@@ -1,0 +1,34 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Compiled Go binaries
+/tms
+/attacker
+/examples/openclaw/openclaw
+/demo/vulnerable-server/vulnerable-server
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated files (keep .d2 source, ignore generated SVG in dev)
+# *.svg  # Uncomment if you want to ignore generated SVGs
