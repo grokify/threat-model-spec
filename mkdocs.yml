@@ -81,6 +81,7 @@ nav:
       - CVSS: concepts/frameworks/cvss.md
   - Specification:
     - JSON IR Overview: specification/index.md
+    - JSON Schema: specification/schema.md
     - Element Types: specification/elements.md
     - Boundary Types: specification/boundaries.md
     - Flow Types: specification/flows.md

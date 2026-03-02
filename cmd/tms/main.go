@@ -111,23 +111,21 @@ func main() {
 func runGenerate(_ *cobra.Command, args []string) {
 	inputPath := args[0]
 
-	// Load JSON
-	diagram, err := ir.LoadFromFile(inputPath)
+	// Try to load as ThreatModel first, fall back to DiagramIR
+	diagrams, isThreatModel, err := loadInput(inputPath)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error loading %s: %v\n", inputPath, err)
 		os.Exit(1)
 	}
 
-	// Validate
-	if err := diagram.Validate(); err != nil {
-		fmt.Fprintf(os.Stderr, "Validation failed: %v\n", err)
-		os.Exit(1)
-	}
-
 	if exportSTIX {
-		// Export to STIX 2.1
+		// Export to STIX 2.1 (use first diagram for now, or could merge)
+		if len(diagrams) == 0 {
+			fmt.Fprintln(os.Stderr, "No diagrams to export")
+			os.Exit(1)
+		}
 		exporter := stix.NewExporter()
-		stixJSON, err := exporter.ExportJSON(diagram)
+		stixJSON, err := exporter.ExportJSON(diagrams[0])
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error exporting to STIX: %v\n", err)
 			os.Exit(1)
@@ -143,37 +141,108 @@ func runGenerate(_ *cobra.Command, args []string) {
 			fmt.Fprintf(os.Stderr, "Generated STIX: %s\n", outputFile)
 		}
 	} else {
-		// Generate D2
-		d2Content := diagram.RenderD2()
+		// Generate D2 for each diagram
+		for i, diagram := range diagrams {
+			d2Content := diagram.RenderD2()
 
-		if outputFile == "" {
-			fmt.Print(d2Content)
-		} else {
-			if err := os.WriteFile(outputFile, []byte(d2Content), 0644); err != nil {
-				fmt.Fprintf(os.Stderr, "Error writing %s: %v\n", outputFile, err)
-				os.Exit(1)
+			// Determine output filename
+			outPath := outputFile
+			if isThreatModel && len(diagrams) > 1 && outputFile != "" {
+				// Multiple diagrams: append diagram type to filename
+				base := strings.TrimSuffix(outputFile, ".d2")
+				outPath = fmt.Sprintf("%s_%s.d2", base, diagram.Type)
 			}
-			fmt.Fprintf(os.Stderr, "Generated D2: %s\n", outputFile)
 
-			// Optionally render to SVG
-			if renderSVG {
-				svgPath := strings.TrimSuffix(outputFile, ".d2") + ".svg"
-				cmd := exec.Command("d2", outputFile, svgPath)
-				cmdOutput, err := cmd.CombinedOutput()
-				if err != nil {
-					fmt.Fprintf(os.Stderr, "Error rendering SVG: %v\n%s", err, cmdOutput)
+			if outPath == "" {
+				if i > 0 {
+					fmt.Print("\n---\n\n") // Separator between diagrams
+				}
+				fmt.Print(d2Content)
+			} else {
+				if err := os.WriteFile(outPath, []byte(d2Content), 0644); err != nil {
+					fmt.Fprintf(os.Stderr, "Error writing %s: %v\n", outPath, err)
 					os.Exit(1)
 				}
-				fmt.Fprintf(os.Stderr, "Generated SVG: %s\n", svgPath)
+				fmt.Fprintf(os.Stderr, "Generated D2: %s\n", outPath)
+
+				// Optionally render to SVG
+				if renderSVG {
+					svgPath := strings.TrimSuffix(outPath, ".d2") + ".svg"
+					cmd := exec.Command("d2", outPath, svgPath)
+					cmdOutput, err := cmd.CombinedOutput()
+					if err != nil {
+						fmt.Fprintf(os.Stderr, "Error rendering SVG: %v\n%s", err, cmdOutput)
+						os.Exit(1)
+					}
+					fmt.Fprintf(os.Stderr, "Generated SVG: %s\n", svgPath)
+				}
 			}
 		}
 	}
 }
 
+// loadInput loads either a ThreatModel or DiagramIR from a JSON file.
+// Returns the diagrams, whether it was a ThreatModel, and any error.
+func loadInput(path string) ([]*ir.DiagramIR, bool, error) {
+	// Try ThreatModel first (check for "diagrams" array)
+	tm, err := ir.LoadThreatModelFromFile(path)
+	if err == nil && len(tm.Diagrams) > 0 {
+		// Validate ThreatModel
+		if err := tm.Validate(); err != nil {
+			return nil, true, fmt.Errorf("validation failed: %w", err)
+		}
+
+		// Extract DiagramIR for each diagram view
+		var diagrams []*ir.DiagramIR
+		for _, dv := range tm.Diagrams {
+			diagrams = append(diagrams, dv.ToDiagramIR(tm))
+		}
+		return diagrams, true, nil
+	}
+
+	// Fall back to DiagramIR
+	diagram, err := ir.LoadFromFile(path)
+	if err != nil {
+		return nil, false, err
+	}
+
+	// Validate DiagramIR
+	if err := diagram.Validate(); err != nil {
+		return nil, false, fmt.Errorf("validation failed: %w", err)
+	}
+
+	return []*ir.DiagramIR{diagram}, false, nil
+}
+
 func runValidate(_ *cobra.Command, args []string) {
 	inputPath := args[0]
 
-	// Load JSON
+	// Try ThreatModel first
+	tm, err := ir.LoadThreatModelFromFile(inputPath)
+	if err == nil && len(tm.Diagrams) > 0 {
+		// Validate as ThreatModel
+		if err := tm.Validate(); err != nil {
+			fmt.Fprintf(os.Stderr, "Validation failed: %v\n", err)
+			os.Exit(1)
+		}
+
+		// For strict validation, also validate each diagram strictly
+		if strictValidation {
+			for _, dv := range tm.Diagrams {
+				d := dv.ToDiagramIR(tm)
+				if err := d.ValidateStrict(); err != nil {
+					fmt.Fprintf(os.Stderr, "Strict validation failed for %s diagram: %v\n", dv.Type, err)
+					os.Exit(1)
+				}
+			}
+			fmt.Printf("Strict validation passed: %s (ThreatModel with %d diagrams)\n", inputPath, len(tm.Diagrams))
+		} else {
+			fmt.Printf("Validation passed: %s (ThreatModel with %d diagrams)\n", inputPath, len(tm.Diagrams))
+		}
+		return
+	}
+
+	// Fall back to DiagramIR
 	diagram, err := ir.LoadFromFile(inputPath)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error loading %s: %v\n", inputPath, err)
