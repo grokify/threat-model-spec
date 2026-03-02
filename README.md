@@ -12,12 +12,12 @@ Threat Model Spec is an open-source library for creating security threat modelin
 
 ## Features
 
-- **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
-- **Multiple Diagram Types** — DFD, Attack Chain, Sequence diagrams
-- **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, CWE, CVSS
-- **STIX 2.1 Export** — Share threat intelligence in standard format
-- **D2 Styles** — Color-coded STRIDE annotations, trust boundaries, attack flows
-- **Validation** — Type-specific field validation
+- 💻 **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
+- 📊 **Multiple Diagram Types** — DFD, Attack Chain, Sequence diagrams
+- 🗺️ **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, CWE, CVSS
+- 📤 **STIX 2.1 Export** — Share threat intelligence in standard format
+- 🎨 **D2 Styles** — Color-coded STRIDE annotations, trust boundaries, attack flows
+- ✅ **Validation** — Type-specific field validation
 
 ## Installation
 
