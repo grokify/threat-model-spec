@@ -7,6 +7,33 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.2.0",
+      "date": "2026-03-02",
+      "highlights": [
+        { "description": "ThreatModel canonical format for multi-diagram threat models with shared metadata and framework mappings" },
+        { "description": "JSON Schema generation and embedding for validation support" }
+      ],
+      "added": [
+        { "description": "`ThreatModel` type as canonical format for multi-diagram threat models with shared metadata", "commit": "70801bd" },
+        { "description": "`schema/` package with JSON Schema generation and embedding (`threat-model.schema.json`, `diagram.schema.json`)", "commit": "70801bd" },
+        { "description": "`cmd/genschema` tool for generating JSON schemas from Go types", "commit": "70801bd" },
+        { "description": "CLI auto-detection of ThreatModel vs DiagramIR format", "commit": "2763dc1" },
+        { "description": "CLI generates separate D2 files for each diagram when processing ThreatModel", "commit": "2763dc1" },
+        { "description": "STIX 2.1 export for OpenClaw example", "commit": "4d7e2f1" }
+      ],
+      "changed": [
+        { "description": "Unified `examples/openclaw/openclaw.json` replaces separate diagram files", "commit": "70801bd" },
+        { "description": "CLI `validate` command reports ThreatModel format and diagram count", "commit": "2763dc1" },
+        { "description": "Consolidated STIX exports into single vulnerability file", "commit": "65585f1" }
+      ],
+      "documentation": [
+        { "description": "Architecture diagram added to README showing ThreatModel flow", "commit": "433e1a2" },
+        { "description": "README updated for ThreatModel as recommended format", "commit": "3d12567" },
+        { "description": "MkDocs documentation updated for ThreatModel format", "commit": "6c120a5" },
+        { "description": "JSON Schema documentation page added", "commit": "2763dc1" }
+      ]
+    },
+    {
       "version": "v0.1.0",
       "date": "2026-03-01",
       "highlights": [
