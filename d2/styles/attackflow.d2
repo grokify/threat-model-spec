@@ -1,0 +1,261 @@
+# Attack Flow Styles for D2
+# https://github.com/grokify/threat-model-spec
+#
+# Styles for visualizing attack chains and kill chain phases
+#
+# Usage: Import this file in your D2 diagram
+#   ...attackflow.d2
+
+classes: {
+  # ============================================================================
+  # Flow Types
+  # ============================================================================
+
+  # Normal/legitimate data flow
+  flow-normal: {
+    style: {
+      stroke: "#424242"
+      stroke-width: 1
+    }
+  }
+
+  # Attack flow (malicious traffic)
+  flow-attack: {
+    style: {
+      stroke: "#c62828"
+      stroke-width: 2
+      stroke-dash: 3
+    }
+  }
+
+  # Exfiltration flow (data leaving)
+  flow-exfil: {
+    style: {
+      stroke: "#b71c1c"
+      stroke-width: 3
+      stroke-dash: 5
+    }
+  }
+
+  # Lateral movement
+  flow-lateral: {
+    style: {
+      stroke: "#e65100"
+      stroke-width: 2
+      stroke-dash: 4
+    }
+  }
+
+  # Command and control
+  flow-c2: {
+    style: {
+      stroke: "#4a148c"
+      stroke-width: 2
+      stroke-dash: 3
+    }
+  }
+
+  # ============================================================================
+  # MITRE ATT&CK Tactic Colors
+  # ============================================================================
+
+  # Initial Access (TA0001)
+  mitre-initial-access: {
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#c62828"
+      border-radius: 4
+    }
+  }
+
+  # Execution (TA0002)
+  mitre-execution: {
+    style: {
+      fill: "#f8bbd9"
+      stroke: "#ad1457"
+      border-radius: 4
+    }
+  }
+
+  # Persistence (TA0003)
+  mitre-persistence: {
+    style: {
+      fill: "#e1bee7"
+      stroke: "#7b1fa2"
+      border-radius: 4
+    }
+  }
+
+  # Privilege Escalation (TA0004)
+  mitre-priv-esc: {
+    style: {
+      fill: "#d1c4e9"
+      stroke: "#512da8"
+      border-radius: 4
+    }
+  }
+
+  # Defense Evasion (TA0005)
+  mitre-defense-evasion: {
+    style: {
+      fill: "#c5cae9"
+      stroke: "#303f9f"
+      border-radius: 4
+    }
+  }
+
+  # Credential Access (TA0006)
+  mitre-cred-access: {
+    style: {
+      fill: "#bbdefb"
+      stroke: "#1976d2"
+      border-radius: 4
+    }
+  }
+
+  # Discovery (TA0007)
+  mitre-discovery: {
+    style: {
+      fill: "#b3e5fc"
+      stroke: "#0288d1"
+      border-radius: 4
+    }
+  }
+
+  # Lateral Movement (TA0008)
+  mitre-lateral: {
+    style: {
+      fill: "#b2ebf2"
+      stroke: "#0097a7"
+      border-radius: 4
+    }
+  }
+
+  # Collection (TA0009)
+  mitre-collection: {
+    style: {
+      fill: "#b2dfdb"
+      stroke: "#00796b"
+      border-radius: 4
+    }
+  }
+
+  # Command and Control (TA0011)
+  mitre-c2: {
+    style: {
+      fill: "#c8e6c9"
+      stroke: "#388e3c"
+      border-radius: 4
+    }
+  }
+
+  # Exfiltration (TA0010)
+  mitre-exfil: {
+    style: {
+      fill: "#dcedc8"
+      stroke: "#689f38"
+      border-radius: 4
+    }
+  }
+
+  # Impact (TA0040)
+  mitre-impact: {
+    style: {
+      fill: "#fff9c4"
+      stroke: "#fbc02d"
+      border-radius: 4
+    }
+  }
+
+  # ============================================================================
+  # Cyber Kill Chain Phases (Lockheed Martin)
+  # ============================================================================
+
+  killchain-recon: {
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1565c0"
+      border-radius: 4
+    }
+  }
+
+  killchain-weaponize: {
+    style: {
+      fill: "#f3e5f5"
+      stroke: "#7b1fa2"
+      border-radius: 4
+    }
+  }
+
+  killchain-deliver: {
+    style: {
+      fill: "#ffebee"
+      stroke: "#c62828"
+      border-radius: 4
+    }
+  }
+
+  killchain-exploit: {
+    style: {
+      fill: "#fff3e0"
+      stroke: "#e65100"
+      border-radius: 4
+    }
+  }
+
+  killchain-install: {
+    style: {
+      fill: "#fff8e1"
+      stroke: "#ff8f00"
+      border-radius: 4
+    }
+  }
+
+  killchain-c2: {
+    style: {
+      fill: "#e8f5e9"
+      stroke: "#2e7d32"
+      border-radius: 4
+    }
+  }
+
+  killchain-actions: {
+    style: {
+      fill: "#fce4ec"
+      stroke: "#c2185b"
+      border-radius: 4
+    }
+  }
+
+  # ============================================================================
+  # Attack Step Indicators
+  # ============================================================================
+
+  attack-step: {
+    shape: circle
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#c62828"
+      stroke-width: 2
+    }
+  }
+
+  attack-step-current: {
+    shape: circle
+    style: {
+      fill: "#c62828"
+      stroke: "#b71c1c"
+      stroke-width: 3
+      font-color: white
+    }
+  }
+
+  attack-step-complete: {
+    shape: circle
+    style: {
+      fill: "#a5d6a7"
+      stroke: "#388e3c"
+      stroke-width: 2
+    }
+  }
+}

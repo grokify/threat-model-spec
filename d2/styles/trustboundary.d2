@@ -1,0 +1,112 @@
+# Trust Boundary Styles for D2
+# https://github.com/grokify/threat-model-spec
+#
+# Trust boundaries separate zones of different trust levels
+#
+# Usage: Import this file in your D2 diagram
+#   ...trustboundary.d2
+
+classes: {
+  # ============================================================================
+  # Trust Boundaries (containers with dashed borders)
+  # ============================================================================
+
+  # Generic trust boundary
+  trust-boundary: {
+    style: {
+      stroke-dash: 5
+      stroke: "#c62828"
+      stroke-width: 2
+      fill: transparent
+      border-radius: 10
+    }
+  }
+
+  # External/Untrusted zone (internet, external users)
+  trust-boundary-external: {
+    style: {
+      stroke-dash: 5
+      stroke: "#c62828"
+      stroke-width: 2
+      fill: "#ffebee"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+
+  # Internal/Trusted zone (internal network, localhost)
+  trust-boundary-internal: {
+    style: {
+      stroke-dash: 5
+      stroke: "#2e7d32"
+      stroke-width: 2
+      fill: "#e8f5e9"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+
+  # DMZ / Semi-trusted zone
+  trust-boundary-dmz: {
+    style: {
+      stroke-dash: 5
+      stroke: "#f57c00"
+      stroke-width: 2
+      fill: "#fff3e0"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+
+  # Browser sandbox
+  trust-boundary-browser: {
+    style: {
+      stroke-dash: 5
+      stroke: "#1565c0"
+      stroke-width: 2
+      fill: "#e3f2fd"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+
+  # Localhost (implicit trust - often a vulnerability)
+  trust-boundary-localhost: {
+    style: {
+      stroke-dash: 5
+      stroke: "#7b1fa2"
+      stroke-width: 2
+      fill: "#f3e5f5"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+
+  # ============================================================================
+  # Boundary Violation Indicators
+  # ============================================================================
+
+  # Boundary that has been breached
+  trust-boundary-breached: {
+    style: {
+      stroke-dash: 3
+      stroke: "#b71c1c"
+      stroke-width: 4
+      fill: "#ffcdd2"
+      opacity: 0.4
+      border-radius: 10
+    }
+  }
+
+  # Weak boundary (implicit trust, design flaw)
+  trust-boundary-weak: {
+    style: {
+      stroke-dash: 8
+      stroke: "#ff9800"
+      stroke-width: 2
+      fill: "#fff8e1"
+      opacity: 0.3
+      border-radius: 10
+    }
+  }
+}

@@ -1,0 +1,131 @@
+# STRIDE Threat Model Styles for D2
+# https://github.com/grokify/threat-model-spec
+#
+# STRIDE: Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation
+#
+# Usage: Import this file in your D2 diagram
+#   ...stride.d2
+
+classes: {
+  # ============================================================================
+  # STRIDE Threat Badges (small inline markers)
+  # ============================================================================
+
+  threat-spoofing: {
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#c62828"
+      font-color: "#b71c1c"
+      border-radius: 4
+    }
+  }
+
+  threat-tampering: {
+    style: {
+      fill: "#fff9c4"
+      stroke: "#f9a825"
+      font-color: "#f57f17"
+      border-radius: 4
+    }
+  }
+
+  threat-repudiation: {
+    style: {
+      fill: "#e1bee7"
+      stroke: "#7b1fa2"
+      font-color: "#6a1b9a"
+      border-radius: 4
+    }
+  }
+
+  threat-info-disclosure: {
+    style: {
+      fill: "#bbdefb"
+      stroke: "#1565c0"
+      font-color: "#0d47a1"
+      border-radius: 4
+    }
+  }
+
+  threat-dos: {
+    style: {
+      fill: "#ffccbc"
+      stroke: "#d84315"
+      font-color: "#bf360c"
+      border-radius: 4
+    }
+  }
+
+  threat-elevation: {
+    style: {
+      fill: "#c8e6c9"
+      stroke: "#2e7d32"
+      font-color: "#1b5e20"
+      border-radius: 4
+    }
+  }
+
+  # ============================================================================
+  # STRIDE Threat Boxes (larger callout annotations)
+  # ============================================================================
+
+  threat-box-spoofing: {
+    style: {
+      fill: "#ffebee"
+      stroke: "#c62828"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#b71c1c"
+    }
+  }
+
+  threat-box-tampering: {
+    style: {
+      fill: "#fffde7"
+      stroke: "#f9a825"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#f57f17"
+    }
+  }
+
+  threat-box-repudiation: {
+    style: {
+      fill: "#f3e5f5"
+      stroke: "#7b1fa2"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#6a1b9a"
+    }
+  }
+
+  threat-box-info-disclosure: {
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1565c0"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#0d47a1"
+    }
+  }
+
+  threat-box-dos: {
+    style: {
+      fill: "#fbe9e7"
+      stroke: "#d84315"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#bf360c"
+    }
+  }
+
+  threat-box-elevation: {
+    style: {
+      fill: "#e8f5e9"
+      stroke: "#2e7d32"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#1b5e20"
+    }
+  }
+}
