@@ -1,5 +1,7 @@
 package ir
 
+import "fmt"
+
 // ThreatModel is the canonical representation of a security threat model.
 // It contains shared metadata and framework mappings, with multiple diagram
 // views of the same vulnerability or threat scenario.
@@ -165,4 +167,51 @@ func (tm *ThreatModel) GetDiagramIR(dt DiagramType) *DiagramIR {
 		return nil
 	}
 	return dv.ToDiagramIR(tm)
+}
+
+// Validate checks that the ThreatModel is internally consistent.
+func (tm *ThreatModel) Validate() error {
+	var errs ValidationErrors
+
+	// Check required fields
+	if tm.ID == "" {
+		errs = append(errs, ValidationError{"id", "required"})
+	}
+	if tm.Title == "" {
+		errs = append(errs, ValidationError{"title", "required"})
+	}
+	if len(tm.Diagrams) == 0 {
+		errs = append(errs, ValidationError{"diagrams", "requires at least one diagram"})
+	}
+
+	// Validate each diagram
+	for i, dv := range tm.Diagrams {
+		// Convert to DiagramIR for validation (with inherited mappings)
+		d := dv.ToDiagramIR(tm)
+		if err := d.Validate(); err != nil {
+			if verrs, ok := err.(ValidationErrors); ok {
+				for _, e := range verrs {
+					errs = append(errs, ValidationError{
+						Field:   fmt.Sprintf("diagrams[%d].%s", i, e.Field),
+						Message: e.Message,
+					})
+				}
+			} else {
+				errs = append(errs, ValidationError{
+					Field:   fmt.Sprintf("diagrams[%d]", i),
+					Message: err.Error(),
+				})
+			}
+		}
+	}
+
+	if errs.HasErrors() {
+		return errs
+	}
+	return nil
+}
+
+// IsValid returns true if the threat model passes validation.
+func (tm *ThreatModel) IsValid() bool {
+	return tm.Validate() == nil
 }

@@ -13,37 +13,42 @@ Threat Model Spec is an open-source library for creating security threat modelin
 ## Architecture
 
 ```
-                            ┌─────────────────┐
-                            │   JSON IR       │
-                            │  (Threat Model) │
-                            └────────┬────────┘
-                                     │
-                         ┌───────────┼───────────┐
-                         │           │           │
-                         ▼           ▼           ▼
-                  ┌──────────┐ ┌──────────┐ ┌──────────┐
-                  │    D2    │ │  STIX    │ │ Validate │
-                  │ Renderer │ │ Exporter │ │          │
-                  └────┬─────┘ └────┬─────┘ └────┬─────┘
-                       │            │            │
-                       ▼            ▼            ▼
-                  ┌──────────┐ ┌──────────┐ ┌──────────┐
-                  │   .d2    │ │  .json   │ │  pass/   │
-                  │  diagram │ │  STIX    │ │  fail    │
-                  └────┬─────┘ │  Bundle  │ └──────────┘
-                       │       └──────────┘
-                       ▼
-                  ┌──────────┐
-                  │   .svg   │
-                  │   .png   │
-                  └──────────┘
+                         ┌──────────────────────┐
+                         │     ThreatModel      │
+                         │  (Canonical Source)  │
+                         └──────────┬───────────┘
+                                    │
+              ┌─────────────────────┼─────────────────────┐
+              │                     │                     │
+              ▼                     ▼                     ▼
+       ┌────────────┐        ┌────────────┐        ┌────────────┐
+       │    DFD     │        │  Attack    │        │  Sequence  │
+       │  Diagram   │        │   Chain    │        │  Diagram   │
+       └─────┬──────┘        └─────┬──────┘        └─────┬──────┘
+             │                     │                     │
+             └─────────────────────┼─────────────────────┘
+                                   │
+                    ┌──────────────┼──────────────┐
+                    │              │              │
+                    ▼              ▼              ▼
+             ┌──────────┐   ┌──────────┐   ┌──────────┐
+             │    D2    │   │   STIX   │   │ Validate │
+             │ Renderer │   │ Exporter │   │          │
+             └────┬─────┘   └────┬─────┘   └────┬─────┘
+                  │              │              │
+                  ▼              ▼              ▼
+             ┌──────────┐   ┌──────────┐   ┌──────────┐
+             │   .d2    │   │  .json   │   │  pass/   │
+             │  → .svg  │   │  STIX    │   │  fail    │
+             └──────────┘   │  Bundle  │   └──────────┘
+                            └──────────┘
 ```
 
-**Input:** JSON IR with diagram type, elements, flows, attacks, and framework mappings
+**Input:** ThreatModel JSON with shared metadata, framework mappings, and multiple diagram views
 
 **Outputs:**
 
-- **D2 Diagrams** → SVG/PNG via D2 CLI
+- **D2 Diagrams** → SVG/PNG via D2 CLI (one per diagram view)
 - **STIX 2.1 Bundles** → Threat intelligence sharing
 - **Validation Results** → Schema and reference checking
 
@@ -74,10 +79,13 @@ go install github.com/grokify/threat-model-spec/cmd/tms@latest
 
 ### Define a Threat Model (JSON)
 
+A ThreatModel is the canonical format containing shared metadata and multiple diagram views:
+
 ```json
 {
-  "type": "attack-chain",
+  "id": "websocket-localhost-takeover",
   "title": "WebSocket Localhost Takeover",
+  "description": "Attack exploiting missing origin validation",
   "mappings": {
     "mitreAttack": [
       {"tacticId": "TA0001", "techniqueId": "T1189", "techniqueName": "Drive-by Compromise"}
@@ -86,30 +94,38 @@ go install github.com/grokify/threat-model-spec/cmd/tms@latest
       {"category": "api", "id": "API2:2023", "name": "Broken Authentication"}
     ]
   },
-  "elements": [
-    {"id": "attacker", "label": "Attacker", "type": "external-entity"},
-    {"id": "victim", "label": "Victim", "type": "process"}
-  ],
-  "attacks": [
-    {"step": 1, "from": "attacker", "to": "victim", "label": "WebSocket to localhost"}
+  "diagrams": [
+    {
+      "type": "attack-chain",
+      "title": "Attack Chain",
+      "elements": [
+        {"id": "attacker", "label": "Attacker", "type": "external-entity"},
+        {"id": "victim", "label": "Victim", "type": "process"}
+      ],
+      "attacks": [
+        {"step": 1, "from": "attacker", "to": "victim", "label": "WebSocket to localhost"}
+      ]
+    }
   ]
 }
 ```
 
+Single-diagram files (DiagramIR format) are also supported for simpler use cases.
+
 ### Generate Diagrams
 
 ```bash
-# Generate D2 diagram
-tms generate attack.json -o attack.d2
+# Generate D2 diagram from ThreatModel
+tms generate threat-model.json -o diagram.d2
 
 # Also render to SVG
-tms generate attack.json -o attack.d2 -svg
+tms generate threat-model.json -o diagram.d2 --svg
 
 # Export to STIX 2.1
-tms generate attack.json --stix -o attack.stix.json
+tms generate threat-model.json --stix -o threat-model.stix.json
 
 # Validate only
-tms validate attack.json
+tms validate threat-model.json
 ```
 
 ## Diagram Types
@@ -155,12 +171,13 @@ tms validate attack.json
 
 ## Examples
 
-See [examples/openclaw/](examples/openclaw/) for a complete threat model of the OpenClaw WebSocket vulnerability, including:
+See [examples/openclaw/](examples/openclaw/) for a complete threat model of the OpenClaw WebSocket vulnerability:
 
-- Data Flow Diagram (DFD)
-- Attack Chain with MITRE ATT&CK mapping
-- Attack Sequence diagram
-- HTML article with all diagrams
+- **[openclaw.json](examples/openclaw/openclaw.json)** — Canonical ThreatModel with all diagram views
+- Data Flow Diagram (DFD) — System architecture and trust boundaries
+- Attack Chain — Attack steps with MITRE ATT&CK mapping
+- Attack Sequence — Time-ordered interactions
+- HTML article with rendered diagrams
 
 ## Requirements
 

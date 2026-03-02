@@ -20,6 +20,19 @@ func LoadFromFile(path string) (*DiagramIR, error) {
 	return &d, nil
 }
 
+// LoadThreatModelFromFile loads a ThreatModel from a JSON file.
+func LoadThreatModelFromFile(path string) (*ThreatModel, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file: %w", err)
+	}
+	var tm ThreatModel
+	if err := json.Unmarshal(data, &tm); err != nil {
+		return nil, fmt.Errorf("failed to parse JSON: %w", err)
+	}
+	return &tm, nil
+}
+
 // RenderD2 renders the DiagramIR to D2 format.
 func (d *DiagramIR) RenderD2() string {
 	switch d.Type {
