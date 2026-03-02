@@ -1,0 +1,436 @@
+{
+  "type": "bundle",
+  "id": "bundle--6f8522a8-f9b8-4898-8001-1898f9b86f8522a8",
+  "objects": [
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "name": "Threat Model Spec",
+      "identity_class": "organization"
+    },
+    {
+      "type": "threat-actor",
+      "spec_version": "2.1",
+      "id": "threat-actor--6f8647a0-f9b8-4898-8001-1898f9b86f8647a0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Attacker Website",
+      "threat_actor_types": [
+        "unknown"
+      ]
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f864b88-f9b8-4898-8001-1898f9b86f864f70",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Victim Browser",
+      "infrastructure_types": "workstation"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f865358-f9b8-4898-8001-1898f9b86f865358",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Malicious JS",
+      "infrastructure_types": "workstation"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f865358-f9b8-4898-8001-1898f9b86f865740",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "OpenClaw Gateway",
+      "infrastructure_types": "gateway"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f865740-f9b8-4898-8001-1898f9b86f865b28",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "AI Agent",
+      "infrastructure_types": "workstation"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f865b28-f9b8-4898-8001-1898f9b86f865b28",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "API Keys (OpenAI, Anthropic)",
+      "infrastructure_types": "data-store"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f865f10-f9b8-4898-8001-1898f9b86f865f10",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Configuration",
+      "infrastructure_types": "data-store"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f8662f8-f9b8-4898-8001-1898f9b86f8662f8",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Conversation Logs",
+      "description": "Code snippets, prompts, secrets",
+      "infrastructure_types": "data-store"
+    },
+    {
+      "type": "infrastructure",
+      "spec_version": "2.1",
+      "id": "infrastructure--6f8666e0-f9b8-4898-8001-1898f9b86f8666e0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Connected Devices",
+      "infrastructure_types": "data-store"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f866ac8-f9b8-4898-8001-1898f9b86f866ac8",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Visits site",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1189",
+          "url": "https://attack.mitre.org/techniques/T1189"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f866eb0-f9b8-4898-8001-1898f9b86f866eb0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Loads malicious JS"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f866eb0-f9b8-4898-8001-1898f9b86f867298",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "WebSocket to localhost",
+      "description": "Bypasses Same-Origin Policy"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f867298-f9b8-4898-8001-1898f9b86f867680",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Brute-force password",
+      "description": "No rate limiting!",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110",
+          "url": "https://attack.mitre.org/techniques/T1110"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f867680-f9b8-4898-8001-1898f9b86f867680",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Register device",
+      "description": "Auto-approve from localhost"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f867a68-f9b8-4898-8001-1898f9b86f867a68",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Access agent"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f867e50-f9b8-4898-8001-1898f9b86f867e50",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Steal API keys",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552",
+          "url": "https://attack.mitre.org/techniques/T1552"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f868238-f9b8-4898-8001-1898f9b86f868238",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Read config"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f868620-f9b8-4898-8001-1898f9b86f868620",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Read logs",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1530",
+          "url": "https://attack.mitre.org/techniques/T1530"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f868a08-f9b8-4898-8001-1898f9b86f868a08",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Enumerate devices",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1018",
+          "url": "https://attack.mitre.org/techniques/T1018"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f868a08-f9b8-4898-8001-1898f9b86f868df0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Return stolen data"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f868df0-f9b8-4898-8001-1898f9b86f8691d8",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Exfiltrate",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1041",
+          "url": "https://attack.mitre.org/techniques/T1041"
+        }
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6f8691d8-f9b8-4898-8001-1898f9b86f8695c0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Target: API Keys (OpenAI, Anthropic)",
+      "description": "Financial loss - attacker uses victim's API credits",
+      "pattern": "[infrastructure:name = 'API Keys (OpenAI, Anthropic)']",
+      "pattern_type": "stix",
+      "valid_from": "2026-03-02T08:43:43Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6f8699a8-f9b8-4898-8001-1898f9b86f8699a8",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Target: Conversation Logs",
+      "description": "IP theft - source code, business logic exposed",
+      "pattern": "[infrastructure:name = 'Conversation Logs']",
+      "pattern_type": "stix",
+      "valid_from": "2026-03-02T08:43:43Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--6f869d90-f9b8-4898-8001-1898f9b86f869d90",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Target: Configuration",
+      "description": "System compromise - reveals architecture details",
+      "pattern": "[infrastructure:name = 'Configuration']",
+      "pattern_type": "stix",
+      "valid_from": "2026-03-02T08:43:43Z"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86a178-f9b8-4898-8001-1898f9b86f86a178",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Drive-by Compromise",
+      "description": "Victim visits attacker-controlled website",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1189",
+          "url": "https://attack.mitre.org/techniques/T1189/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86a560-f9b8-4898-8001-1898f9b86f86a560",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Trusted Relationship",
+      "description": "Localhost implicit trust exploited",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1199",
+          "url": "https://attack.mitre.org/techniques/T1199/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86a948-f9b8-4898-8001-1898f9b86f86a948",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Brute Force",
+      "description": "Password brute-forcing without rate limiting",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110",
+          "url": "https://attack.mitre.org/techniques/T1110/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86a948-f9b8-4898-8001-1898f9b86f86ad30",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Unsecured Credentials",
+      "description": "API keys stored without adequate protection",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1552",
+          "url": "https://attack.mitre.org/techniques/T1552/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86ad30-f9b8-4898-8001-1898f9b86f86ad30",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Exfiltration Over C2 Channel",
+      "description": "Stolen data sent to attacker server",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1041",
+          "url": "https://attack.mitre.org/techniques/T1041/"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--6f86b118-f9b8-4898-8001-1898f9b86f86b118",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Exfiltration via ML Inference API",
+      "description": "Using AI agent API to extract sensitive data",
+      "external_references": [
+        {
+          "source_name": "mitre-atlas",
+          "external_id": "AML.T0024",
+          "url": "https://atlas.mitre.org/techniques/AML.T0024"
+        }
+      ]
+    },
+    {
+      "type": "vulnerability",
+      "spec_version": "2.1",
+      "id": "vulnerability--6f86b500-f9b8-4898-8001-1898f9b86f86b500",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Origin Validation Error",
+      "description": "WebSocket accepts connections without validating origin header",
+      "external_references": [
+        {
+          "source_name": "cwe",
+          "external_id": "CWE-346",
+          "url": "https://cwe.mitre.org/data/definitions/346.html"
+        }
+      ]
+    },
+    {
+      "type": "vulnerability",
+      "spec_version": "2.1",
+      "id": "vulnerability--6f86b8e8-f9b8-4898-8001-1898f9b86f86bcd0",
+      "created": "2026-03-02T08:43:43Z",
+      "modified": "2026-03-02T08:43:43Z",
+      "created_by_ref": "identity--6f852a78-f9b8-4898-8001-1898f9b86f852a78",
+      "name": "Improper Restriction of Excessive Authentication Attempts",
+      "description": "No rate limiting on password attempts",
+      "external_references": [
+        {
+          "source_name": "cwe",
+          "external_id": "CWE-307",
+          "url": "https://cwe.mitre.org/data/definitions/307.html"
+        }
+      ]
+    }
+  ]
+}
