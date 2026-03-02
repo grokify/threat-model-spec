@@ -1,0 +1,39 @@
+{
+  "irVersion": "1.0",
+  "project": "threat-model-spec",
+  "repository": "https://github.com/grokify/threat-model-spec",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-03-01",
+      "highlights": [
+        { "description": "JSON-based intermediate representation for threat modeling diagrams with D2 and STIX 2.1 export" },
+        { "description": "Comprehensive security framework mappings: MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API/LLM/Web), CWE, CVSS, STRIDE" }
+      ],
+      "added": [
+        { "description": "JSON IR schema for threat modeling diagrams (DFD, Attack Chain, Sequence)" },
+        { "description": "`ir` package with types for elements, boundaries, flows, attacks, actors, and messages" },
+        { "description": "`ir/mappings.go` with framework mapping types for MITRE ATT&CK, ATLAS, OWASP, CWE, CVSS, and STRIDE" },
+        { "description": "`diagram` package for programmatic diagram construction with D2 rendering" },
+        { "description": "`stix` package for STIX 2.1 export (Bundle, AttackPattern, ThreatActor, Infrastructure, Indicator, Vulnerability)" },
+        { "description": "`stride` package with STRIDE threat category types and color mappings" },
+        { "description": "`killchain` package with MITRE ATT&CK tactics and Lockheed Martin Cyber Kill Chain phases" },
+        { "description": "`tms` CLI with `generate`, `validate`, and `version` subcommands" },
+        { "description": "`tms generate --stix` flag for STIX 2.1 JSON export" },
+        { "description": "`tms generate -svg` flag to render D2 diagrams to SVG" },
+        { "description": "D2 style library with classes for STRIDE threats, trust boundaries, DFD elements, and attack flows" },
+        { "description": "OpenClaw WebSocket vulnerability example with DFD, attack chain, and sequence diagrams" },
+        { "description": "Demo vulnerable server and malicious page for educational attack demonstration" },
+        { "description": "Validation for diagram type-specific field requirements" }
+      ],
+      "documentation": [
+        { "description": "README with installation, quick start, and framework mapping reference" },
+        { "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings" },
+        { "description": "D2 style reference for STRIDE threat annotations and trust boundaries" }
+      ]
+    }
+  ]
+}
