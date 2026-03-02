@@ -40,7 +40,8 @@
         { "description": "README with installation, quick start, and framework mapping reference", "commit": "084c3a1" },
         { "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings", "commit": "923f9b8" },
         { "description": "D2 style reference for STRIDE threat annotations and trust boundaries", "commit": "084c3a1" },
-        { "description": "README badges for CI, lint, SAST, Go Report Card, and docs", "commit": "b356c7a" }
+        { "description": "README badges for CI, lint, SAST, Go Report Card, and docs", "commit": "b356c7a" },
+        { "description": "MkDocs documentation site with Material theme", "commit": "ece6be6" }
       ]
     }
   ]

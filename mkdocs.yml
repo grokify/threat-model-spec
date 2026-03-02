@@ -98,4 +98,6 @@ nav:
     - Overview: cli/index.md
     - generate: cli/generate.md
     - validate: cli/validate.md
+  - Releases:
+    - v0.1.0: releases/v0.1.0.md
   - Changelog: changelog.md
