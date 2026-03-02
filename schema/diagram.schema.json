@@ -1,0 +1,638 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grokify/threat-model-spec/schema/diagram.schema.json",
+  "$ref": "#/$defs/DiagramIR",
+  "$defs": {
+    "Actor": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ElementType"
+        },
+        "malicious": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label"
+      ]
+    },
+    "AssetClassification": {
+      "type": "string",
+      "enum": [
+        "crown-jewel",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "Attack": {
+      "properties": {
+        "step": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "mitreTactic": {
+          "$ref": "#/$defs/MITRETactic"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "step",
+        "from",
+        "to",
+        "label"
+      ]
+    },
+    "Boundary": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/BoundaryType"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "type"
+      ]
+    },
+    "BoundaryType": {
+      "type": "string",
+      "enum": [
+        "browser",
+        "localhost",
+        "network",
+        "cloud",
+        "breached"
+      ]
+    },
+    "CVSSMapping": {
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "vector": {
+          "type": "string"
+        },
+        "baseScore": {
+          "type": "number"
+        },
+        "severity": {
+          "$ref": "#/$defs/CVSSSeverity"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "version",
+        "vector",
+        "baseScore",
+        "severity"
+      ]
+    },
+    "CVSSSeverity": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ]
+    },
+    "CWEMapping": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
+      ]
+    },
+    "DiagramIR": {
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/DiagramType"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "direction": {
+          "$ref": "#/$defs/Direction"
+        },
+        "legend": {
+          "$ref": "#/$defs/Legend"
+        },
+        "mappings": {
+          "$ref": "#/$defs/Mappings"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/$defs/Element"
+          },
+          "type": "array"
+        },
+        "boundaries": {
+          "items": {
+            "$ref": "#/$defs/Boundary"
+          },
+          "type": "array"
+        },
+        "flows": {
+          "items": {
+            "$ref": "#/$defs/Flow"
+          },
+          "type": "array"
+        },
+        "attacks": {
+          "items": {
+            "$ref": "#/$defs/Attack"
+          },
+          "type": "array"
+        },
+        "targets": {
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "type": "array"
+        },
+        "actors": {
+          "items": {
+            "$ref": "#/$defs/Actor"
+          },
+          "type": "array"
+        },
+        "phases": {
+          "items": {
+            "$ref": "#/$defs/Phase"
+          },
+          "type": "array"
+        },
+        "messages": {
+          "items": {
+            "$ref": "#/$defs/Message"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type",
+        "title"
+      ]
+    },
+    "DiagramType": {
+      "type": "string",
+      "enum": [
+        "dfd",
+        "attack-chain",
+        "sequence"
+      ]
+    },
+    "Direction": {
+      "type": "string",
+      "enum": [
+        "right",
+        "down",
+        "left",
+        "up"
+      ]
+    },
+    "Element": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ElementType"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/AssetClassification"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "type"
+      ]
+    },
+    "ElementType": {
+      "type": "string",
+      "enum": [
+        "process",
+        "datastore",
+        "external-entity",
+        "gateway",
+        "browser",
+        "agent",
+        "api"
+      ]
+    },
+    "Flow": {
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/FlowType"
+        },
+        "bidirectional": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "FlowType": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "attack",
+        "exfil"
+      ]
+    },
+    "Legend": {
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "showStride": {
+          "type": "boolean"
+        },
+        "showMitre": {
+          "type": "boolean"
+        },
+        "showAssets": {
+          "type": "boolean"
+        },
+        "showElements": {
+          "type": "boolean"
+        },
+        "showBoundaries": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "show"
+      ]
+    },
+    "MITREATLASMapping": {
+      "properties": {
+        "tacticId": {
+          "type": "string"
+        },
+        "tacticName": {
+          "type": "string"
+        },
+        "techniqueId": {
+          "type": "string"
+        },
+        "techniqueName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "tacticId",
+        "techniqueId"
+      ]
+    },
+    "MITREAttackMapping": {
+      "properties": {
+        "tacticId": {
+          "type": "string"
+        },
+        "tacticName": {
+          "type": "string"
+        },
+        "techniqueId": {
+          "type": "string"
+        },
+        "techniqueName": {
+          "type": "string"
+        },
+        "subTechniqueId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "tacticId",
+        "techniqueId"
+      ]
+    },
+    "MITRETactic": {
+      "type": "string",
+      "enum": [
+        "TA0001",
+        "TA0002",
+        "TA0003",
+        "TA0004",
+        "TA0005",
+        "TA0006",
+        "TA0007",
+        "TA0008",
+        "TA0009",
+        "TA0010",
+        "TA0011",
+        "TA0040"
+      ]
+    },
+    "Mappings": {
+      "properties": {
+        "mitreAttack": {
+          "items": {
+            "$ref": "#/$defs/MITREAttackMapping"
+          },
+          "type": "array"
+        },
+        "mitreAtlas": {
+          "items": {
+            "$ref": "#/$defs/MITREATLASMapping"
+          },
+          "type": "array"
+        },
+        "owasp": {
+          "items": {
+            "$ref": "#/$defs/OWASPMapping"
+          },
+          "type": "array"
+        },
+        "cwe": {
+          "items": {
+            "$ref": "#/$defs/CWEMapping"
+          },
+          "type": "array"
+        },
+        "cvss": {
+          "$ref": "#/$defs/CVSSMapping"
+        },
+        "stride": {
+          "items": {
+            "$ref": "#/$defs/STRIDEMapping"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Message": {
+      "properties": {
+        "seq": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/FlowType"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "note": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "seq",
+        "from",
+        "to",
+        "label"
+      ]
+    },
+    "OWASPCategory": {
+      "type": "string",
+      "enum": [
+        "api",
+        "llm",
+        "web"
+      ]
+    },
+    "OWASPMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/OWASPCategory"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category",
+        "id"
+      ]
+    },
+    "Phase": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mitreTactic": {
+          "$ref": "#/$defs/MITRETactic"
+        },
+        "description": {
+          "type": "string"
+        },
+        "startMessage": {
+          "type": "integer"
+        },
+        "endMessage": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "startMessage",
+        "endMessage"
+      ]
+    },
+    "STRIDEMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/STRIDEThreat"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category"
+      ]
+    },
+    "STRIDEThreat": {
+      "type": "string",
+      "enum": [
+        "S",
+        "T",
+        "R",
+        "I",
+        "D",
+        "E"
+      ]
+    },
+    "Target": {
+      "properties": {
+        "elementId": {
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/AssetClassification"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "impact": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "elementId",
+        "classification"
+      ]
+    }
+  }
+}
