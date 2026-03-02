@@ -1,0 +1,101 @@
+site_name: Threat Model Spec
+site_description: Security threat modeling diagrams as code with D2 and STIX 2.1 export
+site_url: https://grokify.github.io/threat-model-spec/
+repo_url: https://github.com/grokify/threat-model-spec
+repo_name: grokify/threat-model-spec
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/grokify/threat-model-spec
+  generator: false
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+  - Concepts:
+    - Diagram Types: concepts/diagram-types.md
+    - Security Frameworks:
+      - Overview: concepts/frameworks/index.md
+      - STRIDE: concepts/frameworks/stride.md
+      - MITRE ATT&CK: concepts/frameworks/mitre-attack.md
+      - MITRE ATLAS: concepts/frameworks/mitre-atlas.md
+      - OWASP: concepts/frameworks/owasp.md
+      - CWE: concepts/frameworks/cwe.md
+      - CVSS: concepts/frameworks/cvss.md
+  - Specification:
+    - JSON IR Overview: specification/index.md
+    - Element Types: specification/elements.md
+    - Boundary Types: specification/boundaries.md
+    - Flow Types: specification/flows.md
+    - Framework Mappings: specification/mappings.md
+  - D2 Styles:
+    - Overview: styles/index.md
+    - STRIDE Styles: styles/stride.md
+    - DFD Styles: styles/dfd.md
+    - Trust Boundaries: styles/trust-boundaries.md
+    - Attack Flows: styles/attack-flows.md
+  - Examples:
+    - Overview: examples/index.md
+    - OpenClaw Case Study: examples/openclaw/index.md
+  - CLI Reference:
+    - Overview: cli/index.md
+    - generate: cli/generate.md
+    - validate: cli/validate.md
+  - Changelog: changelog.md

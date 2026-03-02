@@ -32,3 +32,6 @@ Thumbs.db
 
 # Generated files (keep .d2 source, ignore generated SVG in dev)
 # *.svg  # Uncomment if you want to ignore generated SVGs
+
+# MkDocs generated site
+/site/
