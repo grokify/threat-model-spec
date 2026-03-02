@@ -1,0 +1,217 @@
+# OpenClaw Attack Sequence
+# Time-ordered view of the localhost WebSocket takeover with post-exploitation
+
+shape: sequence_diagram
+
+# Actors
+victim: Victim Developer {
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#388e3c"
+    stroke-width: 2
+  }
+}
+
+browser: Browser {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1565c0"
+    stroke-width: 2
+  }
+}
+
+malicious-page: Malicious Page {
+  style: {
+    fill: "#ffcdd2"
+    stroke: "#b71c1c"
+    stroke-width: 2
+  }
+}
+
+gateway: OpenClaw Gateway (localhost:9999) {
+  style: {
+    fill: "#e0f2f1"
+    stroke: "#00796b"
+    stroke-width: 2
+  }
+}
+
+agent: AI Agent {
+  style: {
+    fill: "#e8eaf6"
+    stroke: "#3f51b5"
+    stroke-width: 2
+  }
+}
+
+attacker: Attacker Server {
+  style: {
+    fill: "#ffcdd2"
+    stroke: "#b71c1c"
+    stroke-width: 2
+  }
+}
+
+llm-api: LLM API (OpenAI/Anthropic) {
+  style: {
+    fill: "#fff3e0"
+    stroke: "#ef6c00"
+    stroke-width: 2
+  }
+}
+
+
+# Initial Access [TA0001]
+victim -> browser: 1. Visits innocent-looking page {
+  style.stroke: "#616161"
+}
+
+browser -> malicious-page: 2. GET /innocent-page.html {
+  style.stroke: "#616161"
+}
+
+malicious-page -> browser: 3. 200 OK + malicious JS {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+
+# WebSocket Connection
+browser -> gateway: 4. WebSocket: ws://localhost:9999 {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 5. 101 Switching Protocols (no origin validation!) {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+
+# Credential Access [TA0006]
+browser -> gateway: 6. auth: password="aaa" {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 7. auth_failed {
+  style.stroke: "#616161"
+}
+
+browser -> gateway: 8. auth: password="aab" {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 9. auth_failed {
+  style.stroke: "#616161"
+}
+
+browser -> gateway: 10. ... 1000+ attempts (no rate limit!) {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+browser -> gateway: 11. auth: password="demo123" {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 12. auth_success + session_token {
+  style.stroke: "#616161"
+}
+
+browser -> gateway: 13. register_device: "attacker-device" {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 14. device_registered: OK (auto-approved from localhost) {
+  style.stroke: "#616161"
+}
+
+
+# Collection [TA0009]
+browser -> gateway: 15. get_api_keys (CROWN JEWEL) {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> agent: 16. Read API key store {
+  style.stroke: "#616161"
+}
+
+agent -> gateway: 17. API keys: OPENAI_API_KEY, ANTHROPIC_API_KEY {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+gateway -> browser: 18. api_keys response {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+browser -> gateway: 19. get_config {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 20. config: model settings, preferences {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+browser -> gateway: 21. get_conversation_history {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 22. logs: code snippets, prompts, file paths {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+browser -> gateway: 23. list_devices {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 24. devices: MacBook Pro, attacker-device {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+
+# Exfiltration [TA0010]
+browser -> attacker: 25. POST /exfil (API keys + config + logs) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+attacker -> browser: 26. 200 OK - Data received {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+
+# Post-Exploitation
+attacker -> llm-api: 27. POST /v1/chat/completions (using STOLEN key) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+llm-api -> attacker: 28. 200 OK - Response (billed to victim!) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+attacker -> llm-api: 29. ... continued abuse (crypto mining for AI) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+attacker -> attacker: 30. IMPACT: API key theft, IP theft, persistent access {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+

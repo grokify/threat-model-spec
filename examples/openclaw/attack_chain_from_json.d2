@@ -1,0 +1,215 @@
+# OpenClaw WebSocket Localhost Takeover
+# Attack chain showing how a malicious website can hijack a developer's AI agent
+
+direction: right
+
+legend: Legend {
+  style: {
+    fill: "#fafafa"
+    stroke: "#e0e0e0"
+    border-radius: 8
+  }
+
+  stride: STRIDE Threats {
+    style.fill: "#ffffff"
+    s: S - Spoofing { style: { fill: "#ffebee"; stroke: "#c62828" } }
+    t: T - Tampering { style: { fill: "#fff3e0"; stroke: "#ef6c00" } }
+    r: R - Repudiation { style: { fill: "#fffde7"; stroke: "#f9a825" } }
+    i: I - Info Disclosure { style: { fill: "#e3f2fd"; stroke: "#1565c0" } }
+    d: D - Denial of Service { style: { fill: "#fce4ec"; stroke: "#c2185b" } }
+    e: E - Elevation { style: { fill: "#e8f5e9"; stroke: "#2e7d32" } }
+  }
+
+  mitre: MITRE ATT&CK {
+    style.fill: "#ffffff"
+    ta0001: TA0001 Initial Access { style: { fill: "#fff3e0"; stroke: "#ef6c00" } }
+    ta0006: TA0006 Credential Access { style: { fill: "#fce4ec"; stroke: "#c2185b" } }
+    ta0009: TA0009 Collection { style: { fill: "#f3e5f5"; stroke: "#7b1fa2" } }
+    ta0010: TA0010 Exfiltration { style: { fill: "#ffcdd2"; stroke: "#b71c1c" } }
+  }
+
+  assets: Asset Classification {
+    style.fill: "#ffffff"
+    crown: Crown Jewel { style: { fill: "#ffcdd2"; stroke: "#b71c1c"; stroke-width: 3 } }
+    high: High Value { style: { fill: "#fff3e0"; stroke: "#ef6c00"; stroke-width: 2 } }
+  }
+}
+
+# Trust Boundaries
+browser-sandbox: Browser Sandbox {
+  style: {
+    stroke-dash: 5
+    stroke: "#1565c0"
+    fill: "#e3f2fd"
+    stroke-width: 2
+    border-radius: 10
+  }
+
+  victim: Victim Browser {
+    shape: rectangle
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1565c0"
+      stroke-width: 2
+    }
+  }
+
+  malicious-js: Malicious JS {
+    shape: rectangle
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1976d2"
+      stroke-width: 2
+    }
+  }
+
+}
+
+localhost-zone: Localhost (Implicit Trust) {
+  style: {
+    stroke-dash: 5
+    stroke: "#7b1fa2"
+    fill: "#f3e5f5"
+    stroke-width: 2
+    border-radius: 10
+  }
+
+  gateway: OpenClaw Gateway {
+    shape: hexagon
+    style: {
+      fill: "#e0f2f1"
+      stroke: "#00796b"
+      stroke-width: 2
+    }
+  }
+
+  agent: AI Agent {
+    shape: rectangle
+    style: {
+      fill: "#e8eaf6"
+      stroke: "#3f51b5"
+      stroke-width: 2
+    }
+  }
+
+  api-keys: API Keys (OpenAI, Anthropic) {
+    shape: cylinder
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#b71c1c"
+      stroke-width: 3
+    }
+  }
+
+  config: Configuration {
+    shape: cylinder
+    style: {
+      fill: "#fff3e0"
+      stroke: "#ef6c00"
+      stroke-width: 2
+    }
+  }
+
+  logs: Conversation Logs {
+    shape: cylinder
+    style: {
+      fill: "#fff3e0"
+      stroke: "#ef6c00"
+      stroke-width: 2
+    }
+  }
+
+  devices: Connected Devices {
+    shape: cylinder
+    style: {
+      fill: "#fce4ec"
+      stroke: "#c2185b"
+      stroke-width: 2
+    }
+  }
+
+}
+
+attacker-site: Attacker Website {
+  shape: person
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#388e3c"
+    stroke-width: 2
+  }
+}
+
+
+# Attack Flow
+attacker-site -> victim: 1. Visits site (T1189) {
+  style.stroke: "#ef6c00"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+victim -> malicious-js: 2. Loads malicious JS {
+  style.stroke: "#ef6c00"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+malicious-js -> gateway: 3. WebSocket to localhost {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+malicious-js -> gateway: 4. Brute-force password (T1110) {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+malicious-js -> gateway: 5. Register device {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+gateway -> agent: 6. Access agent {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+agent -> api-keys: 7. Steal API keys (T1552) {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+agent -> config: 8. Read config {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+agent -> logs: 9. Read logs (T1530) {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+gateway -> devices: 10. Enumerate devices (T1018) {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+gateway -> malicious-js: 11. Return stolen data {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+malicious-js -> attacker-site: 12. Exfiltrate (T1041) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+

@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw: How Any Website Can Hijack Your AI Agent via WebSocket</title>
+    <style>
+        :root {
+            --primary: #1565c0;
+            --danger: #c62828;
+            --warning: #ef6c00;
+            --success: #2e7d32;
+            --purple: #7b1fa2;
+            --bg: #fafafa;
+            --text: #212121;
+            --code-bg: #263238;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            margin: 0 0 1rem 0;
+            font-size: 2.5rem;
+        }
+
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        header .meta {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        h3 {
+            color: var(--purple);
+            margin-top: 2rem;
+        }
+
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .alert-danger {
+            background: #ffebee;
+            border-left: 4px solid var(--danger);
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+        }
+
+        code {
+            background: #eceff1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #eceff1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .diagram-container {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-caption {
+            text-align: center;
+            color: #757575;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #fafafa;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .tag-stride {
+            background: #ffebee;
+            color: var(--danger);
+        }
+
+        .tag-mitre {
+            background: #f3e5f5;
+            color: var(--purple);
+        }
+
+        .tag-atlas {
+            background: #e0f7fa;
+            color: #00838f;
+        }
+
+        .tag-owasp {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .tag-crown {
+            background: #ffcdd2;
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .steps {
+            counter-reset: step;
+        }
+
+        .step {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .toc {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+        }
+
+        .toc ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .toc li {
+            margin: 0.5rem 0;
+        }
+
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 2rem;
+            background: #263238;
+            color: #eceff1;
+            text-align: center;
+        }
+
+        footer a {
+            color: #81d4fa;
+        }
+
+        .test-section {
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .test-section h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            pre {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>OpenClaw: WebSocket Localhost Takeover</h1>
+            <p class="subtitle">How Any Website Can Hijack Your AI Coding Agent and Steal Your API Keys</p>
+            <p class="meta">
+                Security Analysis &bull; Threat Modeling &bull; STRIDE &bull; MITRE ATT&CK &bull; MITRE ATLAS &bull; OWASP
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="alert alert-danger">
+            <strong>Vulnerability Severity: Critical</strong><br>
+            A malicious website can connect to localhost WebSocket services, brute-force authentication,
+            register as a trusted device, and exfiltrate API keys, conversation history, and configuration data.
+        </div>
+
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#tldr">TL;DR</a></li>
+                <li><a href="#affected">Affected Systems</a></li>
+                <li><a href="#technical">Technical Analysis</a></li>
+                <li><a href="#dfd">System Architecture (DFD)</a></li>
+                <li><a href="#attack-chain">Attack Chain Analysis</a></li>
+                <li><a href="#sequence">Attack Sequence</a></li>
+                <li><a href="#attack">MITRE ATT&amp;CK Mapping</a></li>
+                <li><a href="#atlas">MITRE ATLAS Mapping</a></li>
+                <li><a href="#owasp">OWASP Mapping</a></li>
+                <li><a href="#impact">Impact Assessment</a></li>
+                <li><a href="#detection">Detection</a></li>
+                <li><a href="#test">Test Your System</a></li>
+                <li><a href="#mitigations">Mitigations</a></li>
+                <li><a href="#timeline">Disclosure Timeline</a></li>
+                <li><a href="#tools">Tools &amp; Resources</a></li>
+            </ul>
+        </div>
+
+        <h2 id="overview">Overview</h2>
+
+        <p>
+            In February 2025, security researchers at <a href="https://www.oasis.security/blog/openclaw-vulnerability">Oasis Security</a>
+            disclosed a critical vulnerability in how AI coding agents handle localhost WebSocket connections.
+            The vulnerability, dubbed <strong>"OpenClaw"</strong>, allows any website to hijack a developer's
+            AI agent running on their local machine.
+        </p>
+
+        <p>
+            The root cause is a dangerous combination of three security weaknesses:
+        </p>
+
+        <table>
+            <tr>
+                <th>Weakness</th>
+                <th>Impact</th>
+                <th>STRIDE</th>
+                <th>ATLAS</th>
+            </tr>
+            <tr>
+                <td>No WebSocket origin validation</td>
+                <td>Any website can connect to localhost</td>
+                <td><span class="tag tag-stride">S - Spoofing</span></td>
+                <td><span class="tag tag-atlas">AML.TA0000</span></td>
+            </tr>
+            <tr>
+                <td>No rate limiting on authentication</td>
+                <td>Passwords can be brute-forced instantly</td>
+                <td><span class="tag tag-stride">E - Elevation</span></td>
+                <td><span class="tag tag-atlas">AML.TA0002</span></td>
+            </tr>
+            <tr>
+                <td>Auto-approve devices from localhost</td>
+                <td>Attackers register as trusted devices</td>
+                <td><span class="tag tag-stride">E - Elevation</span></td>
+                <td><span class="tag tag-atlas">AML.TA0002</span></td>
+            </tr>
+        </table>
+
+        <h2 id="tldr">TL;DR</h2>
+
+        <div class="alert alert-danger">
+            <strong>The vulnerability in 30 seconds:</strong>
+            <ul>
+                <li><strong>What:</strong> Any website can steal your AI agent's API keys (OpenAI, Anthropic, etc.)</li>
+                <li><strong>How:</strong> WebSocket to localhost bypasses browser security; no origin check + no rate limit = instant compromise</li>
+                <li><strong>Impact:</strong> Attacker gets your API keys, conversation history, and can bill charges to your account</li>
+                <li><strong>Fix:</strong> Update your AI agent, use a localhost firewall (LuLu on macOS), or disable the web gateway</li>
+            </ul>
+        </div>
+
+        <h2 id="affected">Affected Systems</h2>
+
+        <p>
+            This vulnerability class affects AI coding agents that expose a WebSocket gateway on localhost
+            for browser-based management interfaces.
+        </p>
+
+        <table>
+            <tr>
+                <th>System</th>
+                <th>Status</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Claude Code (Anthropic)</td>
+                <td><span class="tag" style="background:#c8e6c9;color:#2e7d32;">Patched</span></td>
+                <td>Fixed in version 1.0.3+; validates WebSocket origin</td>
+            </tr>
+            <tr>
+                <td>Cursor</td>
+                <td><span class="tag" style="background:#fff3e0;color:#ef6c00;">Check Version</span></td>
+                <td>Verify you have latest update with origin validation</td>
+            </tr>
+            <tr>
+                <td>Windsurf (Codeium)</td>
+                <td><span class="tag" style="background:#fff3e0;color:#ef6c00;">Check Version</span></td>
+                <td>Verify you have latest update with origin validation</td>
+            </tr>
+            <tr>
+                <td>Custom AI agents</td>
+                <td><span class="tag" style="background:#ffcdd2;color:#b71c1c;">Audit Required</span></td>
+                <td>If you built a localhost WebSocket gateway, audit your origin validation</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-warning">
+            <strong>Not sure if you're affected?</strong> See the <a href="#test">Test Your System</a> section
+            to safely check if your setup is vulnerable.
+        </div>
+
+        <h2 id="technical">Technical Analysis</h2>
+
+        <h3>Why WebSocket Bypasses Same-Origin Policy</h3>
+
+        <p>
+            The browser's Same-Origin Policy (SOP) prevents websites from reading responses from different origins.
+            However, WebSocket has a critical exception: while the browser sends an <code>Origin</code> header,
+            <strong>it's up to the server to validate it</strong>. Many developers don't realize this.
+        </p>
+
+        <pre><code>// Malicious JavaScript on attacker.com
+const ws = new WebSocket('ws://localhost:9999/ws');
+
+// This WORKS! The browser allows the connection.
+// The Origin header is sent, but the server doesn't check it.
+ws.onopen = () => {
+    ws.send(JSON.stringify({cmd: 'auth', password: 'guess1'}));
+};</code></pre>
+
+        <div class="alert alert-warning">
+            <strong>Key Insight:</strong> WebSocket connections to localhost from any website are allowed by browsers.
+            The server must explicitly reject connections from untrusted origins.
+        </div>
+
+        <h3>The Attack Chain</h3>
+
+        <div class="steps">
+            <div class="step">
+                <strong>Initial Access:</strong> Victim visits an innocent-looking webpage (could be through phishing,
+                ad network compromise, or a legitimate site with XSS).
+            </div>
+            <div class="step">
+                <strong>WebSocket Connection:</strong> Malicious JavaScript opens a WebSocket to
+                <code>ws://localhost:9999</code> where the AI agent's gateway is listening.
+            </div>
+            <div class="step">
+                <strong>Credential Brute-Force:</strong> With no rate limiting, the attacker can try thousands
+                of passwords per second until authentication succeeds.
+            </div>
+            <div class="step">
+                <strong>Device Registration:</strong> The attacker registers as a "trusted device" because
+                the connection appears to come from localhost.
+            </div>
+            <div class="step">
+                <strong>Data Exfiltration:</strong> API keys, conversation history, configuration, and connected
+                device information are sent back to the attacker's server.
+            </div>
+            <div class="step">
+                <strong>Post-Exploitation:</strong> Attacker uses stolen API keys to make LLM requests
+                billed to the victim, or sells the keys on dark markets.
+            </div>
+        </div>
+
+        <h2 id="dfd">System Architecture (DFD)</h2>
+
+        <p>
+            To understand the vulnerability, we first need to understand the normal system architecture.
+            This Data Flow Diagram shows how an AI coding agent like Claude Code or similar tools operate:
+        </p>
+
+        <div class="diagram-container">
+            <img src="dfd_from_json.svg" alt="OpenClaw Data Flow Diagram">
+            <p class="diagram-caption">
+                Figure 1: Normal operation - Developer interacts with AI agent via IDE and Web UI.
+                The Gateway manages WebSocket connections and coordinates with the AI Agent.
+            </p>
+        </div>
+
+        <h3>Key Components</h3>
+
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Trust Boundary</th>
+                <th>Classification</th>
+            </tr>
+            <tr>
+                <td>OpenClaw Gateway</td>
+                <td>Localhost (Implicit Trust)</td>
+                <td>Process</td>
+            </tr>
+            <tr>
+                <td>AI Agent</td>
+                <td>Localhost (Implicit Trust)</td>
+                <td>Process</td>
+            </tr>
+            <tr>
+                <td>API Keys</td>
+                <td>Localhost (Implicit Trust)</td>
+                <td><span class="tag tag-crown">Crown Jewel</span></td>
+            </tr>
+            <tr>
+                <td>Conversation Logs</td>
+                <td>Localhost (Implicit Trust)</td>
+                <td>High Value</td>
+            </tr>
+            <tr>
+                <td>Web UI</td>
+                <td>Browser Sandbox</td>
+                <td>Process</td>
+            </tr>
+        </table>
+
+        <p>
+            The critical assumption is that <strong>anything connecting from localhost is trusted</strong>.
+            This assumption is violated when malicious JavaScript in a browser can initiate connections
+            that appear to come from localhost.
+        </p>
+
+        <h2 id="attack-chain">Attack Chain Analysis</h2>
+
+        <p>
+            This diagram maps the attack to MITRE ATT&CK tactics and STRIDE threat categories,
+            showing how the attacker moves from initial access to data exfiltration:
+        </p>
+
+        <div class="diagram-container">
+            <img src="attack_chain_from_json.svg" alt="OpenClaw Attack Chain">
+            <p class="diagram-caption">
+                Figure 2: Attack chain with MITRE ATT&CK and STRIDE annotations.
+                Red elements indicate attacker-controlled components. Crown jewel targets highlighted.
+            </p>
+        </div>
+
+        <h3>High-Value Targets</h3>
+
+        <div class="alert alert-danger">
+            <strong><span class="tag tag-crown">Crown Jewel</span> API Keys</strong><br>
+            OpenAI, Anthropic, and other LLM API keys are the primary target. These have direct monetary value:
+            <ul>
+                <li>Attacker can use victim's API credits (like crypto mining, but for AI)</li>
+                <li>Keys can be sold on dark markets</li>
+                <li>Typical developer may have $100-$10,000+ in API credits</li>
+            </ul>
+        </div>
+
+        <h2 id="sequence">Attack Sequence</h2>
+
+        <p>
+            This sequence diagram shows the time-ordered flow of the attack, including the
+            <strong>post-exploitation phase</strong> where the attacker uses stolen API keys:
+        </p>
+
+        <div class="diagram-container">
+            <img src="attack_sequence_from_json.svg" alt="OpenClaw Attack Sequence">
+            <p class="diagram-caption">
+                Figure 3: Full attack sequence including brute-force loop and post-exploitation.
+                Note how the attacker uses stolen API keys to make requests billed to the victim.
+            </p>
+        </div>
+
+        <h3>Attack Phases</h3>
+
+        <table>
+            <tr>
+                <th>Phase</th>
+                <th>Messages</th>
+                <th>Duration</th>
+            </tr>
+            <tr>
+                <td>Initial Access</td>
+                <td>1-3</td>
+                <td>&lt; 1 second</td>
+            </tr>
+            <tr>
+                <td>WebSocket Connection</td>
+                <td>4-5</td>
+                <td>&lt; 100ms</td>
+            </tr>
+            <tr>
+                <td>Credential Brute-Force</td>
+                <td>6-14</td>
+                <td>1-60 seconds (depends on password)</td>
+            </tr>
+            <tr>
+                <td>Data Collection</td>
+                <td>15-24</td>
+                <td>&lt; 1 second</td>
+            </tr>
+            <tr>
+                <td>Exfiltration</td>
+                <td>25-26</td>
+                <td>&lt; 1 second</td>
+            </tr>
+            <tr>
+                <td>Post-Exploitation</td>
+                <td>27-30</td>
+                <td>Ongoing</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-warning">
+            <strong>Total Attack Time:</strong> From page visit to full compromise can be under 60 seconds.
+            The victim has no indication that anything is wrong.
+        </div>
+
+        <h2 id="attack">MITRE ATT&CK Mapping</h2>
+
+        <p>
+            The attack maps to multiple <a href="https://attack.mitre.org/">MITRE ATT&CK</a> tactics,
+            showing a complete kill chain from initial access to exfiltration:
+        </p>
+
+        <table>
+            <tr>
+                <th>Tactic</th>
+                <th>Technique</th>
+                <th>Attack Step</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-mitre">TA0001</span> Initial Access</td>
+                <td>T1189 - Drive-by Compromise</td>
+                <td>Victim visits malicious page</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-mitre">TA0006</span> Credential Access</td>
+                <td>T1110 - Brute Force</td>
+                <td>Password brute-force (no rate limit)</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-mitre">TA0009</span> Collection</td>
+                <td>T1552 - Unsecured Credentials</td>
+                <td>Steal API keys from config</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-mitre">TA0009</span> Collection</td>
+                <td>T1530 - Data from Cloud Storage</td>
+                <td>Read conversation logs</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-mitre">TA0010</span> Exfiltration</td>
+                <td>T1041 - Exfiltration Over C2</td>
+                <td>Send data to attacker server</td>
+            </tr>
+        </table>
+
+        <h2 id="atlas">MITRE ATLAS Mapping</h2>
+
+        <p>
+            While MITRE ATT&CK covers general enterprise attacks, <a href="https://atlas.mitre.org/">MITRE ATLAS</a>
+            (Adversarial Threat Landscape for Artificial Intelligence Systems) specifically addresses threats
+            to AI and machine learning systems. The OpenClaw vulnerability is particularly relevant to ATLAS
+            because the ultimate target is an <strong>AI coding agent</strong> and its associated resources.
+        </p>
+
+        <div class="alert alert-info">
+            <strong>Why ATLAS Matters Here:</strong> This isn't just a traditional credential theft.
+            The attacker gains access to AI infrastructure—API keys that provide direct access to LLM services,
+            conversation history that may contain proprietary prompts and code, and the ability to abuse
+            the victim's AI compute resources.
+        </div>
+
+        <h3>ATLAS Tactics</h3>
+
+        <table>
+            <tr>
+                <th>Tactic</th>
+                <th>Description</th>
+                <th>OpenClaw Relevance</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.TA0000</span> ML Model Access</td>
+                <td>Gaining access to ML models or systems</td>
+                <td>Attacker gains access to the AI agent gateway via WebSocket</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.TA0002</span> ML Attack Staging</td>
+                <td>Preparing for an attack on ML systems</td>
+                <td>Brute-forcing credentials and registering as trusted device</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.TA0005</span> Collection</td>
+                <td>Gathering ML artifacts and data</td>
+                <td>Extracting API keys, conversation logs, and configuration</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.TA0007</span> Exfiltration</td>
+                <td>Stealing ML artifacts from the environment</td>
+                <td>Sending stolen data to attacker-controlled server</td>
+            </tr>
+        </table>
+
+        <h3>ATLAS Techniques</h3>
+
+        <table>
+            <tr>
+                <th>Technique</th>
+                <th>Name</th>
+                <th>Attack Step</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0000</span></td>
+                <td>ML Supply Chain Compromise</td>
+                <td>Compromising developer's AI toolchain via localhost WebSocket</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0024</span></td>
+                <td>Exfiltration via ML Inference API</td>
+                <td>Using stolen API keys to access LLM services</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0025</span></td>
+                <td>Exfiltration via Cyber Means</td>
+                <td>HTTP POST of stolen credentials to attacker server</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0035</span></td>
+                <td>ML Artifact Collection</td>
+                <td>Gathering API keys, prompts, conversation history</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0040</span></td>
+                <td>ML Model Inference API Access</td>
+                <td>Post-exploitation: using stolen keys to query LLMs</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-atlas">AML.T0048</span></td>
+                <td>Prompt Injection</td>
+                <td>Potential follow-on: injecting malicious prompts via compromised agent</td>
+            </tr>
+        </table>
+
+        <h3>AI-Specific Impact</h3>
+
+        <p>
+            The ATLAS perspective reveals impacts beyond traditional data theft:
+        </p>
+
+        <table>
+            <tr>
+                <th>Impact</th>
+                <th>Description</th>
+                <th>ATLAS Category</th>
+            </tr>
+            <tr>
+                <td><strong>Resource Hijacking</strong></td>
+                <td>Attacker uses victim's API credits for their own LLM queries—equivalent to cryptojacking but for AI compute</td>
+                <td>ML Resource Theft</td>
+            </tr>
+            <tr>
+                <td><strong>Prompt Leakage</strong></td>
+                <td>System prompts, fine-tuning data, and proprietary prompt engineering techniques exposed</td>
+                <td>ML Artifact Collection</td>
+            </tr>
+            <tr>
+                <td><strong>Training Data Exposure</strong></td>
+                <td>Conversation logs may reveal sensitive training examples or business logic</td>
+                <td>Data Exfiltration</td>
+            </tr>
+            <tr>
+                <td><strong>Model Access</strong></td>
+                <td>API keys provide full access to underlying LLM capabilities</td>
+                <td>ML Model Access</td>
+            </tr>
+            <tr>
+                <td><strong>Supply Chain Risk</strong></td>
+                <td>Compromised AI agent could inject malicious suggestions into code</td>
+                <td>ML Supply Chain</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-danger">
+            <strong>Emerging Threat Pattern:</strong> As AI coding assistants become ubiquitous,
+            attacks targeting their infrastructure represent a new category of supply chain risk.
+            Developers trust AI suggestions—a compromised agent could introduce vulnerabilities
+            or backdoors into codebases at scale.
+        </div>
+
+        <h3>Combined ATT&CK + ATLAS View</h3>
+
+        <p>
+            The OpenClaw attack spans both traditional enterprise tactics (ATT&CK) and AI-specific
+            tactics (ATLAS). This dual mapping helps security teams understand the full scope:
+        </p>
+
+        <table>
+            <tr>
+                <th>Attack Phase</th>
+                <th>ATT&CK</th>
+                <th>ATLAS</th>
+            </tr>
+            <tr>
+                <td>Initial Access</td>
+                <td><span class="tag tag-mitre">TA0001</span> Drive-by Compromise</td>
+                <td><span class="tag tag-atlas">AML.TA0000</span> ML Model Access</td>
+            </tr>
+            <tr>
+                <td>Credential Access</td>
+                <td><span class="tag tag-mitre">TA0006</span> Brute Force</td>
+                <td><span class="tag tag-atlas">AML.TA0002</span> ML Attack Staging</td>
+            </tr>
+            <tr>
+                <td>Collection</td>
+                <td><span class="tag tag-mitre">TA0009</span> Unsecured Credentials</td>
+                <td><span class="tag tag-atlas">AML.T0035</span> ML Artifact Collection</td>
+            </tr>
+            <tr>
+                <td>Exfiltration</td>
+                <td><span class="tag tag-mitre">TA0010</span> Exfil Over C2</td>
+                <td><span class="tag tag-atlas">AML.T0025</span> Exfil via Cyber Means</td>
+            </tr>
+            <tr>
+                <td>Post-Exploitation</td>
+                <td><span class="tag tag-mitre">TA0040</span> Impact</td>
+                <td><span class="tag tag-atlas">AML.T0040</span> ML Inference API Access</td>
+            </tr>
+        </table>
+
+        <h2 id="owasp">OWASP Mapping</h2>
+
+        <p>
+            The <a href="https://owasp.org/">OWASP Foundation</a> maintains several Top 10 lists that are
+            widely used for security assessments and compliance. The OpenClaw vulnerability maps to multiple
+            categories across three relevant OWASP lists.
+        </p>
+
+        <h3>OWASP API Security Top 10 (2023)</h3>
+
+        <p>
+            Since the WebSocket gateway is essentially an API, the
+            <a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">API Security Top 10</a>
+            is highly relevant:
+        </p>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>How It Applies</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">API2:2023</span></td>
+                <td>Broken Authentication</td>
+                <td>No rate limiting allows brute-force attacks; weak password policies</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">API4:2023</span></td>
+                <td>Unrestricted Resource Consumption</td>
+                <td>No throttling on authentication attempts enables rapid brute-force</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">API5:2023</span></td>
+                <td>Broken Function Level Authorization</td>
+                <td>Once authenticated, attacker can access all sensitive functions (config, keys, logs)</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">API8:2023</span></td>
+                <td>Security Misconfiguration</td>
+                <td>Missing WebSocket origin validation; auto-approve localhost devices</td>
+            </tr>
+        </table>
+
+        <h3>OWASP Top 10 for LLM Applications (2025)</h3>
+
+        <p>
+            Since the target is an AI coding agent, the
+            <a href="https://genai.owasp.org/llm-top-10/">LLM Application Top 10</a>
+            provides AI-specific context:
+        </p>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>How It Applies</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">LLM06:2025</span></td>
+                <td>Sensitive Information Disclosure</td>
+                <td>API keys, conversation history, and system prompts exposed to attacker</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">LLM10:2025</span></td>
+                <td>Unbounded Consumption</td>
+                <td>Stolen API keys enable attacker to consume victim's LLM resources indefinitely</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-info">
+            <strong>Why LLM Top 10 Matters:</strong> Traditional security frameworks don't capture
+            AI-specific risks like prompt leakage, model access abuse, or LLM resource hijacking.
+            The stolen API keys aren't just credentials—they're access to expensive AI compute.
+        </div>
+
+        <h3>OWASP Web Application Top 10 (2021)</h3>
+
+        <p>
+            The classic <a href="https://owasp.org/Top10/">Web Application Top 10</a> also applies:
+        </p>
+
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Name</th>
+                <th>How It Applies</th>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">A01:2021</span></td>
+                <td>Broken Access Control</td>
+                <td>Localhost trust assumption violated; any origin can connect</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">A07:2021</span></td>
+                <td>Identification and Authentication Failures</td>
+                <td>Permits brute-force attacks; no account lockout</td>
+            </tr>
+            <tr>
+                <td><span class="tag tag-owasp">A05:2021</span></td>
+                <td>Security Misconfiguration</td>
+                <td>Default configuration trusts all localhost connections</td>
+            </tr>
+        </table>
+
+        <h3>Combined OWASP View</h3>
+
+        <p>
+            This table shows how the three root causes map across all OWASP lists:
+        </p>
+
+        <table>
+            <tr>
+                <th>Root Cause</th>
+                <th>API Security</th>
+                <th>LLM Top 10</th>
+                <th>Web Top 10</th>
+            </tr>
+            <tr>
+                <td>No origin validation</td>
+                <td><span class="tag tag-owasp">API8</span></td>
+                <td>—</td>
+                <td><span class="tag tag-owasp">A01</span> <span class="tag tag-owasp">A05</span></td>
+            </tr>
+            <tr>
+                <td>No rate limiting</td>
+                <td><span class="tag tag-owasp">API2</span> <span class="tag tag-owasp">API4</span></td>
+                <td>—</td>
+                <td><span class="tag tag-owasp">A07</span></td>
+            </tr>
+            <tr>
+                <td>Auto-approve localhost</td>
+                <td><span class="tag tag-owasp">API5</span> <span class="tag tag-owasp">API8</span></td>
+                <td>—</td>
+                <td><span class="tag tag-owasp">A01</span></td>
+            </tr>
+            <tr>
+                <td>API key exposure</td>
+                <td>—</td>
+                <td><span class="tag tag-owasp">LLM06</span></td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Resource hijacking</td>
+                <td>—</td>
+                <td><span class="tag tag-owasp">LLM10</span></td>
+                <td>—</td>
+            </tr>
+        </table>
+
+        <h2 id="impact">Impact Assessment</h2>
+
+        <table>
+            <tr>
+                <th>Impact Category</th>
+                <th>Description</th>
+                <th>Severity</th>
+            </tr>
+            <tr>
+                <td>Financial</td>
+                <td>Attacker uses victim's API credits; potential for thousands in charges</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Intellectual Property</td>
+                <td>Conversation history may contain source code, business logic, trade secrets</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Persistence</td>
+                <td>Registered "attacker-device" remains trusted; API keys work indefinitely</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Privacy</td>
+                <td>All prompts and responses visible to attacker</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Supply Chain</td>
+                <td>If agent has file system access, attacker could inject malicious code</td>
+                <td>Critical</td>
+            </tr>
+        </table>
+
+        <h2 id="detection">Detection</h2>
+
+        <p>
+            If you suspect you may have been compromised, look for these indicators:
+        </p>
+
+        <h3>Signs of Compromise</h3>
+
+        <ul>
+            <li><strong>Unexpected API charges:</strong> Check your OpenAI, Anthropic, or other LLM provider billing for unusual activity</li>
+            <li><strong>Unknown devices:</strong> Check your AI agent's device/session list for devices you don't recognize</li>
+            <li><strong>Suspicious logs:</strong> Review your agent's connection logs for connections from unexpected origins</li>
+            <li><strong>Password changes:</strong> If your agent password was changed without your knowledge</li>
+        </ul>
+
+        <h3>Log Analysis</h3>
+
+        <p>
+            If your AI agent keeps connection logs, look for WebSocket connections where:
+        </p>
+
+        <ul>
+            <li>The <code>Origin</code> header is not <code>null</code>, <code>localhost</code>, or your expected domains</li>
+            <li>Multiple failed authentication attempts followed by success</li>
+            <li>Rapid-fire requests for sensitive data (config, API keys, logs)</li>
+            <li>Device registration from unexpected sources</li>
+        </ul>
+
+        <div class="alert alert-warning">
+            <strong>If compromised:</strong> Immediately rotate all API keys stored in the agent's configuration,
+            revoke unknown devices, and check API provider billing for unauthorized usage.
+        </div>
+
+        <h2 id="test">Test Your System</h2>
+
+        <div class="test-section">
+            <h3>Are You Vulnerable?</h3>
+
+            <p>
+                We've created a safe, educational demonstration that lets you test whether your system
+                is vulnerable to this class of attack. The demo includes:
+            </p>
+
+            <ul>
+                <li>A mock vulnerable WebSocket server (mimics the vulnerable behavior)</li>
+                <li>A malicious page that demonstrates the attack</li>
+                <li>Automation to capture screenshots/video of the attack</li>
+            </ul>
+
+            <h4>Quick Test (Manual)</h4>
+
+            <pre><code># Clone the repository
+git clone https://github.com/grokify/threat-model-spec
+cd threat-model-spec
+
+# Start the mock vulnerable server
+cd demo/vulnerable-server
+go run main.go -port 9999 -password demo123
+
+# In another terminal, serve the attack page
+cd demo/malicious-page
+python3 -m http.server 8080
+
+# Open http://localhost:8080 in your browser
+# Click "Start Attack Demo" and watch the attack unfold</code></pre>
+
+            <h4>Automated Demo with Video Capture</h4>
+
+            <pre><code># Run the full automated demo
+cd demo/attacker
+go run main.go -headless=false -wait 20s
+
+# Or with screen recording (requires ffmpeg)
+./record-demo.sh</code></pre>
+
+            <h4>What to Look For</h4>
+
+            <ul class="checklist">
+                <li>Does the WebSocket connection succeed from the browser?</li>
+                <li>Can passwords be brute-forced without rate limiting?</li>
+                <li>Is device registration auto-approved?</li>
+                <li>Can API keys and logs be retrieved?</li>
+            </ul>
+        </div>
+
+        <h3>Testing with LuLu (macOS)</h3>
+
+        <p>
+            <a href="https://objective-see.org/products/lulu.html">LuLu</a> is a free, open-source
+            macOS firewall that can block outgoing connections. You can use it to test whether
+            localhost WebSocket connections are being blocked:
+        </p>
+
+        <div class="alert alert-info">
+            <strong>Test Procedure:</strong>
+            <ol>
+                <li>Install LuLu and enable it</li>
+                <li>Configure a rule to block connections to localhost:9999</li>
+                <li>Run the demo - the WebSocket connection should fail</li>
+                <li>Check LuLu's logs to confirm the block</li>
+            </ol>
+        </div>
+
+        <h2 id="mitigations">Mitigations</h2>
+
+        <h3>For AI Agent Developers</h3>
+
+        <table>
+            <tr>
+                <th>Mitigation</th>
+                <th>Implementation</th>
+                <th>Priority</th>
+            </tr>
+            <tr>
+                <td>Origin Validation</td>
+                <td>Check WebSocket <code>Origin</code> header against allowlist</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Rate Limiting</td>
+                <td>Limit auth attempts (e.g., 5 per minute)</td>
+                <td>Critical</td>
+            </tr>
+            <tr>
+                <td>Device Approval</td>
+                <td>Require explicit user approval for new devices</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Token Binding</td>
+                <td>Bind auth tokens to device fingerprint</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Secure by Default</td>
+                <td>Require explicit opt-in for localhost access</td>
+                <td>High</td>
+            </tr>
+        </table>
+
+        <h3>For Users</h3>
+
+        <table>
+            <tr>
+                <th>Mitigation</th>
+                <th>How</th>
+                <th>Effectiveness</th>
+            </tr>
+            <tr>
+                <td>Application Firewall</td>
+                <td>Use LuLu (macOS) or similar to monitor localhost connections</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Strong Passwords</td>
+                <td>Use long, random passwords for local services</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Browser Isolation</td>
+                <td>Use separate browser profile for sensitive work</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>API Key Rotation</td>
+                <td>Regularly rotate API keys; use short-lived tokens</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Monitor Usage</td>
+                <td>Set up billing alerts for API usage spikes</td>
+                <td>Low (detection)</td>
+            </tr>
+        </table>
+
+        <h2 id="timeline">Disclosure Timeline</h2>
+
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Event</th>
+            </tr>
+            <tr>
+                <td>January 2025</td>
+                <td>Oasis Security discovers vulnerability in AI coding agent WebSocket implementations</td>
+            </tr>
+            <tr>
+                <td>January 2025</td>
+                <td>Responsible disclosure to affected vendors (Anthropic, Cursor, Codeium)</td>
+            </tr>
+            <tr>
+                <td>February 2025</td>
+                <td>Vendors release patches with origin validation and rate limiting</td>
+            </tr>
+            <tr>
+                <td>February 2025</td>
+                <td>Oasis Security publishes "OpenClaw" vulnerability details</td>
+            </tr>
+            <tr>
+                <td>March 2025</td>
+                <td>CVE assignment (pending)</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-success">
+            <strong>Responsible Disclosure:</strong> This vulnerability was responsibly disclosed to affected
+            vendors who released patches before public disclosure. If you're using a current version of
+            Claude Code, Cursor, or Windsurf, you should already have the fix.
+        </div>
+
+        <h2 id="tools">Tools &amp; Resources</h2>
+
+        <h3>Threat Model Spec Library</h3>
+
+        <p>
+            The diagrams in this article were created using <a href="https://github.com/grokify/threat-model-spec">Threat Model Spec</a>,
+            an open-source Go library for creating security threat modeling diagrams with D2.
+        </p>
+
+        <pre><code># Install tms CLI
+go install github.com/grokify/threat-model-spec/cmd/tms@latest
+
+# Generate diagrams from JSON
+tms generate -o attack_chain.d2 attack_chain.json
+d2 attack_chain.d2 attack_chain.svg</code></pre>
+
+        <p>Features:</p>
+
+        <ul>
+            <li>Diagrams-as-code (JSON → D2 → SVG)</li>
+            <li>STRIDE threat annotations</li>
+            <li>MITRE ATT&CK tactic mapping</li>
+            <li>Asset classification (Crown Jewel, High, Medium, Low)</li>
+            <li>Three diagram types: DFD, Attack Chain, Sequence</li>
+            <li>Validation for type-specific field consistency</li>
+        </ul>
+
+        <h3>References</h3>
+
+        <ul>
+            <li><a href="https://www.oasis.security/blog/openclaw-vulnerability">OpenClaw Vulnerability - Oasis Security</a></li>
+            <li><a href="https://attack.mitre.org/">MITRE ATT&CK Framework</a></li>
+            <li><a href="https://atlas.mitre.org/">MITRE ATLAS - Adversarial Threat Landscape for AI Systems</a></li>
+            <li><a href="https://atlas.mitre.org/matrices/ATLAS">ATLAS Matrix - AI/ML Attack Techniques</a></li>
+            <li><a href="https://owasp.org/API-Security/editions/2023/en/0x11-t10/">OWASP API Security Top 10 (2023)</a></li>
+            <li><a href="https://genai.owasp.org/llm-top-10/">OWASP Top 10 for LLM Applications (2025)</a></li>
+            <li><a href="https://owasp.org/Top10/">OWASP Web Application Top 10 (2021)</a></li>
+            <li><a href="https://docs.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats">STRIDE Threat Model</a></li>
+            <li><a href="https://d2lang.com">D2 Diagramming Language</a></li>
+            <li><a href="https://objective-see.org/products/lulu.html">LuLu Firewall for macOS</a></li>
+        </ul>
+
+        <div class="alert alert-success">
+            <strong>Disclosure:</strong> This analysis is for educational purposes. The demonstration code
+            is intentionally vulnerable to help security professionals understand the attack pattern.
+            Never use these techniques against systems you don't own or have permission to test.
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Created with <a href="https://github.com/grokify/threat-model-spec">Threat Model Spec</a> -
+            Threat Modeling Diagrams as Code
+        </p>
+        <p>
+            Diagrams generated from JSON using D2 •
+            <a href="https://d2lang.com">D2 Language</a>
+        </p>
+    </footer>
+</body>
+</html>

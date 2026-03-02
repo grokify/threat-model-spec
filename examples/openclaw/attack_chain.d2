@@ -1,0 +1,328 @@
+# OpenClaw WebSocket Localhost Takeover - Attack Chain Diagram
+# https://github.com/grokify/threat-model-spec
+#
+# Vulnerability: Any website can hijack a developer's AI agent via WebSocket
+# Reference: https://www.oasis.security/blog/openclaw-vulnerability
+
+direction: right
+
+# ============================================================================
+# Legend
+# ============================================================================
+
+legend: Legend {
+  style: {
+    fill: "#fafafa"
+    stroke: "#e0e0e0"
+    border-radius: 8
+  }
+
+  stride: STRIDE Threats {
+    style.fill: "#ffffff"
+
+    s: S - Spoofing {
+      style: {
+        fill: "#ffebee"
+        stroke: "#c62828"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    e: E - Elevation {
+      style: {
+        fill: "#e8f5e9"
+        stroke: "#2e7d32"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    i: I - Info Disclosure {
+      style: {
+        fill: "#e3f2fd"
+        stroke: "#1565c0"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+  }
+
+  mitre: MITRE ATT&CK {
+    style.fill: "#ffffff"
+
+    ta0001: TA0001 Initial Access {
+      style: {
+        fill: "#fff3e0"
+        stroke: "#ef6c00"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    ta0006: TA0006 Credential Access {
+      style: {
+        fill: "#fce4ec"
+        stroke: "#c2185b"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    ta0009: TA0009 Collection {
+      style: {
+        fill: "#f3e5f5"
+        stroke: "#7b1fa2"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    ta0010: TA0010 Exfiltration {
+      style: {
+        fill: "#ffcdd2"
+        stroke: "#b71c1c"
+        border-radius: 4
+        font-size: 11
+      }
+    }
+  }
+
+  assets: Asset Classification {
+    style.fill: "#ffffff"
+
+    crown: Crown Jewel (Critical) {
+      style: {
+        fill: "#ffcdd2"
+        stroke: "#b71c1c"
+        stroke-width: 3
+        border-radius: 4
+        font-size: 11
+      }
+    }
+    high: High Value {
+      style: {
+        fill: "#fff3e0"
+        stroke: "#ef6c00"
+        stroke-width: 2
+        border-radius: 4
+        font-size: 11
+      }
+    }
+  }
+}
+
+# ============================================================================
+# Trust Boundaries
+# ============================================================================
+
+browser-sandbox: Browser Sandbox {
+  style: {
+    stroke-dash: 5
+    stroke: "#1565c0"
+    stroke-width: 2
+    fill: "#e3f2fd"
+    border-radius: 10
+  }
+
+  victim: Victim Browser {
+    shape: rectangle
+    style: {
+      fill: "#e8f5e9"
+      stroke: "#388e3c"
+      stroke-width: 2
+      border-radius: 8
+    }
+  }
+
+  malicious-js: Malicious JS {
+    shape: rectangle
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#b71c1c"
+      stroke-width: 2
+      border-radius: 4
+    }
+  }
+
+  threat-s: S - SPOOFING\n(Impersonate legitimate client) {
+    style: {
+      fill: "#ffebee"
+      stroke: "#c62828"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 12
+    }
+  }
+}
+
+localhost-zone: Localhost (Implicit Trust) {
+  style: {
+    stroke-dash: 5
+    stroke: "#7b1fa2"
+    stroke-width: 2
+    fill: "#f3e5f5"
+    border-radius: 10
+  }
+
+  gateway: OpenClaw Gateway {
+    shape: hexagon
+    style: {
+      fill: "#e0f2f1"
+      stroke: "#00796b"
+      stroke-width: 2
+    }
+  }
+
+  agent: AI Agent {
+    shape: rectangle
+    style: {
+      fill: "#e8eaf6"
+      stroke: "#3f51b5"
+      stroke-width: 2
+      border-radius: 8
+    }
+  }
+
+  # Crown Jewel - API Keys
+  api-keys: API Keys\n(OpenAI, Anthropic, etc.) {
+    shape: cylinder
+    style: {
+      fill: "#ffcdd2"
+      stroke: "#b71c1c"
+      stroke-width: 3
+    }
+  }
+
+  # High Value - Config
+  config: Configuration {
+    shape: cylinder
+    style: {
+      fill: "#fff3e0"
+      stroke: "#ef6c00"
+      stroke-width: 2
+    }
+  }
+
+  # High Value - Logs (may contain secrets)
+  logs: Conversation Logs\n(code, prompts, secrets) {
+    shape: cylinder
+    style: {
+      fill: "#fff3e0"
+      stroke: "#ef6c00"
+      stroke-width: 2
+    }
+  }
+
+  devices: Connected Devices {
+    shape: rectangle
+    style: {
+      fill: "#f5f5f5"
+      stroke: "#9e9e9e"
+      border-radius: 4
+    }
+  }
+
+  threat-e: E - ELEVATION\n(Localhost = trusted) {
+    style: {
+      fill: "#e8f5e9"
+      stroke: "#2e7d32"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 12
+    }
+  }
+
+  threat-i: I - INFO DISCLOSURE\n(API keys, logs, config) {
+    style: {
+      fill: "#e3f2fd"
+      stroke: "#1565c0"
+      stroke-width: 2
+      border-radius: 8
+      font-size: 12
+    }
+  }
+}
+
+attacker-site: Attacker Website {
+  shape: rectangle
+  style: {
+    fill: "#ffcdd2"
+    stroke: "#b71c1c"
+    stroke-width: 2
+    border-radius: 4
+  }
+}
+
+# ============================================================================
+# Attack Flow with MITRE ATT&CK Mapping
+# ============================================================================
+
+# TA0001: Initial Access
+attacker-site -> browser-sandbox.victim: 1. Visits site {
+  style.stroke: "#ef6c00"
+  style.stroke-width: 2
+}
+
+browser-sandbox.victim -> browser-sandbox.malicious-js: 2. Loads malicious JS {
+  style.stroke: "#ef6c00"
+  style.stroke-width: 2
+}
+
+# TA0006: Credential Access
+browser-sandbox.malicious-js -> localhost-zone.gateway: 3. WebSocket to localhost {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+browser-sandbox.malicious-js -> localhost-zone.gateway: 4. Brute-force (T1110) {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+browser-sandbox.malicious-js -> localhost-zone.gateway: 5. Register device {
+  style.stroke: "#c2185b"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+# TA0009: Collection
+localhost-zone.gateway -> localhost-zone.agent: 6. Access agent {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+localhost-zone.agent -> localhost-zone.api-keys: 7. Steal API keys (T1552) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+  style.stroke-dash: 3
+}
+
+localhost-zone.agent -> localhost-zone.config: 8. Read config {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+localhost-zone.agent -> localhost-zone.logs: 9. Read logs (T1530) {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+localhost-zone.gateway -> localhost-zone.devices: 10. Enumerate (T1018) {
+  style.stroke: "#7b1fa2"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+# TA0010: Exfiltration
+localhost-zone.gateway -> browser-sandbox.malicious-js: 11. Return stolen data {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+  style.stroke-dash: 5
+}
+
+browser-sandbox.malicious-js -> attacker-site: 12. Exfiltrate (T1041) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+  style.stroke-dash: 4
+}

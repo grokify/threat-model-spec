@@ -1,0 +1,243 @@
+# OpenClaw Attack Sequence Diagram
+# Time-ordered view of the localhost WebSocket takeover
+# Includes post-exploitation showing attacker using stolen API keys
+# https://github.com/grokify/threat-model-spec
+
+shape: sequence_diagram
+
+# ============================================================================
+# Actors / Lifelines
+# ============================================================================
+
+victim: Victim Developer {
+  style: {
+    fill: "#e8f5e9"
+    stroke: "#388e3c"
+    stroke-width: 2
+  }
+}
+
+browser: Browser {
+  style: {
+    fill: "#e3f2fd"
+    stroke: "#1976d2"
+    stroke-width: 2
+  }
+}
+
+malicious-page: Malicious Page {
+  style: {
+    fill: "#ffcdd2"
+    stroke: "#b71c1c"
+    stroke-width: 2
+  }
+}
+
+gateway: OpenClaw Gateway\n(localhost:9999) {
+  style: {
+    fill: "#e0f2f1"
+    stroke: "#00796b"
+    stroke-width: 2
+  }
+}
+
+agent: AI Agent {
+  style: {
+    fill: "#e8eaf6"
+    stroke: "#3f51b5"
+    stroke-width: 2
+  }
+}
+
+attacker: Attacker Server {
+  style: {
+    fill: "#ffcdd2"
+    stroke: "#b71c1c"
+    stroke-width: 2
+  }
+}
+
+llm-api: LLM API\n(OpenAI/Anthropic) {
+  style: {
+    fill: "#fff3e0"
+    stroke: "#ef6c00"
+    stroke-width: 2
+  }
+}
+
+# ============================================================================
+# Phase 1: Initial Access [TA0001]
+# ============================================================================
+
+victim -> browser: 1. Visits innocent-looking page {
+  style.stroke: "#616161"
+}
+
+browser -> malicious-page: 2. GET /innocent-page.html {
+  style.stroke: "#616161"
+}
+
+malicious-page -> browser: 3. 200 OK + malicious JS {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+# ============================================================================
+# Phase 2: WebSocket Connection (bypasses Same-Origin Policy)
+# ============================================================================
+
+browser -> gateway: 4. WebSocket: ws://localhost:9999 {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+gateway -> browser: 5. 101 Switching Protocols\n(no origin validation!) {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+  style.stroke-dash: 3
+}
+
+# ============================================================================
+# Phase 3: Credential Access [TA0006] - Brute Force (T1110)
+# ============================================================================
+
+browser -> gateway: 6. auth: password="aaa" {
+  style.stroke: "#ff6f00"
+}
+
+gateway -> browser: 7. auth_failed {
+  style.stroke: "#9e9e9e"
+}
+
+browser -> gateway: 8. auth: password="aab" {
+  style.stroke: "#ff6f00"
+}
+
+gateway -> browser: 9. auth_failed {
+  style.stroke: "#9e9e9e"
+}
+
+browser -> gateway: 10. ... 1000+ attempts (no rate limit!) {
+  style.stroke: "#ff6f00"
+  style.stroke-dash: 5
+}
+
+browser -> gateway: 11. auth: password="demo123" {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 12. auth_success + session_token {
+  style.stroke: "#2e7d32"
+  style.stroke-width: 2
+}
+
+# ============================================================================
+# Phase 4: Persistence - Device Registration
+# ============================================================================
+
+browser -> gateway: 13. register_device: "attacker-device"\n(from localhost = auto-approve) {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 14. device_registered: OK {
+  style.stroke: "#2e7d32"
+  style.stroke-width: 2
+}
+
+# ============================================================================
+# Phase 5: Collection [TA0009] - Target High-Value Assets
+# ============================================================================
+
+browser -> gateway: 15. get_api_keys (CROWN JEWEL) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+gateway -> agent: 16. Read API key store {
+  style.stroke: "#00796b"
+}
+
+agent -> gateway: 17. API keys:\n- OPENAI_API_KEY=sk-...\n- ANTHROPIC_API_KEY=sk-ant-... {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+gateway -> browser: 18. api_keys response {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+browser -> gateway: 19. get_config {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 20. config: model settings, preferences {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+}
+
+browser -> gateway: 21. get_conversation_history {
+  style.stroke: "#c62828"
+  style.stroke-width: 2
+}
+
+gateway -> browser: 22. logs: code snippets, prompts, file paths {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+}
+
+browser -> gateway: 23. list_devices {
+  style.stroke: "#c62828"
+}
+
+gateway -> browser: 24. devices: MacBook Pro, attacker-device {
+  style.stroke: "#b71c1c"
+}
+
+# ============================================================================
+# Phase 6: Exfiltration [TA0010] - Send to Attacker (T1041)
+# ============================================================================
+
+browser -> attacker: 25. POST /exfil\nAPI keys + config + logs {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+  style.stroke-dash: 5
+}
+
+attacker -> browser: 26. 200 OK - Data received {
+  style.stroke: "#b71c1c"
+}
+
+# ============================================================================
+# Phase 7: Post-Exploitation - Attacker Uses Stolen API Keys
+# MITRE ATLAS: Resource Theft, Unauthorized API Access
+# ============================================================================
+
+attacker -> llm-api: 27. POST /v1/chat/completions\nAuthorization: Bearer sk-... (STOLEN) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+llm-api -> attacker: 28. 200 OK - Response\n(billed to victim!) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 3
+}
+
+attacker -> llm-api: 29. ... continued abuse\n(crypto mining equivalent for AI) {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+  style.stroke-dash: 5
+}
+
+# ============================================================================
+# Impact Summary (shown as final message)
+# ============================================================================
+
+attacker -> attacker: 30. IMPACT:\n- API key theft (financial loss)\n- Conversation history (IP theft)\n- Persistent device access\n- Victim unaware {
+  style.stroke: "#b71c1c"
+  style.stroke-width: 2
+}

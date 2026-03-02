@@ -1,0 +1,362 @@
+{
+  "type": "sequence",
+  "title": "OpenClaw Attack Sequence",
+  "description": "Time-ordered view of the localhost WebSocket takeover with post-exploitation",
+  "mappings": {
+    "mitreAttack": [
+      {
+        "tacticId": "TA0001",
+        "tacticName": "Initial Access",
+        "techniqueId": "T1189",
+        "techniqueName": "Drive-by Compromise"
+      },
+      {
+        "tacticId": "TA0006",
+        "tacticName": "Credential Access",
+        "techniqueId": "T1110",
+        "techniqueName": "Brute Force"
+      },
+      {
+        "tacticId": "TA0009",
+        "tacticName": "Collection",
+        "techniqueId": "T1552",
+        "techniqueName": "Unsecured Credentials"
+      },
+      {
+        "tacticId": "TA0010",
+        "tacticName": "Exfiltration",
+        "techniqueId": "T1041",
+        "techniqueName": "Exfiltration Over C2 Channel"
+      }
+    ],
+    "mitreAtlas": [
+      {
+        "tacticId": "AML.TA0004",
+        "tacticName": "ML Attack Staging",
+        "techniqueId": "AML.T0024",
+        "techniqueName": "Exfiltration via ML Inference API"
+      }
+    ],
+    "owasp": [
+      {
+        "category": "api",
+        "id": "API2:2023",
+        "name": "Broken Authentication"
+      },
+      {
+        "category": "llm",
+        "id": "LLM10:2025",
+        "name": "Unbounded Consumption",
+        "description": "Stolen API keys enable unlimited API usage billed to victim"
+      }
+    ],
+    "cvss": {
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+      "baseScore": 8.1,
+      "severity": "High"
+    }
+  },
+  "actors": [
+    {
+      "id": "victim",
+      "label": "Victim Developer",
+      "type": "external-entity",
+      "malicious": false
+    },
+    {
+      "id": "browser",
+      "label": "Browser",
+      "type": "browser",
+      "malicious": false
+    },
+    {
+      "id": "malicious-page",
+      "label": "Malicious Page",
+      "type": "process",
+      "malicious": true
+    },
+    {
+      "id": "gateway",
+      "label": "OpenClaw Gateway (localhost:9999)",
+      "type": "gateway",
+      "malicious": false
+    },
+    {
+      "id": "agent",
+      "label": "AI Agent",
+      "type": "agent",
+      "malicious": false
+    },
+    {
+      "id": "attacker",
+      "label": "Attacker Server",
+      "type": "external-entity",
+      "malicious": true
+    },
+    {
+      "id": "llm-api",
+      "label": "LLM API (OpenAI/Anthropic)",
+      "type": "api",
+      "malicious": false
+    }
+  ],
+  "phases": [
+    {
+      "name": "Initial Access",
+      "mitreTactic": "TA0001",
+      "startMessage": 1,
+      "endMessage": 3
+    },
+    {
+      "name": "WebSocket Connection",
+      "description": "Bypasses Same-Origin Policy",
+      "startMessage": 4,
+      "endMessage": 5
+    },
+    {
+      "name": "Credential Access",
+      "mitreTactic": "TA0006",
+      "description": "Brute-force with no rate limiting",
+      "startMessage": 6,
+      "endMessage": 14
+    },
+    {
+      "name": "Collection",
+      "mitreTactic": "TA0009",
+      "description": "Gather high-value assets",
+      "startMessage": 15,
+      "endMessage": 24
+    },
+    {
+      "name": "Exfiltration",
+      "mitreTactic": "TA0010",
+      "startMessage": 25,
+      "endMessage": 26
+    },
+    {
+      "name": "Post-Exploitation",
+      "description": "Attacker uses stolen API keys",
+      "startMessage": 27,
+      "endMessage": 30
+    }
+  ],
+  "messages": [
+    {
+      "seq": 1,
+      "from": "victim",
+      "to": "browser",
+      "label": "Visits innocent-looking page",
+      "type": "normal"
+    },
+    {
+      "seq": 2,
+      "from": "browser",
+      "to": "malicious-page",
+      "label": "GET /innocent-page.html",
+      "type": "normal"
+    },
+    {
+      "seq": 3,
+      "from": "malicious-page",
+      "to": "browser",
+      "label": "200 OK + malicious JS",
+      "type": "attack"
+    },
+    {
+      "seq": 4,
+      "from": "browser",
+      "to": "gateway",
+      "label": "WebSocket: ws://localhost:9999",
+      "type": "attack"
+    },
+    {
+      "seq": 5,
+      "from": "gateway",
+      "to": "browser",
+      "label": "101 Switching Protocols (no origin validation!)",
+      "type": "attack"
+    },
+    {
+      "seq": 6,
+      "from": "browser",
+      "to": "gateway",
+      "label": "auth: password=\"aaa\"",
+      "type": "attack"
+    },
+    {
+      "seq": 7,
+      "from": "gateway",
+      "to": "browser",
+      "label": "auth_failed",
+      "type": "normal"
+    },
+    {
+      "seq": 8,
+      "from": "browser",
+      "to": "gateway",
+      "label": "auth: password=\"aab\"",
+      "type": "attack"
+    },
+    {
+      "seq": 9,
+      "from": "gateway",
+      "to": "browser",
+      "label": "auth_failed",
+      "type": "normal"
+    },
+    {
+      "seq": 10,
+      "from": "browser",
+      "to": "gateway",
+      "label": "... 1000+ attempts (no rate limit!)",
+      "type": "attack",
+      "mitreTechnique": "T1110"
+    },
+    {
+      "seq": 11,
+      "from": "browser",
+      "to": "gateway",
+      "label": "auth: password=\"demo123\"",
+      "type": "attack"
+    },
+    {
+      "seq": 12,
+      "from": "gateway",
+      "to": "browser",
+      "label": "auth_success + session_token",
+      "type": "normal"
+    },
+    {
+      "seq": 13,
+      "from": "browser",
+      "to": "gateway",
+      "label": "register_device: \"attacker-device\"",
+      "type": "attack"
+    },
+    {
+      "seq": 14,
+      "from": "gateway",
+      "to": "browser",
+      "label": "device_registered: OK (auto-approved from localhost)",
+      "type": "normal"
+    },
+    {
+      "seq": 15,
+      "from": "browser",
+      "to": "gateway",
+      "label": "get_api_keys (CROWN JEWEL)",
+      "type": "attack",
+      "mitreTechnique": "T1552"
+    },
+    {
+      "seq": 16,
+      "from": "gateway",
+      "to": "agent",
+      "label": "Read API key store",
+      "type": "normal"
+    },
+    {
+      "seq": 17,
+      "from": "agent",
+      "to": "gateway",
+      "label": "API keys: OPENAI_API_KEY, ANTHROPIC_API_KEY",
+      "type": "exfil"
+    },
+    {
+      "seq": 18,
+      "from": "gateway",
+      "to": "browser",
+      "label": "api_keys response",
+      "type": "exfil"
+    },
+    {
+      "seq": 19,
+      "from": "browser",
+      "to": "gateway",
+      "label": "get_config",
+      "type": "attack"
+    },
+    {
+      "seq": 20,
+      "from": "gateway",
+      "to": "browser",
+      "label": "config: model settings, preferences",
+      "type": "exfil"
+    },
+    {
+      "seq": 21,
+      "from": "browser",
+      "to": "gateway",
+      "label": "get_conversation_history",
+      "type": "attack",
+      "mitreTechnique": "T1530"
+    },
+    {
+      "seq": 22,
+      "from": "gateway",
+      "to": "browser",
+      "label": "logs: code snippets, prompts, file paths",
+      "type": "exfil"
+    },
+    {
+      "seq": 23,
+      "from": "browser",
+      "to": "gateway",
+      "label": "list_devices",
+      "type": "attack",
+      "mitreTechnique": "T1018"
+    },
+    {
+      "seq": 24,
+      "from": "gateway",
+      "to": "browser",
+      "label": "devices: MacBook Pro, attacker-device",
+      "type": "exfil"
+    },
+    {
+      "seq": 25,
+      "from": "browser",
+      "to": "attacker",
+      "label": "POST /exfil (API keys + config + logs)",
+      "type": "exfil",
+      "mitreTechnique": "T1041"
+    },
+    {
+      "seq": 26,
+      "from": "attacker",
+      "to": "browser",
+      "label": "200 OK - Data received",
+      "type": "exfil"
+    },
+    {
+      "seq": 27,
+      "from": "attacker",
+      "to": "llm-api",
+      "label": "POST /v1/chat/completions (using STOLEN key)",
+      "type": "exfil"
+    },
+    {
+      "seq": 28,
+      "from": "llm-api",
+      "to": "attacker",
+      "label": "200 OK - Response (billed to victim!)",
+      "type": "exfil"
+    },
+    {
+      "seq": 29,
+      "from": "attacker",
+      "to": "llm-api",
+      "label": "... continued abuse (crypto mining for AI)",
+      "type": "exfil"
+    },
+    {
+      "seq": 30,
+      "from": "attacker",
+      "to": "attacker",
+      "label": "IMPACT: API key theft, IP theft, persistent access",
+      "type": "attack",
+      "note": true
+    }
+  ]
+}
