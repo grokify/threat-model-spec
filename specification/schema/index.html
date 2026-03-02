@@ -10,22 +10,28 @@
       
       
       
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/specification/schema/">
       
       
+        <link rel="prev" href="../">
       
-      <link rel="icon" href="/threat-model-spec/assets/images/favicon.png">
+      
+        <link rel="next" href="../elements/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>Threat Model Spec</title>
+        <title>JSON Schema - Threat Model Spec</title>
       
     
     
-      <link rel="stylesheet" href="/threat-model-spec/assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="/threat-model-spec/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,7 +50,7 @@
       
     
     
-    <script>__md_scope=new URL("/threat-model-spec/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -69,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#json-schema" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -81,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/threat-model-spec/." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+    <a href="../.." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -101,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              JSON Schema
             
           </span>
         </div>
@@ -219,7 +230,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/threat-model-spec/." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+    <a href="../.." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -249,7 +260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -316,7 +327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/getting-started/installation/" class="md-nav__link">
+      <a href="../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -339,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/getting-started/quick-start/" class="md-nav__link">
+      <a href="../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -414,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/diagram-types/" class="md-nav__link">
+      <a href="../../concepts/diagram-types/" class="md-nav__link">
         
   
   
@@ -479,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/" class="md-nav__link">
+      <a href="../../concepts/frameworks/" class="md-nav__link">
         
   
   
@@ -502,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/stride/" class="md-nav__link">
+      <a href="../../concepts/frameworks/stride/" class="md-nav__link">
         
   
   
@@ -525,7 +536,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/mitre-attack/" class="md-nav__link">
+      <a href="../../concepts/frameworks/mitre-attack/" class="md-nav__link">
         
   
   
@@ -548,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/mitre-atlas/" class="md-nav__link">
+      <a href="../../concepts/frameworks/mitre-atlas/" class="md-nav__link">
         
   
   
@@ -571,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/owasp/" class="md-nav__link">
+      <a href="../../concepts/frameworks/owasp/" class="md-nav__link">
         
   
   
@@ -594,7 +605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/cwe/" class="md-nav__link">
+      <a href="../../concepts/frameworks/cwe/" class="md-nav__link">
         
   
   
@@ -617,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/concepts/frameworks/cvss/" class="md-nav__link">
+      <a href="../../concepts/frameworks/cvss/" class="md-nav__link">
         
   
   
@@ -652,8 +663,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -664,13 +677,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -686,7 +697,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Specification
@@ -700,7 +711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -720,10 +731,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/schema/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    JSON Schema
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -734,6 +767,137 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#schema-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Schemas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#programmatic-access-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programmatic Access (Go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-with-external-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation with External Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ide-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDE Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regenerating-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regenerating Schemas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-validation-schemago" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Validation (schemago)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schema Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threatmodel-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      ThreatModel Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagramir-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiagramIR Schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -746,7 +910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/elements/" class="md-nav__link">
+      <a href="../elements/" class="md-nav__link">
         
   
   
@@ -769,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/boundaries/" class="md-nav__link">
+      <a href="../boundaries/" class="md-nav__link">
         
   
   
@@ -792,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/flows/" class="md-nav__link">
+      <a href="../flows/" class="md-nav__link">
         
   
   
@@ -815,7 +979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/specification/mappings/" class="md-nav__link">
+      <a href="../mappings/" class="md-nav__link">
         
   
   
@@ -890,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/styles/" class="md-nav__link">
+      <a href="../../styles/" class="md-nav__link">
         
   
   
@@ -913,7 +1077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/styles/stride/" class="md-nav__link">
+      <a href="../../styles/stride/" class="md-nav__link">
         
   
   
@@ -936,7 +1100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/styles/dfd/" class="md-nav__link">
+      <a href="../../styles/dfd/" class="md-nav__link">
         
   
   
@@ -959,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/styles/trust-boundaries/" class="md-nav__link">
+      <a href="../../styles/trust-boundaries/" class="md-nav__link">
         
   
   
@@ -982,7 +1146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/styles/attack-flows/" class="md-nav__link">
+      <a href="../../styles/attack-flows/" class="md-nav__link">
         
   
   
@@ -1057,7 +1221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/examples/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
@@ -1080,7 +1244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/examples/openclaw/" class="md-nav__link">
+      <a href="../../examples/openclaw/" class="md-nav__link">
         
   
   
@@ -1155,7 +1319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/cli/" class="md-nav__link">
+      <a href="../../cli/" class="md-nav__link">
         
   
   
@@ -1178,7 +1342,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/cli/generate/" class="md-nav__link">
+      <a href="../../cli/generate/" class="md-nav__link">
         
   
   
@@ -1201,7 +1365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/cli/validate/" class="md-nav__link">
+      <a href="../../cli/validate/" class="md-nav__link">
         
   
   
@@ -1276,7 +1440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/releases/v0.2.0/" class="md-nav__link">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
         
   
   
@@ -1299,7 +1463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/releases/v0.1.0/" class="md-nav__link">
+      <a href="../../releases/v0.1.0/" class="md-nav__link">
         
   
   
@@ -1329,7 +1493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/threat-model-spec/changelog/" class="md-nav__link">
+      <a href="../../changelog/" class="md-nav__link">
         
   
   
@@ -1361,6 +1525,127 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#schema-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using the Schemas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the Schemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#programmatic-access-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      Programmatic Access (Go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validation-with-external-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation with External Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ide-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      IDE Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regenerating-schemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regenerating Schemas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-validation-schemago" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Validation (schemago)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Schema Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threatmodel-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      ThreatModel Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagramir-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiagramIR Schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1372,8 +1657,145 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="json-schema">JSON Schema<a class="headerlink" href="#json-schema" title="Permanent link">&para;</a></h1>
+<p>Threat Model Spec provides JSON Schema files for validating threat model documents. The schemas are generated from Go types using the <code>invopop/jsonschema</code> library.</p>
+<h2 id="schema-files">Schema Files<a class="headerlink" href="#schema-files" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Schema</th>
+<th>Description</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>threat-model.schema.json</code></td>
+<td>ThreatModel format (multi-diagram)</td>
+<td><code>schema/threat-model.schema.json</code></td>
+</tr>
+<tr>
+<td><code>diagram.schema.json</code></td>
+<td>DiagramIR format (single diagram)</td>
+<td><code>schema/diagram.schema.json</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="using-the-schemas">Using the Schemas<a class="headerlink" href="#using-the-schemas" title="Permanent link">&para;</a></h2>
+<h3 id="programmatic-access-go">Programmatic Access (Go)<a class="headerlink" href="#programmatic-access-go" title="Permanent link">&para;</a></h3>
+<p>The schemas are embedded in the <code>schema</code> package:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/threat-model-spec/schema&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1">// Access embedded schemas</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nx">threatModelSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ThreatModelSchema</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nx">diagramSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DiagramSchema</span>
+</code></pre></div>
+<h3 id="validation-with-external-tools">Validation with External Tools<a class="headerlink" href="#validation-with-external-tools" title="Permanent link">&para;</a></h3>
+<p>You can validate JSON files against the schemas using tools like <code>ajv</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Install ajv-cli</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>ajv-cli
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Validate a ThreatModel</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>ajv<span class="w"> </span>validate<span class="w"> </span>-s<span class="w"> </span>schema/threat-model.schema.json<span class="w"> </span>-d<span class="w"> </span>examples/openclaw/openclaw.json
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Validate a DiagramIR</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>ajv<span class="w"> </span>validate<span class="w"> </span>-s<span class="w"> </span>schema/diagram.schema.json<span class="w"> </span>-d<span class="w"> </span>attack.json
+</code></pre></div>
+<h3 id="ide-integration">IDE Integration<a class="headerlink" href="#ide-integration" title="Permanent link">&para;</a></h3>
+<p>Configure your IDE to use the schemas for autocomplete and validation:</p>
+<p><strong>VS Code</strong> (<code>.vscode/settings.json</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;json.schemas&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">&quot;fileMatch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;**/threat-model.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;**/threatmodel.json&quot;</span><span class="p">],</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./schema/threat-model.schema.json&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="nt">&quot;fileMatch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;**/*_chain.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;**/*_sequence.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;**/dfd.json&quot;</span><span class="p">],</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./schema/diagram.schema.json&quot;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="regenerating-schemas">Regenerating Schemas<a class="headerlink" href="#regenerating-schemas" title="Permanent link">&para;</a></h2>
+<p>If you modify the Go types, regenerate the schemas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Build the generator</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>genschema<span class="w"> </span>./cmd/genschema
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Generate schemas</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>./genschema<span class="w"> </span>schema/
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># Validate with schemago</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>schemago<span class="w"> </span>lint<span class="w"> </span>schema/threat-model.schema.json
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>schemago<span class="w"> </span>lint<span class="w"> </span>schema/diagram.schema.json
+</code></pre></div>
+<h2 id="schema-validation-schemago">Schema Validation (schemago)<a class="headerlink" href="#schema-validation-schemago" title="Permanent link">&para;</a></h2>
+<p>The schemas are validated using <code>schemago lint</code> to ensure Go compatibility:</p>
+<ul>
+<li>No ambiguous union types (<code>anyOf</code>/<code>oneOf</code>)</li>
+<li>Consistent discriminator fields</li>
+<li>Clean mapping to Go types</li>
+</ul>
+<h2 id="schema-structure">Schema Structure<a class="headerlink" href="#schema-structure" title="Permanent link">&para;</a></h2>
+<h3 id="threatmodel-schema">ThreatModel Schema<a class="headerlink" href="#threatmodel-schema" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ThreatModel
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── id (string, required)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── title (string, required)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>├── description (string)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├── version (string)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├── authors (array of Author)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>├── references (array of Reference)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├── mappings (Mappings)
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>└── diagrams (array of DiagramView, required)
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    └── DiagramView
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        ├── type (enum: dfd, attack-chain, sequence)
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        ├── title (string)
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        ├── mappings (Mappings, overrides parent)
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        └── ... diagram-specific fields
+</code></pre></div>
+<h3 id="diagramir-schema">DiagramIR Schema<a class="headerlink" href="#diagramir-schema" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>DiagramIR
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>├── type (enum: dfd, attack-chain, sequence, required)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>├── title (string, required)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>├── description (string)
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>├── direction (enum: right, down, left, up)
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>├── legend (Legend)
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>├── mappings (Mappings)
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>├── elements (array of Element)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>├── boundaries (array of Boundary)
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>├── flows (array of Flow)
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>├── attacks (array of Attack)
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>├── targets (array of Target)
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>├── actors (array of Actor)
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>├── phases (array of Phase)
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>└── messages (array of Message)
+</code></pre></div>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../">JSON IR Overview</a> — Format documentation</li>
+<li><a href="../elements/">Element Types</a> — Element schema details</li>
+<li><a href="../mappings/">Framework Mappings</a> — Mappings schema details</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1428,10 +1850,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "/threat-model-spec/", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "/threat-model-spec/assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/threat-model-spec/assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>
