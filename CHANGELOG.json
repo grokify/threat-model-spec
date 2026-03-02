@@ -14,25 +14,33 @@
         { "description": "Comprehensive security framework mappings: MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API/LLM/Web), CWE, CVSS, STRIDE" }
       ],
       "added": [
-        { "description": "JSON IR schema for threat modeling diagrams (DFD, Attack Chain, Sequence)" },
-        { "description": "`ir` package with types for elements, boundaries, flows, attacks, actors, and messages" },
-        { "description": "`ir/mappings.go` with framework mapping types for MITRE ATT&CK, ATLAS, OWASP, CWE, CVSS, and STRIDE" },
-        { "description": "`diagram` package for programmatic diagram construction with D2 rendering" },
-        { "description": "`stix` package for STIX 2.1 export (Bundle, AttackPattern, ThreatActor, Infrastructure, Indicator, Vulnerability)" },
-        { "description": "`stride` package with STRIDE threat category types and color mappings" },
-        { "description": "`killchain` package with MITRE ATT&CK tactics and Lockheed Martin Cyber Kill Chain phases" },
-        { "description": "`tms` CLI with `generate`, `validate`, and `version` subcommands" },
-        { "description": "`tms generate --stix` flag for STIX 2.1 JSON export" },
-        { "description": "`tms generate -svg` flag to render D2 diagrams to SVG" },
-        { "description": "D2 style library with classes for STRIDE threats, trust boundaries, DFD elements, and attack flows" },
-        { "description": "OpenClaw WebSocket vulnerability example with DFD, attack chain, and sequence diagrams" },
-        { "description": "Demo vulnerable server and malicious page for educational attack demonstration" },
-        { "description": "Validation for diagram type-specific field requirements" }
+        { "description": "JSON IR schema for threat modeling diagrams (DFD, Attack Chain, Sequence)", "commit": "cf579f5" },
+        { "description": "`ir` package with types for elements, boundaries, flows, attacks, actors, and messages", "commit": "cf579f5" },
+        { "description": "`ir/mappings.go` with framework mapping types for MITRE ATT&CK, ATLAS, OWASP, CWE, CVSS, and STRIDE", "commit": "cf579f5" },
+        { "description": "`diagram` package for programmatic diagram construction with D2 rendering", "commit": "622761e" },
+        { "description": "`stix` package for STIX 2.1 export (Bundle, AttackPattern, ThreatActor, Infrastructure, Indicator, Vulnerability)", "commit": "a04d572" },
+        { "description": "`stride` package with STRIDE threat category types and color mappings", "commit": "06828c7" },
+        { "description": "`killchain` package with MITRE ATT&CK tactics and Lockheed Martin Cyber Kill Chain phases", "commit": "156ae02" },
+        { "description": "`tms` CLI with `generate`, `validate`, and `version` subcommands", "commit": "38cb8fa" },
+        { "description": "`tms generate --stix` flag for STIX 2.1 JSON export", "commit": "38cb8fa" },
+        { "description": "`tms generate --svg` flag to render D2 diagrams to SVG", "commit": "38cb8fa" },
+        { "description": "D2 style library with classes for STRIDE threats, trust boundaries, DFD elements, and attack flows", "commit": "fb84caf" },
+        { "description": "OpenClaw WebSocket vulnerability example with DFD, attack chain, and sequence diagrams", "commit": "923f9b8" },
+        { "description": "Demo vulnerable server and malicious page for educational attack demonstration", "commit": "29d839c" },
+        { "description": "Validation for diagram type-specific field requirements", "commit": "cf579f5" }
+      ],
+      "changed": [
+        { "description": "CLI migrated from `flag` to Cobra framework for consistent experience and extensibility", "commit": "5c4bc99" }
+      ],
+      "build": [
+        { "description": "GitHub Actions workflows for CI, lint, and CodeQL SAST", "commit": "cf9f749" },
+        { "description": "Dependabot configuration for Go modules and GitHub Actions", "commit": "d9ddcdc" }
       ],
       "documentation": [
-        { "description": "README with installation, quick start, and framework mapping reference" },
-        { "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings" },
-        { "description": "D2 style reference for STRIDE threat annotations and trust boundaries" }
+        { "description": "README with installation, quick start, and framework mapping reference", "commit": "084c3a1" },
+        { "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings", "commit": "923f9b8" },
+        { "description": "D2 style reference for STRIDE threat annotations and trust boundaries", "commit": "084c3a1" },
+        { "description": "README badges for CI, lint, SAST, Go Report Card, and docs", "commit": "b356c7a" }
       ]
     }
   ]
