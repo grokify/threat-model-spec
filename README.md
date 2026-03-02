@@ -10,6 +10,43 @@
 
 Threat Model Spec is an open-source library for creating security threat modeling diagrams as code. It provides a JSON-based intermediate representation (IR) that can be rendered to D2 diagrams and STIX 2.1 for threat intelligence sharing.
 
+## Architecture
+
+```
+                            ┌─────────────────┐
+                            │   JSON IR       │
+                            │  (Threat Model) │
+                            └────────┬────────┘
+                                     │
+                         ┌───────────┼───────────┐
+                         │           │           │
+                         ▼           ▼           ▼
+                  ┌──────────┐ ┌──────────┐ ┌──────────┐
+                  │    D2    │ │  STIX    │ │ Validate │
+                  │ Renderer │ │ Exporter │ │          │
+                  └────┬─────┘ └────┬─────┘ └────┬─────┘
+                       │            │            │
+                       ▼            ▼            ▼
+                  ┌──────────┐ ┌──────────┐ ┌──────────┐
+                  │   .d2    │ │  .json   │ │  pass/   │
+                  │  diagram │ │  STIX    │ │  fail    │
+                  └────┬─────┘ │  Bundle  │ └──────────┘
+                       │       └──────────┘
+                       ▼
+                  ┌──────────┐
+                  │   .svg   │
+                  │   .png   │
+                  └──────────┘
+```
+
+**Input:** JSON IR with diagram type, elements, flows, attacks, and framework mappings
+
+**Outputs:**
+
+- **D2 Diagrams** → SVG/PNG via D2 CLI
+- **STIX 2.1 Bundles** → Threat intelligence sharing
+- **Validation Results** → Schema and reference checking
+
 ## Features
 
 - 💻 **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
