@@ -90,6 +90,16 @@ Score: 9.3 (Critical)
 
 ## Diagrams
 
+The OpenClaw example uses the canonical `ThreatModel` format with all three diagram views in a single file:
+
+```bash
+# Generate all diagrams from the unified ThreatModel
+tms generate openclaw.json -o openclaw.d2 --svg
+
+# Export to STIX 2.1
+tms generate openclaw.json --stix -o openclaw.stix.json
+```
+
 ### Data Flow Diagram
 
 Shows system architecture and trust boundaries:
@@ -98,25 +108,13 @@ Shows system architecture and trust boundaries:
 - Localhost implicit trust zone
 - Data flows between components
 
-```bash
-tms generate dfd.json -o dfd.d2 --svg
-```
-
 ### Attack Chain
 
-Visualizes the 10-step attack sequence:
-
-```bash
-tms generate attack_chain.json -o attack_chain.d2 --svg
-```
+Visualizes the 10-step attack sequence with MITRE ATT&CK mappings.
 
 ### Sequence Diagram
 
-Time-ordered attack timeline:
-
-```bash
-tms generate attack_sequence.json -o attack_sequence.d2 --svg
-```
+Time-ordered attack timeline showing all interactions from initial access to exfiltration.
 
 ## Key Security Lessons
 
@@ -144,12 +142,16 @@ open index.html
 !!! warning "Educational Only"
     The demo server is intentionally vulnerable. Do not use in production.
 
-## JSON IR Example
+## ThreatModel Example
+
+The `openclaw.json` file uses the canonical ThreatModel format with shared metadata and multiple diagram views:
 
 ```json
 {
-  "type": "attack-chain",
+  "id": "openclaw-websocket-localhost-takeover",
   "title": "OpenClaw WebSocket Localhost Takeover",
+  "description": "Critical vulnerability allowing malicious websites to hijack developer sessions",
+  "version": "1.0.0",
   "mappings": {
     "mitreAttack": [
       {"tacticId": "TA0001", "techniqueId": "T1189", "techniqueName": "Drive-by Compromise"},
@@ -160,18 +162,15 @@ open index.html
     ],
     "cvss": {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N",
-      "score": 9.3
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+      "baseScore": 8.1,
+      "severity": "High"
     }
   },
-  "elements": [
-    {"id": "attacker", "label": "Attacker", "type": "external-entity"},
-    {"id": "browser", "label": "Victim Browser", "type": "browser"},
-    {"id": "agent", "label": "AI Agent", "type": "agent", "classification": "crown-jewel"}
-  ],
-  "attacks": [
-    {"step": 1, "from": "attacker", "to": "browser", "label": "Serve malicious page"},
-    {"step": 2, "from": "browser", "to": "agent", "label": "WebSocket to localhost"}
+  "diagrams": [
+    {"type": "dfd", "title": "Data Flow Diagram", ...},
+    {"type": "attack-chain", "title": "Attack Chain", ...},
+    {"type": "sequence", "title": "Attack Sequence", ...}
   ]
 }
 ```
@@ -180,10 +179,9 @@ open index.html
 
 | File | Description |
 |------|-------------|
+| `openclaw.json` | Canonical ThreatModel with all diagram views |
+| `openclaw.stix.json` | STIX 2.1 threat intelligence bundle |
 | `README.md` | Documentation |
-| `dfd.json` | Data flow diagram IR |
-| `attack_chain.json` | Attack chain IR |
-| `attack_sequence.json` | Sequence diagram IR |
 | `*.d2` | Generated D2 files |
 | `*.svg` | Rendered diagrams |
 | `article.html` | Full HTML article |

@@ -4,7 +4,52 @@ This guide walks you through creating your first threat model diagram.
 
 ## 1. Define a Threat Model
 
-Create a JSON file describing your threat model. Here's a simple attack chain example:
+Threat Model Spec supports two JSON formats:
+
+- **ThreatModel** — Canonical format with shared metadata and multiple diagram views (recommended)
+- **DiagramIR** — Single-diagram format for simpler use cases
+
+### ThreatModel Format (Recommended)
+
+The `ThreatModel` format is the canonical representation, containing shared metadata, framework mappings, and multiple diagram views:
+
+```json title="threat-model.json"
+{
+  "id": "websocket-localhost-takeover",
+  "title": "WebSocket Localhost Takeover",
+  "description": "Malicious website exploits localhost WebSocket to compromise AI agent",
+  "mappings": {
+    "mitreAttack": [
+      {"tacticId": "TA0001", "techniqueId": "T1189", "techniqueName": "Drive-by Compromise"}
+    ],
+    "owasp": [
+      {"category": "api", "id": "API2:2023", "name": "Broken Authentication"}
+    ]
+  },
+  "diagrams": [
+    {
+      "type": "attack-chain",
+      "title": "Attack Chain",
+      "elements": [
+        {"id": "attacker", "label": "Attacker", "type": "external-entity"},
+        {"id": "browser", "label": "Victim Browser", "type": "browser"},
+        {"id": "agent", "label": "AI Agent", "type": "agent"}
+      ],
+      "attacks": [
+        {"step": 1, "from": "attacker", "to": "browser", "label": "Serve malicious page", "mitreTechnique": "T1189"},
+        {"step": 2, "from": "browser", "to": "agent", "label": "WebSocket to localhost:9999"}
+      ],
+      "targets": [
+        {"elementId": "agent", "impact": "Full agent compromise"}
+      ]
+    }
+  ]
+}
+```
+
+### DiagramIR Format (Single Diagram)
+
+For simpler use cases, you can use the single-diagram format:
 
 ```json title="attack.json"
 {

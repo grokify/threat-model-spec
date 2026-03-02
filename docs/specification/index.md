@@ -2,9 +2,71 @@
 
 Threat Model Spec uses a JSON-based Intermediate Representation (IR) for defining threat models. This non-polymorphic structure is designed to be Go-friendly and generate clean JSON schemas.
 
-## Overview
+## Formats
 
-The IR uses a discriminated union pattern where the `type` field identifies the diagram kind:
+Threat Model Spec supports two JSON formats:
+
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| **ThreatModel** | Canonical format with multiple diagram views | Complete threat models with shared metadata |
+| **DiagramIR** | Single-diagram format | Simple use cases, individual diagrams |
+
+## ThreatModel (Recommended)
+
+The `ThreatModel` format is the canonical representation for complete threat models:
+
+```json
+{
+  "id": "unique-threat-model-id",
+  "title": "Threat Model Title",
+  "description": "Overview of the vulnerability or threat scenario",
+  "version": "1.0.0",
+  "authors": [
+    {"name": "Author Name", "email": "author@example.com"}
+  ],
+  "references": [
+    {"title": "CVE Link", "url": "https://...", "type": "cve"}
+  ],
+  "mappings": { ... },
+  "diagrams": [
+    {"type": "dfd", ...},
+    {"type": "attack-chain", ...},
+    {"type": "sequence", ...}
+  ]
+}
+```
+
+### ThreatModel Schema
+
+```go
+type ThreatModel struct {
+    ID          string        // Required: unique identifier
+    Title       string        // Required: human-readable title
+    Description string        // Optional: overview of the threat
+    Version     string        // Optional: version string
+    Authors     []Author      // Optional: contributors
+    References  []Reference   // Optional: external links
+    Mappings    *Mappings     // Optional: shared framework mappings
+    Diagrams    []DiagramView // Required: diagram views
+}
+```
+
+### DiagramView
+
+Each diagram in a ThreatModel inherits mappings from the parent unless overridden:
+
+```go
+type DiagramView struct {
+    Type        DiagramType   // Required: dfd, attack-chain, sequence
+    Title       string        // Optional: diagram-specific title
+    Mappings    *Mappings     // Optional: overrides parent mappings
+    // ... diagram-specific fields
+}
+```
+
+## DiagramIR (Single Diagram)
+
+For simpler use cases, the `DiagramIR` format represents a single diagram:
 
 | Type | Description | Key Fields |
 |------|-------------|------------|
@@ -12,7 +74,7 @@ The IR uses a discriminated union pattern where the `type` field identifies the 
 | `attack-chain` | Attack Chain | elements, attacks, targets |
 | `sequence` | Sequence Diagram | actors, messages, phases |
 
-## Base Structure
+### Base Structure
 
 All diagrams share these common fields:
 

@@ -15,12 +15,13 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 
 ## Quick Example
 
-Define a threat model in JSON:
+Define a threat model in JSON using the `ThreatModel` format (the canonical multi-diagram representation):
 
 ```json
 {
-  "type": "attack-chain",
+  "id": "websocket-localhost-takeover",
   "title": "WebSocket Localhost Takeover",
+  "description": "Attack exploiting missing origin validation",
   "mappings": {
     "mitreAttack": [
       {"tacticId": "TA0001", "techniqueId": "T1189", "techniqueName": "Drive-by Compromise"}
@@ -29,12 +30,18 @@ Define a threat model in JSON:
       {"category": "api", "id": "API2:2023", "name": "Broken Authentication"}
     ]
   },
-  "elements": [
-    {"id": "attacker", "label": "Attacker", "type": "external-entity"},
-    {"id": "victim", "label": "Victim", "type": "process"}
-  ],
-  "attacks": [
-    {"step": 1, "from": "attacker", "to": "victim", "label": "WebSocket to localhost"}
+  "diagrams": [
+    {
+      "type": "attack-chain",
+      "title": "Attack Chain",
+      "elements": [
+        {"id": "attacker", "label": "Attacker", "type": "external-entity"},
+        {"id": "victim", "label": "Victim", "type": "process"}
+      ],
+      "attacks": [
+        {"step": 1, "from": "attacker", "to": "victim", "label": "WebSocket to localhost"}
+      ]
+    }
   ]
 }
 ```
@@ -42,14 +49,14 @@ Define a threat model in JSON:
 Generate diagrams:
 
 ```bash
-# Generate D2 diagram
-tms generate attack.json -o attack.d2
+# Generate D2 diagram from ThreatModel
+tms generate threat-model.json -o diagram.d2
 
 # Also render to SVG
-tms generate attack.json -o attack.d2 --svg
+tms generate threat-model.json -o diagram.d2 --svg
 
 # Export to STIX 2.1
-tms generate attack.json --stix -o attack.stix.json
+tms generate threat-model.json --stix -o threat-model.stix.json
 ```
 
 ## Getting Started
