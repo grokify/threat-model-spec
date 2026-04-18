@@ -1,0 +1,18 @@
+{
+  "name": "threat-model-diagrams",
+  "version": "1.0.0",
+  "description": "Multi-agent team for creating threat modeling diagrams with D2, including DFDs, attack flows, and sequence diagrams with STRIDE, MITRE ATT&CK, and OWASP annotations",
+  "author": "grokify",
+  "license": "MIT",
+  "repository": "https://github.com/grokify/threat-model-spec",
+  "homepage": "https://github.com/grokify/threat-model-spec",
+  "commands": "commands",
+  "skills": "skills",
+  "agents": "agents",
+  "context": "# Threat Model Diagrams\n\nThis plugin provides agents for creating security threat modeling diagrams using D2. Diagrams include Data Flow Diagrams (DFDs), attack chain visualizations, and sequence diagrams with annotations for STRIDE, MITRE ATT&CK, MITRE ATLAS, and OWASP frameworks.",
+  "dependencies": [
+    {"name": "d2", "command": "d2 --version"},
+    {"name": "rsvg-convert", "command": "rsvg-convert --version", "optional": true},
+    {"name": "tms", "command": "tms --version", "optional": true}
+  ]
+}

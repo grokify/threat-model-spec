@@ -1,0 +1,17 @@
+{
+  "name": "threat-model-diagrams",
+  "version": "1.0.0",
+  "description": "Agents for creating threat modeling diagrams with D2, including DFDs, attack flows, and sequence diagrams with STRIDE, MITRE ATT&CK, and OWASP annotations",
+  "author": "grokify",
+  "license": "MIT",
+  "repository": "https://github.com/grokify/threat-model-spec",
+  "homepage": "https://github.com/grokify/threat-model-spec",
+  "commands": "./commands/",
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "context": "CLAUDE.md",
+  "dependencies": [
+    {"name": "d2", "command": "d2 --version"},
+    {"name": "rsvg-convert", "command": "rsvg-convert --version", "optional": true}
+  ]
+}
