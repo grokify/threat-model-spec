@@ -35,8 +35,8 @@ Threat Model Spec is an open-source library for creating security threat modelin
                │    D2    │   │   STIX   │   │ Validate │
                │ Renderer │   │ Exporter │   │          │
                └────┬─────┘   └─────┬────┘   └─────┬────┘
-                    │               │               │
-                    ▼               ▼               ▼
+                    │               │              │
+                    ▼               ▼              ▼
                ┌──────────┐   ┌──────────┐   ┌──────────┐
                │   .d2    │   │  .json   │   │  pass/   │
                │  → .svg  │   │  STIX    │   │  fail    │
