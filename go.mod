@@ -6,7 +6,7 @@ require github.com/gorilla/websocket v1.5.3
 
 require (
 	github.com/invopop/jsonschema v0.13.0
-	github.com/plexusone/vibium-go v0.4.0
+	github.com/plexusone/w3pilot v0.8.0
 	github.com/spf13/cobra v1.10.2
 )
 

@@ -26,7 +26,7 @@ import (
 	"syscall"
 	"time"
 
-	vibium "github.com/plexusone/vibium-go"
+	vibium "github.com/plexusone/w3pilot"
 )
 
 // Config holds the automation configuration
@@ -108,7 +108,7 @@ func runDemo(ctx context.Context, config Config) error {
 
 	// Step 3: Launch browser
 	fmt.Println("🌐 Step 3: Launching browser...")
-	var vibe *vibium.Vibe
+	var vibe *vibium.Pilot
 	var launchErr error
 
 	if config.Headless {
@@ -262,7 +262,7 @@ func startAttackPageServer(port int) (*http.Server, error) {
 	return server, nil
 }
 
-func takeScreenshot(ctx context.Context, vibe *vibium.Vibe, outputDir, filename string) error {
+func takeScreenshot(ctx context.Context, vibe *vibium.Pilot, outputDir, filename string) error {
 	data, err := vibe.Screenshot(ctx)
 	if err != nil {
 		return err
