@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/examples/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/agents/">
       
       
         <link rel="prev" href="../styles/attack-flows/">
       
       
-        <link rel="next" href="openclaw/">
+        <link rel="next" href="../cli/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Overview - Threat Model Spec</title>
+        <title>AI Agents - Threat Model Spec</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#examples" class="md-skip">
+        <a href="#ai-agents" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              AI Agents
             
           </span>
         </div>
@@ -1024,51 +1024,6 @@
   
   
   
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            Examples
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-    
-  
-  
-  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -1082,7 +1037,7 @@
   
   
   <span class="md-ellipsis">
-    Overview
+    AI Agents
     
   </span>
   
@@ -1095,7 +1050,7 @@
   
   
   <span class="md-ellipsis">
-    Overview
+    AI Agents
     
   </span>
   
@@ -1118,37 +1073,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#available-examples" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Available Examples
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#openclaw-case-study" class="md-nav__link">
+  <a href="#claude-code-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      OpenClaw Case Study
+      Claude Code Plugin
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="OpenClaw Case Study">
+    <nav class="md-nav" aria-label="Claude Code Plugin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-youll-learn" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      What You'll Learn
+      Installation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#available-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Quick Start
+      Available Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skills
     </span>
   </a>
   
@@ -1160,19 +1124,79 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-your-own-examples" class="md-nav__link">
+  <a href="#agent-specifications" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating Your Own Examples
+      Agent Specifications
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Creating Your Own Examples">
+    <nav class="md-nav" aria-label="Agent Specifications">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-structure" class="md-nav__link">
+  <a href="#dfd-creator" class="md-nav__link">
     <span class="md-ellipsis">
-      Example Structure
+      dfd-creator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-flow-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      attack-flow-visualizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-quality-reviewer" class="md-nav__link">
+    <span class="md-ellipsis">
+      diagram-quality-reviewer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Color Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stride-categories-box-fill" class="md-nav__link">
+    <span class="md-ellipsis">
+      STRIDE Categories (Box Fill)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attck-tactics-arrow-color" class="md-nav__link">
+    <span class="md-ellipsis">
+      ATT&amp;CK Tactics (Arrow Color)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
     </span>
   </a>
   
@@ -1186,37 +1210,6 @@
     </ul>
   
 </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="openclaw/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    OpenClaw Case Study
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -1395,6 +1388,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../releases/v0.2.0/" class="md-nav__link">
         
   
@@ -1490,37 +1506,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#available-examples" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Available Examples
+      Overview
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#openclaw-case-study" class="md-nav__link">
+  <a href="#claude-code-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      OpenClaw Case Study
+      Claude Code Plugin
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="OpenClaw Case Study">
+    <nav class="md-nav" aria-label="Claude Code Plugin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#what-youll-learn" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      What You'll Learn
+      Installation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
+  <a href="#available-commands" class="md-nav__link">
     <span class="md-ellipsis">
-      Quick Start
+      Available Commands
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skills
     </span>
   </a>
   
@@ -1532,19 +1557,79 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#creating-your-own-examples" class="md-nav__link">
+  <a href="#agent-specifications" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating Your Own Examples
+      Agent Specifications
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Creating Your Own Examples">
+    <nav class="md-nav" aria-label="Agent Specifications">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-structure" class="md-nav__link">
+  <a href="#dfd-creator" class="md-nav__link">
     <span class="md-ellipsis">
-      Example Structure
+      dfd-creator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-flow-visualizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      attack-flow-visualizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagram-quality-reviewer" class="md-nav__link">
+    <span class="md-ellipsis">
+      diagram-quality-reviewer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Color Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stride-categories-box-fill" class="md-nav__link">
+    <span class="md-ellipsis">
+      STRIDE Categories (Box Fill)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attck-tactics-arrow-color" class="md-nav__link">
+    <span class="md-ellipsis">
+      ATT&amp;CK Tactics (Arrow Color)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Assets
     </span>
   </a>
   
@@ -1574,68 +1659,210 @@
   
 
 
-<h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h1>
-<p>Threat Model Spec includes complete examples demonstrating real-world threat modeling scenarios.</p>
-<h2 id="available-examples">Available Examples<a class="headerlink" href="#available-examples" title="Permanent link">&para;</a></h2>
+<h1 id="ai-agents">AI Agents<a class="headerlink" href="#ai-agents" title="Permanent link">&para;</a></h1>
+<p>Threat Model Spec includes AI agent specifications for automated diagram creation and quality review.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The <code>agents/</code> directory contains reusable specifications that can be used with AI coding assistants to create threat model diagrams.</p>
 <table>
 <thead>
 <tr>
-<th>Example</th>
+<th>Agent</th>
 <th>Description</th>
-<th>Diagram Types</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="openclaw/">OpenClaw</a></td>
-<td>WebSocket localhost takeover</td>
-<td>DFD, Attack Chain, Sequence</td>
+<td><code>dfd-creator</code></td>
+<td>Creates Data Flow Diagrams with numbered flows and trust boundaries</td>
+</tr>
+<tr>
+<td><code>attack-flow-visualizer</code></td>
+<td>Creates attack chain diagrams with MITRE ATT&amp;CK annotations</td>
+</tr>
+<tr>
+<td><code>diagram-quality-reviewer</code></td>
+<td>Reviews diagrams for layout quality and legend clarity</td>
 </tr>
 </tbody>
 </table>
-<h2 id="openclaw-case-study">OpenClaw Case Study<a class="headerlink" href="#openclaw-case-study" title="Permanent link">&para;</a></h2>
-<p>The OpenClaw example demonstrates a critical vulnerability in a popular AI agent application:</p>
+<h2 id="claude-code-plugin">Claude Code Plugin<a class="headerlink" href="#claude-code-plugin" title="Permanent link">&para;</a></h2>
+<p>A complete Claude Code plugin is available in <code>agents/plugins/claude/</code>.</p>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>claude<span class="w"> </span>plugins<span class="w"> </span>add<span class="w"> </span>./agents/plugins/claude
+</code></pre></div>
+<h3 id="available-commands">Available Commands<a class="headerlink" href="#available-commands" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/create-dfd &lt;name&gt;</code></td>
+<td>Create a Data Flow Diagram</td>
+</tr>
+<tr>
+<td><code>/create-dfd &lt;name&gt; --type normal</code></td>
+<td>Normal operation flows only</td>
+</tr>
+<tr>
+<td><code>/create-dfd &lt;name&gt; --type attack</code></td>
+<td>Attack flows only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="skills">Skills<a class="headerlink" href="#skills" title="Permanent link">&para;</a></h3>
+<p>The plugin includes reusable skills:</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>numbered-flow-creation</code></td>
+<td>Guidelines for numbered data flow sequences</td>
+</tr>
+<tr>
+<td><code>legend-design</code></td>
+<td>Best practices for legend clarity</td>
+</tr>
+<tr>
+<td><code>layout-optimization</code></td>
+<td>Guidelines for reducing whitespace</td>
+</tr>
+</tbody>
+</table>
+<h2 id="agent-specifications">Agent Specifications<a class="headerlink" href="#agent-specifications" title="Permanent link">&para;</a></h2>
+<p>Agent specifications are located in <code>agents/specs/</code> and can be adapted for other AI assistants.</p>
+<h3 id="dfd-creator">dfd-creator<a class="headerlink" href="#dfd-creator" title="Permanent link">&para;</a></h3>
+<p>Creates Data Flow Diagrams with:</p>
 <ul>
-<li><strong>Vulnerability:</strong> WebSocket localhost takeover</li>
-<li><strong>Severity:</strong> Critical (CVSS 9.3)</li>
-<li><strong>Discovered by:</strong> Oasis Security</li>
-<li><strong>Impact:</strong> Full agent compromise, data exfiltration</li>
+<li>Numbered flows (1, 2, 3 for primary; A, B, C for secondary)</li>
+<li>Trust boundary visualization</li>
+<li>Color-coded element types</li>
+<li>Proper legends with <code>near: bottom-center</code></li>
 </ul>
-<h3 id="what-youll-learn">What You'll Learn<a class="headerlink" href="#what-youll-learn" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Creating Data Flow Diagrams (DFD) with trust boundaries</li>
-<li>Building attack chains with MITRE ATT&amp;CK mapping</li>
-<li>Documenting attack sequences</li>
-<li>Mapping to multiple security frameworks (STRIDE, OWASP, CWE)</li>
-<li>Generating D2 diagrams and STIX 2.1 exports</li>
-</ol>
-<h3 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Navigate to the example</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>examples/openclaw
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Generate attack chain diagram</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tms<span class="w"> </span>generate<span class="w"> </span>attack_chain.json<span class="w"> </span>-o<span class="w"> </span>attack_chain.d2<span class="w"> </span>--svg
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Export to STIX 2.1</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>tms<span class="w"> </span>generate<span class="w"> </span>attack_chain.json<span class="w"> </span>--stix<span class="w"> </span>-o<span class="w"> </span>attack_chain.stix.json
-</code></pre></div>
-<h2 id="creating-your-own-examples">Creating Your Own Examples<a class="headerlink" href="#creating-your-own-examples" title="Permanent link">&para;</a></h2>
-<p>Follow this pattern for new threat models:</p>
-<ol>
-<li><strong>Define the threat model</strong> in JSON</li>
-<li><strong>Generate diagrams</strong> with <code>tms generate</code></li>
-<li><strong>Validate</strong> with <code>tms validate --strict</code></li>
-<li><strong>Export to STIX</strong> for threat intelligence sharing</li>
-</ol>
-<h3 id="example-structure">Example Structure<a class="headerlink" href="#example-structure" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>examples/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>└── your-example/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    ├── README.md           # Documentation
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    ├── dfd.json            # Data flow diagram
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    ├── attack_chain.json   # Attack chain
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    ├── sequence.json       # Sequence diagram
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    └── *.svg               # Generated diagrams
-</code></pre></div>
+<h3 id="attack-flow-visualizer">attack-flow-visualizer<a class="headerlink" href="#attack-flow-visualizer" title="Permanent link">&para;</a></h3>
+<p>Creates attack chain diagrams with:</p>
+<ul>
+<li>MITRE ATT&amp;CK tactic/technique mapping</li>
+<li>STRIDE threat annotations</li>
+<li>Crown jewel highlighting</li>
+<li>Exfiltration path visualization</li>
+</ul>
+<h3 id="diagram-quality-reviewer">diagram-quality-reviewer<a class="headerlink" href="#diagram-quality-reviewer" title="Permanent link">&para;</a></h3>
+<p>Reviews diagrams for:</p>
+<ul>
+<li>Aspect ratio and whitespace metrics</li>
+<li>Color conflicts in legends</li>
+<li>Arrow visibility and label clarity</li>
+<li>Nesting depth (recommended ≤ 3)</li>
+</ul>
+<h2 id="color-reference">Color Reference<a class="headerlink" href="#color-reference" title="Permanent link">&para;</a></h2>
+<h3 id="stride-categories-box-fill">STRIDE Categories (Box Fill)<a class="headerlink" href="#stride-categories-box-fill" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Fill</th>
+<th>Stroke</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spoofing</td>
+<td><code>#ffebee</code></td>
+<td><code>#c62828</code></td>
+</tr>
+<tr>
+<td>Tampering</td>
+<td><code>#fff3e0</code></td>
+<td><code>#ef6c00</code></td>
+</tr>
+<tr>
+<td>Repudiation</td>
+<td><code>#f3e5f5</code></td>
+<td><code>#7b1fa2</code></td>
+</tr>
+<tr>
+<td>Info Disclosure</td>
+<td><code>#e3f2fd</code></td>
+<td><code>#1565c0</code></td>
+</tr>
+<tr>
+<td>DoS</td>
+<td><code>#fce4ec</code></td>
+<td><code>#c2185b</code></td>
+</tr>
+<tr>
+<td>Elevation</td>
+<td><code>#e8f5e9</code></td>
+<td><code>#2e7d32</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="attck-tactics-arrow-color">ATT&amp;CK Tactics (Arrow Color)<a class="headerlink" href="#attck-tactics-arrow-color" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tactic</th>
+<th>Fill</th>
+<th>Stroke</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TA0001 Initial Access</td>
+<td><code>#e3f2fd</code></td>
+<td><code>#1976d2</code></td>
+</tr>
+<tr>
+<td>TA0006 Credential Access</td>
+<td><code>#bbdefb</code></td>
+<td><code>#1565c0</code></td>
+</tr>
+<tr>
+<td>TA0009 Collection</td>
+<td><code>#90caf9</code></td>
+<td><code>#0d47a1</code></td>
+</tr>
+<tr>
+<td>TA0010 Exfiltration</td>
+<td><code>#5c6bc0</code></td>
+<td><code>#283593</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="assets">Assets<a class="headerlink" href="#assets" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Fill</th>
+<th>Stroke</th>
+<th>Width</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Crown Jewel</td>
+<td><code>#fff8e1</code></td>
+<td><code>#ff8f00</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td>High Value</td>
+<td><code>#e0f2f1</code></td>
+<td><code>#00897b</code></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
 
 
 

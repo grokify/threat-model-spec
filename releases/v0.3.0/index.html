@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/examples/openclaw/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/releases/v0.3.0/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../../cli/validate/">
       
       
-        <link rel="next" href="../../cli/">
+        <link rel="next" href="../v0.2.0/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>OpenClaw Case Study - Threat Model Spec</title>
+        <title>v0.3.0 - Threat Model Spec</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#openclaw-case-study" class="md-skip">
+        <a href="#v030-release-notes" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              OpenClaw Case Study
+              v0.3.0
             
           </span>
         </div>
@@ -1020,303 +1020,20 @@
       
   
   
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Examples
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            Examples
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../agents/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Overview
+    AI Agents
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    OpenClaw Case Study
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    OpenClaw Case Study
-    
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#vulnerability-summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vulnerability Summary
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#attack-chain" class="md-nav__link">
-    <span class="md-ellipsis">
-      Attack Chain
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cvss-vector" class="md-nav__link">
-    <span class="md-ellipsis">
-      CVSS Vector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#framework-mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Framework Mappings
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Framework Mappings">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stride-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      STRIDE Analysis
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mitre-attck" class="md-nav__link">
-    <span class="md-ellipsis">
-      MITRE ATT&amp;CK
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mitre-atlas" class="md-nav__link">
-    <span class="md-ellipsis">
-      MITRE ATLAS
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#owasp" class="md-nav__link">
-    <span class="md-ellipsis">
-      OWASP
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cwe" class="md-nav__link">
-    <span class="md-ellipsis">
-      CWE
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#diagrams" class="md-nav__link">
-    <span class="md-ellipsis">
-      Diagrams
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Diagrams">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-flow-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      Data Flow Diagram
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#attack-chain_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Attack Chain
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sequence-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sequence Diagram
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-security-lessons" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Security Lessons
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-demo" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running the Demo
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#threatmodel-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      ThreatModel Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files" class="md-nav__link">
-    <span class="md-ellipsis">
-      Files
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1446,8 +1163,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1458,13 +1177,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
           <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
@@ -1480,7 +1197,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Releases
@@ -1491,10 +1208,177 @@
                 
   
   
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's New
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s New">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agent-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Specifications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#claude-code-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Claude Code Plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repository-reorganization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository Reorganization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go Library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Tool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.2.0/" class="md-nav__link">
+      <a href="../v0.2.0/" class="md-nav__link">
         
   
   
@@ -1517,7 +1401,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.1.0/" class="md-nav__link">
+      <a href="../v0.1.0/" class="md-nav__link">
         
   
   
@@ -1589,82 +1473,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#vulnerability-summary" class="md-nav__link">
+  <a href="#highlights" class="md-nav__link">
     <span class="md-ellipsis">
-      Vulnerability Summary
+      Highlights
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attack-chain" class="md-nav__link">
+  <a href="#whats-new" class="md-nav__link">
     <span class="md-ellipsis">
-      Attack Chain
+      What's New
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cvss-vector" class="md-nav__link">
-    <span class="md-ellipsis">
-      CVSS Vector
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#framework-mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      Framework Mappings
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Framework Mappings">
+    <nav class="md-nav" aria-label="What&#39;s New">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stride-analysis" class="md-nav__link">
+  <a href="#agent-specifications" class="md-nav__link">
     <span class="md-ellipsis">
-      STRIDE Analysis
+      Agent Specifications
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mitre-attck" class="md-nav__link">
+  <a href="#claude-code-plugin" class="md-nav__link">
     <span class="md-ellipsis">
-      MITRE ATT&amp;CK
+      Claude Code Plugin
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mitre-atlas" class="md-nav__link">
+  <a href="#repository-reorganization" class="md-nav__link">
     <span class="md-ellipsis">
-      MITRE ATLAS
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#owasp" class="md-nav__link">
-    <span class="md-ellipsis">
-      OWASP
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cwe" class="md-nav__link">
-    <span class="md-ellipsis">
-      CWE
+      Repository Reorganization
     </span>
   </a>
   
@@ -1676,37 +1524,28 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagrams" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Diagrams
+      Installation
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Diagrams">
+    <nav class="md-nav" aria-label="Installation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#data-flow-diagram" class="md-nav__link">
+  <a href="#go-library" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Flow Diagram
+      Go Library
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#attack-chain_1" class="md-nav__link">
+  <a href="#cli-tool" class="md-nav__link">
     <span class="md-ellipsis">
-      Attack Chain
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sequence-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sequence Diagram
+      CLI Tool
     </span>
   </a>
   
@@ -1718,36 +1557,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-security-lessons" class="md-nav__link">
+  <a href="#requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      Key Security Lessons
+      Requirements
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-demo" class="md-nav__link">
+  <a href="#links" class="md-nav__link">
     <span class="md-ellipsis">
-      Running the Demo
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#threatmodel-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      ThreatModel Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files" class="md-nav__link">
-    <span class="md-ellipsis">
-      Files
+      Links
     </span>
   </a>
   
@@ -1772,393 +1593,67 @@
   
 
 
-<h1 id="openclaw-case-study">OpenClaw Case Study<a class="headerlink" href="#openclaw-case-study" title="Permanent link">&para;</a></h1>
-<p>A comprehensive threat model of the OpenClaw WebSocket localhost takeover vulnerability.</p>
-<h2 id="vulnerability-summary">Vulnerability Summary<a class="headerlink" href="#vulnerability-summary" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Name</strong></td>
-<td>OpenClaw WebSocket Localhost Takeover</td>
-</tr>
-<tr>
-<td><strong>Severity</strong></td>
-<td>Critical (CVSS 9.3)</td>
-</tr>
-<tr>
-<td><strong>Fixed in</strong></td>
-<td>v2026.2.25</td>
-</tr>
-<tr>
-<td><strong>Discovered by</strong></td>
-<td>Oasis Security</td>
-</tr>
-</tbody>
-</table>
-<p>OpenClaw, a popular open-source AI agent, was vulnerable to hijacking from any website due to a chain of security flaws in how it handled localhost WebSocket connections.</p>
-<h2 id="attack-chain">Attack Chain<a class="headerlink" href="#attack-chain" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Action</th>
-<th>Vulnerability</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Victim visits malicious website</td>
-<td>Social engineering</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Website loads malicious JavaScript</td>
-<td>-</td>
-</tr>
-<tr>
-<td>3</td>
-<td>JS opens WebSocket to localhost:9999</td>
-<td>WebSocket bypasses same-origin</td>
-</tr>
-<tr>
-<td>4</td>
-<td>JS brute-forces gateway password</td>
-<td>No rate limiting</td>
-</tr>
-<tr>
-<td>5</td>
-<td>JS registers as trusted device</td>
-<td>Auto-approve from localhost</td>
-</tr>
-<tr>
-<td>6-8</td>
-<td>Attacker controls AI agent</td>
-<td>Full compromise</td>
-</tr>
-<tr>
-<td>9-10</td>
-<td>Data exfiltrated to attacker</td>
-<td>Config, logs, API keys stolen</td>
-</tr>
-</tbody>
-</table>
-<h2 id="cvss-vector">CVSS Vector<a class="headerlink" href="#cvss-vector" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Score: 9.3 (Critical)
-</code></pre></div>
-<table>
-<thead>
-<tr>
-<th>Metric</th>
-<th>Value</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AV:N</td>
-<td>Network</td>
-<td>Attack via website</td>
-</tr>
-<tr>
-<td>AC:L</td>
-<td>Low</td>
-<td>Simple exploit</td>
-</tr>
-<tr>
-<td>PR:N</td>
-<td>None</td>
-<td>No privileges needed</td>
-</tr>
-<tr>
-<td>UI:R</td>
-<td>Required</td>
-<td>User visits page</td>
-</tr>
-<tr>
-<td>S:C</td>
-<td>Changed</td>
-<td>Browser → Agent</td>
-</tr>
-<tr>
-<td>C:H</td>
-<td>High</td>
-<td>Full data access</td>
-</tr>
-<tr>
-<td>I:H</td>
-<td>High</td>
-<td>Full control</td>
-</tr>
-<tr>
-<td>A:N</td>
-<td>None</td>
-<td>No availability impact</td>
-</tr>
-</tbody>
-</table>
-<h2 id="framework-mappings">Framework Mappings<a class="headerlink" href="#framework-mappings" title="Permanent link">&para;</a></h2>
-<h3 id="stride-analysis">STRIDE Analysis<a class="headerlink" href="#stride-analysis" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>Applies</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Spoofing</strong></td>
-<td>✓</td>
-<td>Browser JS appears as localhost</td>
-</tr>
-<tr>
-<td><strong>Tampering</strong></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Repudiation</strong></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Information Disclosure</strong></td>
-<td>✓</td>
-<td>API keys, configs exfiltrated</td>
-</tr>
-<tr>
-<td><strong>Denial of Service</strong></td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Elevation of Privilege</strong></td>
-<td>✓</td>
-<td>No rate limit + auto-approve</td>
-</tr>
-</tbody>
-</table>
-<h3 id="mitre-attck">MITRE ATT&amp;CK<a class="headerlink" href="#mitre-attck" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Tactic</th>
-<th>Technique</th>
-<th>ID</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Initial Access</td>
-<td>Drive-by Compromise</td>
-<td>T1189</td>
-</tr>
-<tr>
-<td>Initial Access</td>
-<td>Trusted Relationship</td>
-<td>T1199</td>
-</tr>
-<tr>
-<td>Credential Access</td>
-<td>Brute Force</td>
-<td>T1110</td>
-</tr>
-<tr>
-<td>Collection</td>
-<td>Data from Local System</td>
-<td>T1005</td>
-</tr>
-<tr>
-<td>Exfiltration</td>
-<td>Over C2 Channel</td>
-<td>T1041</td>
-</tr>
-</tbody>
-</table>
-<h3 id="mitre-atlas">MITRE ATLAS<a class="headerlink" href="#mitre-atlas" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Technique</th>
-<th>ID</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Prompt Injection</td>
-<td>AML.T0024</td>
-<td>Control agent behavior</td>
-</tr>
-</tbody>
-</table>
-<h3 id="owasp">OWASP<a class="headerlink" href="#owasp" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Category</th>
-<th>ID</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>API</td>
-<td>API2:2023</td>
-<td>Broken Authentication</td>
-</tr>
-<tr>
-<td>API</td>
-<td>API4:2023</td>
-<td>Unrestricted Resource Consumption</td>
-</tr>
-<tr>
-<td>LLM</td>
-<td>LLM08:2023</td>
-<td>Excessive Agency</td>
-</tr>
-</tbody>
-</table>
-<h3 id="cwe">CWE<a class="headerlink" href="#cwe" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>ID</th>
-<th>Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CWE-346</td>
-<td>Origin Validation Error</td>
-</tr>
-<tr>
-<td>CWE-307</td>
-<td>Improper Restriction of Excessive Auth Attempts</td>
-</tr>
-<tr>
-<td>CWE-287</td>
-<td>Improper Authentication</td>
-</tr>
-</tbody>
-</table>
-<h2 id="diagrams">Diagrams<a class="headerlink" href="#diagrams" title="Permanent link">&para;</a></h2>
-<p>The OpenClaw example uses the canonical <code>ThreatModel</code> format with all three diagram views in a single file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Generate all diagrams from the unified ThreatModel</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>tms<span class="w"> </span>generate<span class="w"> </span>openclaw.json<span class="w"> </span>-o<span class="w"> </span>openclaw.d2<span class="w"> </span>--svg
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Export to STIX 2.1</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>tms<span class="w"> </span>generate<span class="w"> </span>openclaw.json<span class="w"> </span>--stix<span class="w"> </span>-o<span class="w"> </span>openclaw.stix.json
-</code></pre></div>
-<h3 id="data-flow-diagram">Data Flow Diagram<a class="headerlink" href="#data-flow-diagram" title="Permanent link">&para;</a></h3>
-<p>Shows system architecture and trust boundaries:</p>
+<h1 id="v030-release-notes">v0.3.0 Release Notes<a class="headerlink" href="#v030-release-notes" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2026-04-18</p>
+<p>This release introduces agent specifications and a Claude Code plugin for AI-assisted threat model diagram creation, along with repository reorganization.</p>
+<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Browser sandbox boundary</li>
-<li>Localhost implicit trust zone</li>
-<li>Data flows between components</li>
+<li>Agent specifications and Claude Code plugin for threat model diagram creation</li>
+<li>Examples moved to separate repository for focused maintenance</li>
 </ul>
-<h3 id="attack-chain_1">Attack Chain<a class="headerlink" href="#attack-chain_1" title="Permanent link">&para;</a></h3>
-<p>Visualizes the 10-step attack sequence with MITRE ATT&amp;CK mappings.</p>
-<h3 id="sequence-diagram">Sequence Diagram<a class="headerlink" href="#sequence-diagram" title="Permanent link">&para;</a></h3>
-<p>Time-ordered attack timeline showing all interactions from initial access to exfiltration.</p>
-<h2 id="key-security-lessons">Key Security Lessons<a class="headerlink" href="#key-security-lessons" title="Permanent link">&para;</a></h2>
-<div class="admonition danger">
-<p class="admonition-title">Critical Findings</p>
-<ol>
-<li><strong>Never exempt localhost from rate limiting</strong> — browsers execute untrusted code</li>
-<li><strong>Require user confirmation for all device pairings</strong> — even from loopback</li>
-<li><strong>Use cryptographic tokens over passwords</strong> — for local service auth</li>
-<li><strong>Validate WebSocket Origin headers</strong> — even for localhost</li>
-<li><strong>Consider Unix sockets</strong> — instead of TCP localhost for local IPC</li>
-</ol>
-</div>
-<h2 id="running-the-demo">Running the Demo<a class="headerlink" href="#running-the-demo" title="Permanent link">&para;</a></h2>
-<p>The repository includes a vulnerable demo server for educational purposes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Start vulnerable server</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>demo/vulnerable-server
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>go<span class="w"> </span>run<span class="w"> </span>main.go
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># Open malicious page</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">cd</span><span class="w"> </span>demo/malicious-page
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>open<span class="w"> </span>index.html
-</code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Educational Only</p>
-<p>The demo server is intentionally vulnerable. Do not use in production.</p>
-</div>
-<h2 id="threatmodel-example">ThreatModel Example<a class="headerlink" href="#threatmodel-example" title="Permanent link">&para;</a></h2>
-<p>The <code>openclaw.json</code> file uses the canonical ThreatModel format with shared metadata and multiple diagram views:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;openclaw-websocket-localhost-takeover&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OpenClaw WebSocket Localhost Takeover&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical vulnerability allowing malicious websites to hijack developer sessions&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nt">&quot;mitreAttack&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;tacticId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TA0001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;techniqueId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1189&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;techniqueName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Drive-by Compromise&quot;</span><span class="p">},</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;tacticId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TA0006&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;techniqueId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1110&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;techniqueName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Brute Force&quot;</span><span class="p">}</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">],</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nt">&quot;owasp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;API2:2023&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Broken Authentication&quot;</span><span class="p">}</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="p">],</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">&quot;cvss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.1&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">      </span><span class="nt">&quot;baseScore&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8.1</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">  </span><span class="nt">&quot;diagrams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dfd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Flow Diagram&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">},</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attack-chain&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attack Chain&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">},</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attack Sequence&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">}</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">  </span><span class="p">]</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="files">Files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h2>
+<h2 id="whats-new">What's New<a class="headerlink" href="#whats-new" title="Permanent link">&para;</a></h2>
+<h3 id="agent-specifications">Agent Specifications<a class="headerlink" href="#agent-specifications" title="Permanent link">&para;</a></h3>
+<p>New agent specifications for AI-assisted threat model visualization:</p>
 <table>
 <thead>
 <tr>
-<th>File</th>
+<th>Agent</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>openclaw.json</code></td>
-<td>Canonical ThreatModel with all diagram views</td>
+<td><code>attack-flow-visualizer</code></td>
+<td>Creates D2 attack chain diagrams from threat model data</td>
 </tr>
 <tr>
-<td><code>openclaw.stix.json</code></td>
-<td>STIX 2.1 threat intelligence bundle</td>
+<td><code>diagram-quality-reviewer</code></td>
+<td>Reviews and improves diagram quality</td>
 </tr>
 <tr>
-<td><code>README.md</code></td>
-<td>Documentation</td>
-</tr>
-<tr>
-<td><code>*.d2</code></td>
-<td>Generated D2 files</td>
-</tr>
-<tr>
-<td><code>*.svg</code></td>
-<td>Rendered diagrams</td>
-</tr>
-<tr>
-<td><code>article.html</code></td>
-<td>Full HTML article</td>
+<td><code>dfd-creator</code></td>
+<td>Creates data flow diagrams from threat models</td>
 </tr>
 </tbody>
 </table>
+<h3 id="claude-code-plugin">Claude Code Plugin<a class="headerlink" href="#claude-code-plugin" title="Permanent link">&para;</a></h3>
+<p>A complete Claude Code plugin implementation including:</p>
+<ul>
+<li><strong>Agents</strong> — Specialized agents for diagram creation and review</li>
+<li><strong>Commands</strong> — <code>create-dfd</code> command for generating data flow diagrams</li>
+<li><strong>Skills</strong> — Reusable skills for legend design, layout optimization, and numbered flow creation</li>
+</ul>
+<p>Plugin location: <code>agents/plugins/claude/</code></p>
+<h3 id="repository-reorganization">Repository Reorganization<a class="headerlink" href="#repository-reorganization" title="Permanent link">&para;</a></h3>
+<p>The examples directory has been removed. This allows the core library to focus on the specification and tooling.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="go-library">Go Library<a class="headerlink" href="#go-library" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/grokify/threat-model-spec@v0.3.0
+</code></pre></div>
+<h3 id="cli-tool">CLI Tool<a class="headerlink" href="#cli-tool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/threat-model-spec/cmd/tms@v0.3.0
+</code></pre></div>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Go 1.24+</li>
+<li><a href="https://d2lang.com">D2</a> v0.6+ (for SVG rendering)</li>
+</ul>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://grokify.github.io/threat-model-spec/">Documentation</a></li>
+<li><a href="https://github.com/grokify/threat-model-spec">GitHub Repository</a></li>
+<li><a href="../../changelog/">Changelog</a></li>
+</ul>
 
 
 

@@ -2,122 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://grokify.github.io/threat-model-spec/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/changelog/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/agents/</loc>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/cli/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/cli/generate/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/cli/validate/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/diagram-types/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/cvss/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/cwe/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/mitre-atlas/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/mitre-attack/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/owasp/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/concepts/frameworks/stride/</loc>
-         <lastmod>2026-03-02</lastmod>
-    </url>
-    <url>
-         <loc>https://grokify.github.io/threat-model-spec/examples/</loc>
-         <lastmod>2026-03-02</lastmod>
-    </url>
-    <url>
-         <loc>https://grokify.github.io/threat-model-spec/examples/openclaw/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/getting-started/installation/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/getting-started/quick-start/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/releases/v0.1.0/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/releases/v0.2.0/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/releases/v0.3.0/</loc>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/boundaries/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/elements/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/flows/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/mappings/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/schema/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/styles/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/styles/attack-flows/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/styles/dfd/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/styles/stride/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/styles/trust-boundaries/</loc>
-         <lastmod>2026-03-02</lastmod>
+         <lastmod>2026-04-18</lastmod>
     </url>
 </urlset>
