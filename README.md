@@ -60,6 +60,7 @@ Threat Model Spec is an open-source library for creating security threat modelin
 - 📤 **STIX 2.1 Export** — Share threat intelligence in standard format
 - 🎨 **D2 Styles** — Color-coded STRIDE annotations, trust boundaries, attack flows
 - ✅ **Validation** — Type-specific field validation
+- 🤖 **AI Agents** — Claude Code plugin for AI-assisted diagram creation
 
 ## Installation
 
@@ -168,6 +169,26 @@ tms validate threat-model.json
 | `localhost` | Purple | Localhost implicit trust |
 | `network` | Green | Network zones |
 | `breached` | Dark red | Compromised boundaries |
+
+## AI Agents
+
+The `agents/` directory contains specifications for AI-assisted threat model diagram creation:
+
+| Agent | Description |
+|-------|-------------|
+| `dfd-creator` | Creates Data Flow Diagrams with numbered flows and trust boundaries |
+| `attack-flow-visualizer` | Creates attack chain diagrams with MITRE ATT&CK annotations |
+| `diagram-quality-reviewer` | Reviews diagrams for layout quality and legend clarity |
+
+### Claude Code Plugin
+
+Install the Claude Code plugin for AI-assisted diagram creation:
+
+```bash
+claude plugins add ./agents/plugins/claude
+```
+
+Use the `/create-dfd` command to generate diagrams interactively.
 
 ## Requirements
 

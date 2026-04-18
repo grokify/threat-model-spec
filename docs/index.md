@@ -12,6 +12,7 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 - 📤 **STIX 2.1 Export** — Share threat intelligence in standard format
 - 🎨 **D2 Styles** — Color-coded STRIDE annotations, trust boundaries, attack flows
 - ✅ **Validation** — Type-specific field validation
+- 🤖 **AI Agents** — Claude Code plugin for AI-assisted diagram creation
 
 ## Quick Example
 
@@ -94,6 +95,14 @@ tms generate threat-model.json --stix -o threat-model.stix.json
     JSON IR schema reference
 
     [:octicons-arrow-right-24: Specification](specification/index.md)
+
+-   :material-robot:{ .lg .middle } **AI Agents**
+
+    ---
+
+    Claude Code plugin for AI-assisted diagram creation
+
+    [:octicons-arrow-right-24: AI Agents](agents/index.md)
 
 </div>
 
