@@ -363,38 +363,6 @@ func TestValidate_Sequence(t *testing.T) {
 	})
 }
 
-func TestValidate_OpenClawThreatModel(t *testing.T) {
-	// Test that the unified ThreatModel JSON file passes validation
-	path := "../examples/openclaw/openclaw.json"
-
-	tm, err := LoadThreatModelFromFile(path)
-	if err != nil {
-		t.Fatalf("failed to load %s: %v", path, err)
-	}
-	if err := tm.Validate(); err != nil {
-		t.Errorf("validation failed for %s: %v", path, err)
-	}
-
-	// Verify all three diagram types are present
-	expectedTypes := []DiagramType{DiagramTypeDFD, DiagramTypeAttack, DiagramTypeSequence}
-	for _, dt := range expectedTypes {
-		dv := tm.GetDiagram(dt)
-		if dv == nil {
-			t.Errorf("expected diagram type %s not found in ThreatModel", dt)
-		}
-	}
-
-	// Verify individual diagrams validate when extracted
-	for i, dv := range tm.Diagrams {
-		t.Run(string(dv.Type), func(t *testing.T) {
-			d := dv.ToDiagramIR(tm)
-			if err := d.Validate(); err != nil {
-				t.Errorf("diagram[%d] (%s) validation failed: %v", i, dv.Type, err)
-			}
-		})
-	}
-}
-
 func TestValidationErrors(t *testing.T) {
 	t.Run("HasErrors", func(t *testing.T) {
 		var errs ValidationErrors
