@@ -7,6 +7,25 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-04-18",
+      "highlights": [
+        { "description": "Agent specifications and Claude Code plugin for threat model diagram creation" },
+        { "description": "Examples moved to separate repository for focused maintenance" }
+      ],
+      "added": [
+        { "description": "Agent specifications for threat model visualization (attack-flow-visualizer, diagram-quality-reviewer, dfd-creator)", "commit": "989e963" },
+        { "description": "Claude Code plugin with agents, commands, and skills", "commit": "989e963" }
+      ],
+      "changed": [
+        { "description": "Examples directory removed (moved to separate repository)", "commit": "cddf666" }
+      ],
+      "dependencies": [
+        { "description": "Update `github.com/plexusone/vibium-go` to v0.4.0", "commit": "6b5857d" },
+        { "description": "Update GitHub Actions workflows to v0.4.0", "commit": "d9dd5fa" }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-03-02",
       "highlights": [

@@ -108,15 +108,6 @@ tms generate threat-model.json --stix -o threat-model.stix.json
 | [CWE](concepts/frameworks/cwe.md) | Common Weakness Enumeration |
 | [CVSS](concepts/frameworks/cvss.md) | Common Vulnerability Scoring System |
 
-## Example: OpenClaw Vulnerability
-
-See the complete [OpenClaw case study](examples/openclaw/index.md) demonstrating a WebSocket localhost takeover vulnerability with:
-
-- Data Flow Diagram (DFD)
-- Attack Chain with MITRE ATT&CK mapping
-- Sequence Diagram
-- STRIDE threat analysis
-
 ## License
 
 MIT License - see [LICENSE](https://github.com/grokify/threat-model-spec/blob/main/LICENSE)

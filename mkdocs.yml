@@ -92,14 +92,12 @@ nav:
     - DFD Styles: styles/dfd.md
     - Trust Boundaries: styles/trust-boundaries.md
     - Attack Flows: styles/attack-flows.md
-  - Examples:
-    - Overview: examples/index.md
-    - OpenClaw Case Study: examples/openclaw/index.md
   - CLI Reference:
     - Overview: cli/index.md
     - generate: cli/generate.md
     - validate: cli/validate.md
   - Releases:
+    - v0.3.0: releases/v0.3.0.md
     - v0.2.0: releases/v0.2.0.md
     - v0.1.0: releases/v0.1.0.md
   - Changelog: changelog.md

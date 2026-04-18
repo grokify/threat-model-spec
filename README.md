@@ -169,16 +169,6 @@ tms validate threat-model.json
 | `network` | Green | Network zones |
 | `breached` | Dark red | Compromised boundaries |
 
-## Examples
-
-See [examples/openclaw/](examples/openclaw/) for a complete threat model of the OpenClaw WebSocket vulnerability:
-
-- **[openclaw.json](examples/openclaw/openclaw.json)** — Canonical ThreatModel with all diagram views
-- Data Flow Diagram (DFD) — System architecture and trust boundaries
-- Attack Chain — Attack steps with MITRE ATT&CK mapping
-- Attack Sequence — Time-ordered interactions
-- HTML article with rendered diagrams
-
 ## Requirements
 
 - Go 1.24+

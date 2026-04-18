@@ -186,5 +186,3 @@ For comprehensive threat models, use multiple diagram types:
 1. **DFD** — Document system architecture and trust boundaries
 2. **Attack Chain** — Map specific attack vectors with MITRE ATT&CK
 3. **Sequence** — Detail the timeline of critical attacks
-
-See the [OpenClaw example](../examples/openclaw/index.md) for a real-world case study using all three diagram types.

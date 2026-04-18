@@ -32,7 +32,7 @@ You can validate JSON files against the schemas using tools like `ajv`:
 npm install -g ajv-cli
 
 # Validate a ThreatModel
-ajv validate -s schema/threat-model.schema.json -d examples/openclaw/openclaw.json
+ajv validate -s schema/threat-model.schema.json -d threat-model.json
 
 # Validate a DiagramIR
 ajv validate -s schema/diagram.schema.json -d attack.json

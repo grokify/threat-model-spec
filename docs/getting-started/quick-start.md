@@ -199,4 +199,3 @@ Threat Model Spec supports three diagram types:
 - [Diagram Types](../concepts/diagram-types.md) — Detailed diagram type reference
 - [Security Frameworks](../concepts/frameworks/index.md) — STRIDE, MITRE ATT&CK, OWASP mappings
 - [D2 Styles](../styles/index.md) — Color-coded threat annotations
-- [OpenClaw Example](../examples/openclaw/index.md) — Complete case study
