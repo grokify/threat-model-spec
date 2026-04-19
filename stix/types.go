@@ -192,3 +192,62 @@ type Note struct {
 
 func (n *Note) GetType() string { return n.Type }
 func (n *Note) GetID() string   { return n.ID }
+
+// CourseOfAction represents a STIX Course of Action object.
+// It describes actions taken to prevent or respond to attacks.
+type CourseOfAction struct {
+	Type               string              `json:"type"`
+	SpecVersion        string              `json:"spec_version"`
+	ID                 string              `json:"id"`
+	Created            string              `json:"created"`
+	Modified           string              `json:"modified"`
+	CreatedByRef       string              `json:"created_by_ref,omitempty"`
+	Name               string              `json:"name"`
+	Description        string              `json:"description,omitempty"`
+	ActionType         string              `json:"action_type,omitempty"`
+	OSExecutionEnvs    []string            `json:"os_execution_envs,omitempty"`
+	ExternalReferences []ExternalReference `json:"external_references,omitempty"`
+}
+
+func (c *CourseOfAction) GetType() string { return c.Type }
+func (c *CourseOfAction) GetID() string   { return c.ID }
+
+// Malware represents a STIX Malware object.
+type Malware struct {
+	Type               string              `json:"type"`
+	SpecVersion        string              `json:"spec_version"`
+	ID                 string              `json:"id"`
+	Created            string              `json:"created"`
+	Modified           string              `json:"modified"`
+	CreatedByRef       string              `json:"created_by_ref,omitempty"`
+	Name               string              `json:"name"`
+	Description        string              `json:"description,omitempty"`
+	MalwareTypes       []string            `json:"malware_types"`
+	IsFamily           bool                `json:"is_family"`
+	Aliases            []string            `json:"aliases,omitempty"`
+	KillChainPhases    []KillChainPhase    `json:"kill_chain_phases,omitempty"`
+	ExternalReferences []ExternalReference `json:"external_references,omitempty"`
+}
+
+func (m *Malware) GetType() string { return m.Type }
+func (m *Malware) GetID() string   { return m.ID }
+
+// Tool represents a STIX Tool object.
+type Tool struct {
+	Type               string              `json:"type"`
+	SpecVersion        string              `json:"spec_version"`
+	ID                 string              `json:"id"`
+	Created            string              `json:"created"`
+	Modified           string              `json:"modified"`
+	CreatedByRef       string              `json:"created_by_ref,omitempty"`
+	Name               string              `json:"name"`
+	Description        string              `json:"description,omitempty"`
+	ToolTypes          []string            `json:"tool_types,omitempty"`
+	Aliases            []string            `json:"aliases,omitempty"`
+	KillChainPhases    []KillChainPhase    `json:"kill_chain_phases,omitempty"`
+	ToolVersion        string              `json:"tool_version,omitempty"`
+	ExternalReferences []ExternalReference `json:"external_references,omitempty"`
+}
+
+func (t *Tool) GetType() string { return t.Type }
+func (t *Tool) GetID() string   { return t.ID }

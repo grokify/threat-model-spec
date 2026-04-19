@@ -56,6 +56,18 @@ func (e *Exporter) Export(d *ir.DiagramIR) (*Bundle, error) {
 		e.exportMappings(bundle, d.Mappings)
 	}
 
+	// Export mitigations as courses of action
+	for _, mit := range d.Mitigations {
+		coa := e.mitigationToCourseOfAction(mit)
+		bundle.AddObject(coa)
+	}
+
+	// Export threat entries as indicators
+	for _, threat := range d.Threats {
+		ind := e.threatEntryToIndicator(threat)
+		bundle.AddObject(ind)
+	}
+
 	return bundle, nil
 }
 
@@ -168,6 +180,18 @@ func (e *Exporter) exportMappings(bundle *Bundle, m *ir.Mappings) {
 	for _, cwe := range m.CWE {
 		vuln := e.cweToVulnerability(cwe)
 		bundle.AddObject(vuln)
+	}
+
+	// Export CVE mappings as vulnerabilities
+	for _, cve := range m.CVE {
+		vuln := e.cveToVulnerability(cve)
+		bundle.AddObject(vuln)
+	}
+
+	// Export OWASP mappings as attack patterns
+	for _, owasp := range m.OWASP {
+		ap := e.owaspToAttackPattern(owasp)
+		bundle.AddObject(ap)
 	}
 }
 
@@ -355,6 +379,73 @@ func (e *Exporter) cweToVulnerability(cwe ir.CWEMapping) *Vulnerability {
 	}
 }
 
+func (e *Exporter) cveToVulnerability(cve ir.CVEMapping) *Vulnerability {
+	url := cve.URL
+	if url == "" {
+		url = fmt.Sprintf("https://nvd.nist.gov/vuln/detail/%s", cve.ID)
+	}
+
+	return &Vulnerability{
+		Type:         "vulnerability",
+		SpecVersion:  "2.1",
+		ID:           fmt.Sprintf("vulnerability--%s", generateUUID()),
+		Created:      time.Now().UTC().Format(time.RFC3339),
+		Modified:     time.Now().UTC().Format(time.RFC3339),
+		CreatedByRef: e.CreatedByRef,
+		Name:         cve.ID,
+		Description:  cve.Description,
+		ExternalReferences: []ExternalReference{
+			{
+				SourceName: "cve",
+				ExternalID: cve.ID,
+				URL:        url,
+			},
+		},
+	}
+}
+
+func (e *Exporter) owaspToAttackPattern(owasp ir.OWASPMapping) *AttackPattern {
+	url := owasp.URL
+	if url == "" {
+		switch owasp.Category {
+		case ir.OWASPCategoryAPI:
+			url = fmt.Sprintf("https://owasp.org/API-Security/editions/2023/en/0xa%s/", strings.TrimPrefix(owasp.ID, "API"))
+		case ir.OWASPCategoryLLM:
+			url = "https://owasp.org/www-project-top-10-for-large-language-model-applications/"
+		case ir.OWASPCategoryWeb:
+			url = "https://owasp.org/Top10/"
+		}
+	}
+
+	sourceName := "owasp"
+	switch owasp.Category {
+	case ir.OWASPCategoryAPI:
+		sourceName = "owasp-api"
+	case ir.OWASPCategoryLLM:
+		sourceName = "owasp-llm"
+	case ir.OWASPCategoryWeb:
+		sourceName = "owasp-web"
+	}
+
+	return &AttackPattern{
+		Type:         "attack-pattern",
+		SpecVersion:  "2.1",
+		ID:           fmt.Sprintf("attack-pattern--%s", generateUUID()),
+		Created:      time.Now().UTC().Format(time.RFC3339),
+		Modified:     time.Now().UTC().Format(time.RFC3339),
+		CreatedByRef: e.CreatedByRef,
+		Name:         owasp.Name,
+		Description:  owasp.Description,
+		ExternalReferences: []ExternalReference{
+			{
+				SourceName: sourceName,
+				ExternalID: owasp.ID,
+				URL:        url,
+			},
+		},
+	}
+}
+
 func (e *Exporter) targetToIndicator(target ir.Target, d *ir.DiagramIR) *Indicator {
 	// Find the element for this target
 	var elemLabel string
@@ -390,6 +481,40 @@ func (e *Exporter) attackToRelationship(_ ir.Attack, _ *ir.DiagramIR) *Relations
 	// Relationships require source_ref and target_ref to existing STIX objects
 	// This would need to track object IDs during export
 	return nil
+}
+
+func (e *Exporter) mitigationToCourseOfAction(mit ir.Mitigation) *CourseOfAction {
+	return &CourseOfAction{
+		Type:         "course-of-action",
+		SpecVersion:  "2.1",
+		ID:           fmt.Sprintf("course-of-action--%s", generateUUID()),
+		Created:      time.Now().UTC().Format(time.RFC3339),
+		Modified:     time.Now().UTC().Format(time.RFC3339),
+		CreatedByRef: e.CreatedByRef,
+		Name:         mit.Title,
+		Description:  mit.Description,
+	}
+}
+
+func (e *Exporter) threatEntryToIndicator(threat ir.ThreatEntry) *Indicator {
+	description := threat.Description
+	if threat.Severity != "" {
+		description = fmt.Sprintf("[%s] %s", strings.ToUpper(threat.Severity), description)
+	}
+
+	return &Indicator{
+		Type:         "indicator",
+		SpecVersion:  "2.1",
+		ID:           fmt.Sprintf("indicator--%s", generateUUID()),
+		Created:      time.Now().UTC().Format(time.RFC3339),
+		Modified:     time.Now().UTC().Format(time.RFC3339),
+		CreatedByRef: e.CreatedByRef,
+		Name:         threat.Title,
+		Description:  description,
+		Pattern:      fmt.Sprintf("[threat:id = '%s']", threat.ID),
+		PatternType:  "stix",
+		ValidFrom:    time.Now().UTC().Format(time.RFC3339),
+	}
 }
 
 // generateUUID generates a UUID v4 for STIX object IDs.
