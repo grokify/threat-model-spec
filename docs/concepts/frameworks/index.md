@@ -2,16 +2,36 @@
 
 Threat Model Spec supports mapping threats to industry-standard security frameworks for comprehensive documentation and compliance.
 
-## Supported Frameworks
+## Threat Frameworks
 
 | Framework | Purpose | Example |
 |-----------|---------|---------|
-| [STRIDE](stride.md) | Threat categorization | Spoofing, Tampering, etc. |
+| [STRIDE](stride.md) | Security threat categorization | Spoofing, Tampering, etc. |
+| [LINDDUN](linddun.md) | Privacy threat categorization | Linkability, Identifiability, etc. |
 | [MITRE ATT&CK](mitre-attack.md) | Adversary tactics/techniques | T1189 Drive-by Compromise |
 | [MITRE ATLAS](mitre-atlas.md) | AI/ML threats | AML.T0024 Prompt Injection |
 | [OWASP](owasp.md) | Web/API/LLM vulnerabilities | API2:2023 Broken Authentication |
 | [CWE](cwe.md) | Weakness enumeration | CWE-346 Origin Validation Error |
 | [CVSS](cvss.md) | Severity scoring | CVSS:3.1/AV:N/AC:L/... |
+
+## Control Frameworks
+
+| Framework | Purpose | Example |
+|-----------|---------|---------|
+| NIST CSF | Cybersecurity functions | Identify, Protect, Detect, Respond, Recover |
+| CIS Controls v8 | Critical security controls | Control 16: Application Software Security |
+| ISO 27001 | Information security management | A.9.2.3 Management of privileged access |
+
+## Compliance Frameworks
+
+| Framework | Description |
+|-----------|-------------|
+| SOC 2 | Service Organization Controls |
+| PCI-DSS | Payment Card Industry Data Security |
+| HIPAA | Health Insurance Portability |
+| GDPR | General Data Protection Regulation |
+| FedRAMP | Federal Risk Authorization |
+| NIST SP 800-53 | Security Controls Catalog |
 
 ## Using Framework Mappings
 
@@ -82,5 +102,7 @@ The STIX bundle includes:
 | API security | OWASP API Top 10, CWE |
 | AI/ML systems | MITRE ATLAS, OWASP LLM Top 10 |
 | Incident response | MITRE ATT&CK, STRIDE |
-| Compliance reporting | CVSS, CWE |
-| Threat modeling workshops | STRIDE |
+| Privacy threat modeling | LINDDUN, GDPR |
+| Compliance reporting | CVSS, CWE, SOC 2, PCI-DSS |
+| Control implementation | NIST CSF, CIS Controls, ISO 27001 |
+| Threat modeling workshops | STRIDE, LINDDUN |
