@@ -1,0 +1,362 @@
+# Threat Model Spec v0.5.0 Enhancement Plan
+
+> **Status:** 🚧 In Progress
+>
+> **Goal:** Support design-time threat modeling for proactive security analysis during SDLC
+
+## Overview
+
+The current implementation excels at documenting verified threats and known attack patterns. This plan extends the spec to support **proactive threat modeling** during the design phase of SDLC, before features are built.
+
+### Use Cases
+
+1. **Design-time threat modeling** — Analyze a planned feature for potential vulnerabilities before implementation
+2. **Architecture review** — Map network topology and identify where vulnerabilities may exist
+3. **Risk assessment** — Calculate and prioritize risks based on likelihood and impact
+4. **What-if analysis** — Model hypothetical attack scenarios
+
+## Planned Enhancements
+
+### 1. Threat Status: Add "potential" and "theoretical"
+
+**Priority:** High
+
+Extend `ThreatStatus` to distinguish between verified and hypothetical threats.
+
+**New Values:**
+
+| Status | Description | Use Case |
+|--------|-------------|----------|
+| `potential` | Hypothetical threat identified during design review | Design-time |
+| `theoretical` | Threat based on threat modeling methodology (STRIDE/LINDDUN) | Design-time |
+| `identified` | Threat confirmed through testing/incident | Existing |
+| `analyzing` | Threat under investigation | Existing |
+
+**Changes:**
+
+```go
+// ir/mitigations.go
+const (
+    ThreatStatusPotential   ThreatStatus = "potential"   // New
+    ThreatStatusTheoretical ThreatStatus = "theoretical" // New
+    ThreatStatusIdentified  ThreatStatus = "identified"
+    // ... existing values
+)
+```
+
+### 2. Threat Model Phase
+
+**Priority:** High
+
+Add a `phase` field to indicate the lifecycle stage of the threat model.
+
+**New Type:**
+
+```go
+// ir/threat_model.go
+type ModelPhase string
+
+const (
+    ModelPhaseDesign      ModelPhase = "design"      // Pre-implementation
+    ModelPhaseDevelopment ModelPhase = "development" // During implementation
+    ModelPhaseReview      ModelPhase = "review"      // Security review
+    ModelPhaseProduction  ModelPhase = "production"  // Live system
+    ModelPhaseIncident    ModelPhase = "incident"    // Post-incident analysis
+)
+```
+
+**ThreatModel Addition:**
+
+```go
+type ThreatModel struct {
+    // ... existing fields
+
+    // Phase indicates the SDLC phase of this threat model.
+    Phase ModelPhase `json:"phase,omitempty"`
+}
+```
+
+### 3. Risk Score Calculation
+
+**Priority:** High
+
+Add structured risk assessment with calculated scores.
+
+**New Types:**
+
+```go
+// ir/risk.go
+
+type RiskLevel string
+
+const (
+    RiskLevelCritical RiskLevel = "critical" // 9-10
+    RiskLevelHigh     RiskLevel = "high"     // 7-8
+    RiskLevelMedium   RiskLevel = "medium"   // 4-6
+    RiskLevelLow      RiskLevel = "low"      // 1-3
+    RiskLevelInfo     RiskLevel = "info"     // 0
+)
+
+type RiskAssessment struct {
+    // Likelihood of exploitation (1-5 scale)
+    Likelihood int `json:"likelihood"`
+
+    // Impact if exploited (1-5 scale)
+    Impact int `json:"impact"`
+
+    // Score is Likelihood × Impact (1-25, calculated)
+    Score int `json:"score,omitempty"`
+
+    // Level is the categorical risk level (calculated from score)
+    Level RiskLevel `json:"level,omitempty"`
+
+    // Justification explains the likelihood/impact ratings
+    Justification string `json:"justification,omitempty"`
+}
+```
+
+**ThreatEntry Enhancement:**
+
+```go
+type ThreatEntry struct {
+    // ... existing fields
+
+    // Risk provides structured risk assessment.
+    Risk *RiskAssessment `json:"risk,omitempty"`
+}
+```
+
+### 4. Asset Classification
+
+**Priority:** Medium
+
+Add asset sensitivity/value classification to understand what's being protected.
+
+**New Types:**
+
+```go
+// ir/assets.go
+
+type AssetClassification string
+
+const (
+    AssetClassPublic       AssetClassification = "public"
+    AssetClassInternal     AssetClassification = "internal"
+    AssetClassConfidential AssetClassification = "confidential"
+    AssetClassRestricted   AssetClassification = "restricted"
+    AssetClassSecret       AssetClassification = "secret"
+)
+
+type Asset struct {
+    // ID is the unique identifier for the asset.
+    ID string `json:"id"`
+
+    // Name is the human-readable asset name.
+    Name string `json:"name"`
+
+    // Description provides details about the asset.
+    Description string `json:"description,omitempty"`
+
+    // Classification indicates the sensitivity level.
+    Classification AssetClassification `json:"classification"`
+
+    // Owner is responsible for the asset.
+    Owner string `json:"owner,omitempty"`
+
+    // ElementIDs links the asset to diagram elements.
+    ElementIDs []string `json:"elementIds,omitempty"`
+
+    // DataTypes describes what kind of data this asset contains.
+    DataTypes []string `json:"dataTypes,omitempty"`
+}
+```
+
+**ThreatModel Addition:**
+
+```go
+type ThreatModel struct {
+    // ... existing fields
+
+    // Assets lists the assets being protected.
+    Assets []Asset `json:"assets,omitempty"`
+}
+```
+
+### 5. Scenario Modeling
+
+**Priority:** Medium
+
+Add explicit support for "what-if" scenario analysis.
+
+**New Types:**
+
+```go
+// ir/scenarios.go
+
+type Scenario struct {
+    // ID is the unique identifier for the scenario.
+    ID string `json:"id"`
+
+    // Title is a brief description of the scenario.
+    Title string `json:"title"`
+
+    // Description provides the full scenario narrative.
+    Description string `json:"description,omitempty"`
+
+    // Preconditions that must be true for this scenario.
+    Preconditions []string `json:"preconditions,omitempty"`
+
+    // ThreatActorID links to the threat actor profile.
+    ThreatActorID string `json:"threatActorId,omitempty"`
+
+    // AttackPath describes the sequence of attack steps.
+    AttackPath []string `json:"attackPath,omitempty"`
+
+    // TargetAssetIDs lists the assets targeted in this scenario.
+    TargetAssetIDs []string `json:"targetAssetIds,omitempty"`
+
+    // Risk assessment for this scenario.
+    Risk *RiskAssessment `json:"risk,omitempty"`
+
+    // Outcome describes what happens if the attack succeeds.
+    Outcome string `json:"outcome,omitempty"`
+}
+```
+
+**DiagramView Addition:**
+
+```go
+type DiagramView struct {
+    // ... existing fields
+
+    // Scenarios contains what-if attack scenarios for this diagram.
+    Scenarios []Scenario `json:"scenarios,omitempty"`
+}
+```
+
+### 6. Network Topology Enhancements
+
+**Priority:** Low
+
+Enhance DFD elements with optional network-specific fields for topology mapping.
+
+**Element Enhancements:**
+
+```go
+type Element struct {
+    // ... existing fields
+
+    // Network contains optional network topology details.
+    Network *NetworkInfo `json:"network,omitempty"`
+}
+
+type NetworkInfo struct {
+    // Hostname or IP address
+    Host string `json:"host,omitempty"`
+
+    // Ports exposed by this element
+    Ports []int `json:"ports,omitempty"`
+
+    // Protocols used (HTTP, HTTPS, gRPC, etc.)
+    Protocols []string `json:"protocols,omitempty"`
+
+    // Zone indicates the network zone (dmz, internal, cloud, etc.)
+    Zone string `json:"zone,omitempty"`
+}
+```
+
+### 7. Documentation: Design-Time Threat Modeling Guide
+
+**Priority:** High
+
+Create comprehensive documentation for using threat-model-spec during design phase.
+
+**New Documentation:**
+
+- `docs/guides/design-time-threat-modeling.md` — Complete guide
+- `docs/guides/risk-assessment.md` — Risk scoring methodology
+- Update `docs/concepts/diagram-types.md` — Add design-time examples
+- Update `docs/index.md` — Mention design-time use case
+
+**Guide Contents:**
+
+1. When to use design-time threat modeling
+2. Creating a DFD from architecture diagrams
+3. Applying STRIDE/LINDDUN systematically
+4. Using attack trees for what-if analysis
+5. Risk assessment and prioritization
+6. Integrating with SDLC (CI/CD gates, PR reviews)
+7. Example: Threat modeling a new authentication feature
+
+## Architecture Decisions
+
+### Backward Compatibility
+
+All additions will be backward-compatible:
+
+- New fields use `omitempty` tags
+- Existing JSON files remain valid
+- New status values extend existing enums
+
+### File Organization
+
+New types will be organized as:
+
+- `ir/risk.go` — Risk assessment types
+- `ir/assets.go` — Asset classification types
+- `ir/scenarios.go` — Scenario modeling types
+- `ir/network.go` — Network topology types (or extend `ir/types.go`)
+
+### Validation
+
+Add validation for:
+
+- Risk scores in valid range (1-5 for likelihood/impact)
+- Calculated risk level matches score
+- Asset references exist in elements
+- Scenario attack paths reference valid elements
+
+## Implementation Order
+
+### Phase 1 (High Priority)
+
+1. Threat status: Add `potential` and `theoretical`
+2. Model phase field
+3. Risk assessment types and ThreatEntry integration
+4. Design-time threat modeling guide
+
+### Phase 2 (Medium Priority)
+
+5. Asset classification
+6. Scenario modeling
+7. Risk assessment guide
+
+### Phase 3 (Low Priority)
+
+8. Network topology enhancements
+9. Advanced validation
+10. Example threat models for design-time use cases
+
+## Testing Strategy
+
+- Unit tests for all new types
+- Validation tests for risk score calculations
+- Integration tests with D2 rendering
+- Example JSON files for design-time threat models
+- Documentation examples that can be validated
+
+## Success Criteria
+
+1. User can create a threat model for a feature that doesn't exist yet
+2. Threats can be marked as "potential" vs "identified"
+3. Risk scores can be calculated and displayed
+4. Assets can be classified and linked to threats
+5. What-if scenarios can be documented
+6. Clear documentation guides users through design-time threat modeling
+
+## References
+
+- [OWASP Threat Modeling](https://owasp.org/www-community/Threat_Modeling)
+- [Microsoft SDL Threat Modeling](https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling)
+- [NIST Risk Assessment](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final)
+- [FAIR Risk Framework](https://www.fairinstitute.org/)
