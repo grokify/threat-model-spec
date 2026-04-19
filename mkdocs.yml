@@ -86,6 +86,8 @@ nav:
     - Boundary Types: specification/boundaries.md
     - Flow Types: specification/flows.md
     - Framework Mappings: specification/mappings.md
+  - Versions:
+    - v0.4.0: versions/v0.4.0/specification.md
   - D2 Styles:
     - Overview: styles/index.md
     - STRIDE Styles: styles/stride.md
