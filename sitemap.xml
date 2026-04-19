@@ -97,6 +97,10 @@
          <lastmod>2026-04-19</lastmod>
     </url>
     <url>
+         <loc>https://grokify.github.io/threat-model-spec/releases/v0.5.0/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/</loc>
          <lastmod>2026-04-19</lastmod>
     </url>
@@ -142,6 +146,10 @@
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/versions/v0.4.0/specification/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/versions/v0.5.0/specification/</loc>
          <lastmod>2026-04-19</lastmod>
     </url>
 </urlset>

@@ -1,0 +1,1949 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json",
+  "$ref": "#/$defs/ThreatModel",
+  "$defs": {
+    "Actor": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ElementType"
+        },
+        "malicious": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label"
+      ]
+    },
+    "Asset": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AssetType"
+        },
+        "classification": {
+          "$ref": "#/$defs/SensitivityLevel"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "elementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dataTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "complianceFrameworks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "value": {
+          "type": "string"
+        },
+        "retentionPeriod": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "classification"
+      ]
+    },
+    "AssetClassification": {
+      "type": "string",
+      "enum": [
+        "crown-jewel",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "AssetType": {
+      "type": "string",
+      "enum": [
+        "data",
+        "service",
+        "infrastructure",
+        "credential",
+        "identity",
+        "intellectual-property"
+      ]
+    },
+    "Assumption": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AssumptionType"
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "impact": {
+          "type": "string"
+        },
+        "impactSeverity": {
+          "type": "string"
+        },
+        "validationStatus": {
+          "$ref": "#/$defs/ValidationStatus"
+        },
+        "validationMethod": {
+          "type": "string"
+        },
+        "validatedDate": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "relatedComponentIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "AssumptionType": {
+      "type": "string",
+      "enum": [
+        "trust",
+        "security",
+        "operational",
+        "environment",
+        "threat",
+        "compliance",
+        "dependency"
+      ]
+    },
+    "Attack": {
+      "properties": {
+        "step": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "mitreTactic": {
+          "$ref": "#/$defs/MITRETactic"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "step",
+        "from",
+        "to",
+        "label"
+      ]
+    },
+    "AttackTree": {
+      "properties": {
+        "rootId": {
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/AttackTreeNode"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "rootId",
+        "nodes"
+      ]
+    },
+    "AttackTreeNode": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "nodeType": {
+          "$ref": "#/$defs/AttackTreeNodeType"
+        },
+        "description": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "probability": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string"
+        },
+        "countermeasure": {
+          "type": "string"
+        },
+        "mitigated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "nodeType"
+      ]
+    },
+    "AttackTreeNodeType": {
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR",
+        "LEAF"
+      ]
+    },
+    "Author": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "Boundary": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/BoundaryType"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "type"
+      ]
+    },
+    "BoundaryType": {
+      "type": "string",
+      "enum": [
+        "browser",
+        "localhost",
+        "network",
+        "cloud",
+        "breached"
+      ]
+    },
+    "CISControlMapping": {
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "controlName": {
+          "type": "string"
+        },
+        "safeguardId": {
+          "type": "string"
+        },
+        "safeguardName": {
+          "type": "string"
+        },
+        "implementationGroup": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "securityFunction": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "controlId"
+      ]
+    },
+    "CVEMapping": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedVersions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cvss": {
+          "$ref": "#/$defs/CVSSMapping"
+        },
+        "url": {
+          "type": "string"
+        },
+        "references": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
+      ]
+    },
+    "CVSSMapping": {
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "vector": {
+          "type": "string"
+        },
+        "baseScore": {
+          "type": "number"
+        },
+        "severity": {
+          "$ref": "#/$defs/CVSSSeverity"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "version",
+        "vector",
+        "baseScore",
+        "severity"
+      ]
+    },
+    "CVSSSeverity": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ]
+    },
+    "CWEMapping": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
+      ]
+    },
+    "CloudInfo": {
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "vpc": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "ComplianceFramework": {
+      "type": "string",
+      "enum": [
+        "soc2",
+        "pci-dss",
+        "hipaa",
+        "gdpr",
+        "ccpa",
+        "fedramp",
+        "nist-sp-800-53",
+        "nist-sp-800-171",
+        "sox",
+        "glba"
+      ]
+    },
+    "ComplianceMapping": {
+      "properties": {
+        "framework": {
+          "$ref": "#/$defs/ComplianceFramework"
+        },
+        "requirementId": {
+          "type": "string"
+        },
+        "requirementName": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "framework",
+        "requirementId"
+      ]
+    },
+    "Controls": {
+      "properties": {
+        "nistCsf": {
+          "items": {
+            "$ref": "#/$defs/NISTCSFMapping"
+          },
+          "type": "array"
+        },
+        "cis": {
+          "items": {
+            "$ref": "#/$defs/CISControlMapping"
+          },
+          "type": "array"
+        },
+        "iso27001": {
+          "items": {
+            "$ref": "#/$defs/ISO27001Mapping"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "DataSourceType": {
+      "type": "string",
+      "enum": [
+        "logs",
+        "siem",
+        "edr",
+        "ndr",
+        "ids",
+        "waf",
+        "cloudtrail",
+        "api-gateway",
+        "network-capture",
+        "user-behavior",
+        "audit-log"
+      ]
+    },
+    "Detection": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackSteps": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "mitreTechniques": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "method": {
+          "type": "string"
+        },
+        "dataSources": {
+          "items": {
+            "$ref": "#/$defs/DataSourceType"
+          },
+          "type": "array"
+        },
+        "coverage": {
+          "$ref": "#/$defs/DetectionCoverage"
+        },
+        "latencySeconds": {
+          "type": "integer"
+        },
+        "falsePositiveRate": {
+          "type": "string"
+        },
+        "detectionLogic": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "playbookId": {
+          "type": "string"
+        },
+        "alertSeverity": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "coverage"
+      ]
+    },
+    "DetectionCoverage": {
+      "type": "string",
+      "enum": [
+        "none",
+        "partial",
+        "full"
+      ]
+    },
+    "DiagramType": {
+      "type": "string",
+      "enum": [
+        "dfd",
+        "attack-chain",
+        "sequence",
+        "attack-tree"
+      ]
+    },
+    "DiagramView": {
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/DiagramType"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "direction": {
+          "$ref": "#/$defs/Direction"
+        },
+        "legend": {
+          "$ref": "#/$defs/Legend"
+        },
+        "mappings": {
+          "$ref": "#/$defs/Mappings"
+        },
+        "elements": {
+          "items": {
+            "$ref": "#/$defs/Element"
+          },
+          "type": "array"
+        },
+        "boundaries": {
+          "items": {
+            "$ref": "#/$defs/Boundary"
+          },
+          "type": "array"
+        },
+        "flows": {
+          "items": {
+            "$ref": "#/$defs/Flow"
+          },
+          "type": "array"
+        },
+        "attacks": {
+          "items": {
+            "$ref": "#/$defs/Attack"
+          },
+          "type": "array"
+        },
+        "targets": {
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "type": "array"
+        },
+        "actors": {
+          "items": {
+            "$ref": "#/$defs/Actor"
+          },
+          "type": "array"
+        },
+        "phases": {
+          "items": {
+            "$ref": "#/$defs/Phase"
+          },
+          "type": "array"
+        },
+        "messages": {
+          "items": {
+            "$ref": "#/$defs/Message"
+          },
+          "type": "array"
+        },
+        "attackTree": {
+          "$ref": "#/$defs/AttackTree"
+        },
+        "threats": {
+          "items": {
+            "$ref": "#/$defs/ThreatEntry"
+          },
+          "type": "array"
+        },
+        "mitigations": {
+          "items": {
+            "$ref": "#/$defs/Mitigation"
+          },
+          "type": "array"
+        },
+        "detections": {
+          "items": {
+            "$ref": "#/$defs/Detection"
+          },
+          "type": "array"
+        },
+        "responseActions": {
+          "items": {
+            "$ref": "#/$defs/ResponseAction"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type"
+      ]
+    },
+    "Direction": {
+      "type": "string",
+      "enum": [
+        "right",
+        "down",
+        "left",
+        "up"
+      ]
+    },
+    "Element": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ElementType"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/AssetClassification"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/NetworkInfo"
+        },
+        "assetIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "type"
+      ]
+    },
+    "ElementType": {
+      "type": "string",
+      "enum": [
+        "process",
+        "datastore",
+        "external-entity",
+        "gateway",
+        "browser",
+        "agent",
+        "api"
+      ]
+    },
+    "Flow": {
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/FlowType"
+        },
+        "bidirectional": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "FlowType": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "attack",
+        "exfil"
+      ]
+    },
+    "ISO27001Mapping": {
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "controlName": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "controlId"
+      ]
+    },
+    "LINDDUNMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/LINDDUNThreat"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedDataTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dataSubjects": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "privacyPrinciple": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category"
+      ]
+    },
+    "LINDDUNThreat": {
+      "type": "string",
+      "enum": [
+        "L",
+        "I",
+        "N",
+        "D",
+        "Di",
+        "U",
+        "Nc"
+      ]
+    },
+    "Legend": {
+      "properties": {
+        "show": {
+          "type": "boolean"
+        },
+        "showStride": {
+          "type": "boolean"
+        },
+        "showLinddun": {
+          "type": "boolean"
+        },
+        "showMitre": {
+          "type": "boolean"
+        },
+        "showAssets": {
+          "type": "boolean"
+        },
+        "showElements": {
+          "type": "boolean"
+        },
+        "showBoundaries": {
+          "type": "boolean"
+        },
+        "showMitigations": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "show"
+      ]
+    },
+    "MITREATLASMapping": {
+      "properties": {
+        "tacticId": {
+          "type": "string"
+        },
+        "tacticName": {
+          "type": "string"
+        },
+        "techniqueId": {
+          "type": "string"
+        },
+        "techniqueName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "tacticId",
+        "techniqueId"
+      ]
+    },
+    "MITREAttackMapping": {
+      "properties": {
+        "tacticId": {
+          "type": "string"
+        },
+        "tacticName": {
+          "type": "string"
+        },
+        "techniqueId": {
+          "type": "string"
+        },
+        "techniqueName": {
+          "type": "string"
+        },
+        "subTechniqueId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "tacticId",
+        "techniqueId"
+      ]
+    },
+    "MITRETactic": {
+      "type": "string",
+      "enum": [
+        "TA0001",
+        "TA0002",
+        "TA0003",
+        "TA0004",
+        "TA0005",
+        "TA0006",
+        "TA0007",
+        "TA0008",
+        "TA0009",
+        "TA0010",
+        "TA0011",
+        "TA0040"
+      ]
+    },
+    "Mappings": {
+      "properties": {
+        "mitreAttack": {
+          "items": {
+            "$ref": "#/$defs/MITREAttackMapping"
+          },
+          "type": "array"
+        },
+        "mitreAtlas": {
+          "items": {
+            "$ref": "#/$defs/MITREATLASMapping"
+          },
+          "type": "array"
+        },
+        "owasp": {
+          "items": {
+            "$ref": "#/$defs/OWASPMapping"
+          },
+          "type": "array"
+        },
+        "cwe": {
+          "items": {
+            "$ref": "#/$defs/CWEMapping"
+          },
+          "type": "array"
+        },
+        "cve": {
+          "items": {
+            "$ref": "#/$defs/CVEMapping"
+          },
+          "type": "array"
+        },
+        "cvss": {
+          "$ref": "#/$defs/CVSSMapping"
+        },
+        "stride": {
+          "items": {
+            "$ref": "#/$defs/STRIDEMapping"
+          },
+          "type": "array"
+        },
+        "linddun": {
+          "items": {
+            "$ref": "#/$defs/LINDDUNMapping"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "$ref": "#/$defs/Controls"
+        },
+        "compliance": {
+          "items": {
+            "$ref": "#/$defs/ComplianceMapping"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Message": {
+      "properties": {
+        "seq": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/FlowType"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "note": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "seq",
+        "from",
+        "to",
+        "label"
+      ]
+    },
+    "Mitigation": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "strideCategories": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "controlId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/MitigationStatus"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "verifiedDate": {
+          "type": "string"
+        },
+        "effectiveness": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status"
+      ]
+    },
+    "MitigationStatus": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "implemented",
+        "partial",
+        "accepted",
+        "transferred",
+        "not-applicable"
+      ]
+    },
+    "ModelPhase": {
+      "type": "string",
+      "enum": [
+        "design",
+        "development",
+        "review",
+        "production",
+        "incident"
+      ]
+    },
+    "Motivation": {
+      "type": "string",
+      "enum": [
+        "financial",
+        "espionage",
+        "disruption",
+        "destruction",
+        "ideological",
+        "revenge",
+        "notoriety",
+        "curiosity",
+        "competitive"
+      ]
+    },
+    "NISTCSFFunction": {
+      "type": "string",
+      "enum": [
+        "Identify",
+        "Protect",
+        "Detect",
+        "Respond",
+        "Recover"
+      ]
+    },
+    "NISTCSFMapping": {
+      "properties": {
+        "function": {
+          "$ref": "#/$defs/NISTCSFFunction"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryName": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "subcategoryName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "function",
+        "category"
+      ]
+    },
+    "NetworkInfo": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "ports": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "protocols": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "cidr": {
+          "type": "string"
+        },
+        "cloud": {
+          "$ref": "#/$defs/CloudInfo"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "OWASPCategory": {
+      "type": "string",
+      "enum": [
+        "api",
+        "llm",
+        "web"
+      ]
+    },
+    "OWASPMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/OWASPCategory"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category",
+        "id"
+      ]
+    },
+    "Phase": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mitreTactic": {
+          "$ref": "#/$defs/MITRETactic"
+        },
+        "description": {
+          "type": "string"
+        },
+        "startMessage": {
+          "type": "integer"
+        },
+        "endMessage": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "startMessage",
+        "endMessage"
+      ]
+    },
+    "Prerequisite": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AssumptionType"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "dependsOn": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "relatedThreatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "Reference": {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "title",
+        "url"
+      ]
+    },
+    "ResourceLevel": {
+      "type": "string",
+      "enum": [
+        "minimal",
+        "limited",
+        "moderate",
+        "extensive",
+        "unlimited"
+      ]
+    },
+    "ResponseAction": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "triggerDetectionIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "actionType": {
+          "type": "string"
+        },
+        "automated": {
+          "type": "boolean"
+        },
+        "playbookUrl": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "escalationPath": {
+          "type": "string"
+        },
+        "slaMinutes": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "RiskAssessment": {
+      "properties": {
+        "likelihood": {
+          "type": "integer"
+        },
+        "impact": {
+          "type": "integer"
+        },
+        "score": {
+          "type": "integer"
+        },
+        "level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "likelihoodRationale": {
+          "type": "string"
+        },
+        "impactRationale": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "likelihood",
+        "impact"
+      ]
+    },
+    "RiskLevel": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
+    "STRIDEMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/STRIDEThreat"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category"
+      ]
+    },
+    "STRIDEThreat": {
+      "type": "string",
+      "enum": [
+        "S",
+        "T",
+        "R",
+        "I",
+        "D",
+        "E"
+      ]
+    },
+    "Scenario": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ScenarioType"
+        },
+        "threatActorId": {
+          "type": "string"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackPath": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetAssetIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetElementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "risk": {
+          "$ref": "#/$defs/RiskAssessment"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "businessImpact": {
+          "type": "string"
+        },
+        "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "detectionIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "ScenarioType": {
+      "type": "string",
+      "enum": [
+        "external-attack",
+        "insider-threat",
+        "supply-chain",
+        "data-breach",
+        "privacy-violation",
+        "denial-of-service",
+        "escalation"
+      ]
+    },
+    "SensitivityLevel": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
+      ]
+    },
+    "Sophistication": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "advanced"
+      ]
+    },
+    "Target": {
+      "properties": {
+        "elementId": {
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/AssetClassification"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "impact": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "elementId",
+        "classification"
+      ]
+    },
+    "ThreatActor": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ThreatActorType"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sophistication": {
+          "$ref": "#/$defs/Sophistication"
+        },
+        "motivations": {
+          "items": {
+            "$ref": "#/$defs/Motivation"
+          },
+          "type": "array"
+        },
+        "resources": {
+          "$ref": "#/$defs/ResourceLevel"
+        },
+        "primaryGoals": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ttps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetedIndustries": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetedRegions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "knownCampaigns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "references": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "ThreatActorType": {
+      "type": "string",
+      "enum": [
+        "nation-state",
+        "criminal",
+        "hacktivist",
+        "insider",
+        "competitor",
+        "terrorist",
+        "script-kiddie",
+        "researcher"
+      ]
+    },
+    "ThreatEntry": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "strideCategory": {
+          "$ref": "#/$defs/STRIDEThreat"
+        },
+        "linddunCategory": {
+          "$ref": "#/$defs/LINDDUNThreat"
+        },
+        "affectedElements": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedAssets": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ThreatStatus"
+        },
+        "risk": {
+          "$ref": "#/$defs/RiskAssessment"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackVector": {
+          "type": "string"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status"
+      ]
+    },
+    "ThreatModel": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/$defs/ModelPhase"
+        },
+        "authors": {
+          "items": {
+            "$ref": "#/$defs/Author"
+          },
+          "type": "array"
+        },
+        "references": {
+          "items": {
+            "$ref": "#/$defs/Reference"
+          },
+          "type": "array"
+        },
+        "mappings": {
+          "$ref": "#/$defs/Mappings"
+        },
+        "diagrams": {
+          "items": {
+            "$ref": "#/$defs/DiagramView"
+          },
+          "type": "array"
+        },
+        "threatActors": {
+          "items": {
+            "$ref": "#/$defs/ThreatActor"
+          },
+          "type": "array"
+        },
+        "assumptions": {
+          "items": {
+            "$ref": "#/$defs/Assumption"
+          },
+          "type": "array"
+        },
+        "prerequisites": {
+          "items": {
+            "$ref": "#/$defs/Prerequisite"
+          },
+          "type": "array"
+        },
+        "mitigations": {
+          "items": {
+            "$ref": "#/$defs/Mitigation"
+          },
+          "type": "array"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "type": "array"
+        },
+        "scenarios": {
+          "items": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "diagrams"
+      ]
+    },
+    "ThreatStatus": {
+      "type": "string",
+      "enum": [
+        "potential",
+        "theoretical",
+        "identified",
+        "analyzing",
+        "mitigated",
+        "accepted",
+        "transferred",
+        "monitoring"
+      ]
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "enum": [
+        "not-validated",
+        "validated",
+        "invalidated",
+        "pending"
+      ]
+    }
+  }
+}
