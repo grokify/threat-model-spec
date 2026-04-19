@@ -80,6 +80,9 @@ nav:
       - OWASP: concepts/frameworks/owasp.md
       - CWE: concepts/frameworks/cwe.md
       - CVSS: concepts/frameworks/cvss.md
+  - Guides:
+    - Design-Time Threat Modeling: guides/design-time-threat-modeling.md
+    - Risk Assessment: guides/risk-assessment.md
   - Specification:
     - JSON IR Overview: specification/index.md
     - JSON Schema: specification/schema.md
