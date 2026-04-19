@@ -6,13 +6,16 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 
 ## Features
 
-- 💻 **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
-- 📊 **Multiple Diagram Types** — DFD, Attack Chain, Sequence diagrams
-- 🗺️ **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, CWE, CVSS
-- 📤 **STIX 2.1 Export** — Share threat intelligence in standard format
-- 🎨 **D2 Styles** — Color-coded STRIDE annotations, trust boundaries, attack flows
-- ✅ **Validation** — Type-specific field validation
-- 🤖 **AI Agents** — Claude Code plugin for AI-assisted diagram creation
+- **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
+- **Multiple Diagram Types** — DFD, Attack Chain, Sequence, Attack Tree diagrams
+- **Threat Frameworks** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS
+- **Control Frameworks** — NIST CSF, CIS Controls v8, ISO 27001
+- **Compliance Frameworks** — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP
+- **Security Lifecycle** — Mitigations, threat actors, detections, response actions
+- **STIX 2.1 Export** — Share threat intelligence in standard format
+- **D2 Styles** — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows
+- **Validation** — Type-specific field validation with strict mode
+- **AI Agents** — Claude Code plugin for AI-assisted diagram creation
 
 ## Quick Example
 
@@ -108,14 +111,26 @@ tms generate threat-model.json --stix -o threat-model.stix.json
 
 ## Supported Frameworks
 
+### Threat Frameworks
+
 | Framework | Description |
 |-----------|-------------|
 | [STRIDE](concepts/frameworks/stride.md) | Microsoft threat categorization model |
+| [LINDDUN](concepts/frameworks/linddun.md) | Privacy threat framework |
 | [MITRE ATT&CK](concepts/frameworks/mitre-attack.md) | Adversary tactics and techniques |
 | [MITRE ATLAS](concepts/frameworks/mitre-atlas.md) | AI/ML threat matrix |
 | [OWASP Top 10](concepts/frameworks/owasp.md) | Web, API, and LLM security risks |
 | [CWE](concepts/frameworks/cwe.md) | Common Weakness Enumeration |
 | [CVSS](concepts/frameworks/cvss.md) | Common Vulnerability Scoring System |
+
+### Control & Compliance Frameworks
+
+| Framework | Description |
+|-----------|-------------|
+| NIST CSF | Cybersecurity Framework (Identify, Protect, Detect, Respond, Recover) |
+| CIS Controls v8 | Critical Security Controls with implementation groups |
+| ISO 27001 | Information security management |
+| SOC 2, PCI-DSS, HIPAA, GDPR | Compliance framework references |
 
 ## License
 

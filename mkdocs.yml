@@ -74,6 +74,7 @@ nav:
     - Security Frameworks:
       - Overview: concepts/frameworks/index.md
       - STRIDE: concepts/frameworks/stride.md
+      - LINDDUN: concepts/frameworks/linddun.md
       - MITRE ATT&CK: concepts/frameworks/mitre-attack.md
       - MITRE ATLAS: concepts/frameworks/mitre-atlas.md
       - OWASP: concepts/frameworks/owasp.md
@@ -104,4 +105,6 @@ nav:
     - v0.3.0: releases/v0.3.0.md
     - v0.2.0: releases/v0.2.0.md
     - v0.1.0: releases/v0.1.0.md
+  - Plans:
+    - v0.4.0: plans/v0.4.0-plan.md
   - Changelog: changelog.md

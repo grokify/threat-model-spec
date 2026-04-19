@@ -1,6 +1,6 @@
 # Diagram Types
 
-Threat Model Spec supports three diagram types, each suited for different threat modeling scenarios.
+Threat Model Spec supports four diagram types, each suited for different threat modeling scenarios.
 
 ## Overview
 
@@ -9,6 +9,7 @@ Threat Model Spec supports three diagram types, each suited for different threat
 | `dfd` | Data Flow Diagrams | elements, boundaries, flows |
 | `attack-chain` | Attack sequences | elements, attacks, targets |
 | `sequence` | Time-ordered messages | actors, messages, phases |
+| `attack-tree` | Hierarchical threat decomposition | attackTree (root, nodes, gates) |
 
 ## Data Flow Diagram (DFD)
 
@@ -166,6 +167,70 @@ Sequence diagrams show time-ordered interactions between actors, useful for visu
 | `messages` | Ordered messages between actors |
 | `phases` | Optional grouping of attack phases |
 
+## Attack Tree
+
+Attack Trees provide hierarchical decomposition of attack goals, showing how an attacker might achieve objectives through different paths using AND/OR logic gates.
+
+### When to Use
+
+- Risk analysis and prioritization
+- Identifying all paths to a security goal
+- Evaluating attack feasibility
+- Security investment decisions
+
+### Structure
+
+```json
+{
+  "type": "attack-tree",
+  "title": "Compromise User Account",
+  "attackTree": {
+    "goal": "Gain unauthorized access to user account",
+    "root": {
+      "id": "root",
+      "label": "Compromise Account",
+      "gate": "OR",
+      "children": [
+        {
+          "id": "steal-creds",
+          "label": "Steal Credentials",
+          "gate": "OR",
+          "children": [
+            {"id": "phishing", "label": "Phishing Attack"},
+            {"id": "keylogger", "label": "Install Keylogger"}
+          ]
+        },
+        {
+          "id": "bypass-auth",
+          "label": "Bypass Authentication",
+          "gate": "AND",
+          "children": [
+            {"id": "find-vuln", "label": "Find Auth Vulnerability"},
+            {"id": "exploit", "label": "Develop Exploit"}
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Key Fields
+
+| Field | Description |
+|-------|-------------|
+| `attackTree.goal` | High-level attack objective |
+| `attackTree.root` | Root node of the tree |
+| `node.gate` | Logic gate: `AND` (all children required) or `OR` (any child sufficient) |
+| `node.children` | Child attack nodes |
+
+### Gate Types
+
+| Gate | Meaning | D2 Rendering |
+|------|---------|--------------|
+| `OR` | Any child path achieves the goal | Oval node |
+| `AND` | All child paths required | Rectangle node |
+
 ## Choosing a Diagram Type
 
 ```mermaid
@@ -176,7 +241,9 @@ graph TD
     D -->|Yes| E[Use Attack Chain]
     D -->|No| F{Time-ordered messages?}
     F -->|Yes| G[Use Sequence]
-    F -->|No| H[Consider combining types]
+    F -->|No| H{Hierarchical threat analysis?}
+    H -->|Yes| I[Use Attack Tree]
+    H -->|No| J[Consider combining types]
 ```
 
 ## Combining Diagrams
@@ -184,5 +251,6 @@ graph TD
 For comprehensive threat models, use multiple diagram types:
 
 1. **DFD** — Document system architecture and trust boundaries
-2. **Attack Chain** — Map specific attack vectors with MITRE ATT&CK
-3. **Sequence** — Detail the timeline of critical attacks
+2. **Attack Tree** — Analyze all possible attack paths with AND/OR logic
+3. **Attack Chain** — Map specific attack vectors with MITRE ATT&CK
+4. **Sequence** — Detail the timeline of critical attacks
