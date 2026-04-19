@@ -7,6 +7,48 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.4.0",
+      "date": "2026-04-19",
+      "highlights": [
+        {"description": "Versioned specification structure following OpenAPI pattern (`versions/v0.4.0/`)"},
+        {"description": "Comprehensive security lifecycle: mitigations, detections, and response actions"},
+        {"description": "Attack tree diagrams with AND/OR logic gates"},
+        {"description": "LINDDUN privacy threat framework with D2 rendering"},
+        {"description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001"},
+        {"description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP"}
+      ],
+      "added": [
+        {"description": "Security lifecycle types: `Assumption`, `AttackTree`, `Compliance`, `Controls`, `Detection`, `LINDDUN`, `Mitigation`, `ThreatActor`", "commit": "b117a41"},
+        {"description": "Attack tree diagram type with AND/OR logic gates (`attack-tree`)", "commit": "b117a41"},
+        {"description": "LINDDUN privacy threat framework with 7 categories (L, I, N, D, Di, U, Nc)", "commit": "b117a41"},
+        {"description": "Mitigations tracking with status lifecycle (planned, implemented, partial, accepted, transferred)", "commit": "b117a41"},
+        {"description": "Threat status tracking with `ThreatEntry` and `ThreatStatus` types", "commit": "80479b5"},
+        {"description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001", "commit": "b117a41"},
+        {"description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, CCPA, FedRAMP, NIST SP 800-53", "commit": "b117a41"},
+        {"description": "Threat actor profiles with sophistication, motivation, and resources", "commit": "b117a41"},
+        {"description": "Detection capabilities with coverage levels and data sources", "commit": "b117a41"},
+        {"description": "Response actions for incident response workflows", "commit": "80479b5"},
+        {"description": "Assumptions and prerequisites for documenting model constraints", "commit": "b117a41"},
+        {"description": "CVE references in mappings (`CVEMapping` type)", "commit": "80479b5"},
+        {"description": "D2 legend rendering for LINDDUN threats and mitigation status", "commit": "80479b5"},
+        {"description": "Attack tree D2 rendering with AND/OR gate visualization", "commit": "80479b5"},
+        {"description": "STIX 2.1 export for CVE, OWASP, and mitigations", "commit": "09d37e2"},
+        {"description": "Version parameter for genschema command", "commit": "a5be772"},
+        {"description": "Versioned specification structure (`versions/v0.4.0/`)", "commit": "f3cceee"}
+      ],
+      "changed": [
+        {"description": "`Mappings` struct extended with CVE, LINDDUN, Controls, and Compliance fields", "commit": "80479b5"},
+        {"description": "`DiagramIR` extended with AttackTree, Threats, Mitigations, Detections, ResponseActions", "commit": "80479b5"},
+        {"description": "`Legend` extended with ShowLINDDUN and ShowMitigations options", "commit": "80479b5"},
+        {"description": "JSON schemas regenerated to include all new types", "commit": "22cbf10"}
+      ],
+      "documentation": [
+        {"description": "Versioned specification document (`versions/v0.4.0/specification.md`)", "commit": "f3cceee"},
+        {"description": "v0.4.0 release notes", "commit": "2f6bdf4"},
+        {"description": "README updated with new framework tables and usage examples", "commit": "f3cceee"}
+      ]
+    },
+    {
       "version": "v0.3.0",
       "date": "2026-04-18",
       "highlights": [
