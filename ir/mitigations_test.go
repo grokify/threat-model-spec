@@ -158,3 +158,79 @@ func TestThreatStatus_Values(t *testing.T) {
 		})
 	}
 }
+
+func TestThreatEntry_ExtendedFields(t *testing.T) {
+	te := ThreatEntry{
+		ID:              "threat-sqli",
+		Title:           "SQL Injection in Search API",
+		Description:     "User input directly concatenated into SQL query",
+		Status:          ThreatStatusPotential,
+		STRIDECategory:  STRIDETampering,
+		LINDDUNCategory: LINDDUNDisclosure,
+		AffectedAssets:  []string{"asset-userdb", "asset-api"},
+		AttackVector:    "Malicious input in search parameter",
+		Preconditions: []string{
+			"No input validation",
+			"Dynamic SQL queries",
+			"Database user has read access",
+		},
+		Risk: &RiskAssessment{
+			Likelihood:          4,
+			Impact:              5,
+			LikelihoodRationale: "No parameterized queries in codebase",
+			ImpactRationale:     "Full database access including PII",
+		},
+	}
+
+	te.Risk.Calculate()
+
+	// Test Risk fields
+	if te.Risk.Score != 20 {
+		t.Errorf("Risk.Score = %d, want 20", te.Risk.Score)
+	}
+	if te.Risk.Level != RiskLevelCritical {
+		t.Errorf("Risk.Level = %s, want critical", te.Risk.Level)
+	}
+
+	// Test LINDDUN category
+	if te.LINDDUNCategory != LINDDUNDisclosure {
+		t.Errorf("LINDDUNCategory = %s, want Di", te.LINDDUNCategory)
+	}
+
+	// Test affected assets
+	if len(te.AffectedAssets) != 2 {
+		t.Errorf("AffectedAssets length = %d, want 2", len(te.AffectedAssets))
+	}
+
+	// Test preconditions
+	if len(te.Preconditions) != 3 {
+		t.Errorf("Preconditions length = %d, want 3", len(te.Preconditions))
+	}
+
+	// Test JSON round-trip
+	data, err := json.Marshal(te)
+	if err != nil {
+		t.Fatalf("Marshal error: %v", err)
+	}
+
+	var decoded ThreatEntry
+	if err := json.Unmarshal(data, &decoded); err != nil {
+		t.Fatalf("Unmarshal error: %v", err)
+	}
+
+	if decoded.Status != ThreatStatusPotential {
+		t.Errorf("decoded.Status = %s, want potential", decoded.Status)
+	}
+	if decoded.LINDDUNCategory != LINDDUNDisclosure {
+		t.Errorf("decoded.LINDDUNCategory = %s, want Di", decoded.LINDDUNCategory)
+	}
+	if decoded.Risk == nil {
+		t.Fatal("decoded.Risk is nil")
+	}
+	if decoded.Risk.Likelihood != 4 {
+		t.Errorf("decoded.Risk.Likelihood = %d, want 4", decoded.Risk.Likelihood)
+	}
+	if decoded.AttackVector != "Malicious input in search parameter" {
+		t.Errorf("decoded.AttackVector = %s, want 'Malicious input in search parameter'", decoded.AttackVector)
+	}
+}
