@@ -69,6 +69,14 @@
          <lastmod>2026-04-19</lastmod>
     </url>
     <url>
+         <loc>https://grokify.github.io/threat-model-spec/guides/design-time-threat-modeling/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/guides/risk-assessment/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
          <loc>https://grokify.github.io/threat-model-spec/plans/v0.4.0-plan/</loc>
          <lastmod>2026-04-19</lastmod>
     </url>
