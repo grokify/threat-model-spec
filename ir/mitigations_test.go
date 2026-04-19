@@ -20,8 +20,9 @@ func TestThreatStatus_JSONSchema(t *testing.T) {
 	if schema.Type != "string" {
 		t.Errorf("expected type string, got %s", schema.Type)
 	}
-	if len(schema.Enum) != 6 {
-		t.Errorf("expected 6 enum values, got %d", len(schema.Enum))
+	// 8 values: potential, theoretical, identified, analyzing, mitigated, accepted, transferred, monitoring
+	if len(schema.Enum) != 8 {
+		t.Errorf("expected 8 enum values, got %d", len(schema.Enum))
 	}
 }
 
@@ -131,6 +132,8 @@ func TestThreatStatus_Values(t *testing.T) {
 		status ThreatStatus
 		valid  bool
 	}{
+		{ThreatStatusPotential, true},
+		{ThreatStatusTheoretical, true},
 		{ThreatStatusIdentified, true},
 		{ThreatStatusAnalyzing, true},
 		{ThreatStatusMitigated, true},
