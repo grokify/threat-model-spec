@@ -10,28 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/styles/stride/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/concepts/frameworks/linddun/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../stride/">
       
       
-        <link rel="next" href="../dfd/">
+        <link rel="next" href="../mitre-attack/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
     
     
       
-        <title>STRIDE Styles - Threat Model Spec</title>
+        <title>LINDDUN - Threat Model Spec</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -50,7 +50,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#stride-styles" class="md-skip">
+        <a href="#linddun-privacy-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+    <a href="../../.." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              STRIDE Styles
+              LINDDUN
             
           </span>
         </div>
@@ -230,7 +230,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+    <a href="../../.." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -260,7 +260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -327,7 +327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/installation/" class="md-nav__link">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
         
   
   
@@ -350,7 +350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../getting-started/quick-start/" class="md-nav__link">
+      <a href="../../../getting-started/quick-start/" class="md-nav__link">
         
   
   
@@ -377,8 +377,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -389,13 +391,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -411,7 +411,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Concepts
@@ -425,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/diagram-types/" class="md-nav__link">
+      <a href="../../diagram-types/" class="md-nav__link">
         
   
   
@@ -445,6 +445,8 @@
                 
   
   
+    
+  
   
   
     
@@ -454,13 +456,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -476,7 +476,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Security Frameworks
@@ -490,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -513,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/stride/" class="md-nav__link">
+      <a href="../stride/" class="md-nav__link">
         
   
   
@@ -533,10 +533,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../concepts/frameworks/linddun/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    LINDDUN
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -547,6 +569,104 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Categories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-in-threat-model-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage in Threat Model Spec
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage in Threat Model Spec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mappings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mappings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2 Legend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linddun-vs-stride" class="md-nav__link">
+    <span class="md-ellipsis">
+      LINDDUN vs STRIDE
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d2-styling" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2 Styling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -559,7 +679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/mitre-attack/" class="md-nav__link">
+      <a href="../mitre-attack/" class="md-nav__link">
         
   
   
@@ -582,7 +702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/mitre-atlas/" class="md-nav__link">
+      <a href="../mitre-atlas/" class="md-nav__link">
         
   
   
@@ -605,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/owasp/" class="md-nav__link">
+      <a href="../owasp/" class="md-nav__link">
         
   
   
@@ -628,7 +748,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/cwe/" class="md-nav__link">
+      <a href="../cwe/" class="md-nav__link">
         
   
   
@@ -651,7 +771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../concepts/frameworks/cvss/" class="md-nav__link">
+      <a href="../cvss/" class="md-nav__link">
         
   
   
@@ -734,7 +854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/" class="md-nav__link">
+      <a href="../../../specification/" class="md-nav__link">
         
   
   
@@ -757,7 +877,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/schema/" class="md-nav__link">
+      <a href="../../../specification/schema/" class="md-nav__link">
         
   
   
@@ -780,7 +900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/elements/" class="md-nav__link">
+      <a href="../../../specification/elements/" class="md-nav__link">
         
   
   
@@ -803,7 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/boundaries/" class="md-nav__link">
+      <a href="../../../specification/boundaries/" class="md-nav__link">
         
   
   
@@ -826,7 +946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/flows/" class="md-nav__link">
+      <a href="../../../specification/flows/" class="md-nav__link">
         
   
   
@@ -849,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/mappings/" class="md-nav__link">
+      <a href="../../../specification/mappings/" class="md-nav__link">
         
   
   
@@ -924,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../versions/v0.4.0/specification/" class="md-nav__link">
+      <a href="../../../versions/v0.4.0/specification/" class="md-nav__link">
         
   
   
@@ -951,8 +1071,6 @@
       
   
   
-    
-  
   
   
     
@@ -965,11 +1083,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
@@ -985,7 +1105,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             D2 Styles
@@ -999,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../../styles/" class="md-nav__link">
         
   
   
@@ -1019,32 +1139,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    STRIDE Styles
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../styles/stride/" class="md-nav__link">
         
   
   
@@ -1055,170 +1153,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#badge-classes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Badge Classes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Badge Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#box-classes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Box Classes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Box Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Reference
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Color Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#spoofing-red" class="md-nav__link">
-    <span class="md-ellipsis">
-      Spoofing (Red)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tampering-yellow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tampering (Yellow)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repudiation-purple" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repudiation (Purple)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#information-disclosure-blue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Information Disclosure (Blue)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#denial-of-service-orange" class="md-nav__link">
-    <span class="md-ellipsis">
-      Denial of Service (Orange)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#elevation-of-privilege-green" class="md-nav__link">
-    <span class="md-ellipsis">
-      Elevation of Privilege (Green)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Complete Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#go-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Go Integration
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1231,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dfd/" class="md-nav__link">
+      <a href="../../../styles/dfd/" class="md-nav__link">
         
   
   
@@ -1254,7 +1188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../trust-boundaries/" class="md-nav__link">
+      <a href="../../../styles/trust-boundaries/" class="md-nav__link">
         
   
   
@@ -1277,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../attack-flows/" class="md-nav__link">
+      <a href="../../../styles/attack-flows/" class="md-nav__link">
         
   
   
@@ -1307,7 +1241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/" class="md-nav__link">
+      <a href="../../../agents/" class="md-nav__link">
         
   
   
@@ -1374,7 +1308,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/" class="md-nav__link">
+      <a href="../../../cli/" class="md-nav__link">
         
   
   
@@ -1397,7 +1331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/generate/" class="md-nav__link">
+      <a href="../../../cli/generate/" class="md-nav__link">
         
   
   
@@ -1420,7 +1354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cli/validate/" class="md-nav__link">
+      <a href="../../../cli/validate/" class="md-nav__link">
         
   
   
@@ -1495,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.4.0/" class="md-nav__link">
+      <a href="../../../releases/v0.4.0/" class="md-nav__link">
         
   
   
@@ -1518,7 +1452,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.3.0/" class="md-nav__link">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
         
   
   
@@ -1541,7 +1475,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.2.0/" class="md-nav__link">
+      <a href="../../../releases/v0.2.0/" class="md-nav__link">
         
   
   
@@ -1564,7 +1498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../releases/v0.1.0/" class="md-nav__link">
+      <a href="../../../releases/v0.1.0/" class="md-nav__link">
         
   
   
@@ -1639,7 +1573,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plans/v0.4.0-plan/" class="md-nav__link">
+      <a href="../../../plans/v0.4.0-plan/" class="md-nav__link">
         
   
   
@@ -1669,7 +1603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../changelog/" class="md-nav__link">
+      <a href="../../../changelog/" class="md-nav__link">
         
   
   
@@ -1711,28 +1645,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#categories" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Categories
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#badge-classes" class="md-nav__link">
+  <a href="#usage-in-threat-model-spec" class="md-nav__link">
     <span class="md-ellipsis">
-      Badge Classes
+      Usage in Threat Model Spec
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Badge Classes">
+    <nav class="md-nav" aria-label="Usage in Threat Model Spec">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#mappings" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage
+      Mappings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2 Legend
     </span>
   </a>
   
@@ -1744,111 +1687,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#box-classes" class="md-nav__link">
+  <a href="#linddun-vs-stride" class="md-nav__link">
     <span class="md-ellipsis">
-      Box Classes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Box Classes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#usage_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#color-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      Color Reference
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Color Reference">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#spoofing-red" class="md-nav__link">
-    <span class="md-ellipsis">
-      Spoofing (Red)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tampering-yellow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tampering (Yellow)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#repudiation-purple" class="md-nav__link">
-    <span class="md-ellipsis">
-      Repudiation (Purple)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#information-disclosure-blue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Information Disclosure (Blue)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#denial-of-service-orange" class="md-nav__link">
-    <span class="md-ellipsis">
-      Denial of Service (Orange)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#elevation-of-privilege-green" class="md-nav__link">
-    <span class="md-ellipsis">
-      Elevation of Privilege (Green)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Complete Example
+      LINDDUN vs STRIDE
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#go-integration" class="md-nav__link">
+  <a href="#when-to-use" class="md-nav__link">
     <span class="md-ellipsis">
-      Go Integration
+      When to Use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#d2-styling" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2 Styling
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -1873,193 +1741,177 @@
   
 
 
-<h1 id="stride-styles">STRIDE Styles<a class="headerlink" href="#stride-styles" title="Permanent link">&para;</a></h1>
-<p>Color-coded styles for STRIDE threat annotations.</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>STRIDE styles come in two variants:</p>
+<h1 id="linddun-privacy-framework">LINDDUN Privacy Framework<a class="headerlink" href="#linddun-privacy-framework" title="Permanent link">&para;</a></h1>
+<p>LINDDUN is a privacy threat modeling framework developed at KU Leuven. It complements STRIDE by focusing on privacy-specific threats rather than security threats.</p>
+<h2 id="categories">Categories<a class="headerlink" href="#categories" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L</strong></td>
+<td>Linkability</td>
+<td>Ability to link items of interest (records, users, actions)</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td>Identifiability</td>
+<td>Ability to identify a data subject</td>
+</tr>
+<tr>
+<td><strong>N</strong></td>
+<td>Non-repudiation</td>
+<td>Inability to deny an action (privacy concern when deniability is needed)</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>Detectability</td>
+<td>Ability to detect existence of an item of interest</td>
+</tr>
+<tr>
+<td><strong>Di</strong></td>
+<td>Disclosure of Information</td>
+<td>Exposure of personal information</td>
+</tr>
+<tr>
+<td><strong>U</strong></td>
+<td>Unawareness</td>
+<td>Lack of awareness about data collection/processing</td>
+</tr>
+<tr>
+<td><strong>Nc</strong></td>
+<td>Non-compliance</td>
+<td>Failure to comply with privacy regulations</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage-in-threat-model-spec">Usage in Threat Model Spec<a class="headerlink" href="#usage-in-threat-model-spec" title="Permanent link">&para;</a></h2>
+<h3 id="mappings">Mappings<a class="headerlink" href="#mappings" title="Permanent link">&para;</a></h3>
+<p>Add LINDDUN mappings to your threat model:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;linddun&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Identifiability&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User can be identified through session tokens&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">      </span><span class="p">},</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Di&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Disclosure&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Personal data exposed in API response&quot;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="d2-legend">D2 Legend<a class="headerlink" href="#d2-legend" title="Permanent link">&para;</a></h3>
+<p>Enable the LINDDUN legend in your diagrams:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;legend&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;showLINDDUN&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>This renders a color-coded legend with all LINDDUN categories.</p>
+<h2 id="linddun-vs-stride">LINDDUN vs STRIDE<a class="headerlink" href="#linddun-vs-stride" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>STRIDE</th>
+<th>LINDDUN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Focus</td>
+<td>Security threats</td>
+<td>Privacy threats</td>
+</tr>
+<tr>
+<td>Origin</td>
+<td>Microsoft</td>
+<td>KU Leuven</td>
+</tr>
+<tr>
+<td>Categories</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>System security</td>
+<td>Data protection</td>
+</tr>
+</tbody>
+</table>
+<h2 id="when-to-use">When to Use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Badges</strong> — Small inline markers (<code>threat-*</code>)</li>
-<li><strong>Boxes</strong> — Larger callout annotations (<code>threat-box-*</code>)</li>
+<li><strong>GDPR compliance</strong> — Map privacy risks to regulatory requirements</li>
+<li><strong>Privacy by Design</strong> — Identify privacy threats early in development</li>
+<li><strong>Data protection</strong> — Analyze how personal data is handled</li>
+<li><strong>Combined with STRIDE</strong> — Comprehensive security + privacy threat modeling</li>
 </ul>
-<h2 id="badge-classes">Badge Classes<a class="headerlink" href="#badge-classes" title="Permanent link">&para;</a></h2>
-<p>For compact inline threat indicators:</p>
+<h2 id="d2-styling">D2 Styling<a class="headerlink" href="#d2-styling" title="Permanent link">&para;</a></h2>
+<p>LINDDUN threats are rendered with distinct colors:</p>
 <table>
 <thead>
 <tr>
-<th>Class</th>
 <th>Category</th>
-<th>Color</th>
+<th>Fill Color</th>
+<th>Stroke Color</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>threat-spoofing</code></td>
-<td>Spoofing</td>
-<td>Red</td>
+<td>L - Linkability</td>
+<td><code>#e8eaf6</code></td>
+<td><code>#3f51b5</code> (Indigo)</td>
 </tr>
 <tr>
-<td><code>threat-tampering</code></td>
-<td>Tampering</td>
-<td>Yellow</td>
+<td>I - Identifiability</td>
+<td><code>#e3f2fd</code></td>
+<td><code>#1976d2</code> (Blue)</td>
 </tr>
 <tr>
-<td><code>threat-repudiation</code></td>
-<td>Repudiation</td>
-<td>Purple</td>
+<td>N - Non-repudiation</td>
+<td><code>#fff3e0</code></td>
+<td><code>#f57c00</code> (Orange)</td>
 </tr>
 <tr>
-<td><code>threat-info-disclosure</code></td>
-<td>Info Disclosure</td>
-<td>Blue</td>
+<td>D - Detectability</td>
+<td><code>#fce4ec</code></td>
+<td><code>#c2185b</code> (Pink)</td>
 </tr>
 <tr>
-<td><code>threat-dos</code></td>
-<td>Denial of Service</td>
-<td>Orange</td>
+<td>Di - Disclosure</td>
+<td><code>#ffebee</code></td>
+<td><code>#c62828</code> (Red)</td>
 </tr>
 <tr>
-<td><code>threat-elevation</code></td>
-<td>Elevation of Privilege</td>
-<td>Green</td>
+<td>U - Unawareness</td>
+<td><code>#f3e5f5</code></td>
+<td><code>#7b1fa2</code> (Purple)</td>
+</tr>
+<tr>
+<td>Nc - Non-compliance</td>
+<td><code>#efebe9</code></td>
+<td><code>#5d4037</code> (Brown)</td>
 </tr>
 </tbody>
 </table>
-<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>...d2/styles/stride.d2
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>s-badge: &quot;S&quot; { class: threat-spoofing }
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>t-badge: &quot;T&quot; { class: threat-tampering }
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>i-badge: &quot;I&quot; { class: threat-info-disclosure }
-</code></pre></div>
-<h2 id="box-classes">Box Classes<a class="headerlink" href="#box-classes" title="Permanent link">&para;</a></h2>
-<p>For detailed threat annotations:</p>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Category</th>
-<th>Color</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>threat-box-spoofing</code></td>
-<td>Spoofing</td>
-<td>Red</td>
-</tr>
-<tr>
-<td><code>threat-box-tampering</code></td>
-<td>Tampering</td>
-<td>Yellow</td>
-</tr>
-<tr>
-<td><code>threat-box-repudiation</code></td>
-<td>Repudiation</td>
-<td>Purple</td>
-</tr>
-<tr>
-<td><code>threat-box-info-disclosure</code></td>
-<td>Info Disclosure</td>
-<td>Blue</td>
-</tr>
-<tr>
-<td><code>threat-box-dos</code></td>
-<td>Denial of Service</td>
-<td>Orange</td>
-</tr>
-<tr>
-<td><code>threat-box-elevation</code></td>
-<td>Elevation of Privilege</td>
-<td>Green</td>
-</tr>
-</tbody>
-</table>
-<h3 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>...d2/styles/stride.d2
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>spoofing: |md
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  **S - Spoofing**
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  Attacker impersonates legitimate client
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>| { class: threat-box-spoofing }
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>info-disc: |md
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  **I - Information Disclosure**
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  API keys exposed via WebSocket
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>| { class: threat-box-info-disclosure }
-</code></pre></div>
-<h2 id="color-reference">Color Reference<a class="headerlink" href="#color-reference" title="Permanent link">&para;</a></h2>
-<h3 id="spoofing-red">Spoofing (Red)<a class="headerlink" href="#spoofing-red" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Primary:    #c62828
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Background: #ffebee
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Text:       #b71c1c
-</code></pre></div>
-<h3 id="tampering-yellow">Tampering (Yellow)<a class="headerlink" href="#tampering-yellow" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Primary:    #f9a825
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Background: #fffde7
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Text:       #f57f17
-</code></pre></div>
-<h3 id="repudiation-purple">Repudiation (Purple)<a class="headerlink" href="#repudiation-purple" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Primary:    #7b1fa2
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Background: #f3e5f5
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Text:       #6a1b9a
-</code></pre></div>
-<h3 id="information-disclosure-blue">Information Disclosure (Blue)<a class="headerlink" href="#information-disclosure-blue" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Primary:    #1565c0
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Background: #e3f2fd
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Text:       #0d47a1
-</code></pre></div>
-<h3 id="denial-of-service-orange">Denial of Service (Orange)<a class="headerlink" href="#denial-of-service-orange" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Primary:    #d84315
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Background: #fbe9e7
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Text:       #bf360c
-</code></pre></div>
-<h3 id="elevation-of-privilege-green">Elevation of Privilege (Green)<a class="headerlink" href="#elevation-of-privilege-green" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Primary:    #2e7d32
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Background: #e8f5e9
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Text:       #1b5e20
-</code></pre></div>
-<h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>...d2/styles/stride.d2
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>direction: right
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a># Elements
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>auth-service: Auth Service
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>api-gateway: API Gateway
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>database: Database
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a># STRIDE threat annotations
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>s-threat: |md
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>  **S - Spoofing**
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>  No origin validation allows
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>  malicious sites to connect
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>| { class: threat-box-spoofing }
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>i-threat: |md
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>  **I - Information Disclosure**
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>  API keys returned in response
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>| { class: threat-box-info-disclosure }
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>e-threat: |md
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>  **E - Elevation of Privilege**
-<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>  Localhost bypass grants
-<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a>  full agent access
-<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a>| { class: threat-box-elevation }
-<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a>
-<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a># Connect threats to elements
-<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a>s-threat -&gt; api-gateway: affects
-<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a>i-threat -&gt; database: affects
-<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>e-threat -&gt; auth-service: affects
-</code></pre></div>
-<h2 id="go-integration">Go Integration<a class="headerlink" href="#go-integration" title="Permanent link">&para;</a></h2>
-<p>Use the <code>stride</code> package to get D2 class names:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/threat-model-spec/stride&quot;</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nx">threat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">stride</span><span class="p">.</span><span class="nx">Spoofing</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">threat</span><span class="p">.</span><span class="nx">D2Class</span><span class="p">())</span><span class="w">     </span><span class="c1">// threat-spoofing</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">threat</span><span class="p">.</span><span class="nx">D2BoxClass</span><span class="p">())</span><span class="w">  </span><span class="c1">// threat-box-spoofing</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">threat</span><span class="p">.</span><span class="nx">Color</span><span class="p">())</span><span class="w">       </span><span class="c1">// #c62828</span>
-</code></pre></div>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://linddun.org/">LINDDUN Official Website</a></li>
+<li><a href="https://linddun.org/linddun-go/">LINDDUN GO (Lightweight Version)</a></li>
+<li><a href="https://www.linddun.org/linddun">Privacy Threat Modeling</a></li>
+</ul>
 
 
 
@@ -2127,10 +1979,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
       
     
   </body>

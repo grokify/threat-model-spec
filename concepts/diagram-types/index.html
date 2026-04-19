@@ -610,6 +610,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#attack-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Tree
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attack Tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-fields_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gate Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#choosing-a-diagram-type" class="md-nav__link">
     <span class="md-ellipsis">
       Choosing a Diagram Type
@@ -714,6 +765,29 @@
   
   <span class="md-ellipsis">
     STRIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../frameworks/linddun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LINDDUN
     
   </span>
   
@@ -1579,6 +1653,81 @@
   
   
   
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Plans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plans/v0.4.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../changelog/" class="md-nav__link">
         
@@ -1757,6 +1906,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#attack-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Tree
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Attack Tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-to-use_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      When to Use
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-fields_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Fields
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gate Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#choosing-a-diagram-type" class="md-nav__link">
     <span class="md-ellipsis">
       Choosing a Diagram Type
@@ -1794,7 +1994,7 @@
 
 
 <h1 id="diagram-types">Diagram Types<a class="headerlink" href="#diagram-types" title="Permanent link">&para;</a></h1>
-<p>Threat Model Spec supports three diagram types, each suited for different threat modeling scenarios.</p>
+<p>Threat Model Spec supports four diagram types, each suited for different threat modeling scenarios.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1819,6 +2019,11 @@
 <td><code>sequence</code></td>
 <td>Time-ordered messages</td>
 <td>actors, messages, phases</td>
+</tr>
+<tr>
+<td><code>attack-tree</code></td>
+<td>Hierarchical threat decomposition</td>
+<td>attackTree (root, nodes, gates)</td>
 </tr>
 </tbody>
 </table>
@@ -2008,6 +2213,98 @@
 </tr>
 </tbody>
 </table>
+<h2 id="attack-tree">Attack Tree<a class="headerlink" href="#attack-tree" title="Permanent link">&para;</a></h2>
+<p>Attack Trees provide hierarchical decomposition of attack goals, showing how an attacker might achieve objectives through different paths using AND/OR logic gates.</p>
+<h3 id="when-to-use_3">When to Use<a class="headerlink" href="#when-to-use_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Risk analysis and prioritization</li>
+<li>Identifying all paths to a security goal</li>
+<li>Evaluating attack feasibility</li>
+<li>Security investment decisions</li>
+</ul>
+<h3 id="structure_3">Structure<a class="headerlink" href="#structure_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attack-tree&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compromise User Account&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;attackTree&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;goal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gain unauthorized access to user account&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">&quot;root&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Compromise Account&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">      </span><span class="nt">&quot;gate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OR&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">      </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;steal-creds&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">          </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Steal Credentials&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">          </span><span class="nt">&quot;gate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OR&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">            </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;phishing&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Phishing Attack&quot;</span><span class="p">},</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;keylogger&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Install Keylogger&quot;</span><span class="p">}</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">          </span><span class="p">]</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">          </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bypass-auth&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">          </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bypass Authentication&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">          </span><span class="nt">&quot;gate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AND&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">          </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">            </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;find-vuln&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Find Auth Vulnerability&quot;</span><span class="p">},</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">            </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;exploit&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Develop Exploit&quot;</span><span class="p">}</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">          </span><span class="p">]</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="key-fields_3">Key Fields<a class="headerlink" href="#key-fields_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>attackTree.goal</code></td>
+<td>High-level attack objective</td>
+</tr>
+<tr>
+<td><code>attackTree.root</code></td>
+<td>Root node of the tree</td>
+</tr>
+<tr>
+<td><code>node.gate</code></td>
+<td>Logic gate: <code>AND</code> (all children required) or <code>OR</code> (any child sufficient)</td>
+</tr>
+<tr>
+<td><code>node.children</code></td>
+<td>Child attack nodes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gate-types">Gate Types<a class="headerlink" href="#gate-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Meaning</th>
+<th>D2 Rendering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OR</code></td>
+<td>Any child path achieves the goal</td>
+<td>Oval node</td>
+</tr>
+<tr>
+<td><code>AND</code></td>
+<td>All child paths required</td>
+<td>Rectangle node</td>
+</tr>
+</tbody>
+</table>
 <h2 id="choosing-a-diagram-type">Choosing a Diagram Type<a class="headerlink" href="#choosing-a-diagram-type" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TD
     A[What do you want to show?] --&gt; B{System architecture?}
@@ -2016,11 +2313,14 @@
     D --&gt;|Yes| E[Use Attack Chain]
     D --&gt;|No| F{Time-ordered messages?}
     F --&gt;|Yes| G[Use Sequence]
-    F --&gt;|No| H[Consider combining types]</code></pre>
+    F --&gt;|No| H{Hierarchical threat analysis?}
+    H --&gt;|Yes| I[Use Attack Tree]
+    H --&gt;|No| J[Consider combining types]</code></pre>
 <h2 id="combining-diagrams">Combining Diagrams<a class="headerlink" href="#combining-diagrams" title="Permanent link">&para;</a></h2>
 <p>For comprehensive threat models, use multiple diagram types:</p>
 <ol>
 <li><strong>DFD</strong> — Document system architecture and trust boundaries</li>
+<li><strong>Attack Tree</strong> — Analyze all possible attack paths with AND/OR logic</li>
 <li><strong>Attack Chain</strong> — Map specific attack vectors with MITRE ATT&amp;CK</li>
 <li><strong>Sequence</strong> — Detail the timeline of critical attacks</li>
 </ol>
