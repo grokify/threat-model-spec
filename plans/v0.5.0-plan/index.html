@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/plans/v0.4.0-plan/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/plans/v0.5.0-plan/">
       
       
-        <link rel="prev" href="../v0.5.0-plan/">
+        <link rel="prev" href="../../releases/v0.1.0/">
       
       
-        <link rel="next" href="../../changelog/">
+        <link rel="next" href="../v0.4.0-plan/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>v0.4.0 - Threat Model Spec</title>
+        <title>v0.5.0 - Threat Model Spec</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#threat-model-spec-v040-enhancement-plan" class="md-skip">
+        <a href="#threat-model-spec-v050-enhancement-plan" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.4.0
+              v0.5.0
             
           </span>
         </div>
@@ -1594,29 +1594,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../v0.5.0-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    v0.5.0
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1634,7 +1611,7 @@
   
   
   <span class="md-ellipsis">
-    v0.4.0
+    v0.5.0
     
   </span>
   
@@ -1647,7 +1624,7 @@
   
   
   <span class="md-ellipsis">
-    v0.4.0
+    v0.5.0
     
   </span>
   
@@ -1676,6 +1653,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1689,90 +1681,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-mitigationscountermeasures" class="md-nav__link">
+  <a href="#1-threat-status-add-potential-and-theoretical" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Mitigations/Countermeasures
+      1. Threat Status: Add "potential" and "theoretical"
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-threat-status-tracking" class="md-nav__link">
+  <a href="#2-threat-model-phase" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Threat Status Tracking
+      2. Threat Model Phase
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-control-framework-mappings" class="md-nav__link">
+  <a href="#3-risk-score-calculation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Control Framework Mappings
+      3. Risk Score Calculation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-compliance-framework-references" class="md-nav__link">
+  <a href="#4-asset-classification" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Compliance Framework References
+      4. Asset Classification
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-linddun-privacy-framework" class="md-nav__link">
+  <a href="#5-scenario-modeling" class="md-nav__link">
     <span class="md-ellipsis">
-      5. LINDDUN Privacy Framework
+      5. Scenario Modeling
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-threat-actorsadversary-profiles" class="md-nav__link">
+  <a href="#6-network-topology-enhancements" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Threat Actors/Adversary Profiles
+      6. Network Topology Enhancements
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#7-detectionresponse-capabilities" class="md-nav__link">
+  <a href="#7-documentation-design-time-threat-modeling-guide" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Detection/Response Capabilities
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-assumptions-and-prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Assumptions and Prerequisites
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#9-cve-references" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. CVE References
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#10-attack-trees-diagram-type" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Attack Trees Diagram Type
+      7. Documentation: Design-Time Threat Modeling Guide
     </span>
   </a>
   
@@ -1794,9 +1759,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-breaking-changes" class="md-nav__link">
+  <a href="#backward-compatibility" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-Breaking Changes
+      Backward Compatibility
     </span>
   </a>
   
@@ -1812,9 +1777,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schema-regeneration" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Regeneration
+      Validation
     </span>
   </a>
   
@@ -1832,6 +1797,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Implementation Order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1 (High Priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-medium-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2 (Medium Priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-low-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3 (Low Priority)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1843,10 +1841,51 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../v0.4.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1914,6 +1953,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1927,90 +1981,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-mitigationscountermeasures" class="md-nav__link">
+  <a href="#1-threat-status-add-potential-and-theoretical" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Mitigations/Countermeasures
+      1. Threat Status: Add "potential" and "theoretical"
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-threat-status-tracking" class="md-nav__link">
+  <a href="#2-threat-model-phase" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Threat Status Tracking
+      2. Threat Model Phase
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-control-framework-mappings" class="md-nav__link">
+  <a href="#3-risk-score-calculation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Control Framework Mappings
+      3. Risk Score Calculation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-compliance-framework-references" class="md-nav__link">
+  <a href="#4-asset-classification" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Compliance Framework References
+      4. Asset Classification
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-linddun-privacy-framework" class="md-nav__link">
+  <a href="#5-scenario-modeling" class="md-nav__link">
     <span class="md-ellipsis">
-      5. LINDDUN Privacy Framework
+      5. Scenario Modeling
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-threat-actorsadversary-profiles" class="md-nav__link">
+  <a href="#6-network-topology-enhancements" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Threat Actors/Adversary Profiles
+      6. Network Topology Enhancements
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#7-detectionresponse-capabilities" class="md-nav__link">
+  <a href="#7-documentation-design-time-threat-modeling-guide" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Detection/Response Capabilities
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-assumptions-and-prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      8. Assumptions and Prerequisites
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#9-cve-references" class="md-nav__link">
-    <span class="md-ellipsis">
-      9. CVE References
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#10-attack-trees-diagram-type" class="md-nav__link">
-    <span class="md-ellipsis">
-      10. Attack Trees Diagram Type
+      7. Documentation: Design-Time Threat Modeling Guide
     </span>
   </a>
   
@@ -2032,9 +2059,9 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#non-breaking-changes" class="md-nav__link">
+  <a href="#backward-compatibility" class="md-nav__link">
     <span class="md-ellipsis">
-      Non-Breaking Changes
+      Backward Compatibility
     </span>
   </a>
   
@@ -2050,9 +2077,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schema-regeneration" class="md-nav__link">
+  <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Regeneration
+      Validation
     </span>
   </a>
   
@@ -2070,12 +2097,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Implementation Order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-high-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1 (High Priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-medium-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2 (Medium Priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-low-priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3 (Low Priority)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       Testing Strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -2100,164 +2178,331 @@
   
 
 
-<h1 id="threat-model-spec-v040-enhancement-plan">Threat Model Spec v0.4.0 Enhancement Plan<a class="headerlink" href="#threat-model-spec-v040-enhancement-plan" title="Permanent link">&para;</a></h1>
+<h1 id="threat-model-spec-v050-enhancement-plan">Threat Model Spec v0.5.0 Enhancement Plan<a class="headerlink" href="#threat-model-spec-v050-enhancement-plan" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><strong>Status:</strong> ✅ Completed (2026-04-19)</p>
-<p>All 10 planned enhancements were implemented in v0.4.0.</p>
+<p><strong>Status:</strong> ✅ Completed</p>
+<p><strong>Goal:</strong> Support design-time threat modeling for proactive security analysis during SDLC</p>
 </blockquote>
-<p>This document outlines planned enhancements to the threat-model-spec project to provide more comprehensive threat modeling capabilities.</p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>The current implementation provides strong support for:</p>
-<ul>
-<li>STRIDE threat categories</li>
-<li>MITRE ATT&amp;CK/ATLAS mappings</li>
-<li>OWASP Top 10 (API, LLM, Web)</li>
-<li>CWE mappings</li>
-<li>CVSS scoring</li>
-<li>Asset classification</li>
-<li>DFD, attack-chain, sequence diagrams</li>
-</ul>
-<p>The enhancements below address gaps in mitigation tracking, compliance mapping, privacy frameworks, and threat lifecycle management.</p>
+<p>The current implementation excels at documenting verified threats and known attack patterns. This plan extends the spec to support <strong>proactive threat modeling</strong> during the design phase of SDLC, before features are built.</p>
+<h3 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Design-time threat modeling</strong> — Analyze a planned feature for potential vulnerabilities before implementation</li>
+<li><strong>Architecture review</strong> — Map network topology and identify where vulnerabilities may exist</li>
+<li><strong>Risk assessment</strong> — Calculate and prioritize risks based on likelihood and impact</li>
+<li><strong>What-if analysis</strong> — Model hypothetical attack scenarios</li>
+</ol>
 <h2 id="planned-enhancements">Planned Enhancements<a class="headerlink" href="#planned-enhancements" title="Permanent link">&para;</a></h2>
-<h3 id="1-mitigationscountermeasures">1. Mitigations/Countermeasures<a class="headerlink" href="#1-mitigationscountermeasures" title="Permanent link">&para;</a></h3>
+<h3 id="1-threat-status-add-potential-and-theoretical">1. Threat Status: Add "potential" and "theoretical"<a class="headerlink" href="#1-threat-status-add-potential-and-theoretical" title="Permanent link">&para;</a></h3>
 <p><strong>Priority:</strong> High</p>
-<p>Add the ability to document how identified threats are addressed. This is the most commonly requested feature in threat modeling tools.</p>
+<p>Extend <code>ThreatStatus</code> to distinguish between verified and hypothetical threats.</p>
+<p><strong>New Values:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>potential</code></td>
+<td>Hypothetical threat identified during design review</td>
+<td>Design-time</td>
+</tr>
+<tr>
+<td><code>theoretical</code></td>
+<td>Threat based on threat modeling methodology (STRIDE/LINDDUN)</td>
+<td>Design-time</td>
+</tr>
+<tr>
+<td><code>identified</code></td>
+<td>Threat confirmed through testing/incident</td>
+<td>Existing</td>
+</tr>
+<tr>
+<td><code>analyzing</code></td>
+<td>Threat under investigation</td>
+<td>Existing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Changes:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// ir/mitigations.go</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nx">ThreatStatusPotential</span><span class="w">   </span><span class="nx">ThreatStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;potential&quot;</span><span class="w">   </span><span class="c1">// New</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nx">ThreatStatusTheoretical</span><span class="w"> </span><span class="nx">ThreatStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;theoretical&quot;</span><span class="w"> </span><span class="c1">// New</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="nx">ThreatStatusIdentified</span><span class="w">  </span><span class="nx">ThreatStatus</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;identified&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// ... existing values</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="2-threat-model-phase">2. Threat Model Phase<a class="headerlink" href="#2-threat-model-phase" title="Permanent link">&para;</a></h3>
+<p><strong>Priority:</strong> High</p>
+<p>Add a <code>phase</code> field to indicate the lifecycle stage of the threat model.</p>
+<p><strong>New Type:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// ir/threat_model.go</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="kt">string</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">ModelPhaseDesign</span><span class="w">      </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;design&quot;</span><span class="w">      </span><span class="c1">// Pre-implementation</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nx">ModelPhaseDevelopment</span><span class="w"> </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;development&quot;</span><span class="w"> </span><span class="c1">// During implementation</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nx">ModelPhaseReview</span><span class="w">      </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;review&quot;</span><span class="w">      </span><span class="c1">// Security review</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nx">ModelPhaseProduction</span><span class="w">  </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;production&quot;</span><span class="w">  </span><span class="c1">// Live system</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">ModelPhaseIncident</span><span class="w">    </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;incident&quot;</span><span class="w">    </span><span class="c1">// Post-incident analysis</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">)</span>
+</code></pre></div>
+<p><strong>ThreatModel Addition:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ThreatModel</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">// ... existing fields</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="c1">// Phase indicates the SDLC phase of this threat model.</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">Phase</span><span class="w"> </span><span class="nx">ModelPhase</span><span class="w"> </span><span class="s">`json:&quot;phase,omitempty&quot;`</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="3-risk-score-calculation">3. Risk Score Calculation<a class="headerlink" href="#3-risk-score-calculation" title="Permanent link">&para;</a></h3>
+<p><strong>Priority:</strong> High</p>
+<p>Add structured risk assessment with calculated scores.</p>
 <p><strong>New Types:</strong></p>
-<ul>
-<li><code>Mitigation</code> - Links threats to controls with status tracking</li>
-<li><code>MitigationStatus</code> - Enum: implemented, planned, accepted, transferred, not-applicable</li>
-</ul>
-<p><strong>Fields:</strong></p>
-<ul>
-<li>ID, ThreatIDs (links to threats), Control, Status, Owner, Description, VerifiedDate</li>
-</ul>
-<h3 id="2-threat-status-tracking">2. Threat Status Tracking<a class="headerlink" href="#2-threat-status-tracking" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> High</p>
-<p>Track the lifecycle of identified threats from identification through resolution.</p>
-<p><strong>New Type:</strong></p>
-<ul>
-<li><code>ThreatStatus</code> - Enum: identified, analyzing, mitigated, accepted, transferred, monitoring</li>
-</ul>
-<p><strong>Integration:</strong></p>
-<ul>
-<li>Add Status field to Attack, Flow (attack type), and STRIDEMapping types</li>
-</ul>
-<h3 id="3-control-framework-mappings">3. Control Framework Mappings<a class="headerlink" href="#3-control-framework-mappings" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> High</p>
-<p>Bridge threat models to security control frameworks for compliance and audit purposes.</p>
-<p><strong>New Mappings:</strong></p>
-<ul>
-<li><code>NISTCSFMapping</code> - NIST Cybersecurity Framework (Identify, Protect, Detect, Respond, Recover)</li>
-<li><code>CISControlMapping</code> - CIS Critical Security Controls v8</li>
-<li><code>ISO27001Mapping</code> - ISO 27001 control references</li>
-</ul>
-<h3 id="4-compliance-framework-references">4. Compliance Framework References<a class="headerlink" href="#4-compliance-framework-references" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// ir/risk.go</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kd">type</span><span class="w"> </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="kt">string</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">RiskLevelCritical</span><span class="w"> </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;critical&quot;</span><span class="w"> </span><span class="c1">// 9-10</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">RiskLevelHigh</span><span class="w">     </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;high&quot;</span><span class="w">     </span><span class="c1">// 7-8</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">RiskLevelMedium</span><span class="w">   </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;medium&quot;</span><span class="w">   </span><span class="c1">// 4-6</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nx">RiskLevelLow</span><span class="w">      </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;low&quot;</span><span class="w">      </span><span class="c1">// 1-3</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nx">RiskLevelInfo</span><span class="w">     </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;info&quot;</span><span class="w">     </span><span class="c1">// 0</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="kd">type</span><span class="w"> </span><span class="nx">RiskAssessment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="c1">// Likelihood of exploitation (1-5 scale)</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nx">Likelihood</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;likelihood&quot;`</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="c1">// Impact if exploited (1-5 scale)</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nx">Impact</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;impact&quot;`</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="c1">// Score is Likelihood × Impact (1-25, calculated)</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="nx">Score</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;score,omitempty&quot;`</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="c1">// Level is the categorical risk level (calculated from score)</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="nx">Level</span><span class="w"> </span><span class="nx">RiskLevel</span><span class="w"> </span><span class="s">`json:&quot;level,omitempty&quot;`</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="c1">// Justification explains the likelihood/impact ratings</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="nx">Justification</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;justification,omitempty&quot;`</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>ThreatEntry Enhancement:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ThreatEntry</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="c1">// ... existing fields</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="c1">// Risk provides structured risk assessment.</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">Risk</span><span class="w"> </span><span class="o">*</span><span class="nx">RiskAssessment</span><span class="w"> </span><span class="s">`json:&quot;risk,omitempty&quot;`</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="4-asset-classification">4. Asset Classification<a class="headerlink" href="#4-asset-classification" title="Permanent link">&para;</a></h3>
 <p><strong>Priority:</strong> Medium</p>
-<p>Map threats and mitigations to regulatory compliance requirements.</p>
-<p><strong>New Type:</strong></p>
-<ul>
-<li><code>ComplianceMapping</code> - Links to SOC 2, PCI-DSS, HIPAA, GDPR, etc.</li>
-</ul>
-<h3 id="5-linddun-privacy-framework">5. LINDDUN Privacy Framework<a class="headerlink" href="#5-linddun-privacy-framework" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> Medium</p>
-<p>Support privacy-focused threat modeling alongside STRIDE.</p>
+<p>Add asset sensitivity/value classification to understand what's being protected.</p>
 <p><strong>New Types:</strong></p>
-<ul>
-<li><code>LINDDUNThreat</code> - Enum: L, I, N, D, D2, U, N2</li>
-<li><code>LINDDUNMapping</code> - Privacy threat mapping with affected data types</li>
-</ul>
-<h3 id="6-threat-actorsadversary-profiles">6. Threat Actors/Adversary Profiles<a class="headerlink" href="#6-threat-actorsadversary-profiles" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// ir/assets.go</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">type</span><span class="w"> </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="kt">string</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nx">AssetClassPublic</span><span class="w">       </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;public&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nx">AssetClassInternal</span><span class="w">     </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;internal&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nx">AssetClassConfidential</span><span class="w"> </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;confidential&quot;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nx">AssetClassRestricted</span><span class="w">   </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;restricted&quot;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nx">AssetClassSecret</span><span class="w">       </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;secret&quot;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Asset</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="c1">// ID is the unique identifier for the asset.</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;id&quot;`</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="c1">// Name is the human-readable asset name.</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="c1">// Description provides details about the asset.</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;description,omitempty&quot;`</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">    </span><span class="c1">// Classification indicates the sensitivity level.</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="nx">Classification</span><span class="w"> </span><span class="nx">AssetClassification</span><span class="w"> </span><span class="s">`json:&quot;classification&quot;`</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">    </span><span class="c1">// Owner is responsible for the asset.</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">    </span><span class="nx">Owner</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;owner,omitempty&quot;`</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="c1">// ElementIDs links the asset to diagram elements.</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">    </span><span class="nx">ElementIDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;elementIds,omitempty&quot;`</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">    </span><span class="c1">// DataTypes describes what kind of data this asset contains.</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">    </span><span class="nx">DataTypes</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;dataTypes,omitempty&quot;`</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>ThreatModel Addition:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ThreatModel</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="c1">// ... existing fields</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="c1">// Assets lists the assets being protected.</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nx">Assets</span><span class="w"> </span><span class="p">[]</span><span class="nx">Asset</span><span class="w"> </span><span class="s">`json:&quot;assets,omitempty&quot;`</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="5-scenario-modeling">5. Scenario Modeling<a class="headerlink" href="#5-scenario-modeling" title="Permanent link">&para;</a></h3>
 <p><strong>Priority:</strong> Medium</p>
-<p>Document adversary capabilities and motivations for risk-based prioritization.</p>
-<p><strong>New Type:</strong></p>
-<ul>
-<li><code>ThreatActor</code> - Type, sophistication, motivation, resources, TTPs</li>
-</ul>
-<h3 id="7-detectionresponse-capabilities">7. Detection/Response Capabilities<a class="headerlink" href="#7-detectionresponse-capabilities" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> Medium</p>
-<p>Document how threats would be detected and responded to.</p>
-<p><strong>New Type:</strong></p>
-<ul>
-<li><code>Detection</code> - Method, data source, coverage level, response playbook reference</li>
-</ul>
-<h3 id="8-assumptions-and-prerequisites">8. Assumptions and Prerequisites<a class="headerlink" href="#8-assumptions-and-prerequisites" title="Permanent link">&para;</a></h3>
+<p>Add explicit support for "what-if" scenario analysis.</p>
+<p><strong>New Types:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// ir/scenarios.go</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Scenario</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="c1">// ID is the unique identifier for the scenario.</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;id&quot;`</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="c1">// Title is a brief description of the scenario.</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="nx">Title</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot;`</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="c1">// Description provides the full scenario narrative.</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;description,omitempty&quot;`</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="c1">// Preconditions that must be true for this scenario.</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="nx">Preconditions</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;preconditions,omitempty&quot;`</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="c1">// ThreatActorID links to the threat actor profile.</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="nx">ThreatActorID</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;threatActorId,omitempty&quot;`</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="c1">// AttackPath describes the sequence of attack steps.</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="nx">AttackPath</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;attackPath,omitempty&quot;`</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">    </span><span class="c1">// TargetAssetIDs lists the assets targeted in this scenario.</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">    </span><span class="nx">TargetAssetIDs</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;targetAssetIds,omitempty&quot;`</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">    </span><span class="c1">// Risk assessment for this scenario.</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">    </span><span class="nx">Risk</span><span class="w"> </span><span class="o">*</span><span class="nx">RiskAssessment</span><span class="w"> </span><span class="s">`json:&quot;risk,omitempty&quot;`</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">    </span><span class="c1">// Outcome describes what happens if the attack succeeds.</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">    </span><span class="nx">Outcome</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;outcome,omitempty&quot;`</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="p">}</span>
+</code></pre></div>
+<p><strong>DiagramView Addition:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">DiagramView</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="c1">// ... existing fields</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="c1">// Scenarios contains what-if attack scenarios for this diagram.</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nx">Scenarios</span><span class="w"> </span><span class="p">[]</span><span class="nx">Scenario</span><span class="w"> </span><span class="s">`json:&quot;scenarios,omitempty&quot;`</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="6-network-topology-enhancements">6. Network Topology Enhancements<a class="headerlink" href="#6-network-topology-enhancements" title="Permanent link">&para;</a></h3>
 <p><strong>Priority:</strong> Low</p>
-<p>Document trust assumptions that underlie the threat model.</p>
-<p><strong>New Type:</strong></p>
+<p>Enhance DFD elements with optional network-specific fields for topology mapping.</p>
+<p><strong>Element Enhancements:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Element</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="c1">// ... existing fields</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="c1">// Network contains optional network topology details.</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nx">Network</span><span class="w"> </span><span class="o">*</span><span class="nx">NetworkInfo</span><span class="w"> </span><span class="s">`json:&quot;network,omitempty&quot;`</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="kd">type</span><span class="w"> </span><span class="nx">NetworkInfo</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="c1">// Hostname or IP address</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="nx">Host</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;host,omitempty&quot;`</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="c1">// Ports exposed by this element</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">    </span><span class="nx">Ports</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="s">`json:&quot;ports,omitempty&quot;`</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">    </span><span class="c1">// Protocols used (HTTP, HTTPS, gRPC, etc.)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">    </span><span class="nx">Protocols</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;protocols,omitempty&quot;`</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="c1">// Zone indicates the network zone (dmz, internal, cloud, etc.)</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">    </span><span class="nx">Zone</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;zone,omitempty&quot;`</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="7-documentation-design-time-threat-modeling-guide">7. Documentation: Design-Time Threat Modeling Guide<a class="headerlink" href="#7-documentation-design-time-threat-modeling-guide" title="Permanent link">&para;</a></h3>
+<p><strong>Priority:</strong> High</p>
+<p>Create comprehensive documentation for using threat-model-spec during design phase.</p>
+<p><strong>New Documentation:</strong></p>
 <ul>
-<li><code>Assumption</code> - Description, impact if violated, validation status</li>
+<li><code>docs/guides/design-time-threat-modeling.md</code> — Complete guide</li>
+<li><code>docs/guides/risk-assessment.md</code> — Risk scoring methodology</li>
+<li>Update <code>docs/concepts/diagram-types.md</code> — Add design-time examples</li>
+<li>Update <code>docs/index.md</code> — Mention design-time use case</li>
 </ul>
-<h3 id="9-cve-references">9. CVE References<a class="headerlink" href="#9-cve-references" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> Low</p>
-<p>Link threat models to specific known vulnerabilities.</p>
-<p><strong>New Mapping:</strong></p>
-<ul>
-<li><code>CVEMapping</code> - CVE ID, description, affected components, URL</li>
-</ul>
-<h3 id="10-attack-trees-diagram-type">10. Attack Trees Diagram Type<a class="headerlink" href="#10-attack-trees-diagram-type" title="Permanent link">&para;</a></h3>
-<p><strong>Priority:</strong> Low</p>
-<p>Add hierarchical threat decomposition visualization.</p>
-<p><strong>New Diagram Type:</strong></p>
-<ul>
-<li><code>attack-tree</code> - Root goal, sub-goals, AND/OR nodes, leaf attacks</li>
-</ul>
+<p><strong>Guide Contents:</strong></p>
+<ol>
+<li>When to use design-time threat modeling</li>
+<li>Creating a DFD from architecture diagrams</li>
+<li>Applying STRIDE/LINDDUN systematically</li>
+<li>Using attack trees for what-if analysis</li>
+<li>Risk assessment and prioritization</li>
+<li>Integrating with SDLC (CI/CD gates, PR reviews)</li>
+<li>Example: Threat modeling a new authentication feature</li>
+</ol>
 <h2 id="architecture-decisions">Architecture Decisions<a class="headerlink" href="#architecture-decisions" title="Permanent link">&para;</a></h2>
-<h3 id="non-breaking-changes">Non-Breaking Changes<a class="headerlink" href="#non-breaking-changes" title="Permanent link">&para;</a></h3>
+<h3 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
 <p>All additions will be backward-compatible:</p>
 <ul>
 <li>New fields use <code>omitempty</code> tags</li>
 <li>Existing JSON files remain valid</li>
-<li>New types are additive to existing structures</li>
+<li>New status values extend existing enums</li>
 </ul>
 <h3 id="file-organization">File Organization<a class="headerlink" href="#file-organization" title="Permanent link">&para;</a></h3>
 <p>New types will be organized as:</p>
 <ul>
-<li><code>ir/mitigations.go</code> - Mitigation and threat status types</li>
-<li><code>ir/controls.go</code> - Control framework mappings (NIST CSF, CIS, ISO 27001)</li>
-<li><code>ir/compliance.go</code> - Compliance framework mappings</li>
-<li><code>ir/linddun.go</code> - LINDDUN privacy framework</li>
-<li><code>ir/threat_actor.go</code> - Threat actor profiles</li>
-<li><code>ir/detection.go</code> - Detection and response types</li>
-<li><code>ir/assumptions.go</code> - Assumptions and prerequisites</li>
+<li><code>ir/risk.go</code> — Risk assessment types</li>
+<li><code>ir/assets.go</code> — Asset classification types</li>
+<li><code>ir/scenarios.go</code> — Scenario modeling types</li>
+<li><code>ir/network.go</code> — Network topology types (or extend <code>ir/types.go</code>)</li>
 </ul>
-<h3 id="schema-regeneration">Schema Regeneration<a class="headerlink" href="#schema-regeneration" title="Permanent link">&para;</a></h3>
-<p>After adding new types:</p>
-<ol>
-<li>Run <code>go generate ./...</code> to regenerate JSON schemas</li>
-<li>Update embedded schemas in <code>schema/</code> directory</li>
-<li>Validate with <code>schemago lint</code></li>
-</ol>
+<h3 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h3>
+<p>Add validation for:</p>
+<ul>
+<li>Risk scores in valid range (1-5 for likelihood/impact)</li>
+<li>Calculated risk level matches score</li>
+<li>Asset references exist in elements</li>
+<li>Scenario attack paths reference valid elements</li>
+</ul>
 <h2 id="implementation-order">Implementation Order<a class="headerlink" href="#implementation-order" title="Permanent link">&para;</a></h2>
+<h3 id="phase-1-high-priority">Phase 1 (High Priority)<a class="headerlink" href="#phase-1-high-priority" title="Permanent link">&para;</a></h3>
 <ol>
-<li><strong>Phase 1 (High Priority)</strong></li>
-<li>Mitigations and MitigationStatus</li>
-<li>Threat status tracking</li>
-<li>
-<p>Control framework mappings (NIST CSF, CIS)</p>
-</li>
-<li>
-<p><strong>Phase 2 (Medium Priority)</strong></p>
-</li>
-<li>Compliance framework references</li>
-<li>LINDDUN privacy framework</li>
-<li>Threat actors</li>
-<li>
-<p>Detection capabilities</p>
-</li>
-<li>
-<p><strong>Phase 3 (Low Priority)</strong></p>
-</li>
-<li>Assumptions</li>
-<li>CVE references</li>
-<li>Attack trees diagram type</li>
+<li>Threat status: Add <code>potential</code> and <code>theoretical</code></li>
+<li>Model phase field</li>
+<li>Risk assessment types and ThreatEntry integration</li>
+<li>Design-time threat modeling guide</li>
+</ol>
+<h3 id="phase-2-medium-priority">Phase 2 (Medium Priority)<a class="headerlink" href="#phase-2-medium-priority" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Asset classification</li>
+<li>Scenario modeling</li>
+<li>Risk assessment guide</li>
+</ol>
+<h3 id="phase-3-low-priority">Phase 3 (Low Priority)<a class="headerlink" href="#phase-3-low-priority" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Network topology enhancements</li>
+<li>Advanced validation</li>
+<li>Example threat models for design-time use cases</li>
 </ol>
 <h2 id="testing-strategy">Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Unit tests for all new types</li>
-<li>Validation tests for new fields</li>
+<li>Validation tests for risk score calculations</li>
 <li>Integration tests with D2 rendering</li>
-<li>STIX export tests for new mappings</li>
-<li>Example threat models demonstrating new features</li>
+<li>Example JSON files for design-time threat models</li>
+<li>Documentation examples that can be validated</li>
+</ul>
+<h2 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>User can create a threat model for a feature that doesn't exist yet</li>
+<li>Threats can be marked as "potential" vs "identified"</li>
+<li>Risk scores can be calculated and displayed</li>
+<li>Assets can be classified and linked to threats</li>
+<li>What-if scenarios can be documented</li>
+<li>Clear documentation guides users through design-time threat modeling</li>
+</ol>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://owasp.org/www-community/Threat_Modeling">OWASP Threat Modeling</a></li>
+<li><a href="https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling">Microsoft SDL Threat Modeling</a></li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final">NIST Risk Assessment</a></li>
+<li><a href="https://www.fairinstitute.org/">FAIR Risk Framework</a></li>
 </ul>
 
 
