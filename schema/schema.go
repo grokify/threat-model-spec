@@ -5,6 +5,9 @@ import (
 	_ "embed"
 )
 
+// SchemaVersion is the current schema version.
+const SchemaVersion = "v0.4.0"
+
 // ThreatModelSchema is the JSON Schema for the ThreatModel type (multi-diagram format).
 //
 //go:embed threat-model.schema.json

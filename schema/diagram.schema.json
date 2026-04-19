@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/schema/diagram.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/diagram.schema.json",
   "$ref": "#/$defs/DiagramIR",
   "$defs": {
     "Actor": {
@@ -73,6 +73,86 @@
         "label"
       ]
     },
+    "AttackTree": {
+      "properties": {
+        "rootId": {
+          "type": "string"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/AttackTreeNode"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "rootId",
+        "nodes"
+      ]
+    },
+    "AttackTreeNode": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "nodeType": {
+          "$ref": "#/$defs/AttackTreeNodeType"
+        },
+        "description": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "probability": {
+          "type": "number"
+        },
+        "cost": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string"
+        },
+        "countermeasure": {
+          "type": "string"
+        },
+        "mitigated": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "label",
+        "nodeType"
+      ]
+    },
+    "AttackTreeNodeType": {
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR",
+        "LEAF"
+      ]
+    },
     "Boundary": {
       "properties": {
         "id": {
@@ -107,6 +187,81 @@
         "network",
         "cloud",
         "breached"
+      ]
+    },
+    "CISControlMapping": {
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "controlName": {
+          "type": "string"
+        },
+        "safeguardId": {
+          "type": "string"
+        },
+        "safeguardName": {
+          "type": "string"
+        },
+        "implementationGroup": {
+          "type": "string"
+        },
+        "assetType": {
+          "type": "string"
+        },
+        "securityFunction": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "controlId"
+      ]
+    },
+    "CVEMapping": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedVersions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cvss": {
+          "$ref": "#/$defs/CVSSMapping"
+        },
+        "url": {
+          "type": "string"
+        },
+        "references": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
       ]
     },
     "CVSSMapping": {
@@ -165,6 +320,174 @@
       "type": "object",
       "required": [
         "id"
+      ]
+    },
+    "ComplianceFramework": {
+      "type": "string",
+      "enum": [
+        "soc2",
+        "pci-dss",
+        "hipaa",
+        "gdpr",
+        "ccpa",
+        "fedramp",
+        "nist-sp-800-53",
+        "nist-sp-800-171",
+        "sox",
+        "glba"
+      ]
+    },
+    "ComplianceMapping": {
+      "properties": {
+        "framework": {
+          "$ref": "#/$defs/ComplianceFramework"
+        },
+        "requirementId": {
+          "type": "string"
+        },
+        "requirementName": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "framework",
+        "requirementId"
+      ]
+    },
+    "Controls": {
+      "properties": {
+        "nistCsf": {
+          "items": {
+            "$ref": "#/$defs/NISTCSFMapping"
+          },
+          "type": "array"
+        },
+        "cis": {
+          "items": {
+            "$ref": "#/$defs/CISControlMapping"
+          },
+          "type": "array"
+        },
+        "iso27001": {
+          "items": {
+            "$ref": "#/$defs/ISO27001Mapping"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "DataSourceType": {
+      "type": "string",
+      "enum": [
+        "logs",
+        "siem",
+        "edr",
+        "ndr",
+        "ids",
+        "waf",
+        "cloudtrail",
+        "api-gateway",
+        "network-capture",
+        "user-behavior",
+        "audit-log"
+      ]
+    },
+    "Detection": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackSteps": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "mitreTechniques": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "method": {
+          "type": "string"
+        },
+        "dataSources": {
+          "items": {
+            "$ref": "#/$defs/DataSourceType"
+          },
+          "type": "array"
+        },
+        "coverage": {
+          "$ref": "#/$defs/DetectionCoverage"
+        },
+        "latencySeconds": {
+          "type": "integer"
+        },
+        "falsePositiveRate": {
+          "type": "string"
+        },
+        "detectionLogic": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "playbookId": {
+          "type": "string"
+        },
+        "alertSeverity": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "coverage"
+      ]
+    },
+    "DetectionCoverage": {
+      "type": "string",
+      "enum": [
+        "none",
+        "partial",
+        "full"
       ]
     },
     "DiagramIR": {
@@ -234,6 +557,33 @@
             "$ref": "#/$defs/Message"
           },
           "type": "array"
+        },
+        "attackTree": {
+          "$ref": "#/$defs/AttackTree"
+        },
+        "threats": {
+          "items": {
+            "$ref": "#/$defs/ThreatEntry"
+          },
+          "type": "array"
+        },
+        "mitigations": {
+          "items": {
+            "$ref": "#/$defs/Mitigation"
+          },
+          "type": "array"
+        },
+        "detections": {
+          "items": {
+            "$ref": "#/$defs/Detection"
+          },
+          "type": "array"
+        },
+        "responseActions": {
+          "items": {
+            "$ref": "#/$defs/ResponseAction"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -248,7 +598,8 @@
       "enum": [
         "dfd",
         "attack-chain",
-        "sequence"
+        "sequence",
+        "attack-tree"
       ]
     },
     "Direction": {
@@ -340,12 +691,93 @@
         "exfil"
       ]
     },
+    "ISO27001Mapping": {
+      "properties": {
+        "controlId": {
+          "type": "string"
+        },
+        "controlName": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "controlId"
+      ]
+    },
+    "LINDDUNMapping": {
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/LINDDUNThreat"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "affectedDataTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedComponents": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dataSubjects": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "privacyPrinciple": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "category"
+      ]
+    },
+    "LINDDUNThreat": {
+      "type": "string",
+      "enum": [
+        "L",
+        "I",
+        "N",
+        "D",
+        "Di",
+        "U",
+        "Nc"
+      ]
+    },
     "Legend": {
       "properties": {
         "show": {
           "type": "boolean"
         },
         "showStride": {
+          "type": "boolean"
+        },
+        "showLinddun": {
           "type": "boolean"
         },
         "showMitre": {
@@ -358,6 +790,9 @@
           "type": "boolean"
         },
         "showBoundaries": {
+          "type": "boolean"
+        },
+        "showMitigations": {
           "type": "boolean"
         }
       },
@@ -469,12 +904,33 @@
           },
           "type": "array"
         },
+        "cve": {
+          "items": {
+            "$ref": "#/$defs/CVEMapping"
+          },
+          "type": "array"
+        },
         "cvss": {
           "$ref": "#/$defs/CVSSMapping"
         },
         "stride": {
           "items": {
             "$ref": "#/$defs/STRIDEMapping"
+          },
+          "type": "array"
+        },
+        "linddun": {
+          "items": {
+            "$ref": "#/$defs/LINDDUNMapping"
+          },
+          "type": "array"
+        },
+        "controls": {
+          "$ref": "#/$defs/Controls"
+        },
+        "compliance": {
+          "items": {
+            "$ref": "#/$defs/ComplianceMapping"
           },
           "type": "array"
         }
@@ -513,6 +969,108 @@
         "from",
         "to",
         "label"
+      ]
+    },
+    "Mitigation": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "strideCategories": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "controlId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/MitigationStatus"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "verifiedDate": {
+          "type": "string"
+        },
+        "effectiveness": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status"
+      ]
+    },
+    "MitigationStatus": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "implemented",
+        "partial",
+        "accepted",
+        "transferred",
+        "not-applicable"
+      ]
+    },
+    "NISTCSFFunction": {
+      "type": "string",
+      "enum": [
+        "Identify",
+        "Protect",
+        "Detect",
+        "Respond",
+        "Recover"
+      ]
+    },
+    "NISTCSFMapping": {
+      "properties": {
+        "function": {
+          "$ref": "#/$defs/NISTCSFFunction"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryName": {
+          "type": "string"
+        },
+        "subcategory": {
+          "type": "string"
+        },
+        "subcategoryName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "function",
+        "category"
       ]
     },
     "OWASPCategory": {
@@ -574,6 +1132,49 @@
         "endMessage"
       ]
     },
+    "ResponseAction": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "triggerDetectionIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "actionType": {
+          "type": "string"
+        },
+        "automated": {
+          "type": "boolean"
+        },
+        "playbookUrl": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "escalationPath": {
+          "type": "string"
+        },
+        "slaMinutes": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
     "STRIDEMapping": {
       "properties": {
         "category": {
@@ -632,6 +1233,61 @@
       "required": [
         "elementId",
         "classification"
+      ]
+    },
+    "ThreatEntry": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "strideCategory": {
+          "$ref": "#/$defs/STRIDEThreat"
+        },
+        "affectedElements": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/ThreatStatus"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status"
+      ]
+    },
+    "ThreatStatus": {
+      "type": "string",
+      "enum": [
+        "identified",
+        "analyzing",
+        "mitigated",
+        "accepted",
+        "transferred",
+        "monitoring"
       ]
     }
   }
