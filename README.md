@@ -71,6 +71,10 @@ Threat Model Spec is an open-source library for creating security threat modelin
 
 ## Features
 
+- **Design-Time Threat Modeling** — Proactive security analysis during SDLC with STRIDE/LINDDUN
+- **Risk Assessment** — Structured likelihood × impact scoring with categorical risk levels
+- **Asset Inventory** — Sensitivity classification and compliance mapping
+- **Scenario Modeling** — What-if attack scenarios with preconditions and attack paths
 - **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
 - **Multiple Diagram Types** — DFD, Attack Chain, Sequence, Attack Tree diagrams
 - **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS, CVE
@@ -78,6 +82,7 @@ Threat Model Spec is an open-source library for creating security threat modelin
 - **Compliance Frameworks** — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP, and more
 - **Mitigations** — Track countermeasures with status (implemented, planned, accepted)
 - **Threat Actors** — Document adversary profiles with sophistication and motivation
+- **Network Topology** — Map elements to hosts, ports, protocols, and cloud infrastructure
 - **Detection & Response** — Define detection capabilities and response actions
 - **STIX 2.1 Export** — Share threat intelligence in standard format
 - **D2 Styles** — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows
@@ -319,13 +324,14 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 
 | Version | Schema | Specification |
 |---------|--------|---------------|
+| v0.5.0 | [threat-model.schema.json](docs/versions/v0.5.0/threat-model.schema.json) | [specification.md](docs/versions/v0.5.0/specification.md) |
 | v0.4.0 | [threat-model.schema.json](docs/versions/v0.4.0/threat-model.schema.json) | [specification.md](docs/versions/v0.4.0/specification.md) |
 
 ### Schema URLs
 
 ```
-https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/threat-model.schema.json
-https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/diagram.schema.json
+https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json
+https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/diagram.schema.json
 ```
 
 ### Using the Schema
@@ -334,7 +340,7 @@ Reference the schema in your threat model JSON:
 
 ```json
 {
-  "$schema": "https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/threat-model.schema.json",
+  "$schema": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json",
   "id": "my-threat-model",
   "title": "My Application Threat Model",
   "diagrams": [...]
