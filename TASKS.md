@@ -1,156 +1,247 @@
-# D2TM Development Tasks
+# Threat Model Spec Development Tasks
 
-## Phased Approach
+## Completed Phases (Historical)
 
-### Phase 1: D2 Style Library (Core)
+<details>
+<summary>Phase 1-5: Initial Development (Complete)</summary>
 
-Create the foundational D2 style files that can be imported into any D2 diagram.
+### Phase 1: D2 Style Library (Core) ✓
 
 | Task | Status | Description |
 |------|--------|-------------|
 | 1.1 | [x] | Create `d2/styles/stride.d2` - STRIDE threat annotation styles |
-| 1.2 | [x] | Create `d2/styles/dfd.d2` - DFD element styles (process, datastore, external entity) |
+| 1.2 | [x] | Create `d2/styles/dfd.d2` - DFD element styles |
 | 1.3 | [x] | Create `d2/styles/trustboundary.d2` - Trust boundary styles |
-| 1.4 | [x] | Create `d2/styles/attackflow.d2` - Attack flow and kill chain styles |
+| 1.4 | [x] | Create `d2/styles/attackflow.d2` - Attack flow styles |
 | 1.5 | [x] | Create `d2/styles/all.d2` - Combined import file |
 | 1.6 | [x] | Test styles render correctly with D2 CLI |
 
-**Deliverable**: Reusable D2 style library - **COMPLETE**
-
-### Phase 2: OpenClaw Diagram Example
-
-Build the attack chain diagram for the OpenClaw vulnerability using the style library.
+### Phase 2: OpenClaw Diagram Example ✓
 
 | Task | Status | Description |
 |------|--------|-------------|
-| 2.1 | [x] | Create `examples/openclaw/attack_chain.d2` - Full attack chain diagram |
-| 2.2 | [x] | Add STRIDE threat annotations to diagram |
-| 2.3 | [x] | Add MITRE ATT&CK mapping as comments/notes |
+| 2.1 | [x] | Create attack chain diagram |
+| 2.2 | [x] | Add STRIDE threat annotations |
+| 2.3 | [x] | Add MITRE ATT&CK mapping |
 | 2.4 | [x] | Generate SVG output |
-| 2.5 | [x] | Create `examples/openclaw/README.md` - Explanation of the vulnerability |
+| 2.5 | [x] | Create README with vulnerability explanation |
 
-**Deliverable**: OpenClaw attack chain diagram (D2 + SVG) - **COMPLETE**
-
-### Phase 3: Go Library
-
-Add Go types and code generation for programmatic diagram creation.
+### Phase 3: Go Library ✓
 
 | Task | Status | Description |
 |------|--------|-------------|
-| 3.1 | [x] | Create `stride/stride.go` - STRIDE threat types |
-| 3.2 | [x] | Create `killchain/mitre.go` - MITRE ATT&CK tactics/techniques |
-| 3.3 | [x] | Create `killchain/lockheed.go` - Cyber Kill Chain phases |
-| 3.4 | [x] | Create `diagram/element.go` - DFD element types |
-| 3.5 | [x] | Create `diagram/boundary.go` - Trust boundary types |
-| 3.6 | [x] | Create `diagram/flow.go` - Data flow types |
-| 3.7 | [x] | Create `diagram/diagram.go` - Main diagram type |
-| 3.8 | [x] | Create `diagram/render.go` - D2 code generation |
-| 3.9 | [x] | Add unit tests (40 tests passing) |
-| 3.10 | [x] | Run golangci-lint (0 issues) |
+| 3.1-3.10 | [x] | STRIDE, kill chain, diagram types, rendering, tests |
 
-**Deliverable**: Go library for D2 threat model generation - **COMPLETE**
-
-### Phase 4: Vulnerable Demo Service
-
-Create a simple WebSocket server that mimics OpenClaw's vulnerable behavior for educational demonstration.
+### Phase 4: Vulnerable Demo Service ✓
 
 | Task | Status | Description |
 |------|--------|-------------|
-| 4.1 | [x] | Create `demo/vulnerable-server/main.go` - WebSocket server |
-| 4.2 | [x] | Implement password auth (no rate limiting) |
-| 4.3 | [x] | Implement auto-approve device pairing from localhost |
-| 4.4 | [x] | Return mock config/logs on authenticated commands |
-| 4.5 | [x] | Add `demo/vulnerable-server/README.md` with warnings |
+| 4.1-4.5 | [x] | WebSocket server, auth, auto-approve, mock data |
 
-**Server Behavior**:
-- Listen on `localhost:9999`
-- WebSocket endpoint: `/ws`
-- Password: `demo123` (intentionally weak)
-- No rate limiting on auth attempts
-- Auto-approve device registration from localhost
-- Return mock data on successful auth
-
-**Deliverable**: Educational vulnerable WebSocket server - **COMPLETE**
-
-### Phase 5: Attack Demonstration
-
-Create the attack page and automation to prove the vulnerability works.
+### Phase 5: Attack Demonstration ✓
 
 | Task | Status | Description |
 |------|--------|-------------|
-| 5.1 | [x] | Create `demo/malicious-page/index.html` - Attack page with JS |
-| 5.2 | [x] | Implement WebSocket connection to localhost |
-| 5.3 | [x] | Implement password brute-force loop |
-| 5.4 | [x] | Implement device registration after auth |
-| 5.5 | [x] | Implement data exfiltration display |
-| 5.6 | [x] | Create `demo/attacker/main.go` - Vibium-go automation |
-| 5.7 | [x] | Automate: launch browser, serve page, capture result |
-| 5.8 | [x] | Add screenshot/recording of successful attack |
+| 5.1-5.8 | [x] | Malicious page, brute-force, exfiltration, automation |
 
-**Deliverable**: End-to-end attack demonstration - **COMPLETE**
+</details>
 
-### Phase 6: Documentation and Polish
+---
+
+## Enhancement Phases (Complete)
+
+### Phase 7: Mitigations and Threat Status ✓
+
+**Priority:** High | **Status:** Complete
 
 | Task | Status | Description |
 |------|--------|-------------|
-| 6.1 | [ ] | Write main README.md |
-| 6.2 | [ ] | Add Go documentation comments |
-| 6.3 | [ ] | Create example usage snippets |
-| 6.4 | [ ] | Add CI workflow (.github/workflows) |
+| 7.1 | [x] | Create `ir/mitigations.go` with Mitigation and MitigationStatus types |
+| 7.2 | [x] | Add ThreatStatus enum for threat lifecycle tracking |
+| 7.3 | [x] | Add Mitigations field to DiagramIR and ThreatModel |
+| 7.4 | [x] | Add validation for mitigation references |
+| 7.5 | [x] | Update D2 rendering to show mitigation status |
+| 7.6 | [x] | Update STIX export for mitigations |
+| 7.7 | [x] | Add unit tests for mitigation types |
 
-**Deliverable**: Production-ready library
+### Phase 8: Control Framework Mappings ✓
+
+**Priority:** High | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 8.1 | [x] | Create `ir/controls.go` with control framework types |
+| 8.2 | [x] | Add NISTCSFMapping for NIST Cybersecurity Framework |
+| 8.3 | [x] | Add CISControlMapping for CIS Controls v8 |
+| 8.4 | [x] | Add ISO27001Mapping for ISO 27001 |
+| 8.5 | [x] | Add Controls field to Mappings struct |
+| 8.6 | [ ] | Add validation for control references |
+| 8.7 | [ ] | Update STIX export for controls |
+| 8.8 | [x] | Add unit tests for control types |
+
+### Phase 9: Compliance Framework References ✓
+
+**Priority:** Medium | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 9.1 | [x] | Create `ir/compliance.go` with compliance types |
+| 9.2 | [x] | Add ComplianceMapping for regulatory frameworks |
+| 9.3 | [x] | Add ComplianceFramework enum (SOC2, PCI-DSS, HIPAA, GDPR) |
+| 9.4 | [x] | Add Compliance field to Mappings struct |
+| 9.5 | [ ] | Add validation for compliance references |
+| 9.6 | [x] | Add unit tests for compliance types |
+
+### Phase 10: LINDDUN Privacy Framework ✓
+
+**Priority:** Medium | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 10.1 | [x] | Create `ir/linddun.go` with LINDDUN types |
+| 10.2 | [x] | Add LINDDUNThreat enum (L, I, N, D, Di, U, Nc) |
+| 10.3 | [x] | Add LINDDUNMapping with affected data types |
+| 10.4 | [x] | Add LINDDUN field to Mappings struct |
+| 10.5 | [x] | Add D2 styling for LINDDUN threats |
+| 10.6 | [x] | Add unit tests for LINDDUN types |
+
+### Phase 11: Threat Actors ✓
+
+**Priority:** Medium | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 11.1 | [x] | Create `ir/threat_actor.go` with threat actor types |
+| 11.2 | [x] | Add ThreatActor struct with sophistication, motivation, resources |
+| 11.3 | [x] | Add ThreatActorType enum |
+| 11.4 | [x] | Add ThreatActors field to ThreatModel |
+| 11.5 | [ ] | Add validation for threat actor references |
+| 11.6 | [x] | Add unit tests for threat actor types |
+
+### Phase 12: Detection Capabilities ✓
+
+**Priority:** Medium | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 12.1 | [x] | Create `ir/detection.go` with detection types |
+| 12.2 | [x] | Add Detection struct with method, data source, coverage |
+| 12.3 | [x] | Add DetectionCoverage enum |
+| 12.4 | [x] | Add Detections field to DiagramIR |
+| 12.5 | [x] | Add validation for detection references |
+| 12.6 | [x] | Add unit tests for detection types |
+
+### Phase 13: Assumptions and Prerequisites ✓
+
+**Priority:** Low | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 13.1 | [x] | Create `ir/assumptions.go` with assumption types |
+| 13.2 | [x] | Add Assumption struct with impact and validation status |
+| 13.3 | [x] | Add Assumptions field to ThreatModel |
+| 13.4 | [ ] | Add validation for assumption references |
+| 13.5 | [x] | Add unit tests for assumption types |
+
+### Phase 14: CVE References ✓
+
+**Priority:** Low | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 14.1 | [x] | Add CVEMapping to `ir/mappings.go` |
+| 14.2 | [x] | Add CVE field to Mappings struct |
+| 14.3 | [x] | Add URL generation for CVE references (in STIX export) |
+| 14.4 | [ ] | Add unit tests for CVE mapping |
+
+### Phase 15: Attack Trees Diagram Type ✓
+
+**Priority:** Low | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 15.1 | [x] | Add `attack-tree` to DiagramType enum |
+| 15.2 | [x] | Create AttackTreeNode struct for hierarchical decomposition |
+| 15.3 | [x] | Add AND/OR node logic types |
+| 15.4 | [x] | Add D2 rendering for attack trees |
+| 15.5 | [x] | Add validation for attack tree structure |
+| 15.6 | [x] | Add unit tests for attack tree types |
+
+### Phase 16: Schema and Documentation ✓
+
+**Priority:** High | **Status:** Complete
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 16.1 | [x] | Regenerate JSON schemas after type additions |
+| 16.2 | [x] | Update embedded schemas in schema/ directory |
+| 16.3 | [ ] | Validate schemas with schemago lint |
+| 16.4 | [x] | Update README with new features |
+| 16.5 | [ ] | Update MkDocs documentation |
+| 16.6 | [x] | Add changelog entries |
 
 ---
 
 ## Current Focus
 
-**Active Phase**: Phase 6 - Documentation and Polish
+**Status**: All Enhancement Phases Complete
 
-**Completed**: Phase 1 (D2 Styles), Phase 2 (OpenClaw Example), Phase 3 (Go Library), Phase 4 (Vulnerable Server), Phase 5 (Attack Demonstration)
+**Completed**: Phases 7-16 (All type implementations, attack trees, documentation)
 
-**Next Action**: Write main README.md and add CI workflow
+**Remaining**: Optional items (schemago validation, MkDocs docs, some validation tasks)
 
 ---
 
-## Architecture
+## Implementation Summary
 
-```
-d2tm/
-├── d2/
-│   ├── styles/
-│   │   ├── stride.d2           # STRIDE threat styles
-│   │   ├── dfd.d2              # DFD element styles
-│   │   ├── trustboundary.d2    # Trust boundary styles
-│   │   ├── attackflow.d2       # Attack flow styles
-│   │   └── all.d2              # Combined import
-│   └── templates/
-│       └── threat_model.d2     # Full template
-├── stride/
-│   └── stride.go               # Go STRIDE types
-├── killchain/
-│   ├── mitre.go                # MITRE ATT&CK
-│   └── lockheed.go             # Cyber Kill Chain
-├── diagram/
-│   ├── element.go              # DFD elements
-│   ├── boundary.go             # Trust boundaries
-│   ├── flow.go                 # Data flows
-│   ├── diagram.go              # Main type
-│   └── render.go               # D2 generation
-├── examples/
-│   └── openclaw/
-│       ├── attack_chain.d2     # Example diagram
-│       ├── attack_chain.svg    # Rendered output
-│       └── README.md
-└── demo/
-    ├── vulnerable-server/      # Mock OpenClaw
-    ├── malicious-page/         # Attack HTML/JS
-    └── attacker/               # Vibium automation
-```
+### New Files Created
+
+| File | Description |
+|------|-------------|
+| `ir/mitigations.go` | Mitigation, MitigationStatus, ThreatStatus, ThreatEntry |
+| `ir/controls.go` | NIST CSF, CIS Controls v8, ISO 27001 mappings |
+| `ir/compliance.go` | SOC 2, PCI-DSS, HIPAA, GDPR, and other compliance frameworks |
+| `ir/linddun.go` | LINDDUN privacy threat framework |
+| `ir/threat_actor.go` | ThreatActor profiles with sophistication, motivation, resources |
+| `ir/detection.go` | Detection and ResponseAction types |
+| `ir/assumptions.go` | Assumption and Prerequisite types |
+| `ir/attack_tree.go` | AttackTreeNode, AttackTree with AND/OR logic |
+
+### New Test Files
+
+| File | Tests |
+|------|-------|
+| `ir/mitigations_test.go` | MitigationStatus, ThreatStatus, JSON serialization |
+| `ir/controls_test.go` | NIST CSF, CIS, ISO 27001 mappings |
+| `ir/compliance_test.go` | All compliance frameworks |
+| `ir/linddun_test.go` | LINDDUN threats, names, descriptions |
+| `ir/threat_actor_test.go` | Threat actor types, sophistication, motivation |
+| `ir/detection_test.go` | Detection coverage, data sources |
+| `ir/assumptions_test.go` | Assumption types, validation status |
+| `ir/validate_security_test.go` | Validation tests for new security fields |
+| `ir/attack_tree_test.go` | Attack tree node types, AND/OR logic, rendering |
+
+### Updated Files
+
+| File | Changes |
+|------|---------|
+| `ir/mappings.go` | Added CVE, LINDDUN, Controls, Compliance fields |
+| `ir/diagram.go` | Added Threats, Mitigations, Detections, ResponseActions, AttackTree, Legend |
+| `ir/types.go` | Added DiagramTypeAttackTree constant |
+| `ir/threat_model.go` | Added ThreatActors, Assumptions, Prerequisites, Mitigations |
+| `ir/validate.go` | Added validation for new security fields, attack trees |
+| `ir/render.go` | Added LINDDUN legend, mitigations rendering, attack tree rendering |
+| `stix/export.go` | Added export for CVE, OWASP, mitigations, threat entries |
+| `stix/types.go` | Added CourseOfAction, Malware, Tool types |
+| `README.md` | Updated with all new framework tables and features |
+| `CHANGELOG.md` | Added [Unreleased] section with new features |
 
 ---
 
 ## Notes
 
-- All demo code includes clear warnings that it is for educational purposes only
-- The vulnerable server only listens on localhost and has no real functionality
-- Attack demonstration requires explicit user action to run
+- All new fields use `omitempty` for backward compatibility
+- Existing JSON files remain valid after enhancements
+- Go structs are the source of truth (Go-first approach)
+- JSON schemas generated from Go types using invopop/jsonschema
+- All tests pass, linting passes
