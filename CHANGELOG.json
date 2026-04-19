@@ -7,6 +7,42 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.5.0",
+      "date": "2026-04-19",
+      "highlights": [
+        {"description": "Design-time threat modeling for proactive security analysis during SDLC"},
+        {"description": "Structured risk assessment with likelihood × impact scoring"},
+        {"description": "Asset inventory with sensitivity classification and compliance mapping"},
+        {"description": "What-if scenario modeling for attack path analysis"},
+        {"description": "Network topology mapping for infrastructure diagrams"}
+      ],
+      "added": [
+        {"description": "`RiskAssessment` type with likelihood × impact scoring (1-5 scales)", "commit": "cf1bb0d"},
+        {"description": "`RiskLevel` categorical risk levels (critical/high/medium/low/info)", "commit": "cf1bb0d"},
+        {"description": "`ModelPhase` for SDLC phase tracking (design/development/review/production/incident)", "commit": "cf1bb0d"},
+        {"description": "`Asset` type with sensitivity classification and compliance mapping", "commit": "cf1bb0d"},
+        {"description": "`SensitivityLevel` for data classification (public/internal/confidential/restricted/secret)", "commit": "cf1bb0d"},
+        {"description": "`Scenario` type for what-if attack scenario modeling", "commit": "cf1bb0d"},
+        {"description": "`ScenarioType` categorization (external-attack/insider-threat/supply-chain/etc.)", "commit": "cf1bb0d"},
+        {"description": "`NetworkInfo` and `CloudInfo` for network topology mapping", "commit": "aa4390a"},
+        {"description": "`ThreatStatusPotential` for hypothetical threats from design review", "commit": "48dcc7c"},
+        {"description": "`ThreatStatusTheoretical` for threats derived from STRIDE/LINDDUN", "commit": "48dcc7c"},
+        {"description": "Design-time threat modeling guide with SDLC integration", "commit": "c10ab34"},
+        {"description": "Risk assessment guide with likelihood/impact scales", "commit": "c10ab34"}
+      ],
+      "changed": [
+        {"description": "`ThreatModel` extended with Phase, Assets, and Scenarios fields", "commit": "48dcc7c"},
+        {"description": "`ThreatEntry` extended with Risk, LINDDUNCategory, AffectedAssets, AttackVector, Preconditions", "commit": "48dcc7c"},
+        {"description": "`Element` extended with Network and AssetIDs fields", "commit": "aa4390a"},
+        {"description": "JSON schemas regenerated for v0.5.0", "commit": "5a09bac"}
+      ],
+      "documentation": [
+        {"description": "Design-time threat modeling guide (`guides/design-time-threat-modeling.md`)", "commit": "c10ab34"},
+        {"description": "Risk assessment guide (`guides/risk-assessment.md`)", "commit": "c10ab34"},
+        {"description": "MkDocs Guides section added to navigation", "commit": "c10ab34"}
+      ]
+    },
+    {
       "version": "v0.4.0",
       "date": "2026-04-19",
       "highlights": [
