@@ -33,14 +33,22 @@ func (MitigationStatus) JSONSchema() *jsonschema.Schema {
 	}
 }
 
-// ThreatStatus represents the lifecycle state of an identified threat.
+// ThreatStatus represents the lifecycle state of a threat.
 type ThreatStatus string
 
 const (
-	// ThreatStatusIdentified indicates the threat has been identified.
+	// ThreatStatusPotential indicates a hypothetical threat identified during design review.
+	// Use this for design-time threat modeling before implementation.
+	ThreatStatusPotential ThreatStatus = "potential"
+
+	// ThreatStatusTheoretical indicates a threat based on threat modeling methodology.
+	// Use this for threats derived from STRIDE/LINDDUN analysis.
+	ThreatStatusTheoretical ThreatStatus = "theoretical"
+
+	// ThreatStatusIdentified indicates the threat has been confirmed through testing or incident.
 	ThreatStatusIdentified ThreatStatus = "identified"
 
-	// ThreatStatusAnalyzing indicates the threat is under analysis.
+	// ThreatStatusAnalyzing indicates the threat is under investigation.
 	ThreatStatusAnalyzing ThreatStatus = "analyzing"
 
 	// ThreatStatusMitigated indicates the threat has been mitigated.
@@ -60,7 +68,7 @@ const (
 func (ThreatStatus) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"identified", "analyzing", "mitigated", "accepted", "transferred", "monitoring"},
+		Enum: []any{"potential", "theoretical", "identified", "analyzing", "mitigated", "accepted", "transferred", "monitoring"},
 	}
 }
 
@@ -102,8 +110,8 @@ type Mitigation struct {
 	Notes string `json:"notes,omitempty"`
 }
 
-// ThreatEntry represents an identified threat with status tracking.
-// This can be used to track threats independently of diagram elements.
+// ThreatEntry represents a threat with status tracking.
+// This can be used for both design-time (potential) and identified threats.
 type ThreatEntry struct {
 	// ID is the unique identifier for the threat.
 	ID string `json:"id"`
@@ -117,18 +125,36 @@ type ThreatEntry struct {
 	// STRIDECategory identifies the STRIDE threat category.
 	STRIDECategory STRIDEThreat `json:"strideCategory,omitempty"`
 
+	// LINDDUNCategory identifies the LINDDUN privacy threat category.
+	LINDDUNCategory LINDDUNThreat `json:"linddunCategory,omitempty"`
+
 	// AffectedElements lists the element IDs affected by this threat.
 	AffectedElements []string `json:"affectedElements,omitempty"`
 
+	// AffectedAssets lists the asset IDs affected by this threat.
+	AffectedAssets []string `json:"affectedAssets,omitempty"`
+
 	// Status indicates the current threat lifecycle state.
+	// Use "potential" or "theoretical" for design-time threats.
 	Status ThreatStatus `json:"status"`
 
+	// Risk provides structured risk assessment (likelihood × impact).
+	Risk *RiskAssessment `json:"risk,omitempty"`
+
 	// Severity indicates the threat severity (critical, high, medium, low).
+	// Deprecated: Use Risk.Level instead for structured assessment.
 	Severity string `json:"severity,omitempty"`
 
 	// Likelihood indicates the probability of exploitation (high, medium, low).
+	// Deprecated: Use Risk.Likelihood instead for structured assessment.
 	Likelihood string `json:"likelihood,omitempty"`
 
 	// MitigationIDs lists the IDs of mitigations addressing this threat.
 	MitigationIDs []string `json:"mitigationIds,omitempty"`
+
+	// AttackVector describes how the threat could be exploited.
+	AttackVector string `json:"attackVector,omitempty"`
+
+	// Preconditions lists what must be true for this threat to be exploitable.
+	Preconditions []string `json:"preconditions,omitempty"`
 }

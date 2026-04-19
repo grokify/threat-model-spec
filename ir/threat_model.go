@@ -21,6 +21,11 @@ type ThreatModel struct {
 	// Version tracks the threat model version (e.g., "1.0.0").
 	Version string `json:"version,omitempty"`
 
+	// Phase indicates the SDLC phase of this threat model.
+	// Use "design" for pre-implementation threat modeling,
+	// "production" for live systems, "incident" for post-incident analysis.
+	Phase ModelPhase `json:"phase,omitempty"`
+
 	// Authors lists the people who created or contributed to this threat model.
 	Authors []Author `json:"authors,omitempty"`
 
@@ -50,6 +55,12 @@ type ThreatModel struct {
 	// Mitigations contains countermeasures at the threat model level.
 	// These apply across all diagrams; individual diagrams may have additional mitigations.
 	Mitigations []Mitigation `json:"mitigations,omitempty"`
+
+	// Assets lists the assets being protected in this threat model.
+	Assets []Asset `json:"assets,omitempty"`
+
+	// Scenarios contains what-if attack scenarios for analysis.
+	Scenarios []Scenario `json:"scenarios,omitempty"`
 }
 
 // Author represents a contributor to the threat model.
