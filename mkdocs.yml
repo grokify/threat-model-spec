@@ -91,6 +91,7 @@ nav:
     - Flow Types: specification/flows.md
     - Framework Mappings: specification/mappings.md
   - Versions:
+    - v0.5.0: versions/v0.5.0/specification.md
     - v0.4.0: versions/v0.4.0/specification.md
   - D2 Styles:
     - Overview: styles/index.md
@@ -104,6 +105,7 @@ nav:
     - generate: cli/generate.md
     - validate: cli/validate.md
   - Releases:
+    - v0.5.0: releases/v0.5.0.md
     - v0.4.0: releases/v0.4.0.md
     - v0.3.0: releases/v0.3.0.md
     - v0.2.0: releases/v0.2.0.md

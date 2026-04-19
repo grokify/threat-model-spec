@@ -6,12 +6,17 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 
 ## Features
 
+- **Design-Time Threat Modeling** — Proactive security analysis during SDLC with risk assessment
+- **Risk Assessment** — Structured likelihood × impact scoring with categorical risk levels
+- **Asset Inventory** — Sensitivity classification and compliance mapping
+- **Scenario Modeling** — What-if attack scenarios with preconditions and attack paths
 - **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
 - **Multiple Diagram Types** — DFD, Attack Chain, Sequence, Attack Tree diagrams
 - **Threat Frameworks** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS
 - **Control Frameworks** — NIST CSF, CIS Controls v8, ISO 27001
 - **Compliance Frameworks** — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP
 - **Security Lifecycle** — Mitigations, threat actors, detections, response actions
+- **Network Topology** — Map elements to hosts, ports, protocols, and cloud infrastructure
 - **STIX 2.1 Export** — Share threat intelligence in standard format
 - **D2 Styles** — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows
 - **Validation** — Type-specific field validation with strict mode
