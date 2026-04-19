@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/threat-model.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json",
   "$ref": "#/$defs/ThreatModel",
   "$defs": {
     "Actor": {
@@ -25,6 +25,59 @@
         "label"
       ]
     },
+    "Asset": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AssetType"
+        },
+        "classification": {
+          "$ref": "#/$defs/SensitivityLevel"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "elementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dataTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "complianceFrameworks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "value": {
+          "type": "string"
+        },
+        "retentionPeriod": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "classification"
+      ]
+    },
     "AssetClassification": {
       "type": "string",
       "enum": [
@@ -32,6 +85,17 @@
         "high",
         "medium",
         "low"
+      ]
+    },
+    "AssetType": {
+      "type": "string",
+      "enum": [
+        "data",
+        "service",
+        "infrastructure",
+        "credential",
+        "identity",
+        "intellectual-property"
       ]
     },
     "Assumption": {
@@ -404,6 +468,27 @@
         "id"
       ]
     },
+    "CloudInfo": {
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "vpc": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "ComplianceFramework": {
       "type": "string",
       "enum": [
@@ -717,6 +802,15 @@
         },
         "description": {
           "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/NetworkInfo"
+        },
+        "assetIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -1113,6 +1207,16 @@
         "not-applicable"
       ]
     },
+    "ModelPhase": {
+      "type": "string",
+      "enum": [
+        "design",
+        "development",
+        "review",
+        "production",
+        "incident"
+      ]
+    },
     "Motivation": {
       "type": "string",
       "enum": [
@@ -1167,6 +1271,36 @@
         "function",
         "category"
       ]
+    },
+    "NetworkInfo": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "ports": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "protocols": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "cidr": {
+          "type": "string"
+        },
+        "cloud": {
+          "$ref": "#/$defs/CloudInfo"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "OWASPCategory": {
       "type": "string",
@@ -1342,6 +1476,44 @@
         "title"
       ]
     },
+    "RiskAssessment": {
+      "properties": {
+        "likelihood": {
+          "type": "integer"
+        },
+        "impact": {
+          "type": "integer"
+        },
+        "score": {
+          "type": "integer"
+        },
+        "level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "likelihoodRationale": {
+          "type": "string"
+        },
+        "impactRationale": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "likelihood",
+        "impact"
+      ]
+    },
+    "RiskLevel": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
     "STRIDEMapping": {
       "properties": {
         "category": {
@@ -1375,6 +1547,107 @@
         "I",
         "D",
         "E"
+      ]
+    },
+    "Scenario": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/ScenarioType"
+        },
+        "threatActorId": {
+          "type": "string"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackPath": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetAssetIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "targetElementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "threatIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "risk": {
+          "$ref": "#/$defs/RiskAssessment"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "businessImpact": {
+          "type": "string"
+        },
+        "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "detectionIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "ScenarioType": {
+      "type": "string",
+      "enum": [
+        "external-attack",
+        "insider-threat",
+        "supply-chain",
+        "data-breach",
+        "privacy-violation",
+        "denial-of-service",
+        "escalation"
+      ]
+    },
+    "SensitivityLevel": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted",
+        "secret"
       ]
     },
     "Sophistication": {
@@ -1516,7 +1789,16 @@
         "strideCategory": {
           "$ref": "#/$defs/STRIDEThreat"
         },
+        "linddunCategory": {
+          "$ref": "#/$defs/LINDDUNThreat"
+        },
         "affectedElements": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedAssets": {
           "items": {
             "type": "string"
           },
@@ -1525,6 +1807,9 @@
         "status": {
           "$ref": "#/$defs/ThreatStatus"
         },
+        "risk": {
+          "$ref": "#/$defs/RiskAssessment"
+        },
         "severity": {
           "type": "string"
         },
@@ -1532,6 +1817,15 @@
           "type": "string"
         },
         "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackVector": {
+          "type": "string"
+        },
+        "preconditions": {
           "items": {
             "type": "string"
           },
@@ -1559,6 +1853,9 @@
         },
         "version": {
           "type": "string"
+        },
+        "phase": {
+          "$ref": "#/$defs/ModelPhase"
         },
         "authors": {
           "items": {
@@ -1604,6 +1901,18 @@
             "$ref": "#/$defs/Mitigation"
           },
           "type": "array"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "type": "array"
+        },
+        "scenarios": {
+          "items": {
+            "$ref": "#/$defs/Scenario"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -1617,6 +1926,8 @@
     "ThreatStatus": {
       "type": "string",
       "enum": [
+        "potential",
+        "theoretical",
         "identified",
         "analyzing",
         "mitigated",

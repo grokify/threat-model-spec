@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/diagram.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/diagram.schema.json",
   "$ref": "#/$defs/DiagramIR",
   "$defs": {
     "Actor": {
@@ -322,6 +322,27 @@
         "id"
       ]
     },
+    "CloudInfo": {
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "vpc": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "ComplianceFramework": {
       "type": "string",
       "enum": [
@@ -636,6 +657,15 @@
         },
         "description": {
           "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/NetworkInfo"
+        },
+        "assetIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -1073,6 +1103,36 @@
         "category"
       ]
     },
+    "NetworkInfo": {
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "ports": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "protocols": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "zone": {
+          "type": "string"
+        },
+        "cidr": {
+          "type": "string"
+        },
+        "cloud": {
+          "$ref": "#/$defs/CloudInfo"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "OWASPCategory": {
       "type": "string",
       "enum": [
@@ -1175,6 +1235,44 @@
         "title"
       ]
     },
+    "RiskAssessment": {
+      "properties": {
+        "likelihood": {
+          "type": "integer"
+        },
+        "impact": {
+          "type": "integer"
+        },
+        "score": {
+          "type": "integer"
+        },
+        "level": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "likelihoodRationale": {
+          "type": "string"
+        },
+        "impactRationale": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "likelihood",
+        "impact"
+      ]
+    },
+    "RiskLevel": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low",
+        "info"
+      ]
+    },
     "STRIDEMapping": {
       "properties": {
         "category": {
@@ -1249,7 +1347,16 @@
         "strideCategory": {
           "$ref": "#/$defs/STRIDEThreat"
         },
+        "linddunCategory": {
+          "$ref": "#/$defs/LINDDUNThreat"
+        },
         "affectedElements": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "affectedAssets": {
           "items": {
             "type": "string"
           },
@@ -1258,6 +1365,9 @@
         "status": {
           "$ref": "#/$defs/ThreatStatus"
         },
+        "risk": {
+          "$ref": "#/$defs/RiskAssessment"
+        },
         "severity": {
           "type": "string"
         },
@@ -1265,6 +1375,15 @@
           "type": "string"
         },
         "mitigationIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackVector": {
+          "type": "string"
+        },
+        "preconditions": {
           "items": {
             "type": "string"
           },
@@ -1282,6 +1401,8 @@
     "ThreatStatus": {
       "type": "string",
       "enum": [
+        "potential",
+        "theoretical",
         "identified",
         "analyzing",
         "mitigated",
