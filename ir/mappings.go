@@ -18,11 +18,23 @@ type Mappings struct {
 	// CWE contains Common Weakness Enumeration mappings.
 	CWE []CWEMapping `json:"cwe,omitempty"`
 
+	// CVE contains Common Vulnerabilities and Exposures references.
+	CVE []CVEMapping `json:"cve,omitempty"`
+
 	// CVSS contains the CVSS vector string and score.
 	CVSS *CVSSMapping `json:"cvss,omitempty"`
 
 	// STRIDE contains STRIDE threat category mappings.
 	STRIDE []STRIDEMapping `json:"stride,omitempty"`
+
+	// LINDDUN contains LINDDUN privacy threat mappings.
+	LINDDUN []LINDDUNMapping `json:"linddun,omitempty"`
+
+	// Controls contains security control framework mappings (NIST CSF, CIS, ISO 27001).
+	Controls *Controls `json:"controls,omitempty"`
+
+	// Compliance contains regulatory compliance framework mappings.
+	Compliance []ComplianceMapping `json:"compliance,omitempty"`
 }
 
 // MITREAttackMapping represents a MITRE ATT&CK technique reference.
@@ -118,6 +130,30 @@ type CWEMapping struct {
 
 	// URL is the link to the CWE page.
 	URL string `json:"url,omitempty"`
+}
+
+// CVEMapping represents a Common Vulnerabilities and Exposures reference.
+type CVEMapping struct {
+	// ID is the CVE ID (e.g., "CVE-2024-12345").
+	ID string `json:"id"`
+
+	// Description provides a summary of the vulnerability.
+	Description string `json:"description,omitempty"`
+
+	// AffectedComponents lists the component IDs affected by this CVE.
+	AffectedComponents []string `json:"affectedComponents,omitempty"`
+
+	// AffectedVersions lists the software versions affected.
+	AffectedVersions []string `json:"affectedVersions,omitempty"`
+
+	// CVSS contains the CVSS score for this CVE.
+	CVSS *CVSSMapping `json:"cvss,omitempty"`
+
+	// URL is the link to the CVE page.
+	URL string `json:"url,omitempty"`
+
+	// References provides additional URLs related to this CVE.
+	References []string `json:"references,omitempty"`
 }
 
 // CVSSMapping represents a CVSS (Common Vulnerability Scoring System) assessment.

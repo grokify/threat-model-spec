@@ -56,6 +56,25 @@ type DiagramIR struct {
 
 	// Messages are the interactions between actors (for sequence type).
 	Messages []Message `json:"messages,omitempty"`
+
+	// --- Attack Tree specific fields ---
+
+	// AttackTree contains the attack tree structure (for attack-tree type).
+	AttackTree *AttackTree `json:"attackTree,omitempty"`
+
+	// --- Cross-cutting security fields ---
+
+	// Threats contains identified threats with status tracking.
+	Threats []ThreatEntry `json:"threats,omitempty"`
+
+	// Mitigations contains countermeasures addressing identified threats.
+	Mitigations []Mitigation `json:"mitigations,omitempty"`
+
+	// Detections contains detection capabilities for threats and attacks.
+	Detections []Detection `json:"detections,omitempty"`
+
+	// ResponseActions contains incident response actions.
+	ResponseActions []ResponseAction `json:"responseActions,omitempty"`
 }
 
 // Legend configures the diagram legend.
@@ -65,6 +84,9 @@ type Legend struct {
 
 	// ShowSTRIDE includes STRIDE threat legend.
 	ShowSTRIDE bool `json:"showStride,omitempty"`
+
+	// ShowLINDDUN includes LINDDUN privacy threat legend.
+	ShowLINDDUN bool `json:"showLinddun,omitempty"`
 
 	// ShowMITRE includes MITRE ATT&CK tactic legend.
 	ShowMITRE bool `json:"showMitre,omitempty"`
@@ -77,6 +99,9 @@ type Legend struct {
 
 	// ShowBoundaries includes boundary type legend.
 	ShowBoundaries bool `json:"showBoundaries,omitempty"`
+
+	// ShowMitigations includes mitigation status legend.
+	ShowMitigations bool `json:"showMitigations,omitempty"`
 }
 
 // Element represents a DFD element (process, datastore, external entity, etc.).

@@ -35,6 +35,21 @@ type ThreatModel struct {
 	// Diagrams contains the individual diagram views of the threat model.
 	// Each diagram represents a different perspective (DFD, attack chain, sequence).
 	Diagrams []DiagramView `json:"diagrams"`
+
+	// --- Enhanced threat modeling fields ---
+
+	// ThreatActors contains adversary profiles relevant to this threat model.
+	ThreatActors []ThreatActor `json:"threatActors,omitempty"`
+
+	// Assumptions contains security assumptions underlying the threat model.
+	Assumptions []Assumption `json:"assumptions,omitempty"`
+
+	// Prerequisites contains preconditions that must be true.
+	Prerequisites []Prerequisite `json:"prerequisites,omitempty"`
+
+	// Mitigations contains countermeasures at the threat model level.
+	// These apply across all diagrams; individual diagrams may have additional mitigations.
+	Mitigations []Mitigation `json:"mitigations,omitempty"`
 }
 
 // Author represents a contributor to the threat model.
@@ -114,26 +129,50 @@ type DiagramView struct {
 
 	// Messages are the interactions between actors (for sequence type).
 	Messages []Message `json:"messages,omitempty"`
+
+	// --- Attack Tree specific fields ---
+
+	// AttackTree contains the attack tree structure for attack-tree type.
+	AttackTree *AttackTree `json:"attackTree,omitempty"`
+
+	// --- Cross-cutting security fields ---
+
+	// Threats contains identified threats with status tracking.
+	Threats []ThreatEntry `json:"threats,omitempty"`
+
+	// Mitigations contains countermeasures addressing identified threats.
+	Mitigations []Mitigation `json:"mitigations,omitempty"`
+
+	// Detections contains detection capabilities for threats and attacks.
+	Detections []Detection `json:"detections,omitempty"`
+
+	// ResponseActions contains incident response actions.
+	ResponseActions []ResponseAction `json:"responseActions,omitempty"`
 }
 
 // ToDigramIR converts a DiagramView to a standalone DiagramIR,
 // inheriting mappings from the parent ThreatModel if not overridden.
 func (dv *DiagramView) ToDiagramIR(parent *ThreatModel) *DiagramIR {
 	ir := &DiagramIR{
-		Type:        dv.Type,
-		Title:       dv.Title,
-		Description: dv.Description,
-		Direction:   dv.Direction,
-		Legend:      dv.Legend,
-		Mappings:    dv.Mappings,
-		Elements:    dv.Elements,
-		Boundaries:  dv.Boundaries,
-		Flows:       dv.Flows,
-		Attacks:     dv.Attacks,
-		Targets:     dv.Targets,
-		Actors:      dv.Actors,
-		Phases:      dv.Phases,
-		Messages:    dv.Messages,
+		Type:            dv.Type,
+		Title:           dv.Title,
+		Description:     dv.Description,
+		Direction:       dv.Direction,
+		Legend:          dv.Legend,
+		Mappings:        dv.Mappings,
+		Elements:        dv.Elements,
+		Boundaries:      dv.Boundaries,
+		Flows:           dv.Flows,
+		Attacks:         dv.Attacks,
+		Targets:         dv.Targets,
+		Actors:          dv.Actors,
+		Phases:          dv.Phases,
+		Messages:        dv.Messages,
+		AttackTree:      dv.AttackTree,
+		Threats:         dv.Threats,
+		Mitigations:     dv.Mitigations,
+		Detections:      dv.Detections,
+		ResponseActions: dv.ResponseActions,
 	}
 
 	// Inherit title from parent if not set
@@ -144,6 +183,11 @@ func (dv *DiagramView) ToDiagramIR(parent *ThreatModel) *DiagramIR {
 	// Inherit mappings from parent if not set
 	if ir.Mappings == nil && parent != nil {
 		ir.Mappings = parent.Mappings
+	}
+
+	// Inherit mitigations from parent if not set at diagram level
+	if len(ir.Mitigations) == 0 && parent != nil && len(parent.Mitigations) > 0 {
+		ir.Mitigations = parent.Mitigations
 	}
 
 	return ir

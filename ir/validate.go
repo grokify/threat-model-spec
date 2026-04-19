@@ -57,11 +57,19 @@ func (d *DiagramIR) Validate() error {
 		errs = append(errs, d.validateAttackChain()...)
 	case DiagramTypeSequence:
 		errs = append(errs, d.validateSequence()...)
+	case DiagramTypeAttackTree:
+		errs = append(errs, d.validateAttackTree()...)
 	default:
 		if d.Type != "" {
-			errs = append(errs, ValidationError{"type", fmt.Sprintf("invalid type %q, must be one of: dfd, attack-chain, sequence", d.Type)})
+			errs = append(errs, ValidationError{"type", fmt.Sprintf("invalid type %q, must be one of: dfd, attack-chain, sequence, attack-tree", d.Type)})
 		}
 	}
+
+	// Validate cross-cutting security fields (applicable to all diagram types)
+	errs = append(errs, d.validateThreats()...)
+	errs = append(errs, d.validateMitigations()...)
+	errs = append(errs, d.validateDetections()...)
+	errs = append(errs, d.validateResponseActions()...)
 
 	if errs.HasErrors() {
 		return errs
@@ -407,6 +415,27 @@ func (d *DiagramIR) ValidateStrict() error {
 		}
 	}
 
+	// Strict: Check mitigations have owners
+	for i, m := range d.Mitigations {
+		if m.Owner == "" {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation[%d] %q recommended: set owner", i, m.ID)})
+		}
+	}
+
+	// Strict: Check threats have severity
+	for i, t := range d.Threats {
+		if t.Severity == "" {
+			errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat[%d] %q recommended: set severity", i, t.ID)})
+		}
+	}
+
+	// Strict: Check detections have data sources
+	for i, det := range d.Detections {
+		if len(det.DataSources) == 0 {
+			errs = append(errs, ValidationError{"detections", fmt.Sprintf("detection[%d] %q recommended: set dataSources", i, det.ID)})
+		}
+	}
+
 	if errs.HasErrors() {
 		return errs
 	}
@@ -451,6 +480,237 @@ func (d *DiagramIR) MustValidate() {
 // IsValid returns true if the diagram passes validation.
 func (d *DiagramIR) IsValid() bool {
 	return d.Validate() == nil
+}
+
+// validateAttackTree validates an Attack Tree diagram.
+func (d *DiagramIR) validateAttackTree() ValidationErrors {
+	var errs ValidationErrors
+
+	// Attack tree should have an AttackTree structure
+	if d.AttackTree == nil {
+		errs = append(errs, ValidationError{"attackTree", "attack-tree requires an attackTree structure"})
+		return errs
+	}
+
+	if len(d.AttackTree.Nodes) == 0 {
+		errs = append(errs, ValidationError{"attackTree.nodes", "attack-tree requires at least one node"})
+		return errs
+	}
+
+	if d.AttackTree.RootID == "" {
+		errs = append(errs, ValidationError{"attackTree.rootId", "attack-tree requires a rootId"})
+	}
+
+	// Build node ID set
+	nodeIDs := make(map[string]bool)
+	for _, n := range d.AttackTree.Nodes {
+		if n.ID == "" {
+			errs = append(errs, ValidationError{"attackTree.nodes", "node missing required id"})
+			continue
+		}
+		if nodeIDs[n.ID] {
+			errs = append(errs, ValidationError{"attackTree.nodes", fmt.Sprintf("duplicate node id %q", n.ID)})
+		}
+		nodeIDs[n.ID] = true
+
+		if n.Label == "" {
+			errs = append(errs, ValidationError{"attackTree.nodes", fmt.Sprintf("node %q missing required label", n.ID)})
+		}
+
+		// Children are validated in the second pass below
+	}
+
+	// Verify root exists
+	if d.AttackTree.RootID != "" && !nodeIDs[d.AttackTree.RootID] {
+		errs = append(errs, ValidationError{"attackTree.rootId", fmt.Sprintf("rootId %q references unknown node", d.AttackTree.RootID)})
+	}
+
+	// Second pass: validate all child references
+	for _, n := range d.AttackTree.Nodes {
+		for _, childID := range n.Children {
+			if !nodeIDs[childID] {
+				errs = append(errs, ValidationError{"attackTree.nodes", fmt.Sprintf("node %q references unknown child %q", n.ID, childID)})
+			}
+		}
+	}
+
+	// Attack tree should NOT have other diagram-specific fields
+	if len(d.Actors) > 0 {
+		errs = append(errs, ValidationError{"actors", "attack-tree should not have actors (use sequence type)"})
+	}
+	if len(d.Messages) > 0 {
+		errs = append(errs, ValidationError{"messages", "attack-tree should not have messages (use sequence type)"})
+	}
+
+	return errs
+}
+
+// validateMitigations checks that mitigations have valid references.
+func (d *DiagramIR) validateMitigations() ValidationErrors {
+	var errs ValidationErrors
+
+	// Build sets of valid IDs for reference checking
+	elementIDs := make(map[string]bool)
+	for _, e := range d.Elements {
+		elementIDs[e.ID] = true
+	}
+	threatIDs := make(map[string]bool)
+	for _, t := range d.Threats {
+		threatIDs[t.ID] = true
+	}
+
+	mitigationIDs := make(map[string]bool)
+	for i, m := range d.Mitigations {
+		if m.ID == "" {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation[%d] missing required id", i)})
+			continue
+		}
+		if mitigationIDs[m.ID] {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("duplicate mitigation id %q", m.ID)})
+		}
+		mitigationIDs[m.ID] = true
+
+		if m.Title == "" {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation[%d] %q missing required title", i, m.ID)})
+		}
+		if m.Status == "" {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation[%d] %q missing required status", i, m.ID)})
+		}
+
+		// Validate threat references if threats are defined
+		if len(threatIDs) > 0 {
+			for _, tid := range m.ThreatIDs {
+				if !threatIDs[tid] && !elementIDs[tid] {
+					errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation %q references unknown threat %q", m.ID, tid)})
+				}
+			}
+		}
+	}
+
+	return errs
+}
+
+// validateThreats checks that threat entries have valid references.
+func (d *DiagramIR) validateThreats() ValidationErrors {
+	var errs ValidationErrors
+
+	elementIDs := make(map[string]bool)
+	for _, e := range d.Elements {
+		elementIDs[e.ID] = true
+	}
+
+	mitigationIDs := make(map[string]bool)
+	for _, m := range d.Mitigations {
+		mitigationIDs[m.ID] = true
+	}
+
+	threatIDs := make(map[string]bool)
+	for i, t := range d.Threats {
+		if t.ID == "" {
+			errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat[%d] missing required id", i)})
+			continue
+		}
+		if threatIDs[t.ID] {
+			errs = append(errs, ValidationError{"threats", fmt.Sprintf("duplicate threat id %q", t.ID)})
+		}
+		threatIDs[t.ID] = true
+
+		if t.Title == "" {
+			errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat[%d] %q missing required title", i, t.ID)})
+		}
+		if t.Status == "" {
+			errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat[%d] %q missing required status", i, t.ID)})
+		}
+
+		// Validate element references
+		for _, eid := range t.AffectedElements {
+			if !elementIDs[eid] {
+				errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat %q references unknown element %q", t.ID, eid)})
+			}
+		}
+
+		// Validate mitigation references
+		for _, mid := range t.MitigationIDs {
+			if !mitigationIDs[mid] {
+				errs = append(errs, ValidationError{"threats", fmt.Sprintf("threat %q references unknown mitigation %q", t.ID, mid)})
+			}
+		}
+	}
+
+	return errs
+}
+
+// validateDetections checks that detections have valid references.
+func (d *DiagramIR) validateDetections() ValidationErrors {
+	var errs ValidationErrors
+
+	threatIDs := make(map[string]bool)
+	for _, t := range d.Threats {
+		threatIDs[t.ID] = true
+	}
+
+	detectionIDs := make(map[string]bool)
+	for i, det := range d.Detections {
+		if det.ID == "" {
+			errs = append(errs, ValidationError{"detections", fmt.Sprintf("detection[%d] missing required id", i)})
+			continue
+		}
+		if detectionIDs[det.ID] {
+			errs = append(errs, ValidationError{"detections", fmt.Sprintf("duplicate detection id %q", det.ID)})
+		}
+		detectionIDs[det.ID] = true
+
+		if det.Title == "" {
+			errs = append(errs, ValidationError{"detections", fmt.Sprintf("detection[%d] %q missing required title", i, det.ID)})
+		}
+		if det.Coverage == "" {
+			errs = append(errs, ValidationError{"detections", fmt.Sprintf("detection[%d] %q missing required coverage", i, det.ID)})
+		}
+
+		// Validate threat references
+		for _, tid := range det.ThreatIDs {
+			if !threatIDs[tid] {
+				errs = append(errs, ValidationError{"detections", fmt.Sprintf("detection %q references unknown threat %q", det.ID, tid)})
+			}
+		}
+	}
+
+	return errs
+}
+
+// validateResponseActions checks that response actions have valid references.
+func (d *DiagramIR) validateResponseActions() ValidationErrors {
+	var errs ValidationErrors
+
+	detectionIDs := make(map[string]bool)
+	for _, det := range d.Detections {
+		detectionIDs[det.ID] = true
+	}
+
+	responseIDs := make(map[string]bool)
+	for i, r := range d.ResponseActions {
+		if r.ID == "" {
+			errs = append(errs, ValidationError{"responseActions", fmt.Sprintf("responseAction[%d] missing required id", i)})
+			continue
+		}
+		if responseIDs[r.ID] {
+			errs = append(errs, ValidationError{"responseActions", fmt.Sprintf("duplicate responseAction id %q", r.ID)})
+		}
+		responseIDs[r.ID] = true
+
+		if r.Title == "" {
+			errs = append(errs, ValidationError{"responseActions", fmt.Sprintf("responseAction[%d] %q missing required title", i, r.ID)})
+		}
+
+		// Validate detection references
+		for _, did := range r.TriggerDetectionIDs {
+			if !detectionIDs[did] {
+				errs = append(errs, ValidationError{"responseActions", fmt.Sprintf("responseAction %q references unknown detection %q", r.ID, did)})
+			}
+		}
+	}
+
+	return errs
 }
 
 // Errors implements the error interface check for ValidationErrors.

@@ -42,6 +42,8 @@ func (d *DiagramIR) RenderD2() string {
 		return d.renderAttackChain()
 	case DiagramTypeSequence:
 		return d.renderSequence()
+	case DiagramTypeAttackTree:
+		return d.renderAttackTree()
 	default:
 		return d.renderDFD() // Default to DFD
 	}
@@ -88,6 +90,9 @@ func (d *DiagramIR) renderDFD() string {
 	for _, f := range d.Flows {
 		sb.WriteString(d.renderFlow(f))
 	}
+
+	// Mitigations
+	sb.WriteString(d.renderMitigations())
 
 	return sb.String()
 }
@@ -237,6 +242,29 @@ func (d *DiagramIR) renderLegend() string {
 		sb.WriteString("    style.fill: \"#ffffff\"\n")
 		sb.WriteString("    browser: Browser { style: { stroke-dash: 5; stroke: \"#1565c0\"; fill: \"#e3f2fd\" } }\n")
 		sb.WriteString("    localhost: Localhost { style: { stroke-dash: 5; stroke: \"#7b1fa2\"; fill: \"#f3e5f5\" } }\n")
+		sb.WriteString("  }\n")
+	}
+
+	if d.Legend.ShowLINDDUN {
+		sb.WriteString("\n  linddun: LINDDUN Privacy Threats {\n")
+		sb.WriteString("    style.fill: \"#ffffff\"\n")
+		sb.WriteString("    l: L - Linkability { style: { fill: \"#e8eaf6\"; stroke: \"#3f51b5\" } }\n")
+		sb.WriteString("    i: I - Identifiability { style: { fill: \"#e3f2fd\"; stroke: \"#1976d2\" } }\n")
+		sb.WriteString("    n: N - Non-repudiation { style: { fill: \"#fff3e0\"; stroke: \"#f57c00\" } }\n")
+		sb.WriteString("    d: D - Detectability { style: { fill: \"#fce4ec\"; stroke: \"#c2185b\" } }\n")
+		sb.WriteString("    di: Di - Disclosure { style: { fill: \"#ffebee\"; stroke: \"#c62828\" } }\n")
+		sb.WriteString("    u: U - Unawareness { style: { fill: \"#f3e5f5\"; stroke: \"#7b1fa2\" } }\n")
+		sb.WriteString("    nc: Nc - Non-compliance { style: { fill: \"#efebe9\"; stroke: \"#5d4037\" } }\n")
+		sb.WriteString("  }\n")
+	}
+
+	if d.Legend.ShowMitigations {
+		sb.WriteString("\n  mitigations: Mitigation Status {\n")
+		sb.WriteString("    style.fill: \"#ffffff\"\n")
+		sb.WriteString("    implemented: Implemented { style: { fill: \"#e8f5e9\"; stroke: \"#2e7d32\" } }\n")
+		sb.WriteString("    partial: Partial { style: { fill: \"#fff3e0\"; stroke: \"#f57c00\" } }\n")
+		sb.WriteString("    planned: Planned { style: { fill: \"#e3f2fd\"; stroke: \"#1976d2\" } }\n")
+		sb.WriteString("    accepted: Accepted { style: { fill: \"#f5f5f5\"; stroke: \"#616161\" } }\n")
 		sb.WriteString("  }\n")
 	}
 
@@ -496,6 +524,227 @@ func elementTypeToColors(t ElementType) (fill, stroke string) {
 		return "#e8eaf6", "#3f51b5"
 	case ElementTypeAPI:
 		return "#fff3e0", "#ef6c00"
+	default:
+		return "#f5f5f5", "#9e9e9e"
+	}
+}
+
+// renderAttackTree renders an Attack Tree diagram.
+func (d *DiagramIR) renderAttackTree() string {
+	var sb strings.Builder
+
+	// Header
+	fmt.Fprintf(&sb, "# %s\n", d.Title)
+	if d.Description != "" {
+		fmt.Fprintf(&sb, "# %s\n", d.Description)
+	}
+	sb.WriteString("\n")
+
+	// Direction (typically top-down for attack trees)
+	if d.Direction != "" {
+		fmt.Fprintf(&sb, "direction: %s\n\n", d.Direction)
+	} else {
+		sb.WriteString("direction: down\n\n")
+	}
+
+	// Legend
+	if d.Legend != nil && d.Legend.Show {
+		sb.WriteString(d.renderAttackTreeLegend())
+	}
+
+	// Attack tree structure
+	if d.AttackTree == nil || len(d.AttackTree.Nodes) == 0 {
+		sb.WriteString("# No attack tree nodes defined\n")
+		return sb.String()
+	}
+
+	// Render all nodes
+	sb.WriteString("# Attack Tree Nodes\n")
+	for _, node := range d.AttackTree.Nodes {
+		sb.WriteString(d.renderAttackTreeNode(node))
+	}
+
+	// Render connections
+	sb.WriteString("\n# Attack Tree Connections\n")
+	for _, node := range d.AttackTree.Nodes {
+		for _, childID := range node.Children {
+			fmt.Fprintf(&sb, "%s -> %s\n", node.ID, childID)
+		}
+	}
+
+	return sb.String()
+}
+
+// renderAttackTreeLegend renders the legend for attack trees.
+func (d *DiagramIR) renderAttackTreeLegend() string {
+	var sb strings.Builder
+
+	sb.WriteString("legend: Legend {\n")
+	sb.WriteString("  style: {\n")
+	sb.WriteString("    fill: \"#fafafa\"\n")
+	sb.WriteString("    stroke: \"#e0e0e0\"\n")
+	sb.WriteString("    border-radius: 8\n")
+	sb.WriteString("  }\n")
+
+	sb.WriteString("\n  gates: Logic Gates {\n")
+	sb.WriteString("    style.fill: \"#ffffff\"\n")
+	sb.WriteString("    and: AND Gate (∧) { style: { fill: \"#e3f2fd\"; stroke: \"#1976d2\" } }\n")
+	sb.WriteString("    or: OR Gate (∨) { style: { fill: \"#fff3e0\"; stroke: \"#ef6c00\" } }\n")
+	sb.WriteString("    leaf: Leaf Attack { style: { fill: \"#ffebee\"; stroke: \"#c62828\" } }\n")
+	sb.WriteString("  }\n")
+
+	sb.WriteString("\n  status: Attack Status {\n")
+	sb.WriteString("    style.fill: \"#ffffff\"\n")
+	sb.WriteString("    active: Active Attack { style: { fill: \"#ffebee\"; stroke: \"#c62828\" } }\n")
+	sb.WriteString("    mitigated: Mitigated { style: { fill: \"#e8f5e9\"; stroke: \"#2e7d32\" } }\n")
+	sb.WriteString("  }\n")
+
+	sb.WriteString("}\n\n")
+	return sb.String()
+}
+
+// renderAttackTreeNode renders a single attack tree node.
+func (d *DiagramIR) renderAttackTreeNode(node AttackTreeNode) string {
+	var sb strings.Builder
+
+	// Build label with gate symbol
+	label := node.Label
+	switch node.NodeType {
+	case AttackTreeNodeTypeAND:
+		label = fmt.Sprintf("∧ %s", node.Label)
+	case AttackTreeNodeTypeOR:
+		label = fmt.Sprintf("∨ %s", node.Label)
+	}
+
+	// Add MITRE technique if present
+	if node.MITRETechnique != "" {
+		label = fmt.Sprintf("%s\\n[%s]", label, node.MITRETechnique)
+	}
+
+	fmt.Fprintf(&sb, "%s: \"%s\" {\n", node.ID, label)
+
+	// Shape based on node type
+	switch node.NodeType {
+	case AttackTreeNodeTypeAND:
+		sb.WriteString("  shape: diamond\n")
+	case AttackTreeNodeTypeOR:
+		sb.WriteString("  shape: hexagon\n")
+	default:
+		sb.WriteString("  shape: rectangle\n")
+	}
+
+	sb.WriteString("  style: {\n")
+
+	// Color based on node type and mitigation status
+	if node.Mitigated {
+		sb.WriteString("    fill: \"#e8f5e9\"\n")
+		sb.WriteString("    stroke: \"#2e7d32\"\n")
+	} else {
+		switch node.NodeType {
+		case AttackTreeNodeTypeAND:
+			sb.WriteString("    fill: \"#e3f2fd\"\n")
+			sb.WriteString("    stroke: \"#1976d2\"\n")
+		case AttackTreeNodeTypeOR:
+			sb.WriteString("    fill: \"#fff3e0\"\n")
+			sb.WriteString("    stroke: \"#ef6c00\"\n")
+		default:
+			sb.WriteString("    fill: \"#ffebee\"\n")
+			sb.WriteString("    stroke: \"#c62828\"\n")
+		}
+	}
+
+	sb.WriteString("    stroke-width: 2\n")
+	sb.WriteString("    border-radius: 8\n")
+	sb.WriteString("  }\n")
+	sb.WriteString("}\n\n")
+
+	return sb.String()
+}
+
+// renderMitigations renders the mitigations section.
+func (d *DiagramIR) renderMitigations() string {
+	if len(d.Mitigations) == 0 {
+		return ""
+	}
+
+	var sb strings.Builder
+	sb.WriteString("\n# Mitigations\n")
+	sb.WriteString("mitigations: Mitigations {\n")
+	sb.WriteString("  style: {\n")
+	sb.WriteString("    fill: \"#f5f5f5\"\n")
+	sb.WriteString("    stroke: \"#9e9e9e\"\n")
+	sb.WriteString("    border-radius: 10\n")
+	sb.WriteString("  }\n\n")
+
+	for _, m := range d.Mitigations {
+		sb.WriteString(d.renderMitigation(m))
+	}
+
+	sb.WriteString("}\n")
+	return sb.String()
+}
+
+// renderMitigation renders a single mitigation.
+func (d *DiagramIR) renderMitigation(m Mitigation) string {
+	var sb strings.Builder
+
+	label := m.Title
+	if m.Status != "" {
+		label = fmt.Sprintf("%s [%s]", m.Title, m.Status)
+	}
+
+	fmt.Fprintf(&sb, "  %s: \"%s\" {\n", m.ID, label)
+	sb.WriteString("    shape: rectangle\n")
+	sb.WriteString("    style: {\n")
+
+	// Color based on status
+	switch m.Status {
+	case MitigationStatusImplemented:
+		sb.WriteString("      fill: \"#e8f5e9\"\n")
+		sb.WriteString("      stroke: \"#2e7d32\"\n")
+	case MitigationStatusPartial:
+		sb.WriteString("      fill: \"#fff3e0\"\n")
+		sb.WriteString("      stroke: \"#f57c00\"\n")
+	case MitigationStatusPlanned:
+		sb.WriteString("      fill: \"#e3f2fd\"\n")
+		sb.WriteString("      stroke: \"#1976d2\"\n")
+	case MitigationStatusAccepted:
+		sb.WriteString("      fill: \"#f5f5f5\"\n")
+		sb.WriteString("      stroke: \"#616161\"\n")
+	case MitigationStatusTransferred:
+		sb.WriteString("      fill: \"#e1f5fe\"\n")
+		sb.WriteString("      stroke: \"#0288d1\"\n")
+	default:
+		sb.WriteString("      fill: \"#f5f5f5\"\n")
+		sb.WriteString("      stroke: \"#9e9e9e\"\n")
+	}
+
+	sb.WriteString("      stroke-width: 2\n")
+	sb.WriteString("      border-radius: 5\n")
+	sb.WriteString("    }\n")
+	sb.WriteString("  }\n\n")
+
+	return sb.String()
+}
+
+// LINDDUNThreatToColors returns fill and stroke colors for LINDDUN threat types.
+// This can be used by external rendering tools.
+func LINDDUNThreatToColors(t LINDDUNThreat) (fill, stroke string) {
+	switch t {
+	case LINDDUNLinkability:
+		return "#e8eaf6", "#3f51b5"
+	case LINDDUNIdentifiability:
+		return "#e3f2fd", "#1976d2"
+	case LINDDUNNonRepudiation:
+		return "#fff3e0", "#f57c00"
+	case LINDDUNDetectability:
+		return "#fce4ec", "#c2185b"
+	case LINDDUNDisclosure:
+		return "#ffebee", "#c62828"
+	case LINDDUNUnawareness:
+		return "#f3e5f5", "#7b1fa2"
+	case LINDDUNNonCompliance:
+		return "#efebe9", "#5d4037"
 	default:
 		return "#f5f5f5", "#9e9e9e"
 	}

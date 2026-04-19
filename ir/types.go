@@ -9,16 +9,17 @@ import "github.com/invopop/jsonschema"
 type DiagramType string
 
 const (
-	DiagramTypeDFD      DiagramType = "dfd"
-	DiagramTypeAttack   DiagramType = "attack-chain"
-	DiagramTypeSequence DiagramType = "sequence"
+	DiagramTypeDFD        DiagramType = "dfd"
+	DiagramTypeAttack     DiagramType = "attack-chain"
+	DiagramTypeSequence   DiagramType = "sequence"
+	DiagramTypeAttackTree DiagramType = "attack-tree"
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for DiagramType.
 func (DiagramType) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"dfd", "attack-chain", "sequence"},
+		Enum: []any{"dfd", "attack-chain", "sequence", "attack-tree"},
 	}
 }
 
