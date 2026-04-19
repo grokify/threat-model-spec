@@ -126,6 +126,52 @@ type Element struct {
 
 	// Description provides additional context.
 	Description string `json:"description,omitempty"`
+
+	// Network contains optional network topology details.
+	Network *NetworkInfo `json:"network,omitempty"`
+
+	// AssetIDs links this element to Asset definitions.
+	AssetIDs []string `json:"assetIds,omitempty"`
+}
+
+// NetworkInfo contains network topology details for an element.
+// This is useful for mapping DFD elements to actual network infrastructure.
+type NetworkInfo struct {
+	// Host is the hostname, IP address, or service name.
+	Host string `json:"host,omitempty"`
+
+	// Ports lists the ports exposed by this element.
+	Ports []int `json:"ports,omitempty"`
+
+	// Protocols lists the protocols used (HTTP, HTTPS, gRPC, TCP, etc.).
+	Protocols []string `json:"protocols,omitempty"`
+
+	// Zone indicates the network zone (dmz, internal, cloud, public, etc.).
+	Zone string `json:"zone,omitempty"`
+
+	// CIDR is the network CIDR block if applicable.
+	CIDR string `json:"cidr,omitempty"`
+
+	// Cloud contains cloud-specific identifiers.
+	Cloud *CloudInfo `json:"cloud,omitempty"`
+}
+
+// CloudInfo contains cloud provider specific details.
+type CloudInfo struct {
+	// Provider is the cloud provider (aws, gcp, azure, etc.).
+	Provider string `json:"provider,omitempty"`
+
+	// Region is the cloud region.
+	Region string `json:"region,omitempty"`
+
+	// VPC is the VPC/VNet identifier.
+	VPC string `json:"vpc,omitempty"`
+
+	// Subnet is the subnet identifier.
+	Subnet string `json:"subnet,omitempty"`
+
+	// ResourceID is the cloud resource identifier.
+	ResourceID string `json:"resourceId,omitempty"`
 }
 
 // Boundary represents a trust boundary containing elements.
