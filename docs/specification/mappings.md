@@ -79,6 +79,12 @@ The `mappings` field links threat models to industry security frameworks.
       "name": "Broken Authentication",
       "description": "No rate limiting on authentication",
       "url": "https://owasp.org/API-Security/..."
+    },
+    {
+      "category": "agentic",
+      "id": "ASI02:2026",
+      "name": "Tool Misuse & Exploitation",
+      "description": "Attackers exploit agent's access to tools"
     }
   ]
 }
@@ -86,11 +92,39 @@ The `mappings` field links threat models to industry security frameworks.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `category` | string | Yes | `web`, `api`, or `llm` |
+| `category` | string | Yes | `web`, `api`, `llm`, or `agentic` |
 | `id` | string | Yes | OWASP ID |
 | `name` | string | Yes | Vulnerability name |
 | `description` | string | No | Context |
 | `url` | string | No | OWASP URL |
+
+### OWASP Categories
+
+| Category | Value | Year |
+|----------|-------|------|
+| Web Applications | `web` | 2021 |
+| API Security | `api` | 2023 |
+| LLM Applications | `llm` | 2025 |
+| Agentic Applications | `agentic` | 2026 |
+
+### Attack Step OWASP Mappings
+
+Attack steps can include `owaspIds` and `asiIds`:
+
+```json
+{
+  "attacks": [
+    {
+      "step": 1,
+      "from": "attacker",
+      "to": "agent",
+      "label": "Inject malicious prompt",
+      "owaspIds": ["LLM01:2025"],
+      "asiIds": ["ASI01:2026", "ASI02:2026"]
+    }
+  ]
+}
+```
 
 ## STRIDE
 
@@ -189,7 +223,8 @@ The `mappings` field links threat models to industry security frameworks.
     "owasp": [
       {"category": "api", "id": "API2:2023", "name": "Broken Authentication"},
       {"category": "api", "id": "API4:2023", "name": "Unrestricted Resource Consumption"},
-      {"category": "llm", "id": "LLM08:2023", "name": "Excessive Agency"}
+      {"category": "llm", "id": "LLM06:2025", "name": "Excessive Agency"},
+      {"category": "agentic", "id": "ASI02:2026", "name": "Tool Misuse & Exploitation"}
     ],
     "stride": [
       {"category": "S", "name": "Spoofing"},
