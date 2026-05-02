@@ -737,3 +737,58 @@ func (errs ValidationErrors) Is(target error) bool {
 	}
 	return false
 }
+
+// ValidateOWASPMappings checks that OWASP IDs in mappings and attacks are recognized.
+// Returns warnings (not errors) for unrecognized IDs to allow forward compatibility.
+func (d *DiagramIR) ValidateOWASPMappings() []string {
+	var warnings []string
+
+	// Check top-level OWASP mappings
+	if d.Mappings != nil {
+		for _, m := range d.Mappings.OWASP {
+			if !ValidateOWASPID(m.ID) {
+				warnings = append(warnings, fmt.Sprintf("mappings.owasp: unrecognized OWASP ID %q", m.ID))
+			}
+		}
+	}
+
+	// Check attack step OWASP IDs
+	for _, a := range d.Attacks {
+		for _, id := range a.OWASPIds {
+			if !ValidateOWASPID(id) {
+				warnings = append(warnings, fmt.Sprintf("attacks[step=%d].owaspIds: unrecognized OWASP ID %q", a.Step, id))
+			}
+		}
+		for _, id := range a.ASIIds {
+			if !ValidateOWASPID(id) {
+				warnings = append(warnings, fmt.Sprintf("attacks[step=%d].asiIds: unrecognized ASI ID %q", a.Step, id))
+			}
+		}
+	}
+
+	return warnings
+}
+
+// ValidateOWASPMappings checks that OWASP IDs in the ThreatModel are recognized.
+func (tm *ThreatModel) ValidateOWASPMappings() []string {
+	var warnings []string
+
+	// Check top-level ThreatModel mappings
+	if tm.Mappings != nil {
+		for _, m := range tm.Mappings.OWASP {
+			if !ValidateOWASPID(m.ID) {
+				warnings = append(warnings, fmt.Sprintf("mappings.owasp: unrecognized OWASP ID %q", m.ID))
+			}
+		}
+	}
+
+	// Check each diagram
+	for i, dv := range tm.Diagrams {
+		diagramIR := dv.ToDiagramIR(tm)
+		for _, w := range diagramIR.ValidateOWASPMappings() {
+			warnings = append(warnings, fmt.Sprintf("diagrams[%d].%s", i, w))
+		}
+	}
+
+	return warnings
+}

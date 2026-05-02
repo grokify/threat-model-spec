@@ -86,16 +86,17 @@ type MITREATLASMapping struct {
 type OWASPCategory string
 
 const (
-	OWASPCategoryAPI OWASPCategory = "api" // API Security Top 10
-	OWASPCategoryLLM OWASPCategory = "llm" // LLM Application Top 10
-	OWASPCategoryWeb OWASPCategory = "web" // Web Application Top 10
+	OWASPCategoryAPI     OWASPCategory = "api"     // API Security Top 10 (2023)
+	OWASPCategoryLLM     OWASPCategory = "llm"     // LLM Application Top 10 (2025)
+	OWASPCategoryWeb     OWASPCategory = "web"     // Web Application Top 10 (2021)
+	OWASPCategoryAgentic OWASPCategory = "agentic" // Agentic Applications Top 10 (ASI 2026)
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for OWASPCategory.
 func (OWASPCategory) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"api", "llm", "web"},
+		Enum: []any{"api", "llm", "web", "agentic"},
 	}
 }
 
