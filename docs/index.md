@@ -6,13 +6,15 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 
 ## Features
 
+### Core Capabilities
+
 - **Design-Time Threat Modeling** — Proactive security analysis during SDLC with risk assessment
 - **Risk Assessment** — Structured likelihood × impact scoring with categorical risk levels
 - **Asset Inventory** — Sensitivity classification and compliance mapping
 - **Scenario Modeling** — What-if attack scenarios with preconditions and attack paths
 - **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
 - **Multiple Diagram Types** — DFD, Attack Chain, Sequence, Attack Tree diagrams
-- **Threat Frameworks** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS
+- **Threat Frameworks** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API, LLM, Web, ASI), STRIDE, LINDDUN, CWE, CVSS
 - **Control Frameworks** — NIST CSF, CIS Controls v8, ISO 27001
 - **Compliance Frameworks** — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP
 - **Security Lifecycle** — Mitigations, threat actors, detections, response actions
@@ -21,6 +23,43 @@ Threat Model Spec is an open-source Go library and CLI for creating security thr
 - **D2 Styles** — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows
 - **Validation** — Type-specific field validation with strict mode
 - **AI Agents** — Claude Code plugin for AI-assisted diagram creation
+
+### v0.6.0 Enhancements
+
+- **Role-Based Security Guidance**
+    - **Red Team** — Exploitation steps, offensive tools, payload patterns, difficulty ratings
+    - **Blue Team** — Detection rules (Sigma, YARA, Splunk), IOCs, hunting queries, log sources
+    - **Remediation** — Secure code patterns, review checklists, recommended libraries
+    - **Incident Playbooks** — Structured response procedures with IR phases and contacts
+
+- **Risk Quantification**
+    - **FAIR Assessment** — Factor Analysis of Information Risk with frequency/loss estimates
+    - **Business Impact** — Revenue, customer, regulatory, reputation, operational impacts
+    - **EPSS Integration** — Exploit Prediction Scoring System data for CVEs
+
+- **Purple Team**
+    - **Atomic Red Team Mapping** — Link attacks to atomic tests with validation status
+    - **Detection Coverage Matrix** — Track technique coverage across detection capabilities
+    - **Security Metrics** — MTTD, MTTR, MTTC, detection rates, false positive tracking
+
+- **Threat Intelligence**
+    - **Enhanced STIX 2.1 Export** — IOCs to indicators, actors to threat-actors, detections to course-of-actions
+    - **KEV Catalog** — CISA Known Exploited Vulnerabilities integration
+    - **OWASP ASI Support** — Agentic Security Top 10 (2026) for AI agent threats
+
+- **Supply Chain Security**
+    - **SBOM Integration** — Link threat models to CycloneDX/SPDX software bills of materials
+    - **VEX Statements** — Vulnerability Exploitability eXchange for status tracking
+    - **Dependency Risk** — Track vulnerable components with severity and remediation
+
+- **Vulnerability Management**
+    - **SSVC Decision Trees** — CISA's Stakeholder-Specific Vulnerability Categorization
+    - **Priority Decisions** — Automated prioritization (Track, Track*, Attend, Act)
+
+- **Attack Path Analysis**
+    - **Attack Graphs** — Graph-based representation of attack surfaces
+    - **Path Finding** — All paths, shortest paths (Dijkstra), and critical paths
+    - **Risk Calculation** — Path-based risk scoring and reachability analysis
 
 ## Quick Example
 
@@ -124,7 +163,7 @@ tms generate threat-model.json --stix -o threat-model.stix.json
 | [LINDDUN](concepts/frameworks/linddun.md) | Privacy threat framework |
 | [MITRE ATT&CK](concepts/frameworks/mitre-attack.md) | Adversary tactics and techniques |
 | [MITRE ATLAS](concepts/frameworks/mitre-atlas.md) | AI/ML threat matrix |
-| [OWASP Top 10](concepts/frameworks/owasp.md) | Web, API, and LLM security risks |
+| [OWASP Top 10](concepts/frameworks/owasp.md) | Web, API, LLM, and Agentic (ASI) security risks |
 | [CWE](concepts/frameworks/cwe.md) | Common Weakness Enumeration |
 | [CVSS](concepts/frameworks/cvss.md) | Common Vulnerability Scoring System |
 
