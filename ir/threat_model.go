@@ -61,6 +61,58 @@ type ThreatModel struct {
 
 	// Scenarios contains what-if attack scenarios for analysis.
 	Scenarios []Scenario `json:"scenarios,omitempty"`
+
+	// --- Role-based security guidance ---
+
+	// RedTeam contains offensive security/penetration testing guidance.
+	RedTeam *ExploitationGuidance `json:"redTeam,omitempty"`
+
+	// BlueTeam contains defensive security/detection guidance.
+	BlueTeam *DefenseGuidance `json:"blueTeam,omitempty"`
+
+	// Remediation contains developer guidance for fixing vulnerabilities.
+	Remediation *RemediationGuidance `json:"remediation,omitempty"`
+
+	// Playbooks contains incident response playbooks.
+	Playbooks []IncidentPlaybook `json:"playbooks,omitempty"`
+
+	// TestSuites links to app-test-spec test suites for validation.
+	TestSuites []TestSuiteReference `json:"testSuites,omitempty"`
+
+	// --- Risk quantification ---
+
+	// RiskAssessment contains FAIR (Factor Analysis of Information Risk) assessment data.
+	RiskAssessment *FAIRAssessment `json:"riskAssessment,omitempty"`
+
+	// BusinessImpact contains broader business impact analysis.
+	BusinessImpact *BusinessImpact `json:"businessImpact,omitempty"`
+
+	// EPSSData contains Exploit Prediction Scoring System data for CVEs.
+	EPSSData []EPSSData `json:"epssData,omitempty"`
+
+	// --- Purple Team (Adversary Emulation) ---
+
+	// AtomicTests contains Atomic Red Team test mappings for validation.
+	AtomicTests []AtomicTestMapping `json:"atomicTests,omitempty"`
+
+	// DetectionCoverage contains MITRE ATT&CK detection coverage matrix.
+	DetectionCoverage *DetectionCoverageMatrix `json:"detectionCoverage,omitempty"`
+
+	// --- Security Metrics ---
+
+	// Metrics contains security metrics for tracking detection/response effectiveness.
+	Metrics *SecurityMetrics `json:"metrics,omitempty"`
+
+	// --- Supply Chain Security ---
+
+	// SBOM contains references to Software Bill of Materials documents.
+	SBOM *SBOMReference `json:"sbom,omitempty"`
+
+	// VEXStatements contains Vulnerability Exploitability eXchange statements.
+	VEXStatements []VEXStatement `json:"vexStatements,omitempty"`
+
+	// DependencyRisks tracks risk information for software dependencies.
+	DependencyRisks []DependencyRisk `json:"dependencyRisks,omitempty"`
 }
 
 // Author represents a contributor to the threat model.
