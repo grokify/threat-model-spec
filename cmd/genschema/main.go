@@ -13,7 +13,7 @@ import (
 
 const (
 	baseURL        = "https://github.com/grokify/threat-model-spec"
-	currentVersion = "v0.4.0"
+	currentVersion = "v0.6.0"
 )
 
 func main() {
