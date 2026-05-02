@@ -157,4 +157,7 @@ type ThreatEntry struct {
 
 	// Preconditions lists what must be true for this threat to be exploitable.
 	Preconditions []string `json:"preconditions,omitempty"`
+
+	// SSVCAssessment contains CISA SSVC vulnerability prioritization data.
+	SSVCAssessment *SSVCAssessment `json:"ssvcAssessment,omitempty"`
 }

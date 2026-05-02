@@ -224,17 +224,57 @@ type Attack struct {
 	// Label describes the attack step.
 	Label string `json:"label"`
 
+	// Action describes what the attacker does in this step.
+	// More specific than Label when both are provided.
+	Action string `json:"action,omitempty"`
+
+	// Outcome describes the result of this attack step.
+	Outcome string `json:"outcome,omitempty"`
+
 	// MITRETactic is the MITRE ATT&CK tactic ID.
 	MITRETactic MITRETactic `json:"mitreTactic,omitempty"`
 
 	// MITRETechnique is the MITRE ATT&CK technique ID (e.g., T1110).
 	MITRETechnique string `json:"mitreTechnique,omitempty"`
 
+	// ATLASTechnique is the MITRE ATLAS technique ID for AI/ML-specific attacks.
+	ATLASTechnique string `json:"atlasTechnique,omitempty"`
+
+	// OWASPIds lists applicable OWASP categories (e.g., "API01", "LLM01", "A01:2021").
+	// Supports multiple IDs as one step may map to several OWASP categories.
+	OWASPIds []string `json:"owaspIds,omitempty"`
+
+	// ASIIds lists applicable OWASP Agentic Security categories (e.g., "ASI02:2026", "ASI03:2026").
+	// Supports multiple IDs as one step may map to several ASI categories.
+	ASIIds []string `json:"asiIds,omitempty"`
+
 	// STRIDEThreats lists applicable STRIDE threats.
 	STRIDEThreats []STRIDEThreat `json:"strideThreats,omitempty"`
 
+	// LINDDUNThreats lists applicable LINDDUN privacy threats.
+	LINDDUNThreats []LINDDUNThreat `json:"linddunThreats,omitempty"`
+
 	// Description provides additional context.
 	Description string `json:"description,omitempty"`
+
+	// --- Role-based notes (v0.7.0) ---
+
+	// RedTeamNotes provides exploitation guidance for this specific step.
+	RedTeamNotes string `json:"redTeamNotes,omitempty"`
+
+	// BlueTeamNotes provides detection guidance for this specific step.
+	BlueTeamNotes string `json:"blueTeamNotes,omitempty"`
+
+	// RemediationNote provides fix guidance for this specific step.
+	RemediationNote string `json:"remediationNote,omitempty"`
+
+	// TestRef links this attack step to an app-test-spec test case.
+	TestRef *TestReference `json:"testRef,omitempty"`
+
+	// --- Supply Chain (v0.6.0) ---
+
+	// ComponentRefs links this attack step to vulnerable software components.
+	ComponentRefs []ComponentReference `json:"componentRefs,omitempty"`
 }
 
 // Target represents a high-value asset being targeted.
