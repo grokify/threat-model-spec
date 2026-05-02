@@ -238,6 +238,254 @@
 
 ---
 
+---
+
+## v0.6.0: Comprehensive Security Enhancement
+
+> **Design Docs:** [`docs/design/v0.6.0/`](docs/design/v0.6.0/)
+>
+> **Status:** In Progress (~50% complete)
+
+This release combines OWASP ASI support, role-based security data, risk quantification, threat intelligence export, purple team capabilities, and security metrics.
+
+---
+
+### Section A: OWASP ASI Support ✓
+
+#### Phase 17: Core ASI Support ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 17.1 | [x] | Add `OWASPCategoryAgentic` to `ir/mappings.go` |
+| 17.2 | [x] | Update `OWASPCategory.JSONSchema()` to include "agentic" |
+| 17.3 | [x] | Add `ASIIds []string` field to Attack struct |
+| 17.4 | [x] | Add unit tests for new category and field |
+
+#### Phase 18: OWASP Reference Data ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 18.1 | [x] | Create `ir/owasp_reference.go` with OWASPEntry type |
+| 18.2 | [x] | Add OWASP API Security Top 10 (2023) - 10 entries |
+| 18.3 | [x] | Add OWASP LLM Top 10 (2025) - 10 entries |
+| 18.4 | [x] | Add OWASP Web Top 10 (2021) - 10 entries |
+| 18.5 | [x] | Add OWASP Agentic Top 10 (ASI 2026) - 10 entries |
+| 18.6 | [x] | Add GetOWASPEntry() and ValidateOWASPID() functions |
+| 18.7 | [x] | Add unit tests for reference data |
+
+#### Phase 19: Validation & Documentation ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 19.1 | [x] | Add ValidateOWASPMappings() to `ir/validate.go` |
+| 19.2 | [x] | Update README.md with ASI support |
+
+---
+
+### Section B: Role-Based Security Data ✓
+
+#### Phase 20: Red Team Data Types ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 20.1 | [x] | Create `ir/redteam.go` with ExploitationGuidance struct |
+| 20.2 | [x] | Add ExploitationStep type for ordered attack steps |
+| 20.3 | [x] | Add OffensiveTool type for tool recommendations |
+| 20.4 | [x] | Add PayloadPattern type for generic payload templates |
+| 20.5 | [x] | Add ExploitDifficulty enum |
+| 20.6 | [x] | Add unit tests with JSON round-trip verification |
+
+#### Phase 21: Blue Team Data Types ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 21.1 | [x] | Create `ir/blueteam.go` with DefenseGuidance struct |
+| 21.2 | [x] | Add DetectionRule type with format support |
+| 21.3 | [x] | Add DetectionFormat enum (sigma, yara, splunk, etc.) |
+| 21.4 | [x] | Add IOC type with type, value, confidence |
+| 21.5 | [x] | Add IOCType enum |
+| 21.6 | [x] | Add LogSource type for monitoring |
+| 21.7 | [x] | Add HuntingQuery type for threat hunting |
+| 21.8 | [x] | Add AlertThreshold type |
+| 21.9 | [x] | Add unit tests with JSON round-trip verification |
+
+#### Phase 22: Remediation Data Types ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 22.1 | [x] | Create `ir/remediation.go` with RemediationGuidance struct |
+| 22.2 | [x] | Add CodePattern type for vulnerable/secure patterns |
+| 22.3 | [x] | Add ChecklistItem type for review checklists |
+| 22.4 | [x] | Add Library type for recommended libraries |
+| 22.5 | [x] | Add ConfigChange type for configuration fixes |
+| 22.6 | [x] | Add TestingApproach type |
+| 22.7 | [x] | Add unit tests with JSON round-trip verification |
+
+#### Phase 23: app-test-spec Integration ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 23.1 | [x] | Create `ir/testref.go` with TestReference struct |
+| 23.2 | [x] | Add TestPurpose enum |
+| 23.3 | [x] | Add TestSuiteReference type |
+| 23.4 | [x] | Add TestRef to Attack struct |
+| 23.5 | [x] | Add TestSuites to ThreatModel struct |
+| 23.6 | [x] | Add TestRefs to ExploitationGuidance and TestingApproach |
+| 23.7 | [x] | Add unit tests with JSON round-trip verification |
+
+#### Phase 24: Incident Playbooks ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 24.1 | [x] | Create `ir/playbook.go` with IncidentPlaybook struct |
+| 24.2 | [x] | Add PlaybookStep type for ordered response steps |
+| 24.3 | [x] | Add PlaybookPhase enum |
+| 24.4 | [x] | Add Contact type for incident contacts |
+| 24.5 | [x] | Add Playbooks to ThreatModel struct |
+| 24.6 | [x] | Add unit tests with JSON round-trip verification |
+
+#### Phase 25: ThreatModel & Attack Integration ✓
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 25.1 | [x] | Add RedTeam, BlueTeam, Remediation fields to ThreatModel |
+| 25.2 | [x] | Add RedTeamNotes, BlueTeamNotes, RemediationNote to Attack |
+| 25.3 | [x] | Regenerate JSON schemas |
+| 25.4 | [x] | All tests pass, linting passes |
+
+---
+
+### Section C: Risk Quantification (Pending)
+
+#### Phase 26: FAIR Risk Assessment
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 26.1 | [ ] | Create `ir/fair.go` with FAIRAssessment struct |
+| 26.2 | [ ] | Add FrequencyEstimate type (LEF components) |
+| 26.3 | [ ] | Add LossEstimate type (LM components) |
+| 26.4 | [ ] | Add ALE calculation helper |
+| 26.5 | [ ] | Add RiskAssessment to ThreatModel |
+| 26.6 | [ ] | Add unit tests |
+
+#### Phase 27: Business Impact & EPSS
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 27.1 | [ ] | Add BusinessImpact struct to `ir/fair.go` |
+| 27.2 | [ ] | Create `ir/epss.go` with EPSSData struct |
+| 27.3 | [ ] | Add GetEPSSScore() lookup function |
+| 27.4 | [ ] | Add BusinessImpact and EPSSData to ThreatModel |
+| 27.5 | [ ] | Add unit tests |
+
+---
+
+### Section D: Threat Intelligence (Pending)
+
+#### Phase 28: STIX 2.1 Export
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 28.1 | [ ] | Create `ir/stix_export.go` with export functions |
+| 28.2 | [ ] | Implement IOC to STIX Indicator conversion |
+| 28.3 | [ ] | Implement ThreatActor to STIX Threat-Actor conversion |
+| 28.4 | [ ] | Implement Attack to STIX Attack-Pattern conversion |
+| 28.5 | [ ] | Implement ThreatModel.ExportSTIXBundle() |
+| 28.6 | [ ] | Add unit tests with STIX schema validation |
+
+#### Phase 29: KEV Catalog Integration
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 29.1 | [ ] | Create `ir/kev.go` with KEVEntry struct |
+| 29.2 | [ ] | Add embedded KEV catalog data (or fetch function) |
+| 29.3 | [ ] | Add GetKEVEntry() and IsInKEV() functions |
+| 29.4 | [ ] | Add KEVData field to CVEMapping |
+| 29.5 | [ ] | Add unit tests |
+
+---
+
+### Section E: Purple Team (Pending)
+
+#### Phase 30: Atomic Red Team Mapping
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 30.1 | [ ] | Create `ir/atomicredteam.go` with AtomicTestMapping struct |
+| 30.2 | [ ] | Add AtomicTests field to ThreatModel |
+| 30.3 | [ ] | Add AtomicTestID field to Attack (optional) |
+| 30.4 | [ ] | Add validation for technique ID format |
+| 30.5 | [ ] | Add unit tests |
+
+#### Phase 31: Detection Coverage Matrix
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 31.1 | [ ] | Create `ir/coverage.go` with DetectionCoverageMatrix struct |
+| 31.2 | [ ] | Add TechniqueCoverage struct |
+| 31.3 | [ ] | Add CoverageSummary struct |
+| 31.4 | [ ] | Add CalculateCoverage() function |
+| 31.5 | [ ] | Add DetectionCoverage to ThreatModel |
+| 31.6 | [ ] | Add unit tests |
+
+---
+
+### Section F: Security Metrics (Pending)
+
+#### Phase 32: MTTD/MTTR & Coverage Metrics
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 32.1 | [ ] | Create `ir/metrics.go` with SecurityMetrics struct |
+| 32.2 | [ ] | Add Duration type for time measurements |
+| 32.3 | [ ] | Add Metrics field to ThreatModel |
+| 32.4 | [ ] | Add unit tests |
+
+---
+
+### Final Integration
+
+#### Phase 33: Release Preparation
+
+| Task | Status | Description |
+|------|--------|-------------|
+| 33.1 | [x] | Update version to v0.6.0 in `cmd/genschema/main.go` |
+| 33.2 | [x] | Regenerate JSON schemas to schema/ and docs/versions/v0.6.0/ |
+| 33.3 | [ ] | Update README.md with all new features |
+| 33.4 | [ ] | Add CHANGELOG.md entry for v0.6.0 |
+| 33.5 | [ ] | Extend openclaw.json with sample role/risk/metrics data |
+| 33.6 | [ ] | Run full test suite: `go test ./...` |
+| 33.7 | [ ] | Run linter: `golangci-lint run` |
+| 33.8 | [ ] | Create git commit |
+| 33.9 | [ ] | Tag v0.6.0 release |
+
+---
+
+### Progress Summary
+
+| Section | Phases | Status | Completion |
+|---------|--------|--------|------------|
+| A: OWASP ASI | 17-19 | Complete | 100% |
+| B: Role-Based | 20-25 | Complete | 100% |
+| C: Risk | 26-27 | Pending | 0% |
+| D: Threat Intel | 28-29 | Pending | 0% |
+| E: Purple Team | 30-31 | Pending | 0% |
+| F: Metrics | 32 | Pending | 0% |
+| Final | 33 | In Progress | 25% |
+| **Overall** | 17-33 | In Progress | ~50% |
+
+---
+
+## Design Documentation
+
+Version-specific design documents are located in `docs/design/v0.X.0/`:
+
+| Version | Status | Documents |
+|---------|--------|-----------|
+| v0.6.0 | In Progress | [PRD](docs/design/v0.6.0/PRD.md), [TRD](docs/design/v0.6.0/TRD.md), [PLAN](docs/design/v0.6.0/PLAN.md), [TASKS](docs/design/v0.6.0/TASKS.md) |
+
+---
+
 ## Notes
 
 - All new fields use `omitempty` for backward compatibility

@@ -71,13 +71,15 @@ Threat Model Spec is an open-source library for creating security threat modelin
 
 ## Features
 
+### Core Capabilities
+
 - **Design-Time Threat Modeling** — Proactive security analysis during SDLC with STRIDE/LINDDUN
 - **Risk Assessment** — Structured likelihood × impact scoring with categorical risk levels
 - **Asset Inventory** — Sensitivity classification and compliance mapping
 - **Scenario Modeling** — What-if attack scenarios with preconditions and attack paths
 - **Diagrams-as-Code** — Define threat models in JSON, render to D2/SVG
 - **Multiple Diagram Types** — DFD, Attack Chain, Sequence, Attack Tree diagrams
-- **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS, CVE
+- **Framework Mappings** — MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API, LLM, Web, ASI/Agentic), STRIDE, LINDDUN, CWE, CVSS, CVE
 - **Control Frameworks** — NIST CSF, CIS Controls v8, ISO 27001 mappings
 - **Compliance Frameworks** — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP, and more
 - **Mitigations** — Track countermeasures with status (implemented, planned, accepted)
@@ -88,6 +90,45 @@ Threat Model Spec is an open-source library for creating security threat modelin
 - **D2 Styles** — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows
 - **Validation** — Type-specific field validation with strict mode
 - **AI Agents** — Claude Code plugin for AI-assisted diagram creation
+
+### v0.6.0 Security Enhancement Features
+
+- **Role-Based Security Guidance**
+  - **Red Team** — Exploitation steps, offensive tools, payload patterns, difficulty ratings
+  - **Blue Team** — Detection rules (Sigma, YARA, Splunk), IOCs, hunting queries, log sources
+  - **Remediation** — Secure code patterns, review checklists, recommended libraries
+  - **Incident Playbooks** — Structured response procedures with IR phases and contacts
+
+- **Risk Quantification**
+  - **FAIR Assessment** — Factor Analysis of Information Risk with frequency/loss estimates
+  - **Business Impact** — Revenue, customer, regulatory, reputation, operational impacts
+  - **EPSS Integration** — Exploit Prediction Scoring System data for CVEs
+  - **KEV Catalog** — CISA Known Exploited Vulnerabilities tracking
+
+- **Purple Team**
+  - **Atomic Red Team Mapping** — Link attacks to atomic tests with validation status
+  - **Detection Coverage Matrix** — Track technique coverage across detection capabilities
+  - **Security Metrics** — MTTD, MTTR, MTTC, detection rates, false positive tracking
+
+- **Threat Intelligence**
+  - **Enhanced STIX 2.1 Export** — IOCs to indicators, actors to threat-actors, detections to course-of-actions
+  - **OWASP ASI Support** — Agentic Security Top 10 (2026) mappings for AI agent threats
+
+- **Supply Chain Security**
+  - **SBOM Integration** — Link threat models to CycloneDX/SPDX software bills of materials
+  - **VEX Statements** — Vulnerability Exploitability eXchange for vulnerability status tracking
+  - **Dependency Risk** — Track vulnerable components with severity and remediation guidance
+
+- **Vulnerability Management**
+  - **SSVC Decision Trees** — CISA's Stakeholder-Specific Vulnerability Categorization
+  - **Priority Decisions** — Automated prioritization (Track, Track*, Attend, Act)
+  - **Exploitation Status** — Track active exploitation, PoC availability, and automatable attacks
+
+- **Attack Path Analysis**
+  - **Attack Graphs** — Graph-based representation of attack surfaces
+  - **Path Finding** — Find all paths, shortest paths (Dijkstra), and critical paths
+  - **Risk Calculation** — Path-based risk scoring and reachability analysis
+  - **Graph Construction** — Build attack graphs from threat model diagrams
 
 ## Installation
 
@@ -179,6 +220,28 @@ tms validate threat-model.json
 | CWE | `cwe` | `{"id": "CWE-346", "name": "Origin Validation Error"}` |
 | CVE | `cve` | `{"id": "CVE-2024-12345"}` |
 | CVSS | `cvss` | `{"version": "3.1", "vector": "CVSS:3.1/..."}` |
+
+#### OWASP Top 10 Categories
+
+| Category | Value | List | Year |
+|----------|-------|------|------|
+| API Security | `api` | API Security Top 10 | 2023 |
+| LLM Applications | `llm` | LLM Application Top 10 | 2025 |
+| Web Applications | `web` | Web Application Top 10 | 2021 |
+| Agentic Applications | `agentic` | Agentic Top 10 (ASI) | 2026 |
+
+Attack steps can include `asiIds` for OWASP Agentic Security mappings:
+
+```json
+{
+  "step": 6,
+  "from": "gateway",
+  "to": "agent",
+  "label": "Access agent",
+  "asiIds": ["ASI02:2026", "ASI03:2026"],
+  "owaspIds": ["API8:2023"]
+}
+```
 
 ### Control Frameworks
 
@@ -324,14 +387,15 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 
 | Version | Schema | Specification |
 |---------|--------|---------------|
+| v0.6.0 | [threat-model.schema.json](docs/versions/v0.6.0/threat-model.schema.json) | Comprehensive security enhancement |
 | v0.5.0 | [threat-model.schema.json](docs/versions/v0.5.0/threat-model.schema.json) | [specification.md](docs/versions/v0.5.0/specification.md) |
 | v0.4.0 | [threat-model.schema.json](docs/versions/v0.4.0/threat-model.schema.json) | [specification.md](docs/versions/v0.4.0/specification.md) |
 
 ### Schema URLs
 
 ```
-https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json
-https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/diagram.schema.json
+https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/threat-model.schema.json
+https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/diagram.schema.json
 ```
 
 ### Using the Schema
@@ -340,7 +404,7 @@ Reference the schema in your threat model JSON:
 
 ```json
 {
-  "$schema": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/threat-model.schema.json",
+  "$schema": "https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/threat-model.schema.json",
   "id": "my-threat-model",
   "title": "My Application Threat Model",
   "diagrams": [...]
