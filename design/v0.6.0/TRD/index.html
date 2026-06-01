@@ -1,0 +1,2576 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Security threat modeling diagrams as code with D2 and STIX 2.1 export">
+      
+      
+      
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/design/v0.6.0/TRD/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>Technical Requirements Document: v0.6.0 - Comprehensive Security Enhancement - Threat Model Spec</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#technical-requirements-document-v060-comprehensive-security-enhancement" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Threat Model Spec
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Technical Requirements Document: v0.6.0 - Comprehensive Security Enhancement
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/grokify/threat-model-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/threat-model-spec
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Threat Model Spec
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/grokify/threat-model-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/threat-model-spec
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/diagram-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diagram Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security Frameworks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Security Frameworks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/stride/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STRIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/linddun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LINDDUN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/mitre-attack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MITRE ATT&CK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/mitre-atlas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MITRE ATLAS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OWASP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/cwe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CWE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/cvss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CVSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/design-time-threat-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Design-Time Threat Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/risk-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Risk Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Specification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON IR Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Element Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/boundaries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Boundary Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flow Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/mappings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Mappings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Versions
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Versions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.6.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.5.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.4.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    D2 Styles
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            D2 Styles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/stride/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STRIDE Styles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/dfd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DFD Styles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/trust-boundaries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trust Boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/attack-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attack Flows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            CLI Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    generate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    validate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.2.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.1.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.1.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Plans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.6.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.5.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.4.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-level-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Level Design
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-a-owasp-asi-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A: OWASP ASI Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section A: OWASP ASI Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#owaspcategory-extension" class="md-nav__link">
+    <span class="md-ellipsis">
+      OWASPCategory Extension
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#owasp-reference-data-irowasp_referencego" class="md-nav__link">
+    <span class="md-ellipsis">
+      OWASP Reference Data (ir/owasp_reference.go)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-role-based-security-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B: Role-Based Security Data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section B: Role-Based Security Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#red-team-types-irredteamgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Red Team Types (ir/redteam.go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blue-team-types-irblueteamgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blue Team Types (ir/blueteam.go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation-types-irremediationgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remediation Types (ir/remediation.go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playbook-types-irplaybookgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Playbook Types (ir/playbook.go)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-reference-types-irtestrefgo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Reference Types (ir/testref.go)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-risk-quantification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C: Risk Quantification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section C: Risk Quantification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fair-types-irfairgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAIR Types (ir/fair.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epss-types-irepssgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      EPSS Types (ir/epss.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-threat-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D: Threat Intelligence
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section D: Threat Intelligence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stix-export-types-irstix_exportgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      STIX Export Types (ir/stix_export.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kev-types-irkevgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      KEV Types (ir/kev.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-purple-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E: Purple Team
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section E: Purple Team">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atomic-red-team-types-iratomicredteamgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atomic Red Team Types (ir/atomicredteam.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-coverage-types-ircoveragego-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detection Coverage Types (ir/coverage.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-security-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F: Security Metrics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section F: Security Metrics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metrics-types-irmetricsgo-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics Types (ir/metrics.go) - NEW
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threatmodel-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ThreatModel Additions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-additions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Additions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified Files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backward-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backward Compatibility
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="technical-requirements-document-v060-comprehensive-security-enhancement">Technical Requirements Document: v0.6.0 - Comprehensive Security Enhancement<a class="headerlink" href="#technical-requirements-document-v060-comprehensive-security-enhancement" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Version:</strong> 0.6.0
+<strong>Status:</strong> In Progress
+<strong>Date:</strong> 2026-04-28</p>
+</blockquote>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="high-level-design">High-Level Design<a class="headerlink" href="#high-level-design" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                           threat-model-spec v0.6.0                           │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├─────────────────────────────────────────────────────────────────────────────┤
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│                                                                              │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  Section A: OWASP ASI Support                                                │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  ├── OWASPCategoryAgentic          ──────► ASI 2026 mapping                 │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  ├── ASIIds []string (Attack)      ──────► Per-step ASI IDs                 │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│  └── OWASPReference data           ──────► 40 entries (API, LLM, Web, ASI)  │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│                                                                              │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  Section B: Role-Based Security Data                                         │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│  ├── RedTeam      *ExploitationGuidance  ──────► Offensive Testing          │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  ├── BlueTeam     *DefenseGuidance       ──────► SIEM/EDR/Hunting           │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│  ├── Remediation  *RemediationGuidance   ──────► Code Fixes                 │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│  ├── Playbooks    []IncidentPlaybook     ──────► IR Response                │
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│  └── TestSuites   []TestSuiteReference   ──────► app-test-spec              │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│                                                                              │
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│  Section C: Risk Quantification                                              │
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│  ├── FAIRAssessment                ──────► Quantified risk                  │
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│  ├── BusinessImpact                ──────► Revenue/customer impact          │
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│  └── EPSSMapping                   ──────► Exploit prediction               │
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│                                                                              │
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│  Section D: Threat Intelligence                                              │
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│  ├── STIXBundle export             ──────► TI platform sharing              │
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│  ├── KEVMapping                    ──────► CISA known exploited             │
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│  └── ThreatActorSTIX               ──────► Actor intelligence               │
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│                                                                              │
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│  Section E: Purple Team                                                      │
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│  ├── AtomicTestMapping             ──────► ART validation                   │
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│  ├── DetectionCoverageMatrix       ──────► ATT&amp;CK heatmap                   │
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>│  └── PurpleExercise                ──────► Exercise planning                │
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>│                                                                              │
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>│  Section F: Security Metrics                                                 │
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>│  ├── SecurityMetrics               ──────► MTTD/MTTR tracking               │
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>│  └── CoverageMetrics               ──────► Attack surface coverage          │
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>│                                                                              │
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>└─────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h2 id="data-model">Data Model<a class="headerlink" href="#data-model" title="Permanent link">&para;</a></h2>
+<h3 id="section-a-owasp-asi-support">Section A: OWASP ASI Support<a class="headerlink" href="#section-a-owasp-asi-support" title="Permanent link">&para;</a></h3>
+<h4 id="owaspcategory-extension">OWASPCategory Extension<a class="headerlink" href="#owaspcategory-extension" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">OWASPCategoryAPI</span><span class="w">     </span><span class="nx">OWASPCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;api&quot;</span><span class="w">     </span><span class="c1">// API Security Top 10 (2023)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">OWASPCategoryLLM</span><span class="w">     </span><span class="nx">OWASPCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;llm&quot;</span><span class="w">     </span><span class="c1">// LLM Application Top 10 (2025)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nx">OWASPCategoryWeb</span><span class="w">     </span><span class="nx">OWASPCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;web&quot;</span><span class="w">     </span><span class="c1">// Web Application Top 10 (2021)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">OWASPCategoryAgentic</span><span class="w"> </span><span class="nx">OWASPCategory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;agentic&quot;</span><span class="w"> </span><span class="c1">// Agentic Applications Top 10 (2026)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+</code></pre></div>
+<h4 id="owasp-reference-data-irowasp_referencego">OWASP Reference Data (<code>ir/owasp_reference.go</code>)<a class="headerlink" href="#owasp-reference-data-irowasp_referencego" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">OWASPEntry</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;id&quot;`</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">Name</span><span class="w">        </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;name&quot;`</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;description&quot;`</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">Category</span><span class="w">    </span><span class="nx">OWASPCategory</span><span class="w"> </span><span class="s">`json:&quot;category&quot;`</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nx">URL</span><span class="w">         </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;url&quot;`</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">// 40 entries across 4 categories</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="kd">var</span><span class="w"> </span><span class="nx">OWASPAPITop10</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">OWASPEntry</span><span class="w">     </span><span class="c1">// 10 entries</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kd">var</span><span class="w"> </span><span class="nx">OWASPLLMTop10</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">OWASPEntry</span><span class="w">     </span><span class="c1">// 10 entries</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="kd">var</span><span class="w"> </span><span class="nx">OWASPWebTop10</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">OWASPEntry</span><span class="w">     </span><span class="c1">// 10 entries</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="kd">var</span><span class="w"> </span><span class="nx">OWASPAgenticTop10</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">OWASPEntry</span><span class="w"> </span><span class="c1">// 10 entries</span>
+</code></pre></div>
+<h3 id="section-b-role-based-security-data">Section B: Role-Based Security Data<a class="headerlink" href="#section-b-role-based-security-data" title="Permanent link">&para;</a></h3>
+<h4 id="red-team-types-irredteamgo">Red Team Types (<code>ir/redteam.go</code>)<a class="headerlink" href="#red-team-types-irredteamgo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ExploitationGuidance</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">Prerequisites</span><span class="w">      </span><span class="p">[]</span><span class="kt">string</span><span class="w">           </span><span class="s">`json:&quot;prerequisites,omitempty&quot;`</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">ExploitationSteps</span><span class="w">  </span><span class="p">[]</span><span class="nx">ExploitationStep</span><span class="w"> </span><span class="s">`json:&quot;exploitationSteps,omitempty&quot;`</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">Tools</span><span class="w">              </span><span class="p">[]</span><span class="nx">OffensiveTool</span><span class="w">    </span><span class="s">`json:&quot;tools,omitempty&quot;`</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">PayloadPatterns</span><span class="w">    </span><span class="p">[]</span><span class="nx">PayloadPattern</span><span class="w">   </span><span class="s">`json:&quot;payloadPatterns,omitempty&quot;`</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">SuccessIndicators</span><span class="w">  </span><span class="p">[]</span><span class="kt">string</span><span class="w">           </span><span class="s">`json:&quot;successIndicators,omitempty&quot;`</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">Difficulty</span><span class="w">         </span><span class="nx">ExploitDifficulty</span><span class="w">  </span><span class="s">`json:&quot;difficulty,omitempty&quot;`</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">TestRefs</span><span class="w">           </span><span class="p">[]</span><span class="nx">TestReference</span><span class="w">    </span><span class="s">`json:&quot;testRefs,omitempty&quot;`</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ExploitDifficulty</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// trivial, low, medium, high, expert</span>
+</code></pre></div>
+<h4 id="blue-team-types-irblueteamgo">Blue Team Types (<code>ir/blueteam.go</code>)<a class="headerlink" href="#blue-team-types-irblueteamgo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">DefenseGuidance</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">DetectionRules</span><span class="w">            </span><span class="p">[]</span><span class="nx">DetectionRule</span><span class="w">  </span><span class="s">`json:&quot;detectionRules,omitempty&quot;`</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">IOCs</span><span class="w">                      </span><span class="p">[]</span><span class="nx">IOC</span><span class="w">            </span><span class="s">`json:&quot;iocs,omitempty&quot;`</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">LogSources</span><span class="w">                </span><span class="p">[]</span><span class="nx">LogSource</span><span class="w">      </span><span class="s">`json:&quot;logSources,omitempty&quot;`</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">HuntingQueries</span><span class="w">            </span><span class="p">[]</span><span class="nx">HuntingQuery</span><span class="w">   </span><span class="s">`json:&quot;huntingQueries,omitempty&quot;`</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">MonitoringRecommendations</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;monitoringRecommendations,omitempty&quot;`</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">}</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kd">type</span><span class="w"> </span><span class="nx">DetectionFormat</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// sigma, yara, splunk, elastic, kql, snort, suricata</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kd">type</span><span class="w"> </span><span class="nx">IOCType</span><span class="w"> </span><span class="kt">string</span><span class="w">         </span><span class="c1">// ip, domain, url, hash, filepath, email, registry, process</span>
+</code></pre></div>
+<h4 id="remediation-types-irremediationgo">Remediation Types (<code>ir/remediation.go</code>)<a class="headerlink" href="#remediation-types-irremediationgo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">RemediationGuidance</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nx">VulnerablePatterns</span><span class="w">   </span><span class="p">[]</span><span class="nx">CodePattern</span><span class="w">      </span><span class="s">`json:&quot;vulnerablePatterns,omitempty&quot;`</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nx">SecurePatterns</span><span class="w">       </span><span class="p">[]</span><span class="nx">CodePattern</span><span class="w">      </span><span class="s">`json:&quot;securePatterns,omitempty&quot;`</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">ReviewChecklist</span><span class="w">      </span><span class="p">[]</span><span class="nx">ChecklistItem</span><span class="w">    </span><span class="s">`json:&quot;reviewChecklist,omitempty&quot;`</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nx">RecommendedLibraries</span><span class="w"> </span><span class="p">[]</span><span class="nx">Library</span><span class="w">          </span><span class="s">`json:&quot;recommendedLibraries,omitempty&quot;`</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nx">ConfigurationChanges</span><span class="w"> </span><span class="p">[]</span><span class="nx">ConfigChange</span><span class="w">     </span><span class="s">`json:&quot;configurationChanges,omitempty&quot;`</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nx">TestingApproach</span><span class="w">      </span><span class="o">*</span><span class="nx">TestingApproach</span><span class="w">   </span><span class="s">`json:&quot;testingApproach,omitempty&quot;`</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="playbook-types-irplaybookgo">Playbook Types (<code>ir/playbook.go</code>)<a class="headerlink" href="#playbook-types-irplaybookgo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">IncidentPlaybook</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;id&quot;`</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">Name</span><span class="w">        </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;name&quot;`</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nx">ThreatType</span><span class="w">  </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;threatType,omitempty&quot;`</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nx">Steps</span><span class="w">       </span><span class="p">[]</span><span class="nx">PlaybookStep</span><span class="w"> </span><span class="s">`json:&quot;steps,omitempty&quot;`</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nx">Contacts</span><span class="w">    </span><span class="p">[]</span><span class="nx">Contact</span><span class="w">      </span><span class="s">`json:&quot;contacts,omitempty&quot;`</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="nx">SLAMinutes</span><span class="w">  </span><span class="kt">int</span><span class="w">            </span><span class="s">`json:&quot;slaMinutes,omitempty&quot;`</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">}</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="kd">type</span><span class="w"> </span><span class="nx">PlaybookPhase</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// preparation, identification, containment, eradication, recovery, lessons-learned</span>
+</code></pre></div>
+<h4 id="test-reference-types-irtestrefgo">Test Reference Types (<code>ir/testref.go</code>)<a class="headerlink" href="#test-reference-types-irtestrefgo" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">TestReference</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="nx">TestID</span><span class="w">      </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;testId&quot;`</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nx">TestFile</span><span class="w">    </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;testFile,omitempty&quot;`</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nx">Purpose</span><span class="w">     </span><span class="nx">TestPurpose</span><span class="w"> </span><span class="s">`json:&quot;purpose&quot;`</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="nx">Description</span><span class="w"> </span><span class="kt">string</span><span class="w">      </span><span class="s">`json:&quot;description,omitempty&quot;`</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="kd">type</span><span class="w"> </span><span class="nx">TestPurpose</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// exploitation, detection, remediation, regression</span>
+</code></pre></div>
+<h3 id="section-c-risk-quantification">Section C: Risk Quantification<a class="headerlink" href="#section-c-risk-quantification" title="Permanent link">&para;</a></h3>
+<h4 id="fair-types-irfairgo-new">FAIR Types (<code>ir/fair.go</code>) - NEW<a class="headerlink" href="#fair-types-irfairgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">FAIRAssessment</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="c1">// Loss Event Frequency</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nx">ThreatEventFrequency</span><span class="w">  </span><span class="o">*</span><span class="nx">FrequencyEstimate</span><span class="w"> </span><span class="s">`json:&quot;threatEventFrequency,omitempty&quot;`</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nx">Vulnerability</span><span class="w">         </span><span class="o">*</span><span class="nx">Percentage</span><span class="w">        </span><span class="s">`json:&quot;vulnerability,omitempty&quot;`</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="c1">// Loss Magnitude</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nx">PrimaryLoss</span><span class="w">           </span><span class="o">*</span><span class="nx">LossEstimate</span><span class="w">      </span><span class="s">`json:&quot;primaryLoss,omitempty&quot;`</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nx">SecondaryLoss</span><span class="w">         </span><span class="o">*</span><span class="nx">LossEstimate</span><span class="w">      </span><span class="s">`json:&quot;secondaryLoss,omitempty&quot;`</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="c1">// Derived</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nx">AnnualizedLossExpectancy</span><span class="w"> </span><span class="o">*</span><span class="nx">Currency</span><span class="w">       </span><span class="s">`json:&quot;annualizedLossExpectancy,omitempty&quot;`</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="nx">RiskScore</span><span class="w">             </span><span class="kt">float64</span><span class="w">            </span><span class="s">`json:&quot;riskScore,omitempty&quot;`</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="p">}</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="kd">type</span><span class="w"> </span><span class="nx">FrequencyEstimate</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">    </span><span class="nx">Min</span><span class="w">      </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;min&quot;`</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">    </span><span class="nx">Max</span><span class="w">      </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;max&quot;`</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">    </span><span class="nx">MostLikely</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;mostLikely&quot;`</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">    </span><span class="nx">Confidence</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;confidence,omitempty&quot;`</span><span class="w"> </span><span class="c1">// high, medium, low</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="p">}</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="kd">type</span><span class="w"> </span><span class="nx">LossEstimate</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="w">    </span><span class="nx">Min</span><span class="w">      </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;min&quot;`</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="w">    </span><span class="nx">Max</span><span class="w">      </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;max&quot;`</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="w">    </span><span class="nx">MostLikely</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;mostLikely&quot;`</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="w">    </span><span class="nx">Currency</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;currency,omitempty&quot;`</span><span class="w"> </span><span class="c1">// USD, EUR, etc.</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="p">}</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="kd">type</span><span class="w"> </span><span class="nx">BusinessImpact</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="w">    </span><span class="nx">RevenueImpact</span><span class="w">     </span><span class="o">*</span><span class="nx">LossEstimate</span><span class="w"> </span><span class="s">`json:&quot;revenueImpact,omitempty&quot;`</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a><span class="w">    </span><span class="nx">CustomerImpact</span><span class="w">    </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;customerImpact,omitempty&quot;`</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="w">    </span><span class="nx">RegulatoryImpact</span><span class="w">  </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;regulatoryImpact,omitempty&quot;`</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="w">    </span><span class="nx">ReputationImpact</span><span class="w">  </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;reputationImpact,omitempty&quot;`</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="w">    </span><span class="nx">OperationalImpact</span><span class="w"> </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;operationalImpact,omitempty&quot;`</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="w">    </span><span class="nx">Criticality</span><span class="w">       </span><span class="kt">string</span><span class="w">        </span><span class="s">`json:&quot;criticality,omitempty&quot;`</span><span class="w"> </span><span class="c1">// critical, high, medium, low</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="epss-types-irepssgo-new">EPSS Types (<code>ir/epss.go</code>) - NEW<a class="headerlink" href="#epss-types-irepssgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">EPSSData</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nx">CVE</span><span class="w">         </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;cve&quot;`</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nx">EPSSScore</span><span class="w">   </span><span class="kt">float64</span><span class="w">   </span><span class="s">`json:&quot;epssScore&quot;`</span><span class="w">   </span><span class="c1">// 0.0 - 1.0</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nx">Percentile</span><span class="w">  </span><span class="kt">float64</span><span class="w">   </span><span class="s">`json:&quot;percentile&quot;`</span><span class="w">  </span><span class="c1">// 0.0 - 100.0</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nx">DateScored</span><span class="w">  </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;dateScored,omitempty&quot;`</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="section-d-threat-intelligence">Section D: Threat Intelligence<a class="headerlink" href="#section-d-threat-intelligence" title="Permanent link">&para;</a></h3>
+<h4 id="stix-export-types-irstix_exportgo-new">STIX Export Types (<code>ir/stix_export.go</code>) - NEW<a class="headerlink" href="#stix-export-types-irstix_exportgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">STIXExportOptions</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nx">IncludeIndicators</span><span class="w">   </span><span class="kt">bool</span><span class="w"> </span><span class="s">`json:&quot;includeIndicators,omitempty&quot;`</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nx">IncludeAttackPatterns</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="s">`json:&quot;includeAttackPatterns,omitempty&quot;`</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nx">IncludeThreatActors</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="s">`json:&quot;includeThreatActors,omitempty&quot;`</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="nx">IncludeMalware</span><span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="s">`json:&quot;includeMalware,omitempty&quot;`</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="nx">IncludeTools</span><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="s">`json:&quot;includeTools,omitempty&quot;`</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">}</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c1">// Functions</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">tm</span><span class="w"> </span><span class="o">*</span><span class="nx">ThreatModel</span><span class="p">)</span><span class="w"> </span><span class="nx">ExportSTIXBundle</span><span class="p">(</span><span class="nx">opts</span><span class="w"> </span><span class="nx">STIXExportOptions</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">stix</span><span class="p">.</span><span class="nx">Bundle</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ioc</span><span class="w"> </span><span class="o">*</span><span class="nx">IOC</span><span class="p">)</span><span class="w"> </span><span class="nx">ToSTIXIndicator</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">stix</span><span class="p">.</span><span class="nx">Indicator</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">ta</span><span class="w"> </span><span class="o">*</span><span class="nx">ThreatActor</span><span class="p">)</span><span class="w"> </span><span class="nx">ToSTIXThreatActor</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">stix</span><span class="p">.</span><span class="nx">ThreatActor</span>
+</code></pre></div>
+<h4 id="kev-types-irkevgo-new">KEV Types (<code>ir/kev.go</code>) - NEW<a class="headerlink" href="#kev-types-irkevgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">KEVEntry</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="nx">CVEID</span><span class="w">              </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;cveId&quot;`</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nx">VendorProject</span><span class="w">      </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;vendorProject&quot;`</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nx">Product</span><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;product&quot;`</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nx">VulnerabilityName</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;vulnerabilityName&quot;`</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nx">DateAdded</span><span class="w">          </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;dateAdded&quot;`</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nx">ShortDescription</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;shortDescription&quot;`</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="nx">RequiredAction</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;requiredAction&quot;`</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="nx">DueDate</span><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;dueDate&quot;`</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">    </span><span class="nx">KnownRansomware</span><span class="w">    </span><span class="kt">bool</span><span class="w">   </span><span class="s">`json:&quot;knownRansomwareCampaignUse&quot;`</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="p">}</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="c1">// Function</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="kd">func</span><span class="w"> </span><span class="nx">GetKEVEntry</span><span class="p">(</span><span class="nx">cveID</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">KEVEntry</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="kd">func</span><span class="w"> </span><span class="nx">IsInKEV</span><span class="p">(</span><span class="nx">cveID</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span>
+</code></pre></div>
+<h3 id="section-e-purple-team">Section E: Purple Team<a class="headerlink" href="#section-e-purple-team" title="Permanent link">&para;</a></h3>
+<h4 id="atomic-red-team-types-iratomicredteamgo-new">Atomic Red Team Types (<code>ir/atomicredteam.go</code>) - NEW<a class="headerlink" href="#atomic-red-team-types-iratomicredteamgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">AtomicTestMapping</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nx">TechniqueID</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;techniqueId&quot;`</span><span class="w"> </span><span class="c1">// e.g., T1059.001</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nx">AtomicTests</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;atomicTests&quot;`</span><span class="w"> </span><span class="c1">// e.g., [&quot;T1059.001-1&quot;, &quot;T1059.001-2&quot;]</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nx">Validated</span><span class="w">   </span><span class="kt">bool</span><span class="w">     </span><span class="s">`json:&quot;validated,omitempty&quot;`</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nx">LastRun</span><span class="w">     </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;lastRun,omitempty&quot;`</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="nx">Result</span><span class="w">      </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;result,omitempty&quot;`</span><span class="w"> </span><span class="c1">// passed, failed, blocked</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="detection-coverage-types-ircoveragego-new">Detection Coverage Types (<code>ir/coverage.go</code>) - NEW<a class="headerlink" href="#detection-coverage-types-ircoveragego-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">DetectionCoverageMatrix</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="nx">Techniques</span><span class="w"> </span><span class="p">[]</span><span class="nx">TechniqueCoverage</span><span class="w"> </span><span class="s">`json:&quot;techniques&quot;`</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nx">Summary</span><span class="w">    </span><span class="o">*</span><span class="nx">CoverageSummary</span><span class="w">    </span><span class="s">`json:&quot;summary,omitempty&quot;`</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">}</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="kd">type</span><span class="w"> </span><span class="nx">TechniqueCoverage</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="nx">TechniqueID</span><span class="w">   </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;techniqueId&quot;`</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="nx">TechniqueName</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;techniqueName&quot;`</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="nx">Tactic</span><span class="w">        </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;tactic&quot;`</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="nx">Coverage</span><span class="w">      </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;coverage&quot;`</span><span class="w"> </span><span class="c1">// none, partial, full</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">    </span><span class="nx">DetectionIDs</span><span class="w">  </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;detectionIds,omitempty&quot;`</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">    </span><span class="nx">Notes</span><span class="w">         </span><span class="kt">string</span><span class="w">  </span><span class="s">`json:&quot;notes,omitempty&quot;`</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="p">}</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="kd">type</span><span class="w"> </span><span class="nx">CoverageSummary</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">    </span><span class="nx">TotalTechniques</span><span class="w">   </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;totalTechniques&quot;`</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">    </span><span class="nx">CoveredFull</span><span class="w">       </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;coveredFull&quot;`</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">    </span><span class="nx">CoveredPartial</span><span class="w">    </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;coveredPartial&quot;`</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="w">    </span><span class="nx">NotCovered</span><span class="w">        </span><span class="kt">int</span><span class="w">     </span><span class="s">`json:&quot;notCovered&quot;`</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="w">    </span><span class="nx">CoveragePercent</span><span class="w">   </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;coveragePercent&quot;`</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="section-f-security-metrics">Section F: Security Metrics<a class="headerlink" href="#section-f-security-metrics" title="Permanent link">&para;</a></h3>
+<h4 id="metrics-types-irmetricsgo-new">Metrics Types (<code>ir/metrics.go</code>) - NEW<a class="headerlink" href="#metrics-types-irmetricsgo-new" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">SecurityMetrics</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nx">MTTD</span><span class="w">          </span><span class="o">*</span><span class="nx">Duration</span><span class="w"> </span><span class="s">`json:&quot;mttd,omitempty&quot;`</span><span class="w">          </span><span class="c1">// Mean Time to Detect</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="nx">MTTR</span><span class="w">          </span><span class="o">*</span><span class="nx">Duration</span><span class="w"> </span><span class="s">`json:&quot;mttr,omitempty&quot;`</span><span class="w">          </span><span class="c1">// Mean Time to Respond</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="nx">MTTC</span><span class="w">          </span><span class="o">*</span><span class="nx">Duration</span><span class="w"> </span><span class="s">`json:&quot;mttc,omitempty&quot;`</span><span class="w">          </span><span class="c1">// Mean Time to Contain</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="nx">DetectionRate</span><span class="w"> </span><span class="kt">float64</span><span class="w">   </span><span class="s">`json:&quot;detectionRate,omitempty&quot;`</span><span class="w"> </span><span class="c1">// 0.0 - 1.0</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="nx">FalsePositiveRate</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="s">`json:&quot;falsePositiveRate,omitempty&quot;`</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="nx">MeasuredAt</span><span class="w">    </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;measuredAt,omitempty&quot;`</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="p">}</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Duration</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="nx">Value</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;value&quot;`</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span><span class="nx">Unit</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;unit&quot;`</span><span class="w"> </span><span class="c1">// seconds, minutes, hours, days</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="threatmodel-additions">ThreatModel Additions<a class="headerlink" href="#threatmodel-additions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ThreatModel</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="c1">// ... existing fields ...</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="c1">// Section A: OWASP (existing, enhanced)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="c1">// Mappings.OWASP now includes agentic category</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">    </span><span class="c1">// Section B: Role-Based Security Data</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="nx">RedTeam</span><span class="w">     </span><span class="o">*</span><span class="nx">ExploitationGuidance</span><span class="w">  </span><span class="s">`json:&quot;redTeam,omitempty&quot;`</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">    </span><span class="nx">BlueTeam</span><span class="w">    </span><span class="o">*</span><span class="nx">DefenseGuidance</span><span class="w">       </span><span class="s">`json:&quot;blueTeam,omitempty&quot;`</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">    </span><span class="nx">Remediation</span><span class="w"> </span><span class="o">*</span><span class="nx">RemediationGuidance</span><span class="w">   </span><span class="s">`json:&quot;remediation,omitempty&quot;`</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">    </span><span class="nx">Playbooks</span><span class="w">   </span><span class="p">[]</span><span class="nx">IncidentPlaybook</span><span class="w">     </span><span class="s">`json:&quot;playbooks,omitempty&quot;`</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">    </span><span class="nx">TestSuites</span><span class="w">  </span><span class="p">[]</span><span class="nx">TestSuiteReference</span><span class="w">   </span><span class="s">`json:&quot;testSuites,omitempty&quot;`</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">    </span><span class="c1">// Section C: Risk Quantification</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="w">    </span><span class="nx">RiskAssessment</span><span class="w"> </span><span class="o">*</span><span class="nx">FAIRAssessment</span><span class="w">    </span><span class="s">`json:&quot;riskAssessment,omitempty&quot;`</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">    </span><span class="nx">BusinessImpact</span><span class="w"> </span><span class="o">*</span><span class="nx">BusinessImpact</span><span class="w">    </span><span class="s">`json:&quot;businessImpact,omitempty&quot;`</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">    </span><span class="nx">EPSSData</span><span class="w">       </span><span class="p">[]</span><span class="nx">EPSSData</span><span class="w">         </span><span class="s">`json:&quot;epssData,omitempty&quot;`</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="w">    </span><span class="c1">// Section D: Threat Intelligence</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="w">    </span><span class="c1">// (Export functions, not stored fields)</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="w">    </span><span class="c1">// Section E: Purple Team</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="w">    </span><span class="nx">AtomicTests</span><span class="w">       </span><span class="p">[]</span><span class="nx">AtomicTestMapping</span><span class="w">      </span><span class="s">`json:&quot;atomicTests,omitempty&quot;`</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a><span class="w">    </span><span class="nx">DetectionCoverage</span><span class="w"> </span><span class="o">*</span><span class="nx">DetectionCoverageMatrix</span><span class="w"> </span><span class="s">`json:&quot;detectionCoverage,omitempty&quot;`</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a><span class="w">    </span><span class="c1">// Section F: Security Metrics</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="w">    </span><span class="nx">Metrics</span><span class="w"> </span><span class="o">*</span><span class="nx">SecurityMetrics</span><span class="w"> </span><span class="s">`json:&quot;metrics,omitempty&quot;`</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="attack-additions">Attack Additions<a class="headerlink" href="#attack-additions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">Attack</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="c1">// ... existing fields ...</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="c1">// Role-based notes</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="nx">RedTeamNotes</span><span class="w">    </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;redTeamNotes,omitempty&quot;`</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="nx">BlueTeamNotes</span><span class="w">   </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;blueTeamNotes,omitempty&quot;`</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="nx">RemediationNote</span><span class="w"> </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;remediationNote,omitempty&quot;`</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span><span class="nx">TestRef</span><span class="w">         </span><span class="o">*</span><span class="nx">TestReference</span><span class="w"> </span><span class="s">`json:&quot;testRef,omitempty&quot;`</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="files-summary">Files Summary<a class="headerlink" href="#files-summary" title="Permanent link">&para;</a></h2>
+<h3 id="new-files">New Files<a class="headerlink" href="#new-files" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Section</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/owasp_reference.go</code></td>
+<td>A</td>
+<td>40 OWASP entries</td>
+</tr>
+<tr>
+<td><code>ir/redteam.go</code></td>
+<td>B</td>
+<td>Exploitation guidance</td>
+</tr>
+<tr>
+<td><code>ir/blueteam.go</code></td>
+<td>B</td>
+<td>Defense guidance</td>
+</tr>
+<tr>
+<td><code>ir/remediation.go</code></td>
+<td>B</td>
+<td>Code fix guidance</td>
+</tr>
+<tr>
+<td><code>ir/playbook.go</code></td>
+<td>B</td>
+<td>IR playbooks</td>
+</tr>
+<tr>
+<td><code>ir/testref.go</code></td>
+<td>B</td>
+<td>app-test-spec integration</td>
+</tr>
+<tr>
+<td><code>ir/fair.go</code></td>
+<td>C</td>
+<td>FAIR risk assessment</td>
+</tr>
+<tr>
+<td><code>ir/epss.go</code></td>
+<td>C</td>
+<td>EPSS scoring</td>
+</tr>
+<tr>
+<td><code>ir/stix_export.go</code></td>
+<td>D</td>
+<td>STIX 2.1 export</td>
+</tr>
+<tr>
+<td><code>ir/kev.go</code></td>
+<td>D</td>
+<td>KEV catalog</td>
+</tr>
+<tr>
+<td><code>ir/atomicredteam.go</code></td>
+<td>E</td>
+<td>ART mapping</td>
+</tr>
+<tr>
+<td><code>ir/coverage.go</code></td>
+<td>E</td>
+<td>Detection coverage</td>
+</tr>
+<tr>
+<td><code>ir/metrics.go</code></td>
+<td>F</td>
+<td>Security metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modified-files">Modified Files<a class="headerlink" href="#modified-files" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/mappings.go</code></td>
+<td>OWASPCategoryAgentic</td>
+</tr>
+<tr>
+<td><code>ir/diagram.go</code></td>
+<td>ASIIds, role notes, TestRef on Attack</td>
+</tr>
+<tr>
+<td><code>ir/threat_model.go</code></td>
+<td>All new ThreatModel fields</td>
+</tr>
+<tr>
+<td><code>ir/validate.go</code></td>
+<td>ValidateOWASPMappings()</td>
+</tr>
+</tbody>
+</table>
+<h2 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h2>
+<ul>
+<li>All new fields use <code>omitempty</code> tag</li>
+<li>Existing ThreatModel and DiagramIR JSON remains valid</li>
+<li>No changes to existing required fields</li>
+<li>Version bump to v0.6.0 for schema</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/grokify/threat-model-spec" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

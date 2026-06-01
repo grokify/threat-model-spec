@@ -176,15 +176,36 @@
         "label": {
           "type": "string"
         },
+        "action": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        },
         "mitreTactic": {
           "$ref": "#/$defs/MITRETactic"
         },
         "mitreTechnique": {
           "type": "string"
         },
+        "atlasTechnique": {
+          "type": "string"
+        },
+        "owaspIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "strideThreats": {
           "items": {
             "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "linddunThreats": {
+          "items": {
+            "$ref": "#/$defs/LINDDUNThreat"
           },
           "type": "array"
         },

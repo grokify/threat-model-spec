@@ -314,6 +314,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v060-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.6.0 Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1131,6 +1155,29 @@
   
   
     <li class="md-nav__item">
+      <a href="versions/v0.6.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="versions/v0.5.0/specification/" class="md-nav__link">
         
   
@@ -1539,6 +1586,29 @@
   
   
     <li class="md-nav__item">
+      <a href="releases/v0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="releases/v0.5.0/" class="md-nav__link">
         
   
@@ -1706,6 +1776,29 @@
   
   
     <li class="md-nav__item">
+      <a href="plans/v0.6.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="plans/v0.5.0-plan/" class="md-nav__link">
         
   
@@ -1807,6 +1900,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Capabilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#v060-enhancements" class="md-nav__link">
+    <span class="md-ellipsis">
+      v0.6.0 Enhancements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1892,6 +2009,7 @@
 <p><strong>Security threat modeling diagrams as code with D2 and STIX 2.1 export.</strong></p>
 <p>Threat Model Spec is an open-source Go library and CLI for creating security threat modeling diagrams programmatically. Define your threat models in JSON, render them to D2 diagrams, and export to STIX 2.1 for threat intelligence sharing.</p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<h3 id="core-capabilities">Core Capabilities<a class="headerlink" href="#core-capabilities" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Design-Time Threat Modeling</strong> — Proactive security analysis during SDLC with risk assessment</li>
 <li><strong>Risk Assessment</strong> — Structured likelihood × impact scoring with categorical risk levels</li>
@@ -1899,7 +2017,7 @@
 <li><strong>Scenario Modeling</strong> — What-if attack scenarios with preconditions and attack paths</li>
 <li><strong>Diagrams-as-Code</strong> — Define threat models in JSON, render to D2/SVG</li>
 <li><strong>Multiple Diagram Types</strong> — DFD, Attack Chain, Sequence, Attack Tree diagrams</li>
-<li><strong>Threat Frameworks</strong> — MITRE ATT&amp;CK, MITRE ATLAS, OWASP Top 10, STRIDE, LINDDUN, CWE, CVSS</li>
+<li><strong>Threat Frameworks</strong> — MITRE ATT&amp;CK, MITRE ATLAS, OWASP Top 10 (API, LLM, Web, ASI), STRIDE, LINDDUN, CWE, CVSS</li>
 <li><strong>Control Frameworks</strong> — NIST CSF, CIS Controls v8, ISO 27001</li>
 <li><strong>Compliance Frameworks</strong> — SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP</li>
 <li><strong>Security Lifecycle</strong> — Mitigations, threat actors, detections, response actions</li>
@@ -1908,6 +2026,65 @@
 <li><strong>D2 Styles</strong> — Color-coded STRIDE/LINDDUN annotations, trust boundaries, attack flows</li>
 <li><strong>Validation</strong> — Type-specific field validation with strict mode</li>
 <li><strong>AI Agents</strong> — Claude Code plugin for AI-assisted diagram creation</li>
+</ul>
+<h3 id="v060-enhancements">v0.6.0 Enhancements<a class="headerlink" href="#v060-enhancements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Role-Based Security Guidance</strong></p>
+<ul>
+<li><strong>Red Team</strong> — Exploitation steps, offensive tools, payload patterns, difficulty ratings</li>
+<li><strong>Blue Team</strong> — Detection rules (Sigma, YARA, Splunk), IOCs, hunting queries, log sources</li>
+<li><strong>Remediation</strong> — Secure code patterns, review checklists, recommended libraries</li>
+<li><strong>Incident Playbooks</strong> — Structured response procedures with IR phases and contacts</li>
+</ul>
+</li>
+<li>
+<p><strong>Risk Quantification</strong></p>
+<ul>
+<li><strong>FAIR Assessment</strong> — Factor Analysis of Information Risk with frequency/loss estimates</li>
+<li><strong>Business Impact</strong> — Revenue, customer, regulatory, reputation, operational impacts</li>
+<li><strong>EPSS Integration</strong> — Exploit Prediction Scoring System data for CVEs</li>
+</ul>
+</li>
+<li>
+<p><strong>Purple Team</strong></p>
+<ul>
+<li><strong>Atomic Red Team Mapping</strong> — Link attacks to atomic tests with validation status</li>
+<li><strong>Detection Coverage Matrix</strong> — Track technique coverage across detection capabilities</li>
+<li><strong>Security Metrics</strong> — MTTD, MTTR, MTTC, detection rates, false positive tracking</li>
+</ul>
+</li>
+<li>
+<p><strong>Threat Intelligence</strong></p>
+<ul>
+<li><strong>Enhanced STIX 2.1 Export</strong> — IOCs to indicators, actors to threat-actors, detections to course-of-actions</li>
+<li><strong>KEV Catalog</strong> — CISA Known Exploited Vulnerabilities integration</li>
+<li><strong>OWASP ASI Support</strong> — Agentic Security Top 10 (2026) for AI agent threats</li>
+</ul>
+</li>
+<li>
+<p><strong>Supply Chain Security</strong></p>
+<ul>
+<li><strong>SBOM Integration</strong> — Link threat models to CycloneDX/SPDX software bills of materials</li>
+<li><strong>VEX Statements</strong> — Vulnerability Exploitability eXchange for status tracking</li>
+<li><strong>Dependency Risk</strong> — Track vulnerable components with severity and remediation</li>
+</ul>
+</li>
+<li>
+<p><strong>Vulnerability Management</strong></p>
+<ul>
+<li><strong>SSVC Decision Trees</strong> — CISA's Stakeholder-Specific Vulnerability Categorization</li>
+<li><strong>Priority Decisions</strong> — Automated prioritization (Track, Track*, Attend, Act)</li>
+</ul>
+</li>
+<li>
+<p><strong>Attack Path Analysis</strong></p>
+<ul>
+<li><strong>Attack Graphs</strong> — Graph-based representation of attack surfaces</li>
+<li><strong>Path Finding</strong> — All paths, shortest paths (Dijkstra), and critical paths</li>
+<li><strong>Risk Calculation</strong> — Path-based risk scoring and reachability analysis</li>
+</ul>
+</li>
 </ul>
 <h2 id="quick-example">Quick Example<a class="headerlink" href="#quick-example" title="Permanent link">&para;</a></h2>
 <p>Define a threat model in JSON using the <code>ThreatModel</code> format (the canonical multi-diagram representation):</p>
@@ -2011,7 +2188,7 @@
 </tr>
 <tr>
 <td><a href="concepts/frameworks/owasp/">OWASP Top 10</a></td>
-<td>Web, API, and LLM security risks</td>
+<td>Web, API, LLM, and Agentic (ASI) security risks</td>
 </tr>
 <tr>
 <td><a href="concepts/frameworks/cwe/">CWE</a></td>

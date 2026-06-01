@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/releases/v0.2.0/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/releases/v0.6.0/">
       
       
-        <link rel="prev" href="../v0.3.0/">
+        <link rel="prev" href="../../cli/validate/">
       
       
-        <link rel="next" href="../v0.1.0/">
+        <link rel="next" href="../v0.5.0/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>v0.2.0 - Threat Model Spec</title>
+        <title>v0.6.0 - Threat Model Spec</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#v020-release-notes" class="md-skip">
+        <a href="#v060-release-notes" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.2.0
+              v0.6.0
             
           </span>
         </div>
@@ -1450,10 +1450,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../v0.6.0/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1464,6 +1486,287 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      Highlights
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's New
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s New">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#owasp-asi-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      OWASP ASI Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-based-security-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Role-Based Security Guidance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Role-Based Security Guidance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#red-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Red Team
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blue-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Blue Team
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remediation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remediation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-quantification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Quantification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risk Quantification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fair-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAIR Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epss-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      EPSS Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purple-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purple Team
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Purple Team">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atomic-red-team-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atomic Red Team Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-coverage-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detection Coverage Matrix
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supply-chain-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supply Chain Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Supply Chain Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbom-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      SBOM Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vex-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      VEX Statements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssvc-vulnerability-prioritization" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSVC Vulnerability Prioritization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-path-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Path Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      New Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go Library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cli-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLI Tool
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requirements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1542,32 +1845,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    v0.2.0
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../v0.2.0/" class="md-nav__link">
         
   
   
@@ -1578,170 +1859,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
-    <span class="md-ellipsis">
-      Highlights
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#whats-new" class="md-nav__link">
-    <span class="md-ellipsis">
-      What's New
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What&#39;s New">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#threatmodel-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      ThreatModel Format
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json-schema" class="md-nav__link">
-    <span class="md-ellipsis">
-      JSON Schema
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cli-improvements" class="md-nav__link">
-    <span class="md-ellipsis">
-      CLI Improvements
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schema-generator" class="md-nav__link">
-    <span class="md-ellipsis">
-      Schema Generator
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
-    <span class="md-ellipsis">
-      Migration Guide
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-v010" class="md-nav__link">
-    <span class="md-ellipsis">
-      From v0.1.0
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#openclaw-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      OpenClaw Example
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#go-library" class="md-nav__link">
-    <span class="md-ellipsis">
-      Go Library
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cli-tool" class="md-nav__link">
-    <span class="md-ellipsis">
-      CLI Tool
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Requirements
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#links" class="md-nav__link">
-    <span class="md-ellipsis">
-      Links
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1966,36 +2083,177 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#threatmodel-format" class="md-nav__link">
+  <a href="#owasp-asi-support" class="md-nav__link">
     <span class="md-ellipsis">
-      ThreatModel Format
+      OWASP ASI Support
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#json-schema" class="md-nav__link">
+  <a href="#role-based-security-guidance" class="md-nav__link">
     <span class="md-ellipsis">
-      JSON Schema
+      Role-Based Security Guidance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Role-Based Security Guidance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#red-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Red Team
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cli-improvements" class="md-nav__link">
+  <a href="#blue-team" class="md-nav__link">
     <span class="md-ellipsis">
-      CLI Improvements
+      Blue Team
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#schema-generator" class="md-nav__link">
+  <a href="#remediation" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Generator
+      Remediation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risk-quantification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Risk Quantification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Risk Quantification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fair-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      FAIR Assessment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epss-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      EPSS Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purple-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purple Team
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Purple Team">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atomic-red-team-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atomic Red Team Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detection-coverage-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detection Coverage Matrix
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supply-chain-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supply Chain Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Supply Chain Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbom-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      SBOM Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vex-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      VEX Statements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssvc-vulnerability-prioritization" class="md-nav__link">
+    <span class="md-ellipsis">
+      SSVC Vulnerability Prioritization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attack-path-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attack Path Analysis
     </span>
   </a>
   
@@ -2007,35 +2265,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#migration-guide" class="md-nav__link">
+  <a href="#new-types" class="md-nav__link">
     <span class="md-ellipsis">
-      Migration Guide
+      New Types
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Migration Guide">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-v010" class="md-nav__link">
-    <span class="md-ellipsis">
-      From v0.1.0
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#openclaw-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      OpenClaw Example
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2109,123 +2343,321 @@
   
 
 
-<h1 id="v020-release-notes">v0.2.0 Release Notes<a class="headerlink" href="#v020-release-notes" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2026-03-02</p>
-<p>This release introduces the ThreatModel canonical format for multi-diagram threat models with shared metadata and framework mappings, along with JSON Schema generation for validation support.</p>
+<h1 id="v060-release-notes">v0.6.0 Release Notes<a class="headerlink" href="#v060-release-notes" title="Permanent link">&para;</a></h1>
+<p><strong>Release Date:</strong> 2026-04-28</p>
+<p>This release introduces comprehensive security enhancements including role-based guidance, risk quantification, threat intelligence, purple team capabilities, supply chain security, and attack path analysis.</p>
 <h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
 <ul>
-<li>ThreatModel canonical format for multi-diagram threat models with shared metadata and framework mappings</li>
-<li>JSON Schema generation and embedding for validation support</li>
+<li>Role-based security data for Red Team, Blue Team, and Remediation workflows</li>
+<li>FAIR risk assessment with annualized loss expectancy calculations</li>
+<li>Enhanced STIX 2.1 export with IOCs, detection rules, and threat actors</li>
+<li>Purple team capabilities with Atomic Red Team mapping and detection coverage matrix</li>
+<li>Security metrics tracking (MTTD, MTTR, detection rates)</li>
+<li>Supply chain security with SBOM integration and VEX statements</li>
+<li>SSVC vulnerability prioritization with automated decision trees</li>
+<li>Attack graph analysis with path finding and risk calculation algorithms</li>
+<li>OWASP Agentic Security Top 10 (ASI 2026) support</li>
 </ul>
 <h2 id="whats-new">What's New<a class="headerlink" href="#whats-new" title="Permanent link">&para;</a></h2>
-<h3 id="threatmodel-format">ThreatModel Format<a class="headerlink" href="#threatmodel-format" title="Permanent link">&para;</a></h3>
-<p>The new <code>ThreatModel</code> type serves as the canonical format for threat models containing multiple diagram views:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tm-example&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Threat Model&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Description of the threat model&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">&quot;authors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Author&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;author@example.com&quot;</span><span class="p">}],</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;mitre_attack&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;tactic&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Initial Access&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;technique&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1189&quot;</span><span class="p">}]</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p">},</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">&quot;diagrams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dfd&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Flow Diagram&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">},</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attack-chain&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Attack Chain&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">},</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sequence&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sequence Diagram&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">}</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="p">]</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">}</span>
-</code></pre></div>
-<p>Key benefits:</p>
-<ul>
-<li><strong>Shared Metadata</strong> — Title, description, version, and authors apply to all diagrams</li>
-<li><strong>Shared Mappings</strong> — Framework mappings (MITRE ATT&amp;CK, OWASP, etc.) are defined once and inherited by all diagrams</li>
-<li><strong>Single File</strong> — One JSON file contains all diagram views for a threat model</li>
-</ul>
-<h3 id="json-schema">JSON Schema<a class="headerlink" href="#json-schema" title="Permanent link">&para;</a></h3>
-<p>JSON Schemas are now generated from Go types and embedded in the <code>schema</code> package:</p>
+<h3 id="owasp-asi-support">OWASP ASI Support<a class="headerlink" href="#owasp-asi-support" title="Permanent link">&para;</a></h3>
+<p>Support for the new OWASP Agentic Security Top 10 (2026) for AI agent threats:</p>
 <table>
 <thead>
 <tr>
-<th>Schema</th>
+<th>Category</th>
+<th>Value</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>threat-model.schema.json</code></td>
-<td>ThreatModel format (multi-diagram)</td>
+<td>API Security</td>
+<td><code>api</code></td>
+<td>API Security Top 10 (2023)</td>
 </tr>
 <tr>
-<td><code>diagram.schema.json</code></td>
-<td>DiagramIR format (single diagram)</td>
+<td>LLM Applications</td>
+<td><code>llm</code></td>
+<td>LLM Application Top 10 (2025)</td>
+</tr>
+<tr>
+<td>Web Applications</td>
+<td><code>web</code></td>
+<td>Web Application Top 10 (2021)</td>
+</tr>
+<tr>
+<td>Agentic Applications</td>
+<td><code>agentic</code></td>
+<td>Agentic Top 10 (ASI 2026)</td>
 </tr>
 </tbody>
 </table>
-<p>Access schemas programmatically:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/grokify/threat-model-spec/schema&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">threatModelSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">ThreatModelSchema</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">diagramSchema</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">DiagramSchema</span>
+<p>Attack steps can now include <code>asiIds</code> for OWASP Agentic Security mappings:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gateway&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agent&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Access agent&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">&quot;asiIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ASI02:2026&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ASI03:2026&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">&quot;owaspIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;API8:2023&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
 </code></pre></div>
-<p>Validate with external tools:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ajv<span class="w"> </span>validate<span class="w"> </span>-s<span class="w"> </span>schema/threat-model.schema.json<span class="w"> </span>-d<span class="w"> </span>model.json
+<p>Reference data is available for all 40 OWASP entries via <code>GetOWASPEntry()</code> and <code>ValidateOWASPID()</code>.</p>
+<h3 id="role-based-security-guidance">Role-Based Security Guidance<a class="headerlink" href="#role-based-security-guidance" title="Permanent link">&para;</a></h3>
+<h4 id="red-team">Red Team<a class="headerlink" href="#red-team" title="Permanent link">&para;</a></h4>
+<p>Exploitation guidance for penetration testers:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;redTeam&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;prerequisites&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Target must have WebSocket gateway enabled&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;exploitationSteps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Host malicious page&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tool&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python HTTP server&quot;</span><span class="p">}</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">&quot;tools&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Burp Suite&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;purpose&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WebSocket interception&quot;</span><span class="p">}],</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;low&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="cli-improvements">CLI Improvements<a class="headerlink" href="#cli-improvements" title="Permanent link">&para;</a></h3>
-<p>The CLI now auto-detects ThreatModel vs DiagramIR format:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Process ThreatModel (generates separate D2 files per diagram)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>tms<span class="w"> </span>generate<span class="w"> </span>threatmodel.json<span class="w"> </span>-o<span class="w"> </span>output
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Produces: output_dfd.d2, output_attack-chain.d2, output_sequence.d2</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># Validate reports format and diagram count</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>tms<span class="w"> </span>validate<span class="w"> </span>threatmodel.json
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Output: threatmodel.json: valid (ThreatModel with 3 diagrams)</span>
+<h4 id="blue-team">Blue Team<a class="headerlink" href="#blue-team" title="Permanent link">&para;</a></h4>
+<p>Defense guidance with detection rules:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;blueTeam&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">&quot;detectionRules&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cross-Origin WebSocket&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">&quot;rule&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;title: Cross-Origin WebSocket Connection...&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&quot;iocs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ws://localhost:*&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">}</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">&quot;huntingQueries&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Find WS connections&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;splunk&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">}</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="schema-generator">Schema Generator<a class="headerlink" href="#schema-generator" title="Permanent link">&para;</a></h3>
-<p>A new <code>cmd/genschema</code> tool generates JSON schemas from Go types:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>genschema<span class="w"> </span>./cmd/genschema
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>./genschema<span class="w"> </span>schema/
+<h4 id="remediation">Remediation<a class="headerlink" href="#remediation" title="Permanent link">&para;</a></h4>
+<p>Developer guidance for fixing vulnerabilities:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;remediation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;codePatterns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;javascript&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nt">&quot;vulnerable&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;// No origin check&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nt">&quot;secure&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;if (origin !== allowedOrigin) { ws.close(); }&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nt">&quot;checklist&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;item&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Validate WebSocket Origin header&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="migration-guide">Migration Guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
-<h3 id="from-v010">From v0.1.0<a class="headerlink" href="#from-v010" title="Permanent link">&para;</a></h3>
-<p>If you have separate diagram files (e.g., <code>dfd.json</code>, <code>attack_chain.json</code>), you can:</p>
-<ol>
-<li><strong>Keep using DiagramIR</strong> — The CLI still supports single-diagram files</li>
-<li><strong>Migrate to ThreatModel</strong> — Combine diagrams into a unified file with shared metadata</li>
-</ol>
-<p>To migrate:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Old approach (multiple files)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>tms<span class="w"> </span>generate<span class="w"> </span>dfd.json<span class="w"> </span>-o<span class="w"> </span>dfd.d2
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>tms<span class="w"> </span>generate<span class="w"> </span>attack_chain.json<span class="w"> </span>-o<span class="w"> </span>attack_chain.d2
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1"># New approach (single ThreatModel file)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>tms<span class="w"> </span>generate<span class="w"> </span>threatmodel.json<span class="w"> </span>-o<span class="w"> </span>output
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># Generates: output_dfd.d2, output_attack-chain.d2</span>
+<h3 id="risk-quantification">Risk Quantification<a class="headerlink" href="#risk-quantification" title="Permanent link">&para;</a></h3>
+<h4 id="fair-assessment">FAIR Assessment<a class="headerlink" href="#fair-assessment" title="Permanent link">&para;</a></h4>
+<p>Factor Analysis of Information Risk with ALE calculation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;riskAssessment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;scenarioName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WebSocket Takeover&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nt">&quot;frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">&quot;contactFrequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&quot;probabilityOfAction&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">      </span><span class="nt">&quot;threatEventFrequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">&quot;loss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="nt">&quot;primaryLoss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">},</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">      </span><span class="nt">&quot;secondaryLoss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200000</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">}</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="openclaw-example">OpenClaw Example<a class="headerlink" href="#openclaw-example" title="Permanent link">&para;</a></h3>
-<p>The OpenClaw example has been consolidated:</p>
+<h4 id="epss-integration">EPSS Integration<a class="headerlink" href="#epss-integration" title="Permanent link">&para;</a></h4>
+<p>Exploit Prediction Scoring System data for CVEs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;epssData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">&quot;cve&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVE-2024-12345&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">      </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">&quot;percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.97</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-28&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="purple-team">Purple Team<a class="headerlink" href="#purple-team" title="Permanent link">&para;</a></h3>
+<h4 id="atomic-red-team-mapping">Atomic Red Team Mapping<a class="headerlink" href="#atomic-red-team-mapping" title="Permanent link">&para;</a></h4>
+<p>Link threats to atomic tests for validation:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;atomicTests&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">&quot;techniqueId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1189&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">&quot;testId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1189-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">&quot;testName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Drive-by Compromise&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">      </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;passed&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="nt">&quot;platform&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;windows&quot;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="detection-coverage-matrix">Detection Coverage Matrix<a class="headerlink" href="#detection-coverage-matrix" title="Permanent link">&para;</a></h4>
+<p>Track MITRE ATT&amp;CK detection coverage:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;detectionCoverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">&quot;techniques&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nt">&quot;techniqueId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;T1189&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nt">&quot;coverage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;full&quot;</span><span class="p">,</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">        </span><span class="nt">&quot;detectionMethods&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Network monitoring&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Browser logs&quot;</span><span class="p">]</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="security-metrics">Security Metrics<a class="headerlink" href="#security-metrics" title="Permanent link">&para;</a></h3>
+<p>Track detection and response effectiveness:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;metrics&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">&quot;mttd&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;minutes&quot;</span><span class="p">},</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;mttr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hours&quot;</span><span class="p">},</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">&quot;mttc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;minutes&quot;</span><span class="p">},</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">&quot;detectionRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nt">&quot;falsePositiveRate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="supply-chain-security">Supply Chain Security<a class="headerlink" href="#supply-chain-security" title="Permanent link">&para;</a></h3>
+<h4 id="sbom-integration">SBOM Integration<a class="headerlink" href="#sbom-integration" title="Permanent link">&para;</a></h4>
+<p>Link threat models to software bills of materials:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;sbom&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cyclonedx&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.5&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./sbom.json&quot;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="p">}</span>
+</code></pre></div>
+<h4 id="vex-statements">VEX Statements<a class="headerlink" href="#vex-statements" title="Permanent link">&para;</a></h4>
+<p>Vulnerability Exploitability eXchange for status tracking:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">&quot;vexStatements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">      </span><span class="nt">&quot;vulnerability&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVE-2024-12345&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;not_affected&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">      </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vulnerable_code_not_in_execute_path&quot;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="ssvc-vulnerability-prioritization">SSVC Vulnerability Prioritization<a class="headerlink" href="#ssvc-vulnerability-prioritization" title="Permanent link">&para;</a></h3>
+<p>CISA Stakeholder-Specific Vulnerability Categorization:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">&quot;ssvc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">&quot;exploitation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">&quot;automatable&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="nt">&quot;technicalImpact&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;total&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">    </span><span class="nt">&quot;missionPrevalence&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;essential&quot;</span><span class="p">,</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nt">&quot;decision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;act&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="attack-path-analysis">Attack Path Analysis<a class="headerlink" href="#attack-path-analysis" title="Permanent link">&para;</a></h3>
+<p>Graph-based attack surface analysis:</p>
 <ul>
-<li><strong>Before:</strong> <code>examples/openclaw/dfd.json</code>, <code>attack_chain.json</code>, <code>attack_sequence.json</code></li>
-<li><strong>After:</strong> <code>examples/openclaw/openclaw.json</code> (unified ThreatModel)</li>
+<li><code>FindAllPaths()</code> — Complete path enumeration with cycle detection</li>
+<li><code>FindShortestPath()</code> — Dijkstra's algorithm for minimal path</li>
+<li><code>FindCriticalPaths()</code> — Highest risk path identification</li>
+<li><code>CalculatePathRisk()</code> — Path-based risk scoring</li>
+<li><code>ReachabilityAnalysis()</code> — Exposure assessment from entry points</li>
 </ul>
+<h2 id="new-types">New Types<a class="headerlink" href="#new-types" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ExploitationGuidance</code></td>
+<td>Red team exploitation steps and tools</td>
+</tr>
+<tr>
+<td><code>DefenseGuidance</code></td>
+<td>Blue team detection rules and IOCs</td>
+</tr>
+<tr>
+<td><code>RemediationGuidance</code></td>
+<td>Developer fix patterns and checklists</td>
+</tr>
+<tr>
+<td><code>IncidentPlaybook</code></td>
+<td>Structured IR procedures</td>
+</tr>
+<tr>
+<td><code>FAIRAssessment</code></td>
+<td>FAIR risk quantification</td>
+</tr>
+<tr>
+<td><code>EPSSData</code></td>
+<td>Exploit prediction scoring</td>
+</tr>
+<tr>
+<td><code>KEVEntry</code></td>
+<td>CISA KEV catalog entry</td>
+</tr>
+<tr>
+<td><code>AtomicTestMapping</code></td>
+<td>Atomic Red Team test reference</td>
+</tr>
+<tr>
+<td><code>DetectionCoverageMatrix</code></td>
+<td>ATT&amp;CK coverage tracking</td>
+</tr>
+<tr>
+<td><code>SecurityMetrics</code></td>
+<td>MTTD/MTTR/MTTC metrics</td>
+</tr>
+<tr>
+<td><code>SBOMReference</code></td>
+<td>SBOM integration</td>
+</tr>
+<tr>
+<td><code>VEXStatement</code></td>
+<td>Vulnerability status</td>
+</tr>
+<tr>
+<td><code>SSVCAssessment</code></td>
+<td>SSVC prioritization</td>
+</tr>
+<tr>
+<td><code>AttackGraph</code></td>
+<td>Graph-based attack surface</td>
+</tr>
+<tr>
+<td><code>AttackPath</code></td>
+<td>Path analysis results</td>
+</tr>
+</tbody>
+</table>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <h3 id="go-library">Go Library<a class="headerlink" href="#go-library" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/grokify/threat-model-spec@v0.2.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/grokify/threat-model-spec@v0.6.0
 </code></pre></div>
 <h3 id="cli-tool">CLI Tool<a class="headerlink" href="#cli-tool" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/threat-model-spec/cmd/tms@v0.2.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/threat-model-spec/cmd/tms@v0.6.0
 </code></pre></div>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Go 1.24+</li>
+<li>Go 1.25+</li>
 <li><a href="https://d2lang.com">D2</a> v0.6+ (for SVG rendering)</li>
 </ul>
 <h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="../../versions/v0.6.0/specification/">Specification</a></li>
 <li><a href="https://grokify.github.io/threat-model-spec/">Documentation</a></li>
 <li><a href="https://github.com/grokify/threat-model-spec">GitHub Repository</a></li>
-<li><a href="../../specification/schema/">JSON Schema Reference</a></li>
 <li><a href="../../changelog/">Changelog</a></li>
 </ul>
 

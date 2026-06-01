@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/concepts/frameworks/cvss/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/design/v0.6.0/PLAN/">
       
       
-        <link rel="prev" href="../cwe/">
-      
-      
-        <link rel="next" href="../../../guides/design-time-threat-modeling/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -24,7 +20,7 @@
     
     
       
-        <title>CVSS - Threat Model Spec</title>
+        <title>Implementation Plan: v0.6.0 - Comprehensive Security Enhancement - Threat Model Spec</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cvss" class="md-skip">
+        <a href="#implementation-plan-v060-comprehensive-security-enhancement" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CVSS
+              Implementation Plan: v0.6.0 - Comprehensive Security Enhancement
             
           </span>
         </div>
@@ -377,8 +373,6 @@
       
   
   
-    
-  
   
   
     
@@ -391,11 +385,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -411,7 +407,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Concepts
@@ -425,7 +421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../diagram-types/" class="md-nav__link">
+      <a href="../../../concepts/diagram-types/" class="md-nav__link">
         
   
   
@@ -445,8 +441,6 @@
                 
   
   
-    
-  
   
   
     
@@ -456,11 +450,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
         
           
           <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
@@ -476,7 +472,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Security Frameworks
@@ -490,7 +486,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../../concepts/frameworks/" class="md-nav__link">
         
   
   
@@ -513,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../stride/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/stride/" class="md-nav__link">
         
   
   
@@ -536,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../linddun/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/linddun/" class="md-nav__link">
         
   
   
@@ -559,7 +555,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mitre-attack/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/mitre-attack/" class="md-nav__link">
         
   
   
@@ -582,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mitre-atlas/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/mitre-atlas/" class="md-nav__link">
         
   
   
@@ -605,7 +601,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../owasp/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/owasp/" class="md-nav__link">
         
   
   
@@ -628,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cwe/" class="md-nav__link">
+      <a href="../../../concepts/frameworks/cwe/" class="md-nav__link">
         
   
   
@@ -648,32 +644,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    CVSS
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/cvss/" class="md-nav__link">
         
   
   
@@ -684,137 +658,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cvss-v31-metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      CVSS v3.1 Metrics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="CVSS v3.1 Metrics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#base-metrics" class="md-nav__link">
-    <span class="md-ellipsis">
-      Base Metrics
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#json-mapping-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      JSON Mapping Format
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-vectors" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Vectors
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Example Vectors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#critical-93-websocket-localhost-takeover" class="md-nav__link">
-    <span class="md-ellipsis">
-      Critical (9.3) - WebSocket Localhost Takeover
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#high-75-authentication-bypass" class="md-nav__link">
-    <span class="md-ellipsis">
-      High (7.5) - Authentication Bypass
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#medium-53-information-disclosure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Medium (5.3) - Information Disclosure
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#calculating-cvss-scores" class="md-nav__link">
-    <span class="md-ellipsis">
-      Calculating CVSS Scores
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      Complete Example
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1923,19 +1766,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cvss-v31-metrics" class="md-nav__link">
+  <a href="#implementation-phases" class="md-nav__link">
     <span class="md-ellipsis">
-      CVSS v3.1 Metrics
+      Implementation Phases
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="CVSS v3.1 Metrics">
+    <nav class="md-nav" aria-label="Implementation Phases">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base-metrics" class="md-nav__link">
+  <a href="#section-a-owasp-asi-support-phases-17-19" class="md-nav__link">
     <span class="md-ellipsis">
-      Base Metrics
+      Section A: OWASP ASI Support (Phases 17-19)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-role-based-security-data-phases-20-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B: Role-Based Security Data (Phases 20-25)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-risk-quantification-phases-26-27" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C: Risk Quantification (Phases 26-27)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-threat-intelligence-phases-28-29" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D: Threat Intelligence (Phases 28-29)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-purple-team-phases-30-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E: Purple Team (Phases 30-31)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-security-metrics-phase-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F: Security Metrics (Phase 32)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-g-supply-chain-security-phases-34-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section G: Supply Chain Security (Phases 34-35)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-h-vulnerability-management-phase-36" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section H: Vulnerability Management (Phase 36)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-i-attack-path-analysis-phases-37-38" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section I: Attack Path Analysis (Phases 37-38)
     </span>
   </a>
   
@@ -1947,46 +1862,163 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#json-mapping-format" class="md-nav__link">
+  <a href="#detailed-phase-plans" class="md-nav__link">
     <span class="md-ellipsis">
-      JSON Mapping Format
+      Detailed Phase Plans
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-vectors" class="md-nav__link">
-    <span class="md-ellipsis">
-      Example Vectors
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Example Vectors">
+    <nav class="md-nav" aria-label="Detailed Phase Plans">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#critical-93-websocket-localhost-takeover" class="md-nav__link">
+  <a href="#phase-17-core-asi-support" class="md-nav__link">
     <span class="md-ellipsis">
-      Critical (9.3) - WebSocket Localhost Takeover
+      Phase 17: Core ASI Support ✓
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#high-75-authentication-bypass" class="md-nav__link">
+  <a href="#phase-18-owasp-reference-data" class="md-nav__link">
     <span class="md-ellipsis">
-      High (7.5) - Authentication Bypass
+      Phase 18: OWASP Reference Data ✓
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#medium-53-information-disclosure" class="md-nav__link">
+  <a href="#phase-19-validation-documentation" class="md-nav__link">
     <span class="md-ellipsis">
-      Medium (5.3) - Information Disclosure
+      Phase 19: Validation &amp; Documentation ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-20-red-team-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 20: Red Team Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-21-blue-team-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 21: Blue Team Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-22-remediation-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 22: Remediation Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-23-app-test-spec-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 23: app-test-spec Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-24-incident-playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 24: Incident Playbooks ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-25-threatmodel-attack-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 25: ThreatModel &amp; Attack Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-26-fair-risk-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 26: FAIR Risk Assessment ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-27-business-impact-epss" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 27: Business Impact &amp; EPSS ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-28-stix-21-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 28: STIX 2.1 Export ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-29-kev-catalog-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 29: KEV Catalog Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-30-atomic-red-team-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 30: Atomic Red Team Mapping ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-31-detection-coverage-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 31: Detection Coverage Matrix ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-32-security-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 32: Security Metrics ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-33-final-integration-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 33: Final Integration &amp; Release ✓
     </span>
   </a>
   
@@ -1998,27 +2030,126 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#calculating-cvss-scores" class="md-nav__link">
+  <a href="#section-g-supply-chain-security" class="md-nav__link">
     <span class="md-ellipsis">
-      Calculating CVSS Scores
+      Section G: Supply Chain Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section G: Supply Chain Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-34-sbom-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 34: SBOM Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-35-vex-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 35: VEX Support
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-h-vulnerability-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section H: Vulnerability Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section H: Vulnerability Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-36-ssvc-decision-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 36: SSVC Decision Trees
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-i-attack-path-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section I: Attack Path Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section I: Attack Path Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-37-graph-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 37: Graph Data Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-38-path-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 38: Path Computation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priority Matrix
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#complete-example" class="md-nav__link">
+  <a href="#dependencies" class="md-nav__link">
     <span class="md-ellipsis">
-      Complete Example
+      Dependencies
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
+  <a href="#testing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
-      References
+      Testing Strategy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Criteria
     </span>
   </a>
   
@@ -2043,167 +2174,1270 @@
   
 
 
-<h1 id="cvss">CVSS<a class="headerlink" href="#cvss" title="Permanent link">&para;</a></h1>
-<p>CVSS (Common Vulnerability Scoring System) provides a standardized method for rating the severity of security vulnerabilities.</p>
+<h1 id="implementation-plan-v060-comprehensive-security-enhancement">Implementation Plan: v0.6.0 - Comprehensive Security Enhancement<a class="headerlink" href="#implementation-plan-v060-comprehensive-security-enhancement" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Status:</strong> In Progress
+<strong>Started:</strong> 2026-04-28</p>
+</blockquote>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>CVSS scores range from 0.0 to 10.0:</p>
+<p>This plan covers all enhancements from v0.5.0 to v0.6.0, organized into six sections with corresponding implementation phases.</p>
+<h2 id="implementation-phases">Implementation Phases<a class="headerlink" href="#implementation-phases" title="Permanent link">&para;</a></h2>
+<h3 id="section-a-owasp-asi-support-phases-17-19">Section A: OWASP ASI Support (Phases 17-19)<a class="headerlink" href="#section-a-owasp-asi-support-phases-17-19" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
 <table>
 <thead>
 <tr>
-<th>Score</th>
-<th>Severity</th>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0.0</td>
-<td>None</td>
+<td>17</td>
+<td>Core ASI Support</td>
+<td>Complete</td>
 </tr>
 <tr>
-<td>0.1 - 3.9</td>
-<td>Low</td>
+<td>18</td>
+<td>OWASP Reference Data</td>
+<td>Complete</td>
 </tr>
 <tr>
-<td>4.0 - 6.9</td>
-<td>Medium</td>
-</tr>
-<tr>
-<td>7.0 - 8.9</td>
-<td>High</td>
-</tr>
-<tr>
-<td>9.0 - 10.0</td>
-<td>Critical</td>
+<td>19</td>
+<td>Validation &amp; Documentation</td>
+<td>Complete</td>
 </tr>
 </tbody>
 </table>
-<h2 id="cvss-v31-metrics">CVSS v3.1 Metrics<a class="headerlink" href="#cvss-v31-metrics" title="Permanent link">&para;</a></h2>
-<h3 id="base-metrics">Base Metrics<a class="headerlink" href="#base-metrics" title="Permanent link">&para;</a></h3>
+<h3 id="section-b-role-based-security-data-phases-20-25">Section B: Role-Based Security Data (Phases 20-25)<a class="headerlink" href="#section-b-role-based-security-data-phases-20-25" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
 <table>
 <thead>
 <tr>
-<th>Metric</th>
-<th>Values</th>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20</td>
+<td>Red Team Data Types</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Blue Team Data Types</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Remediation Data Types</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>23</td>
+<td>app-test-spec Integration</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Incident Playbooks</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>25</td>
+<td>ThreatModel &amp; Attack Integration</td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-c-risk-quantification-phases-26-27">Section C: Risk Quantification (Phases 26-27)<a class="headerlink" href="#section-c-risk-quantification-phases-26-27" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>26</td>
+<td>FAIR Risk Assessment</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Business Impact &amp; EPSS</td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-d-threat-intelligence-phases-28-29">Section D: Threat Intelligence (Phases 28-29)<a class="headerlink" href="#section-d-threat-intelligence-phases-28-29" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28</td>
+<td>STIX 2.1 Export</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>29</td>
+<td>KEV Catalog Integration</td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-e-purple-team-phases-30-31">Section E: Purple Team (Phases 30-31)<a class="headerlink" href="#section-e-purple-team-phases-30-31" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>Atomic Red Team Mapping</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Detection Coverage Matrix</td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-f-security-metrics-phase-32">Section F: Security Metrics (Phase 32)<a class="headerlink" href="#section-f-security-metrics-phase-32" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Complete</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32</td>
+<td>MTTD/MTTR &amp; Coverage Metrics</td>
+<td>Complete</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-g-supply-chain-security-phases-34-35">Section G: Supply Chain Security (Phases 34-35)<a class="headerlink" href="#section-g-supply-chain-security-phases-34-35" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Pending</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>34</td>
+<td>SBOM Integration</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>35</td>
+<td>VEX Support</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-h-vulnerability-management-phase-36">Section H: Vulnerability Management (Phase 36)<a class="headerlink" href="#section-h-vulnerability-management-phase-36" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Pending</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>36</td>
+<td>SSVC Decision Trees</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-i-attack-path-analysis-phases-37-38">Section I: Attack Path Analysis (Phases 37-38)<a class="headerlink" href="#section-i-attack-path-analysis-phases-37-38" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> Pending</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>37</td>
+<td>Graph Data Model</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>38</td>
+<td>Path Computation</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="detailed-phase-plans">Detailed Phase Plans<a class="headerlink" href="#detailed-phase-plans" title="Permanent link">&para;</a></h2>
+<h3 id="phase-17-core-asi-support">Phase 17: Core ASI Support ✓<a class="headerlink" href="#phase-17-core-asi-support" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Attack Vector (AV)</td>
-<td>N/A/L/P</td>
-<td>Network/Adjacent/Local/Physical</td>
+<td>17.1</td>
+<td>[x]</td>
+<td>Add <code>OWASPCategoryAgentic</code> to <code>ir/mappings.go</code></td>
 </tr>
 <tr>
-<td>Attack Complexity (AC)</td>
-<td>L/H</td>
-<td>Low/High</td>
+<td>17.2</td>
+<td>[x]</td>
+<td>Update <code>OWASPCategory.JSONSchema()</code> to include "agentic"</td>
 </tr>
 <tr>
-<td>Privileges Required (PR)</td>
-<td>N/L/H</td>
-<td>None/Low/High</td>
+<td>17.3</td>
+<td>[x]</td>
+<td>Add <code>ASIIds []string</code> field to Attack struct</td>
 </tr>
 <tr>
-<td>User Interaction (UI)</td>
-<td>N/R</td>
-<td>None/Required</td>
-</tr>
-<tr>
-<td>Scope (S)</td>
-<td>U/C</td>
-<td>Unchanged/Changed</td>
-</tr>
-<tr>
-<td>Confidentiality (C)</td>
-<td>N/L/H</td>
-<td>None/Low/High</td>
-</tr>
-<tr>
-<td>Integrity (I)</td>
-<td>N/L/H</td>
-<td>None/Low/High</td>
-</tr>
-<tr>
-<td>Availability (A)</td>
-<td>N/L/H</td>
-<td>None/Low/High</td>
+<td>17.4</td>
+<td>[x]</td>
+<td>Add unit tests for new category and field</td>
 </tr>
 </tbody>
 </table>
-<h2 id="json-mapping-format">JSON Mapping Format<a class="headerlink" href="#json-mapping-format" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;cvss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.1&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">      </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">      </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.3</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
+<h3 id="phase-18-owasp-reference-data">Phase 18: OWASP Reference Data ✓<a class="headerlink" href="#phase-18-owasp-reference-data" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18.1</td>
+<td>[x]</td>
+<td>Create <code>ir/owasp_reference.go</code> with OWASPEntry type</td>
+</tr>
+<tr>
+<td>18.2</td>
+<td>[x]</td>
+<td>Add OWASP API Security Top 10 (2023) - 10 entries</td>
+</tr>
+<tr>
+<td>18.3</td>
+<td>[x]</td>
+<td>Add OWASP LLM Top 10 (2025) - 10 entries</td>
+</tr>
+<tr>
+<td>18.4</td>
+<td>[x]</td>
+<td>Add OWASP Web Top 10 (2021) - 10 entries</td>
+</tr>
+<tr>
+<td>18.5</td>
+<td>[x]</td>
+<td>Add OWASP Agentic Top 10 (ASI 2026) - 10 entries</td>
+</tr>
+<tr>
+<td>18.6</td>
+<td>[x]</td>
+<td>Add GetOWASPEntry() and ValidateOWASPID() functions</td>
+</tr>
+<tr>
+<td>18.7</td>
+<td>[x]</td>
+<td>Add unit tests for reference data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-19-validation-documentation">Phase 19: Validation &amp; Documentation ✓<a class="headerlink" href="#phase-19-validation-documentation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19.1</td>
+<td>[x]</td>
+<td>Add ValidateOWASPMappings() to <code>ir/validate.go</code></td>
+</tr>
+<tr>
+<td>19.2</td>
+<td>[x]</td>
+<td>Update README.md with ASI support</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-20-red-team-data-types">Phase 20: Red Team Data Types ✓<a class="headerlink" href="#phase-20-red-team-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20.1</td>
+<td>[x]</td>
+<td>Create <code>ir/redteam.go</code> with ExploitationGuidance struct</td>
+</tr>
+<tr>
+<td>20.2</td>
+<td>[x]</td>
+<td>Add ExploitationStep type for ordered attack steps</td>
+</tr>
+<tr>
+<td>20.3</td>
+<td>[x]</td>
+<td>Add OffensiveTool type for tool recommendations</td>
+</tr>
+<tr>
+<td>20.4</td>
+<td>[x]</td>
+<td>Add PayloadPattern type for generic payload templates</td>
+</tr>
+<tr>
+<td>20.5</td>
+<td>[x]</td>
+<td>Add ExploitDifficulty enum</td>
+</tr>
+<tr>
+<td>20.6</td>
+<td>[x]</td>
+<td>Add unit tests with JSON round-trip verification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-21-blue-team-data-types">Phase 21: Blue Team Data Types ✓<a class="headerlink" href="#phase-21-blue-team-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21.1</td>
+<td>[x]</td>
+<td>Create <code>ir/blueteam.go</code> with DefenseGuidance struct</td>
+</tr>
+<tr>
+<td>21.2</td>
+<td>[x]</td>
+<td>Add DetectionRule type with format support</td>
+</tr>
+<tr>
+<td>21.3</td>
+<td>[x]</td>
+<td>Add DetectionFormat enum (sigma, yara, splunk, etc.)</td>
+</tr>
+<tr>
+<td>21.4</td>
+<td>[x]</td>
+<td>Add IOC type with type, value, confidence</td>
+</tr>
+<tr>
+<td>21.5</td>
+<td>[x]</td>
+<td>Add IOCType enum</td>
+</tr>
+<tr>
+<td>21.6</td>
+<td>[x]</td>
+<td>Add LogSource type for monitoring</td>
+</tr>
+<tr>
+<td>21.7</td>
+<td>[x]</td>
+<td>Add HuntingQuery type for threat hunting</td>
+</tr>
+<tr>
+<td>21.8</td>
+<td>[x]</td>
+<td>Add AlertThreshold type</td>
+</tr>
+<tr>
+<td>21.9</td>
+<td>[x]</td>
+<td>Add unit tests with JSON round-trip verification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-22-remediation-data-types">Phase 22: Remediation Data Types ✓<a class="headerlink" href="#phase-22-remediation-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22.1</td>
+<td>[x]</td>
+<td>Create <code>ir/remediation.go</code> with RemediationGuidance struct</td>
+</tr>
+<tr>
+<td>22.2</td>
+<td>[x]</td>
+<td>Add CodePattern type for vulnerable/secure patterns</td>
+</tr>
+<tr>
+<td>22.3</td>
+<td>[x]</td>
+<td>Add ChecklistItem type for review checklists</td>
+</tr>
+<tr>
+<td>22.4</td>
+<td>[x]</td>
+<td>Add Library type for recommended libraries</td>
+</tr>
+<tr>
+<td>22.5</td>
+<td>[x]</td>
+<td>Add ConfigChange type for configuration fixes</td>
+</tr>
+<tr>
+<td>22.6</td>
+<td>[x]</td>
+<td>Add TestingApproach type</td>
+</tr>
+<tr>
+<td>22.7</td>
+<td>[x]</td>
+<td>Add unit tests with JSON round-trip verification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-23-app-test-spec-integration">Phase 23: app-test-spec Integration ✓<a class="headerlink" href="#phase-23-app-test-spec-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>23.1</td>
+<td>[x]</td>
+<td>Create <code>ir/testref.go</code> with TestReference struct</td>
+</tr>
+<tr>
+<td>23.2</td>
+<td>[x]</td>
+<td>Add TestPurpose enum</td>
+</tr>
+<tr>
+<td>23.3</td>
+<td>[x]</td>
+<td>Add TestSuiteReference type</td>
+</tr>
+<tr>
+<td>23.4</td>
+<td>[x]</td>
+<td>Add TestRef to Attack struct</td>
+</tr>
+<tr>
+<td>23.5</td>
+<td>[x]</td>
+<td>Add TestSuites to ThreatModel struct</td>
+</tr>
+<tr>
+<td>23.6</td>
+<td>[x]</td>
+<td>Add TestRefs to ExploitationGuidance and TestingApproach</td>
+</tr>
+<tr>
+<td>23.7</td>
+<td>[x]</td>
+<td>Add unit tests with JSON round-trip verification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-24-incident-playbooks">Phase 24: Incident Playbooks ✓<a class="headerlink" href="#phase-24-incident-playbooks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24.1</td>
+<td>[x]</td>
+<td>Create <code>ir/playbook.go</code> with IncidentPlaybook struct</td>
+</tr>
+<tr>
+<td>24.2</td>
+<td>[x]</td>
+<td>Add PlaybookStep type for ordered response steps</td>
+</tr>
+<tr>
+<td>24.3</td>
+<td>[x]</td>
+<td>Add PlaybookPhase enum</td>
+</tr>
+<tr>
+<td>24.4</td>
+<td>[x]</td>
+<td>Add Contact type for incident contacts</td>
+</tr>
+<tr>
+<td>24.5</td>
+<td>[x]</td>
+<td>Add Playbooks to ThreatModel struct</td>
+</tr>
+<tr>
+<td>24.6</td>
+<td>[x]</td>
+<td>Add unit tests with JSON round-trip verification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-25-threatmodel-attack-integration">Phase 25: ThreatModel &amp; Attack Integration ✓<a class="headerlink" href="#phase-25-threatmodel-attack-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25.1</td>
+<td>[x]</td>
+<td>Add RedTeam, BlueTeam, Remediation fields to ThreatModel</td>
+</tr>
+<tr>
+<td>25.2</td>
+<td>[x]</td>
+<td>Add RedTeamNotes, BlueTeamNotes, RemediationNote to Attack</td>
+</tr>
+<tr>
+<td>25.3</td>
+<td>[x]</td>
+<td>Regenerate JSON schemas</td>
+</tr>
+<tr>
+<td>25.4</td>
+<td>[x]</td>
+<td>All tests pass, linting passes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-26-fair-risk-assessment">Phase 26: FAIR Risk Assessment ✓<a class="headerlink" href="#phase-26-fair-risk-assessment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>26.1</td>
+<td>[x]</td>
+<td>Create <code>ir/fair.go</code> with FAIRAssessment struct</td>
+</tr>
+<tr>
+<td>26.2</td>
+<td>[x]</td>
+<td>Add FrequencyEstimate type (LEF components)</td>
+</tr>
+<tr>
+<td>26.3</td>
+<td>[x]</td>
+<td>Add LossEstimate type (LM components)</td>
+</tr>
+<tr>
+<td>26.4</td>
+<td>[x]</td>
+<td>Add ALE calculation helper</td>
+</tr>
+<tr>
+<td>26.5</td>
+<td>[x]</td>
+<td>Add RiskAssessment to ThreatModel</td>
+</tr>
+<tr>
+<td>26.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-27-business-impact-epss">Phase 27: Business Impact &amp; EPSS ✓<a class="headerlink" href="#phase-27-business-impact-epss" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>27.1</td>
+<td>[x]</td>
+<td>Add BusinessImpact struct to <code>ir/fair.go</code></td>
+</tr>
+<tr>
+<td>27.2</td>
+<td>[x]</td>
+<td>Create <code>ir/epss.go</code> with EPSSData struct</td>
+</tr>
+<tr>
+<td>27.3</td>
+<td>[x]</td>
+<td>Add GetEPSSScore() lookup function (static data or API)</td>
+</tr>
+<tr>
+<td>27.4</td>
+<td>[x]</td>
+<td>Add BusinessImpact and EPSSData to ThreatModel</td>
+</tr>
+<tr>
+<td>27.5</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-28-stix-21-export">Phase 28: STIX 2.1 Export ✓<a class="headerlink" href="#phase-28-stix-21-export" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28.1</td>
+<td>[x]</td>
+<td>Create <code>ir/stix_export.go</code> with export functions</td>
+</tr>
+<tr>
+<td>28.2</td>
+<td>[x]</td>
+<td>Implement IOC to STIX Indicator conversion</td>
+</tr>
+<tr>
+<td>28.3</td>
+<td>[x]</td>
+<td>Implement ThreatActor to STIX Threat-Actor conversion</td>
+</tr>
+<tr>
+<td>28.4</td>
+<td>[x]</td>
+<td>Implement Attack to STIX Attack-Pattern conversion</td>
+</tr>
+<tr>
+<td>28.5</td>
+<td>[x]</td>
+<td>Implement ThreatModel.ExportSTIXBundle()</td>
+</tr>
+<tr>
+<td>28.6</td>
+<td>[x]</td>
+<td>Add unit tests with STIX schema validation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-29-kev-catalog-integration">Phase 29: KEV Catalog Integration ✓<a class="headerlink" href="#phase-29-kev-catalog-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>29.1</td>
+<td>[x]</td>
+<td>Create <code>ir/kev.go</code> with KEVEntry struct</td>
+</tr>
+<tr>
+<td>29.2</td>
+<td>[x]</td>
+<td>Add embedded KEV catalog data (or fetch function)</td>
+</tr>
+<tr>
+<td>29.3</td>
+<td>[x]</td>
+<td>Add GetKEVEntry() and IsInKEV() functions</td>
+</tr>
+<tr>
+<td>29.4</td>
+<td>[x]</td>
+<td>Add KEVData field to CVEMapping</td>
+</tr>
+<tr>
+<td>29.5</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-30-atomic-red-team-mapping">Phase 30: Atomic Red Team Mapping ✓<a class="headerlink" href="#phase-30-atomic-red-team-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30.1</td>
+<td>[x]</td>
+<td>Create <code>ir/atomicredteam.go</code> with AtomicTestMapping struct</td>
+</tr>
+<tr>
+<td>30.2</td>
+<td>[x]</td>
+<td>Add AtomicTests field to ThreatModel</td>
+</tr>
+<tr>
+<td>30.3</td>
+<td>[x]</td>
+<td>Add AtomicTestID field to Attack (optional)</td>
+</tr>
+<tr>
+<td>30.4</td>
+<td>[x]</td>
+<td>Add validation for technique ID format</td>
+</tr>
+<tr>
+<td>30.5</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-31-detection-coverage-matrix">Phase 31: Detection Coverage Matrix ✓<a class="headerlink" href="#phase-31-detection-coverage-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>31.1</td>
+<td>[x]</td>
+<td>Create <code>ir/coverage.go</code> with DetectionCoverageMatrix struct</td>
+</tr>
+<tr>
+<td>31.2</td>
+<td>[x]</td>
+<td>Add TechniqueCoverage struct</td>
+</tr>
+<tr>
+<td>31.3</td>
+<td>[x]</td>
+<td>Add CoverageSummary struct</td>
+</tr>
+<tr>
+<td>31.4</td>
+<td>[x]</td>
+<td>Add CalculateCoverage() function</td>
+</tr>
+<tr>
+<td>31.5</td>
+<td>[x]</td>
+<td>Add DetectionCoverage to ThreatModel</td>
+</tr>
+<tr>
+<td>31.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-32-security-metrics">Phase 32: Security Metrics ✓<a class="headerlink" href="#phase-32-security-metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32.1</td>
+<td>[x]</td>
+<td>Create <code>ir/metrics.go</code> with SecurityMetrics struct</td>
+</tr>
+<tr>
+<td>32.2</td>
+<td>[x]</td>
+<td>Add Duration type for time measurements</td>
+</tr>
+<tr>
+<td>32.3</td>
+<td>[x]</td>
+<td>Add Metrics field to ThreatModel</td>
+</tr>
+<tr>
+<td>32.4</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-33-final-integration-release">Phase 33: Final Integration &amp; Release ✓<a class="headerlink" href="#phase-33-final-integration-release" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>33.1</td>
+<td>[x]</td>
+<td>Update version to v0.6.0 in genschema</td>
+</tr>
+<tr>
+<td>33.2</td>
+<td>[x]</td>
+<td>Regenerate all JSON schemas</td>
+</tr>
+<tr>
+<td>33.3</td>
+<td>[x]</td>
+<td>Update README.md with all new features</td>
+</tr>
+<tr>
+<td>33.4</td>
+<td>[x]</td>
+<td>Add CHANGELOG entry for v0.6.0</td>
+</tr>
+<tr>
+<td>33.5</td>
+<td>[x]</td>
+<td>Extend openclaw.json with sample data</td>
+</tr>
+<tr>
+<td>33.6</td>
+<td>[x]</td>
+<td>Run full test suite</td>
+</tr>
+<tr>
+<td>33.7</td>
+<td>[x]</td>
+<td>Run linter</td>
+</tr>
+<tr>
+<td>33.8</td>
+<td>[ ]</td>
+<td>Tag release</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-g-supply-chain-security">Section G: Supply Chain Security<a class="headerlink" href="#section-g-supply-chain-security" title="Permanent link">&para;</a></h2>
+<h3 id="phase-34-sbom-integration">Phase 34: SBOM Integration<a class="headerlink" href="#phase-34-sbom-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>34.1</td>
+<td>[ ]</td>
+<td>Create <code>ir/sbom.go</code> with SBOMReference struct</td>
+</tr>
+<tr>
+<td>34.2</td>
+<td>[ ]</td>
+<td>Add SBOMFormat enum (cyclonedx, spdx)</td>
+</tr>
+<tr>
+<td>34.3</td>
+<td>[ ]</td>
+<td>Add ComponentReference struct for linking threats to components</td>
+</tr>
+<tr>
+<td>34.4</td>
+<td>[ ]</td>
+<td>Add DependencyRisk struct for vulnerable dependency tracking</td>
+</tr>
+<tr>
+<td>34.5</td>
+<td>[ ]</td>
+<td>Add SBOM field to ThreatModel</td>
+</tr>
+<tr>
+<td>34.6</td>
+<td>[ ]</td>
+<td>Add ComponentRefs to Attack struct</td>
+</tr>
+<tr>
+<td>34.7</td>
+<td>[ ]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-35-vex-support">Phase 35: VEX Support<a class="headerlink" href="#phase-35-vex-support" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>35.1</td>
+<td>[ ]</td>
+<td>Create <code>ir/vex.go</code> with VEXStatement struct</td>
+</tr>
+<tr>
+<td>35.2</td>
+<td>[ ]</td>
+<td>Add VEXStatus enum (not_affected, affected, fixed, under_investigation)</td>
+</tr>
+<tr>
+<td>35.3</td>
+<td>[ ]</td>
+<td>Add VEXJustification enum (component_not_present, vulnerable_code_not_present, etc.)</td>
+</tr>
+<tr>
+<td>35.4</td>
+<td>[ ]</td>
+<td>Add VEXStatements field to ThreatModel</td>
+</tr>
+<tr>
+<td>35.5</td>
+<td>[ ]</td>
+<td>Add VEX export function (OpenVEX format)</td>
+</tr>
+<tr>
+<td>35.6</td>
+<td>[ ]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-h-vulnerability-management">Section H: Vulnerability Management<a class="headerlink" href="#section-h-vulnerability-management" title="Permanent link">&para;</a></h2>
+<h3 id="phase-36-ssvc-decision-trees">Phase 36: SSVC Decision Trees<a class="headerlink" href="#phase-36-ssvc-decision-trees" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>36.1</td>
+<td>[ ]</td>
+<td>Create <code>ir/ssvc.go</code> with SSVCAssessment struct</td>
+</tr>
+<tr>
+<td>36.2</td>
+<td>[ ]</td>
+<td>Add Exploitation enum (none, poc, active)</td>
+</tr>
+<tr>
+<td>36.3</td>
+<td>[ ]</td>
+<td>Add Automatable enum (no, yes)</td>
+</tr>
+<tr>
+<td>36.4</td>
+<td>[ ]</td>
+<td>Add TechnicalImpact enum (partial, total)</td>
+</tr>
+<tr>
+<td>36.5</td>
+<td>[ ]</td>
+<td>Add MissionPrevalence enum (minimal, support, essential)</td>
+</tr>
+<tr>
+<td>36.6</td>
+<td>[ ]</td>
+<td>Add PublicWellBeing enum (minimal, material, irreversible)</td>
+</tr>
+<tr>
+<td>36.7</td>
+<td>[ ]</td>
+<td>Add SSVCDecision enum (track, track*, attend, act)</td>
+</tr>
+<tr>
+<td>36.8</td>
+<td>[ ]</td>
+<td>Add CalculateSSVCDecision() function</td>
+</tr>
+<tr>
+<td>36.9</td>
+<td>[ ]</td>
+<td>Add SSVCAssessment to ThreatEntry</td>
+</tr>
+<tr>
+<td>36.10</td>
+<td>[ ]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-i-attack-path-analysis">Section I: Attack Path Analysis<a class="headerlink" href="#section-i-attack-path-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="phase-37-graph-data-model">Phase 37: Graph Data Model<a class="headerlink" href="#phase-37-graph-data-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>37.1</td>
+<td>[ ]</td>
+<td>Create <code>ir/attackgraph.go</code> with AttackGraph struct</td>
+</tr>
+<tr>
+<td>37.2</td>
+<td>[ ]</td>
+<td>Add GraphNode struct (element, threat, or control)</td>
+</tr>
+<tr>
+<td>37.3</td>
+<td>[ ]</td>
+<td>Add GraphEdge struct with edge types (flow, attack, mitigation)</td>
+</tr>
+<tr>
+<td>37.4</td>
+<td>[ ]</td>
+<td>Add BuildAttackGraph() from ThreatModel</td>
+</tr>
+<tr>
+<td>37.5</td>
+<td>[ ]</td>
+<td>Add ToJSON() and FromJSON() for graph serialization</td>
+</tr>
+<tr>
+<td>37.6</td>
+<td>[ ]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-38-path-computation">Phase 38: Path Computation<a class="headerlink" href="#phase-38-path-computation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>38.1</td>
+<td>[ ]</td>
+<td>Add AttackPath struct (sequence of nodes/edges)</td>
+</tr>
+<tr>
+<td>38.2</td>
+<td>[ ]</td>
+<td>Add FindAllPaths(source, target) function</td>
+</tr>
+<tr>
+<td>38.3</td>
+<td>[ ]</td>
+<td>Add FindShortestPath(source, target) function</td>
+</tr>
+<tr>
+<td>38.4</td>
+<td>[ ]</td>
+<td>Add CalculatePathRisk(path) function</td>
+</tr>
+<tr>
+<td>38.5</td>
+<td>[ ]</td>
+<td>Add FindCriticalPaths() for highest-risk paths</td>
+</tr>
+<tr>
+<td>38.6</td>
+<td>[ ]</td>
+<td>Add ReachabilityAnalysis() for exposure assessment</td>
+</tr>
+<tr>
+<td>38.7</td>
+<td>[ ]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="priority-matrix">Priority Matrix<a class="headerlink" href="#priority-matrix" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Phases</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P0 - Critical</strong></td>
+<td>17-33</td>
+<td>Core functionality, complete</td>
+</tr>
+<tr>
+<td><strong>P1 - High</strong></td>
+<td>34-35</td>
+<td>SBOM/VEX - supply chain is major attack vector</td>
+</tr>
+<tr>
+<td><strong>P2 - Medium</strong></td>
+<td>36</td>
+<td>SSVC - complements EPSS for prioritization</td>
+</tr>
+<tr>
+<td><strong>P3 - Lower</strong></td>
+<td>37-38</td>
+<td>Attack paths - advanced analysis capability</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Section A-F (Complete) ──► Section G (Supply Chain) ──► Section I (Attack Paths)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                       └──► Section H (SSVC)        ──┘
 </code></pre></div>
-<h2 id="example-vectors">Example Vectors<a class="headerlink" href="#example-vectors" title="Permanent link">&para;</a></h2>
-<h3 id="critical-93-websocket-localhost-takeover">Critical (9.3) - WebSocket Localhost Takeover<a class="headerlink" href="#critical-93-websocket-localhost-takeover" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N
-</code></pre></div>
-<ul>
-<li><strong>AV:N</strong> - Network accessible (via malicious website)</li>
-<li><strong>AC:L</strong> - Low complexity (simple exploit)</li>
-<li><strong>PR:N</strong> - No privileges required</li>
-<li><strong>UI:R</strong> - User must visit malicious page</li>
-<li><strong>S:C</strong> - Scope changed (browser → agent)</li>
-<li><strong>C:H</strong> - High confidentiality impact</li>
-<li><strong>I:H</strong> - High integrity impact</li>
-<li><strong>A:N</strong> - No availability impact</li>
-</ul>
-<h3 id="high-75-authentication-bypass">High (7.5) - Authentication Bypass<a class="headerlink" href="#high-75-authentication-bypass" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
-</code></pre></div>
-<h3 id="medium-53-information-disclosure">Medium (5.3) - Information Disclosure<a class="headerlink" href="#medium-53-information-disclosure" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
-</code></pre></div>
-<h2 id="calculating-cvss-scores">Calculating CVSS Scores<a class="headerlink" href="#calculating-cvss-scores" title="Permanent link">&para;</a></h2>
-<p>Use the NIST CVSS Calculator or include scores from CVE databases:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">&quot;cvss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.1&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N&quot;</span><span class="p">,</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">      </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.3</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">&quot;cwe&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CWE-346&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Origin Validation Error&quot;</span><span class="p">}</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="complete-example">Complete Example<a class="headerlink" href="#complete-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;attack-chain&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Vulnerability Assessment&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;mappings&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">&quot;cvss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.1&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="nt">&quot;vector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H/A:N&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">      </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">9.3</span><span class="p">,</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">      </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="p">},</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">&quot;cwe&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CWE-346&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Origin Validation Error&quot;</span><span class="p">},</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CWE-307&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Improper Restriction of Excessive Authentication Attempts&quot;</span><span class="p">}</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="p">],</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">&quot;owasp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">      </span><span class="p">{</span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;API2:2023&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Broken Authentication&quot;</span><span class="p">}</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="p">]</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">  </span><span class="p">}</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="p">}</span>
-</code></pre></div>
-<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.first.org/cvss/v3.1/specification-document">CVSS v3.1 Specification</a></li>
-<li><a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator">NIST CVSS Calculator</a></li>
-<li><a href="https://www.first.org/cvss/user-guide">CVSS User Guide</a></li>
-</ul>
+<h2 id="testing-strategy">Testing Strategy<a class="headerlink" href="#testing-strategy" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Test Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>OWASPCategory, ASIIds, reference data lookup, validation</td>
+</tr>
+<tr>
+<td>B</td>
+<td>All role types, JSON round-trip, enum values</td>
+</tr>
+<tr>
+<td>C</td>
+<td>FAIR calculations, estimate validation</td>
+</tr>
+<tr>
+<td>D</td>
+<td>STIX schema compliance, IOC conversion</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Technique ID validation, coverage calculation</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Duration formatting, metric aggregation</td>
+</tr>
+<tr>
+<td>G</td>
+<td>SBOM format validation, VEX status, component linking</td>
+</tr>
+<tr>
+<td>H</td>
+<td>SSVC decision calculation, enum validation</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Graph construction, path finding, risk calculation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<ol>
+<li>[x] Section A: All OWASP reference data complete (40 entries)</li>
+<li>[x] Section B: Role-based types usable and tested</li>
+<li>[x] Section C: FAIR risk scores calculable</li>
+<li>[x] Section D: STIX bundles validate against official schema</li>
+<li>[x] Section E: Detection coverage calculable from threat model</li>
+<li>[x] Section F: Metrics trackable per threat</li>
+<li>[x] All tests pass</li>
+<li>[x] Linting passes</li>
+<li>[x] Backward compatible with v0.5.0 threat models</li>
+<li>[ ] Section G: SBOM references linkable to threats, VEX exportable</li>
+<li>[ ] Section H: SSVC decisions calculable from threat data</li>
+<li>[ ] Section I: Attack paths computable from threat model graph</li>
+</ol>
 
 
 

@@ -1,0 +1,3665 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Security threat modeling diagrams as code with D2 and STIX 2.1 export">
+      
+      
+      
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/design/v0.6.0/TASKS/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>v0.6.0 Tasks - Comprehensive Security Enhancement - Threat Model Spec</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#v060-tasks-comprehensive-security-enhancement" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Threat Model Spec" class="md-header__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Threat Model Spec
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              v0.6.0 Tasks - Comprehensive Security Enhancement
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/grokify/threat-model-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/threat-model-spec
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Threat Model Spec" class="md-nav__button md-logo" aria-label="Threat Model Spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Threat Model Spec
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/grokify/threat-model-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/threat-model-spec
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Concepts
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/diagram-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diagram Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Security Frameworks
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Security Frameworks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/stride/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STRIDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/linddun/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    LINDDUN
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/mitre-attack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MITRE ATT&CK
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/mitre-atlas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MITRE ATLAS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/owasp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OWASP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/cwe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CWE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../concepts/frameworks/cvss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CVSS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/design-time-threat-modeling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Design-Time Threat Modeling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../guides/risk-assessment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Risk Assessment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Specification
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Specification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON IR Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JSON Schema
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/elements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Element Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/boundaries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Boundary Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flow Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../specification/mappings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Framework Mappings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Versions
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Versions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.6.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.5.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../versions/v0.4.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    D2 Styles
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            D2 Styles
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/stride/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    STRIDE Styles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/dfd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DFD Styles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/trust-boundaries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Trust Boundaries
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styles/attack-flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attack Flows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AI Agents
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            CLI Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    generate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/validate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    validate
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.5.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.2.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.1.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.1.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plans
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            Plans
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.6.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.6.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.5.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.5.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plans/v0.4.0-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-a-owasp-asi-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A: OWASP ASI Support ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section A: OWASP ASI Support ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-17-core-asi-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 17: Core ASI Support ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-18-owasp-reference-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 18: OWASP Reference Data ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-19-validation-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 19: Validation &amp; Documentation ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-b-role-based-security-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B: Role-Based Security Data ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section B: Role-Based Security Data ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-20-red-team-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 20: Red Team Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-21-blue-team-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 21: Blue Team Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-22-remediation-data-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 22: Remediation Data Types ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-23-app-test-spec-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 23: app-test-spec Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-24-incident-playbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 24: Incident Playbooks ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-25-threatmodel-attack-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 25: ThreatModel &amp; Attack Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-c-risk-quantification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C: Risk Quantification ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section C: Risk Quantification ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-26-fair-risk-assessment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 26: FAIR Risk Assessment ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-27-business-impact-epss" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 27: Business Impact &amp; EPSS ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-d-threat-intelligence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D: Threat Intelligence ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section D: Threat Intelligence ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-28-stix-21-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 28: STIX 2.1 Export ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-29-kev-catalog-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 29: KEV Catalog Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-e-purple-team" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E: Purple Team ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section E: Purple Team ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-30-atomic-red-team-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 30: Atomic Red Team Mapping ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-31-detection-coverage-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 31: Detection Coverage Matrix ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-f-security-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F: Security Metrics ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section F: Security Metrics ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-32-mttdmttr-coverage-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 32: MTTD/MTTR &amp; Coverage Metrics ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Final Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-33-release-preparation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 33: Release Preparation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-g-supply-chain-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section G: Supply Chain Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section G: Supply Chain Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-34-sbom-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 34: SBOM Integration ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-35-vex-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 35: VEX Support ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-h-vulnerability-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section H: Vulnerability Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section H: Vulnerability Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-36-ssvc-decision-trees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 36: SSVC Decision Trees ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-i-attack-path-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section I: Attack Path Analysis ✓
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section I: Attack Path Analysis ✓">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-37-graph-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 37: Graph Data Model ✓
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-38-path-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 38: Path Computation ✓
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#created-section-a-b-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Created (Section A &amp; B - Complete)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#created-sections-c-f-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Created (Sections C-F - Complete)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified (Complete)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-sections-c-f-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified (Sections C-F - Complete)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#created-sections-g-i-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Created (Sections G-I - Complete)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modified-sections-g-i-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modified (Sections G-I - Complete)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#progress-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="v060-tasks-comprehensive-security-enhancement">v0.6.0 Tasks - Comprehensive Security Enhancement<a class="headerlink" href="#v060-tasks-comprehensive-security-enhancement" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Status:</strong> In Progress
+<strong>Started:</strong> 2026-04-28</p>
+</blockquote>
+<hr />
+<h2 id="section-a-owasp-asi-support">Section A: OWASP ASI Support ✓<a class="headerlink" href="#section-a-owasp-asi-support" title="Permanent link">&para;</a></h2>
+<h3 id="phase-17-core-asi-support">Phase 17: Core ASI Support ✓<a class="headerlink" href="#phase-17-core-asi-support" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17.1</td>
+<td>[x]</td>
+<td>Add <code>OWASPCategoryAgentic</code> to <code>ir/mappings.go</code></td>
+</tr>
+<tr>
+<td>17.2</td>
+<td>[x]</td>
+<td>Update <code>OWASPCategory.JSONSchema()</code> to include "agentic"</td>
+</tr>
+<tr>
+<td>17.3</td>
+<td>[x]</td>
+<td>Add <code>ASIIds []string</code> field to Attack struct in <code>ir/diagram.go</code></td>
+</tr>
+<tr>
+<td>17.4</td>
+<td>[x]</td>
+<td>Add unit tests for new category and field</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-18-owasp-reference-data">Phase 18: OWASP Reference Data ✓<a class="headerlink" href="#phase-18-owasp-reference-data" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>18.1</td>
+<td>[x]</td>
+<td>Create <code>ir/owasp_reference.go</code> with OWASPEntry type</td>
+</tr>
+<tr>
+<td>18.2</td>
+<td>[x]</td>
+<td>Add OWASP API Security Top 10 (2023) reference data</td>
+</tr>
+<tr>
+<td>18.3</td>
+<td>[x]</td>
+<td>Add OWASP LLM Top 10 (2025) reference data</td>
+</tr>
+<tr>
+<td>18.4</td>
+<td>[x]</td>
+<td>Add OWASP Web Top 10 (2021) reference data</td>
+</tr>
+<tr>
+<td>18.5</td>
+<td>[x]</td>
+<td>Add OWASP Agentic Top 10 (ASI 2026) reference data</td>
+</tr>
+<tr>
+<td>18.6</td>
+<td>[x]</td>
+<td>Add GetOWASPEntry() and ValidateOWASPID() functions</td>
+</tr>
+<tr>
+<td>18.7</td>
+<td>[x]</td>
+<td>Add unit tests for reference data</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-19-validation-documentation">Phase 19: Validation &amp; Documentation ✓<a class="headerlink" href="#phase-19-validation-documentation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19.1</td>
+<td>[x]</td>
+<td>Add ValidateOWASPMappings() to <code>ir/validate.go</code></td>
+</tr>
+<tr>
+<td>19.2</td>
+<td>[x]</td>
+<td>Update README.md with ASI support</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-b-role-based-security-data">Section B: Role-Based Security Data ✓<a class="headerlink" href="#section-b-role-based-security-data" title="Permanent link">&para;</a></h2>
+<h3 id="phase-20-red-team-data-types">Phase 20: Red Team Data Types ✓<a class="headerlink" href="#phase-20-red-team-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20.1</td>
+<td>[x]</td>
+<td>Create <code>ir/redteam.go</code> with ExploitationGuidance struct</td>
+</tr>
+<tr>
+<td>20.2</td>
+<td>[x]</td>
+<td>Add ExploitationStep type for ordered attack steps</td>
+</tr>
+<tr>
+<td>20.3</td>
+<td>[x]</td>
+<td>Add OffensiveTool type for tool recommendations</td>
+</tr>
+<tr>
+<td>20.4</td>
+<td>[x]</td>
+<td>Add PayloadPattern type for generic payload templates</td>
+</tr>
+<tr>
+<td>20.5</td>
+<td>[x]</td>
+<td>Add ExploitDifficulty enum (trivial, low, medium, high, expert)</td>
+</tr>
+<tr>
+<td>20.6</td>
+<td>[x]</td>
+<td>Add unit tests for all red team types</td>
+</tr>
+<tr>
+<td>20.7</td>
+<td>[x]</td>
+<td>Verify JSON serialization round-trip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-21-blue-team-data-types">Phase 21: Blue Team Data Types ✓<a class="headerlink" href="#phase-21-blue-team-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21.1</td>
+<td>[x]</td>
+<td>Create <code>ir/blueteam.go</code> with DefenseGuidance struct</td>
+</tr>
+<tr>
+<td>21.2</td>
+<td>[x]</td>
+<td>Add DetectionRule type with Sigma format support</td>
+</tr>
+<tr>
+<td>21.3</td>
+<td>[x]</td>
+<td>Add DetectionFormat enum (sigma, yara, splunk, elastic, kql, snort, suricata, custom)</td>
+</tr>
+<tr>
+<td>21.4</td>
+<td>[x]</td>
+<td>Add IOC type with type, value, confidence, expiration</td>
+</tr>
+<tr>
+<td>21.5</td>
+<td>[x]</td>
+<td>Add IOCType enum (ip, domain, url, hash, filepath, email, registry, process, certificate, pattern)</td>
+</tr>
+<tr>
+<td>21.6</td>
+<td>[x]</td>
+<td>Add LogSource type for monitoring recommendations</td>
+</tr>
+<tr>
+<td>21.7</td>
+<td>[x]</td>
+<td>Add HuntingQuery type for proactive threat hunting</td>
+</tr>
+<tr>
+<td>21.8</td>
+<td>[x]</td>
+<td>Add AlertThreshold type for monitoring thresholds</td>
+</tr>
+<tr>
+<td>21.9</td>
+<td>[x]</td>
+<td>Add unit tests for all blue team types</td>
+</tr>
+<tr>
+<td>21.10</td>
+<td>[x]</td>
+<td>Verify JSON serialization round-trip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-22-remediation-data-types">Phase 22: Remediation Data Types ✓<a class="headerlink" href="#phase-22-remediation-data-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22.1</td>
+<td>[x]</td>
+<td>Create <code>ir/remediation.go</code> with RemediationGuidance struct</td>
+</tr>
+<tr>
+<td>22.2</td>
+<td>[x]</td>
+<td>Add CodePattern type for vulnerable/secure patterns</td>
+</tr>
+<tr>
+<td>22.3</td>
+<td>[x]</td>
+<td>Add ChecklistItem type for review checklists</td>
+</tr>
+<tr>
+<td>22.4</td>
+<td>[x]</td>
+<td>Add Library type for recommended libraries</td>
+</tr>
+<tr>
+<td>22.5</td>
+<td>[x]</td>
+<td>Add ConfigChange type for configuration fixes</td>
+</tr>
+<tr>
+<td>22.6</td>
+<td>[x]</td>
+<td>Add TestingApproach type for verification guidance</td>
+</tr>
+<tr>
+<td>22.7</td>
+<td>[x]</td>
+<td>Add unit tests for all remediation types</td>
+</tr>
+<tr>
+<td>22.8</td>
+<td>[x]</td>
+<td>Verify JSON serialization round-trip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-23-app-test-spec-integration">Phase 23: app-test-spec Integration ✓<a class="headerlink" href="#phase-23-app-test-spec-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>23.1</td>
+<td>[x]</td>
+<td>Create <code>ir/testref.go</code> with TestReference struct</td>
+</tr>
+<tr>
+<td>23.2</td>
+<td>[x]</td>
+<td>Add TestPurpose enum (exploitation, detection, remediation, regression)</td>
+</tr>
+<tr>
+<td>23.3</td>
+<td>[x]</td>
+<td>Add TestSuiteReference type for suite-level references</td>
+</tr>
+<tr>
+<td>23.4</td>
+<td>[x]</td>
+<td>Add TestRef field to Attack struct</td>
+</tr>
+<tr>
+<td>23.5</td>
+<td>[x]</td>
+<td>Add TestSuites field to ThreatModel struct</td>
+</tr>
+<tr>
+<td>23.6</td>
+<td>[x]</td>
+<td>Add TestRefs to ExploitationGuidance and TestingApproach</td>
+</tr>
+<tr>
+<td>23.7</td>
+<td>[x]</td>
+<td>Add unit tests for test reference types</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-24-incident-playbooks">Phase 24: Incident Playbooks ✓<a class="headerlink" href="#phase-24-incident-playbooks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24.1</td>
+<td>[x]</td>
+<td>Create <code>ir/playbook.go</code> with IncidentPlaybook struct</td>
+</tr>
+<tr>
+<td>24.2</td>
+<td>[x]</td>
+<td>Add PlaybookStep type for ordered response steps</td>
+</tr>
+<tr>
+<td>24.3</td>
+<td>[x]</td>
+<td>Add PlaybookPhase enum for IR phases</td>
+</tr>
+<tr>
+<td>24.4</td>
+<td>[x]</td>
+<td>Add Contact type for incident contacts</td>
+</tr>
+<tr>
+<td>24.5</td>
+<td>[x]</td>
+<td>Add Playbooks field to ThreatModel struct</td>
+</tr>
+<tr>
+<td>24.6</td>
+<td>[x]</td>
+<td>Add unit tests for playbook types</td>
+</tr>
+<tr>
+<td>24.7</td>
+<td>[x]</td>
+<td>Verify JSON serialization round-trip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-25-threatmodel-attack-integration">Phase 25: ThreatModel &amp; Attack Integration ✓<a class="headerlink" href="#phase-25-threatmodel-attack-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25.1</td>
+<td>[x]</td>
+<td>Add RedTeam, BlueTeam, Remediation fields to ThreatModel</td>
+</tr>
+<tr>
+<td>25.2</td>
+<td>[x]</td>
+<td>Add RedTeamNotes, BlueTeamNotes, RemediationNote to Attack</td>
+</tr>
+<tr>
+<td>25.3</td>
+<td>[x]</td>
+<td>Regenerate JSON schemas</td>
+</tr>
+<tr>
+<td>25.4</td>
+<td>[x]</td>
+<td>All tests pass, linting passes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-c-risk-quantification">Section C: Risk Quantification ✓<a class="headerlink" href="#section-c-risk-quantification" title="Permanent link">&para;</a></h2>
+<h3 id="phase-26-fair-risk-assessment">Phase 26: FAIR Risk Assessment ✓<a class="headerlink" href="#phase-26-fair-risk-assessment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>26.1</td>
+<td>[x]</td>
+<td>Create <code>ir/fair.go</code> with FAIRAssessment struct</td>
+</tr>
+<tr>
+<td>26.2</td>
+<td>[x]</td>
+<td>Add FrequencyEstimate type (min, max, mostLikely, confidence)</td>
+</tr>
+<tr>
+<td>26.3</td>
+<td>[x]</td>
+<td>Add LossEstimate type (min, max, mostLikely, currency)</td>
+</tr>
+<tr>
+<td>26.4</td>
+<td>[x]</td>
+<td>Add CalculateALE() function for Annualized Loss Expectancy</td>
+</tr>
+<tr>
+<td>26.5</td>
+<td>[x]</td>
+<td>Add RiskAssessment field to ThreatModel</td>
+</tr>
+<tr>
+<td>26.6</td>
+<td>[x]</td>
+<td>Add unit tests for FAIR types</td>
+</tr>
+<tr>
+<td>26.7</td>
+<td>[x]</td>
+<td>Add unit tests for ALE calculation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-27-business-impact-epss">Phase 27: Business Impact &amp; EPSS ✓<a class="headerlink" href="#phase-27-business-impact-epss" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>27.1</td>
+<td>[x]</td>
+<td>Add BusinessImpact struct (revenue, customer, regulatory, reputation, operational)</td>
+</tr>
+<tr>
+<td>27.2</td>
+<td>[x]</td>
+<td>Create <code>ir/epss.go</code> with EPSSData struct</td>
+</tr>
+<tr>
+<td>27.3</td>
+<td>[x]</td>
+<td>Add EPSSScore lookup (static data or FIRST API)</td>
+</tr>
+<tr>
+<td>27.4</td>
+<td>[x]</td>
+<td>Add BusinessImpact field to ThreatModel</td>
+</tr>
+<tr>
+<td>27.5</td>
+<td>[x]</td>
+<td>Add EPSSData field to ThreatModel</td>
+</tr>
+<tr>
+<td>27.6</td>
+<td>[x]</td>
+<td>Add unit tests for business impact</td>
+</tr>
+<tr>
+<td>27.7</td>
+<td>[x]</td>
+<td>Add unit tests for EPSS data</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-d-threat-intelligence">Section D: Threat Intelligence ✓<a class="headerlink" href="#section-d-threat-intelligence" title="Permanent link">&para;</a></h2>
+<h3 id="phase-28-stix-21-export">Phase 28: STIX 2.1 Export ✓<a class="headerlink" href="#phase-28-stix-21-export" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28.1</td>
+<td>[x]</td>
+<td>Create <code>ir/stix_export.go</code> with STIXExportOptions struct</td>
+</tr>
+<tr>
+<td>28.2</td>
+<td>[x]</td>
+<td>Implement IOC.ToSTIXIndicator() method</td>
+</tr>
+<tr>
+<td>28.3</td>
+<td>[x]</td>
+<td>Implement ThreatActor.ToSTIXThreatActor() method</td>
+</tr>
+<tr>
+<td>28.4</td>
+<td>[x]</td>
+<td>Implement Attack.ToSTIXAttackPattern() method</td>
+</tr>
+<tr>
+<td>28.5</td>
+<td>[x]</td>
+<td>Implement DetectionRule.ToSTIXCourseOfAction() method</td>
+</tr>
+<tr>
+<td>28.6</td>
+<td>[x]</td>
+<td>Implement ThreatModel.ExportSTIXBundle() method</td>
+</tr>
+<tr>
+<td>28.7</td>
+<td>[x]</td>
+<td>Add unit tests with STIX 2.1 schema validation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-29-kev-catalog-integration">Phase 29: KEV Catalog Integration ✓<a class="headerlink" href="#phase-29-kev-catalog-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>29.1</td>
+<td>[x]</td>
+<td>Create <code>ir/kev.go</code> with KEVEntry struct</td>
+</tr>
+<tr>
+<td>29.2</td>
+<td>[x]</td>
+<td>Add embedded KEV catalog data (or API fetch function)</td>
+</tr>
+<tr>
+<td>29.3</td>
+<td>[x]</td>
+<td>Add GetKEVEntry(cveID) function</td>
+</tr>
+<tr>
+<td>29.4</td>
+<td>[x]</td>
+<td>Add IsInKEV(cveID) function</td>
+</tr>
+<tr>
+<td>29.5</td>
+<td>[x]</td>
+<td>Add KEVStatus for threat model reports</td>
+</tr>
+<tr>
+<td>29.6</td>
+<td>[x]</td>
+<td>Add unit tests for KEV lookup</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-e-purple-team">Section E: Purple Team ✓<a class="headerlink" href="#section-e-purple-team" title="Permanent link">&para;</a></h2>
+<h3 id="phase-30-atomic-red-team-mapping">Phase 30: Atomic Red Team Mapping ✓<a class="headerlink" href="#phase-30-atomic-red-team-mapping" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30.1</td>
+<td>[x]</td>
+<td>Create <code>ir/atomicredteam.go</code> with AtomicTestMapping struct</td>
+</tr>
+<tr>
+<td>30.2</td>
+<td>[x]</td>
+<td>Add fields: TechniqueID, AtomicTests, Validated, LastRun, Result</td>
+</tr>
+<tr>
+<td>30.3</td>
+<td>[x]</td>
+<td>Add AtomicTests []AtomicTestMapping to ThreatModel</td>
+</tr>
+<tr>
+<td>30.4</td>
+<td>[x]</td>
+<td>Add AtomicTestID optional field to Attack</td>
+</tr>
+<tr>
+<td>30.5</td>
+<td>[x]</td>
+<td>Add validation for MITRE technique ID format</td>
+</tr>
+<tr>
+<td>30.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-31-detection-coverage-matrix">Phase 31: Detection Coverage Matrix ✓<a class="headerlink" href="#phase-31-detection-coverage-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>31.1</td>
+<td>[x]</td>
+<td>Create <code>ir/coverage.go</code> with DetectionCoverageMatrix struct</td>
+</tr>
+<tr>
+<td>31.2</td>
+<td>[x]</td>
+<td>Add TechniqueCoverage struct (techniqueId, name, tactic, coverage, detectionIds)</td>
+</tr>
+<tr>
+<td>31.3</td>
+<td>[x]</td>
+<td>Add CoverageSummary struct (total, full, partial, none, percent)</td>
+</tr>
+<tr>
+<td>31.4</td>
+<td>[x]</td>
+<td>Add CalculateCoverage(techniques, detections) function</td>
+</tr>
+<tr>
+<td>31.5</td>
+<td>[x]</td>
+<td>Add DetectionCoverage *DetectionCoverageMatrix to ThreatModel</td>
+</tr>
+<tr>
+<td>31.6</td>
+<td>[x]</td>
+<td>Add unit tests for coverage calculation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-f-security-metrics">Section F: Security Metrics ✓<a class="headerlink" href="#section-f-security-metrics" title="Permanent link">&para;</a></h2>
+<h3 id="phase-32-mttdmttr-coverage-metrics">Phase 32: MTTD/MTTR &amp; Coverage Metrics ✓<a class="headerlink" href="#phase-32-mttdmttr-coverage-metrics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32.1</td>
+<td>[x]</td>
+<td>Create <code>ir/metrics.go</code> with SecurityMetrics struct</td>
+</tr>
+<tr>
+<td>32.2</td>
+<td>[x]</td>
+<td>Add Duration type (value, unit) for time measurements</td>
+</tr>
+<tr>
+<td>32.3</td>
+<td>[x]</td>
+<td>Add MTTD, MTTR, MTTC fields</td>
+</tr>
+<tr>
+<td>32.4</td>
+<td>[x]</td>
+<td>Add DetectionRate, FalsePositiveRate fields</td>
+</tr>
+<tr>
+<td>32.5</td>
+<td>[x]</td>
+<td>Add Metrics *SecurityMetrics to ThreatModel</td>
+</tr>
+<tr>
+<td>32.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="final-integration">Final Integration<a class="headerlink" href="#final-integration" title="Permanent link">&para;</a></h2>
+<h3 id="phase-33-release-preparation">Phase 33: Release Preparation<a class="headerlink" href="#phase-33-release-preparation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>33.1</td>
+<td>[x]</td>
+<td>Update version to v0.6.0 in <code>cmd/genschema/main.go</code></td>
+</tr>
+<tr>
+<td>33.2</td>
+<td>[x]</td>
+<td>Regenerate JSON schemas to schema/ and docs/versions/v0.6.0/</td>
+</tr>
+<tr>
+<td>33.3</td>
+<td>[x]</td>
+<td>Update README.md with all new features</td>
+</tr>
+<tr>
+<td>33.4</td>
+<td>[x]</td>
+<td>Add CHANGELOG.md entry for v0.6.0</td>
+</tr>
+<tr>
+<td>33.5</td>
+<td>[x]</td>
+<td>Extend openclaw.json with sample role/risk/metrics data</td>
+</tr>
+<tr>
+<td>33.6</td>
+<td>[x]</td>
+<td>Run full test suite: <code>go test ./...</code></td>
+</tr>
+<tr>
+<td>33.7</td>
+<td>[x]</td>
+<td>Run linter: <code>golangci-lint run</code></td>
+</tr>
+<tr>
+<td>33.8</td>
+<td>[ ]</td>
+<td>Create git commit</td>
+</tr>
+<tr>
+<td>33.9</td>
+<td>[ ]</td>
+<td>Tag v0.6.0 release</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-g-supply-chain-security">Section G: Supply Chain Security<a class="headerlink" href="#section-g-supply-chain-security" title="Permanent link">&para;</a></h2>
+<h3 id="phase-34-sbom-integration">Phase 34: SBOM Integration ✓<a class="headerlink" href="#phase-34-sbom-integration" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>34.1</td>
+<td>[x]</td>
+<td>Create <code>ir/sbom.go</code> with SBOMReference struct</td>
+</tr>
+<tr>
+<td>34.2</td>
+<td>[x]</td>
+<td>Add SBOMFormat enum (cyclonedx, spdx)</td>
+</tr>
+<tr>
+<td>34.3</td>
+<td>[x]</td>
+<td>Add ComponentReference struct for linking threats to components</td>
+</tr>
+<tr>
+<td>34.4</td>
+<td>[x]</td>
+<td>Add DependencyRisk struct for vulnerable dependency tracking</td>
+</tr>
+<tr>
+<td>34.5</td>
+<td>[x]</td>
+<td>Add SBOM field to ThreatModel</td>
+</tr>
+<tr>
+<td>34.6</td>
+<td>[x]</td>
+<td>Add ComponentRefs to Attack struct</td>
+</tr>
+<tr>
+<td>34.7</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-35-vex-support">Phase 35: VEX Support ✓<a class="headerlink" href="#phase-35-vex-support" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>35.1</td>
+<td>[x]</td>
+<td>Create <code>ir/vex.go</code> with VEXStatement struct</td>
+</tr>
+<tr>
+<td>35.2</td>
+<td>[x]</td>
+<td>Add VEXStatus enum (not_affected, affected, fixed, under_investigation)</td>
+</tr>
+<tr>
+<td>35.3</td>
+<td>[x]</td>
+<td>Add VEXJustification enum (component_not_present, vulnerable_code_not_present, etc.)</td>
+</tr>
+<tr>
+<td>35.4</td>
+<td>[x]</td>
+<td>Add VEXStatements field to ThreatModel</td>
+</tr>
+<tr>
+<td>35.5</td>
+<td>[x]</td>
+<td>Add VEX export function (OpenVEX format)</td>
+</tr>
+<tr>
+<td>35.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-h-vulnerability-management">Section H: Vulnerability Management<a class="headerlink" href="#section-h-vulnerability-management" title="Permanent link">&para;</a></h2>
+<h3 id="phase-36-ssvc-decision-trees">Phase 36: SSVC Decision Trees ✓<a class="headerlink" href="#phase-36-ssvc-decision-trees" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>36.1</td>
+<td>[x]</td>
+<td>Create <code>ir/ssvc.go</code> with SSVCAssessment struct</td>
+</tr>
+<tr>
+<td>36.2</td>
+<td>[x]</td>
+<td>Add Exploitation enum (none, poc, active)</td>
+</tr>
+<tr>
+<td>36.3</td>
+<td>[x]</td>
+<td>Add Automatable enum (no, yes)</td>
+</tr>
+<tr>
+<td>36.4</td>
+<td>[x]</td>
+<td>Add TechnicalImpact enum (partial, total)</td>
+</tr>
+<tr>
+<td>36.5</td>
+<td>[x]</td>
+<td>Add MissionPrevalence enum (minimal, support, essential)</td>
+</tr>
+<tr>
+<td>36.6</td>
+<td>[x]</td>
+<td>Add PublicWellBeing enum (minimal, material, irreversible)</td>
+</tr>
+<tr>
+<td>36.7</td>
+<td>[x]</td>
+<td>Add SSVCDecision enum (track, track*, attend, act)</td>
+</tr>
+<tr>
+<td>36.8</td>
+<td>[x]</td>
+<td>Add CalculateSSVCDecision() function</td>
+</tr>
+<tr>
+<td>36.9</td>
+<td>[x]</td>
+<td>Add SSVCAssessment to ThreatEntry</td>
+</tr>
+<tr>
+<td>36.10</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-i-attack-path-analysis">Section I: Attack Path Analysis ✓<a class="headerlink" href="#section-i-attack-path-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="phase-37-graph-data-model">Phase 37: Graph Data Model ✓<a class="headerlink" href="#phase-37-graph-data-model" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>37.1</td>
+<td>[x]</td>
+<td>Create <code>ir/attackgraph.go</code> with AttackGraph struct</td>
+</tr>
+<tr>
+<td>37.2</td>
+<td>[x]</td>
+<td>Add GraphNode struct (element, threat, or control)</td>
+</tr>
+<tr>
+<td>37.3</td>
+<td>[x]</td>
+<td>Add GraphEdge struct with edge types (flow, attack, mitigation)</td>
+</tr>
+<tr>
+<td>37.4</td>
+<td>[x]</td>
+<td>Add BuildAttackGraph() from ThreatModel</td>
+</tr>
+<tr>
+<td>37.5</td>
+<td>[x]</td>
+<td>Add ToJSON() and FromJSON() for graph serialization</td>
+</tr>
+<tr>
+<td>37.6</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="phase-38-path-computation">Phase 38: Path Computation ✓<a class="headerlink" href="#phase-38-path-computation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>38.1</td>
+<td>[x]</td>
+<td>Add AttackPath struct (sequence of nodes/edges)</td>
+</tr>
+<tr>
+<td>38.2</td>
+<td>[x]</td>
+<td>Add FindAllPaths(source, target) function</td>
+</tr>
+<tr>
+<td>38.3</td>
+<td>[x]</td>
+<td>Add FindShortestPath(source, target) function</td>
+</tr>
+<tr>
+<td>38.4</td>
+<td>[x]</td>
+<td>Add CalculatePathRisk(path) function</td>
+</tr>
+<tr>
+<td>38.5</td>
+<td>[x]</td>
+<td>Add FindCriticalPaths() for highest-risk paths</td>
+</tr>
+<tr>
+<td>38.6</td>
+<td>[x]</td>
+<td>Add ReachabilityAnalysis() for exposure assessment</td>
+</tr>
+<tr>
+<td>38.7</td>
+<td>[x]</td>
+<td>Add unit tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="files-summary">Files Summary<a class="headerlink" href="#files-summary" title="Permanent link">&para;</a></h2>
+<h3 id="created-section-a-b-complete">Created (Section A &amp; B - Complete)<a class="headerlink" href="#created-section-a-b-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Section</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/owasp_reference.go</code></td>
+<td>A</td>
+<td>40 OWASP entries across 4 lists</td>
+</tr>
+<tr>
+<td><code>ir/owasp_reference_test.go</code></td>
+<td>A</td>
+<td>OWASP reference tests</td>
+</tr>
+<tr>
+<td><code>ir/mappings_test.go</code></td>
+<td>A</td>
+<td>Mappings tests</td>
+</tr>
+<tr>
+<td><code>ir/redteam.go</code></td>
+<td>B</td>
+<td>ExploitationGuidance, steps, tools, patterns</td>
+</tr>
+<tr>
+<td><code>ir/redteam_test.go</code></td>
+<td>B</td>
+<td>Red team tests</td>
+</tr>
+<tr>
+<td><code>ir/blueteam.go</code></td>
+<td>B</td>
+<td>DefenseGuidance, rules, IOCs, queries</td>
+</tr>
+<tr>
+<td><code>ir/blueteam_test.go</code></td>
+<td>B</td>
+<td>Blue team tests</td>
+</tr>
+<tr>
+<td><code>ir/remediation.go</code></td>
+<td>B</td>
+<td>RemediationGuidance, patterns, checklists</td>
+</tr>
+<tr>
+<td><code>ir/remediation_test.go</code></td>
+<td>B</td>
+<td>Remediation tests</td>
+</tr>
+<tr>
+<td><code>ir/playbook.go</code></td>
+<td>B</td>
+<td>IncidentPlaybook, steps, contacts</td>
+</tr>
+<tr>
+<td><code>ir/playbook_test.go</code></td>
+<td>B</td>
+<td>Playbook tests</td>
+</tr>
+<tr>
+<td><code>ir/testref.go</code></td>
+<td>B</td>
+<td>TestReference, TestSuiteReference</td>
+</tr>
+<tr>
+<td><code>ir/testref_test.go</code></td>
+<td>B</td>
+<td>Test reference tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="created-sections-c-f-complete">Created (Sections C-F - Complete)<a class="headerlink" href="#created-sections-c-f-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Section</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/fair.go</code></td>
+<td>C</td>
+<td>FAIR risk assessment types</td>
+</tr>
+<tr>
+<td><code>ir/fair_test.go</code></td>
+<td>C</td>
+<td>FAIR tests</td>
+</tr>
+<tr>
+<td><code>ir/epss.go</code></td>
+<td>C</td>
+<td>EPSS scoring types</td>
+</tr>
+<tr>
+<td><code>ir/epss_test.go</code></td>
+<td>C</td>
+<td>EPSS tests</td>
+</tr>
+<tr>
+<td><code>ir/stix_export.go</code></td>
+<td>D</td>
+<td>STIX 2.1 export functions</td>
+</tr>
+<tr>
+<td><code>ir/stix_export_test.go</code></td>
+<td>D</td>
+<td>STIX export tests</td>
+</tr>
+<tr>
+<td><code>ir/kev.go</code></td>
+<td>D</td>
+<td>KEV catalog types</td>
+</tr>
+<tr>
+<td><code>ir/kev_test.go</code></td>
+<td>D</td>
+<td>KEV tests</td>
+</tr>
+<tr>
+<td><code>ir/atomicredteam.go</code></td>
+<td>E</td>
+<td>Atomic Red Team mapping</td>
+</tr>
+<tr>
+<td><code>ir/atomicredteam_test.go</code></td>
+<td>E</td>
+<td>ART tests</td>
+</tr>
+<tr>
+<td><code>ir/coverage.go</code></td>
+<td>E</td>
+<td>Detection coverage matrix</td>
+</tr>
+<tr>
+<td><code>ir/coverage_test.go</code></td>
+<td>E</td>
+<td>Coverage tests</td>
+</tr>
+<tr>
+<td><code>ir/metrics.go</code></td>
+<td>F</td>
+<td>Security metrics types</td>
+</tr>
+<tr>
+<td><code>ir/metrics_test.go</code></td>
+<td>F</td>
+<td>Metrics tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modified-complete">Modified (Complete)<a class="headerlink" href="#modified-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/mappings.go</code></td>
+<td>Added OWASPCategoryAgentic</td>
+</tr>
+<tr>
+<td><code>ir/diagram.go</code></td>
+<td>Added ASIIds, role notes, TestRef to Attack</td>
+</tr>
+<tr>
+<td><code>ir/threat_model.go</code></td>
+<td>Added RedTeam, BlueTeam, Remediation, Playbooks, TestSuites</td>
+</tr>
+<tr>
+<td><code>ir/validate.go</code></td>
+<td>Added ValidateOWASPMappings()</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modified-sections-c-f-complete">Modified (Sections C-F - Complete)<a class="headerlink" href="#modified-sections-c-f-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/threat_model.go</code></td>
+<td>Added RiskAssessment, BusinessImpact, EPSSData, AtomicTests, DetectionCoverage, Metrics</td>
+</tr>
+</tbody>
+</table>
+<h3 id="created-sections-g-i-complete">Created (Sections G-I - Complete)<a class="headerlink" href="#created-sections-g-i-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Section</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/sbom.go</code></td>
+<td>G</td>
+<td>SBOM references, component linking</td>
+</tr>
+<tr>
+<td><code>ir/sbom_test.go</code></td>
+<td>G</td>
+<td>SBOM tests</td>
+</tr>
+<tr>
+<td><code>ir/vex.go</code></td>
+<td>G</td>
+<td>VEX statements, status, justifications</td>
+</tr>
+<tr>
+<td><code>ir/vex_test.go</code></td>
+<td>G</td>
+<td>VEX tests</td>
+</tr>
+<tr>
+<td><code>ir/ssvc.go</code></td>
+<td>H</td>
+<td>SSVC decision trees, enums</td>
+</tr>
+<tr>
+<td><code>ir/ssvc_test.go</code></td>
+<td>H</td>
+<td>SSVC tests</td>
+</tr>
+<tr>
+<td><code>ir/attackgraph.go</code></td>
+<td>I</td>
+<td>Attack graph model, nodes, edges</td>
+</tr>
+<tr>
+<td><code>ir/attackgraph_test.go</code></td>
+<td>I</td>
+<td>Graph tests</td>
+</tr>
+<tr>
+<td><code>ir/attackpath.go</code></td>
+<td>I</td>
+<td>Path computation, risk calculation</td>
+</tr>
+<tr>
+<td><code>ir/attackpath_test.go</code></td>
+<td>I</td>
+<td>Path tests</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modified-sections-g-i-complete">Modified (Sections G-I - Complete)<a class="headerlink" href="#modified-sections-g-i-complete" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ir/threat_model.go</code></td>
+<td>Added SBOM, VEXStatements, DependencyRisks fields</td>
+</tr>
+<tr>
+<td><code>ir/diagram.go</code></td>
+<td>Added ComponentRefs to Attack</td>
+</tr>
+<tr>
+<td><code>ir/mitigations.go</code></td>
+<td>Added SSVCAssessment to ThreatEntry</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="progress-summary">Progress Summary<a class="headerlink" href="#progress-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Phases</th>
+<th>Status</th>
+<th>Completion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A: OWASP ASI</td>
+<td>17-19</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>B: Role-Based</td>
+<td>20-25</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>C: Risk</td>
+<td>26-27</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>D: Threat Intel</td>
+<td>28-29</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>E: Purple Team</td>
+<td>30-31</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>F: Metrics</td>
+<td>32</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>G: Supply Chain</td>
+<td>34-35</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>H: Vuln Mgmt</td>
+<td>36</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>I: Attack Paths</td>
+<td>37-38</td>
+<td>Complete</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Final</td>
+<td>33</td>
+<td>In Progress</td>
+<td>78%</td>
+</tr>
+<tr>
+<td><strong>Overall</strong></td>
+<td>17-38</td>
+<td>In Progress</td>
+<td>~97%</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/grokify/threat-model-spec" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

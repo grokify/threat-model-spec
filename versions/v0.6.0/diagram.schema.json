@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.5.0/diagram.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/diagram.schema.json",
   "$ref": "#/$defs/DiagramIR",
   "$defs": {
     "Actor": {
@@ -69,6 +69,12 @@
           },
           "type": "array"
         },
+        "asiIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "strideThreats": {
           "items": {
             "$ref": "#/$defs/STRIDEThreat"
@@ -83,6 +89,24 @@
         },
         "description": {
           "type": "string"
+        },
+        "redTeamNotes": {
+          "type": "string"
+        },
+        "blueTeamNotes": {
+          "type": "string"
+        },
+        "remediationNote": {
+          "type": "string"
+        },
+        "testRef": {
+          "$ref": "#/$defs/TestReference"
+        },
+        "componentRefs": {
+          "items": {
+            "$ref": "#/$defs/ComponentReference"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -412,6 +436,39 @@
         "framework",
         "requirementId"
       ]
+    },
+    "ComponentReference": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "purl": {
+          "type": "string"
+        },
+        "cpe": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "supplier": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "vulnerabilityIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "Controls": {
       "properties": {
@@ -1159,7 +1216,8 @@
       "enum": [
         "api",
         "llm",
-        "web"
+        "web",
+        "agentic"
       ]
     },
     "OWASPMapping": {
@@ -1294,6 +1352,42 @@
         "info"
       ]
     },
+    "SSVCAssessment": {
+      "properties": {
+        "vulnerabilityId": {
+          "type": "string"
+        },
+        "exploitation": {
+          "type": "string"
+        },
+        "automatable": {
+          "type": "string"
+        },
+        "technicalImpact": {
+          "type": "string"
+        },
+        "missionPrevalence": {
+          "type": "string"
+        },
+        "publicWellBeing": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "assessedAt": {
+          "type": "string"
+        },
+        "assessedBy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "STRIDEMapping": {
       "properties": {
         "category": {
@@ -1354,6 +1448,49 @@
         "classification"
       ]
     },
+    "TestPurpose": {
+      "type": "string",
+      "enum": [
+        "exploitation",
+        "detection",
+        "remediation",
+        "regression"
+      ]
+    },
+    "TestReference": {
+      "properties": {
+        "testId": {
+          "type": "string"
+        },
+        "testFile": {
+          "type": "string"
+        },
+        "purpose": {
+          "$ref": "#/$defs/TestPurpose"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suiteId": {
+          "type": "string"
+        },
+        "attackStep": {
+          "type": "integer"
+        },
+        "automated": {
+          "type": "boolean"
+        },
+        "tool": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "testId",
+        "purpose"
+      ]
+    },
     "ThreatEntry": {
       "properties": {
         "id": {
@@ -1409,6 +1546,9 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "ssvcAssessment": {
+          "$ref": "#/$defs/SSVCAssessment"
         }
       },
       "additionalProperties": false,
