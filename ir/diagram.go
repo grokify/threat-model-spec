@@ -132,6 +132,16 @@ type Element struct {
 
 	// AssetIDs links this element to Asset definitions.
 	AssetIDs []string `json:"assetIds,omitempty"`
+
+	// --- Agent-specific fields (v0.7.0) ---
+
+	// AgentCapabilities describes the capabilities of an AI agent element.
+	// Only applicable when Type is "agent".
+	AgentCapabilities *AgentCapabilities `json:"agentCapabilities,omitempty"`
+
+	// ExecutionContext describes the execution environment for this element.
+	// Useful for understanding RCE impact and sandbox escape potential.
+	ExecutionContext *ExecutionContext `json:"executionContext,omitempty"`
 }
 
 // NetworkInfo contains network topology details for an element.
@@ -154,6 +164,27 @@ type NetworkInfo struct {
 
 	// Cloud contains cloud-specific identifiers.
 	Cloud *CloudInfo `json:"cloud,omitempty"`
+
+	// --- WebSocket-specific fields (v0.7.0) ---
+
+	// WebSocket contains WebSocket-specific security configuration.
+	// Use this when the element is a WebSocket endpoint.
+	WebSocket *WebSocketConfig `json:"webSocket,omitempty"`
+
+	// --- Origin/CORS fields (v0.7.0) ---
+
+	// AllowedOrigins lists origins permitted to connect.
+	// Applicable to WebSocket and CORS-enabled HTTP endpoints.
+	AllowedOrigins []string `json:"allowedOrigins,omitempty"`
+
+	// OriginValidation indicates whether origin validation is enforced.
+	OriginValidation bool `json:"originValidation,omitempty"`
+
+	// RateLimitRPS is the rate limit in requests per second (0 = no limit).
+	RateLimitRPS int `json:"rateLimitRps,omitempty"`
+
+	// RateLimitConnections is the max concurrent connections (0 = no limit).
+	RateLimitConnections int `json:"rateLimitConnections,omitempty"`
 }
 
 // CloudInfo contains cloud provider specific details.
@@ -190,6 +221,33 @@ type Boundary struct {
 
 	// Description provides additional context.
 	Description string `json:"description,omitempty"`
+
+	// --- Trust modeling fields (v0.7.0) ---
+
+	// ImplicitlyTrusted indicates whether elements inside this boundary
+	// are implicitly trusted without validation. This is common for localhost
+	// boundaries where services assume local connections are safe.
+	ImplicitlyTrusted bool `json:"implicitlyTrusted,omitempty"`
+
+	// TrustAssumption describes the security assumption for this boundary.
+	// Example: "Localhost connections are trusted without authentication"
+	TrustAssumption string `json:"trustAssumption,omitempty"`
+
+	// TrustViolationRisk describes how the trust assumption could be violated.
+	// Example: "Cross-Site WebSocket Hijacking can bypass localhost restriction"
+	TrustViolationRisk string `json:"trustViolationRisk,omitempty"`
+
+	// BreachVector describes how this boundary was/could be breached.
+	// Applicable when Type is "breached" or for threat modeling.
+	BreachVector string `json:"breachVector,omitempty"`
+
+	// AuthenticationRequired indicates whether authentication is required
+	// to cross this boundary.
+	AuthenticationRequired bool `json:"authenticationRequired,omitempty"`
+
+	// AuthorizationEnforced indicates whether authorization is checked
+	// at this boundary.
+	AuthorizationEnforced bool `json:"authorizationEnforced,omitempty"`
 }
 
 // Flow represents a data flow between elements.
@@ -208,6 +266,30 @@ type Flow struct {
 
 	// Bidirectional indicates if the flow goes both ways.
 	Bidirectional bool `json:"bidirectional,omitempty"`
+
+	// --- Protocol and security fields (v0.7.0) ---
+
+	// Protocol specifies the transport protocol (http, https, ws, wss, grpc, tcp, etc.).
+	Protocol string `json:"protocol,omitempty"`
+
+	// Encrypted indicates whether the flow is encrypted.
+	Encrypted bool `json:"encrypted,omitempty"`
+
+	// Authenticated indicates whether the flow requires authentication.
+	Authenticated bool `json:"authenticated,omitempty"`
+
+	// CrossOrigin indicates whether this is a cross-origin flow.
+	// Relevant for browser-initiated flows like WebSocket connections.
+	CrossOrigin bool `json:"crossOrigin,omitempty"`
+
+	// CredentialFlowID links this flow to a CredentialFlow for token tracking.
+	CredentialFlowID string `json:"credentialFlowId,omitempty"`
+
+	// DataClassification indicates the sensitivity of data in this flow.
+	DataClassification AssetClassification `json:"dataClassification,omitempty"`
+
+	// CWEIDs lists applicable CWE identifiers if this flow has vulnerabilities.
+	CWEIDs []string `json:"cweIds,omitempty"`
 }
 
 // Attack represents an attack step in an attack chain.
