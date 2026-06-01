@@ -375,7 +375,7 @@ import (
 )
 
 // Create report
-report := evaluation.NewEvaluationReport("vulnerability-article", "CVE-2026-25253")
+report := evaluation.NewEvaluationReport("vulnerability-article", "vulnerability-article.md")
 
 // Add category scores
 for _, rubric := range tmseval.VulnerabilityArticleRubricSet() {

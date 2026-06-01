@@ -6,6 +6,7 @@ require github.com/gorilla/websocket v1.5.3
 
 require (
 	github.com/invopop/jsonschema v0.14.0
+	github.com/plexusone/structured-evaluation v0.6.0
 	github.com/plexusone/w3pilot v0.8.0
 	github.com/spf13/cobra v1.10.2
 )
@@ -18,3 +19,5 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.4 // indirect
 )
+
+replace github.com/plexusone/structured-evaluation => /Users/johnwang/go/src/github.com/plexusone/structured-evaluation
