@@ -114,7 +114,7 @@ type ThreatModel struct {
 	// DependencyRisks tracks risk information for software dependencies.
 	DependencyRisks []DependencyRisk `json:"dependencyRisks,omitempty"`
 
-	// --- Credential and Attack Pattern Tracking (v0.6.0) ---
+	// --- Credential and Attack Pattern Tracking (v0.7.0) ---
 
 	// CredentialFlows tracks credential lifecycles through the system.
 	// Use this to model token exfiltration, replay attacks, and credential exposure.

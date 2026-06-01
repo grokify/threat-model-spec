@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/diagram.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.7.0/diagram.schema.json",
   "$ref": "#/$defs/DiagramIR",
   "$defs": {
     "Actor": {

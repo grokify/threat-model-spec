@@ -54,7 +54,7 @@ const (
 	BoundaryTypeCloud     BoundaryType = "cloud"
 	BoundaryTypeBreached  BoundaryType = "breached"
 
-	// Additional boundary types (v0.6.0)
+	// Additional boundary types (v0.7.0)
 
 	// BoundaryTypeContainer represents a container boundary.
 	BoundaryTypeContainer BoundaryType = "container"
@@ -85,7 +85,7 @@ const (
 	FlowTypeAttack FlowType = "attack"
 	FlowTypeExfil  FlowType = "exfil"
 
-	// Additional flow types for specific attack patterns (v0.6.0)
+	// Additional flow types for specific attack patterns (v0.7.0)
 
 	// FlowTypeCredential indicates credential/token transmission.
 	FlowTypeCredential FlowType = "credential"

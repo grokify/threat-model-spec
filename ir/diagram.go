@@ -133,7 +133,7 @@ type Element struct {
 	// AssetIDs links this element to Asset definitions.
 	AssetIDs []string `json:"assetIds,omitempty"`
 
-	// --- Agent-specific fields (v0.6.0) ---
+	// --- Agent-specific fields (v0.7.0) ---
 
 	// AgentCapabilities describes the capabilities of an AI agent element.
 	// Only applicable when Type is "agent".
@@ -165,13 +165,13 @@ type NetworkInfo struct {
 	// Cloud contains cloud-specific identifiers.
 	Cloud *CloudInfo `json:"cloud,omitempty"`
 
-	// --- WebSocket-specific fields (v0.6.0) ---
+	// --- WebSocket-specific fields (v0.7.0) ---
 
 	// WebSocket contains WebSocket-specific security configuration.
 	// Use this when the element is a WebSocket endpoint.
 	WebSocket *WebSocketConfig `json:"webSocket,omitempty"`
 
-	// --- Origin/CORS fields (v0.6.0) ---
+	// --- Origin/CORS fields (v0.7.0) ---
 
 	// AllowedOrigins lists origins permitted to connect.
 	// Applicable to WebSocket and CORS-enabled HTTP endpoints.
@@ -222,7 +222,7 @@ type Boundary struct {
 	// Description provides additional context.
 	Description string `json:"description,omitempty"`
 
-	// --- Trust modeling fields (v0.6.0) ---
+	// --- Trust modeling fields (v0.7.0) ---
 
 	// ImplicitlyTrusted indicates whether elements inside this boundary
 	// are implicitly trusted without validation. This is common for localhost
@@ -267,7 +267,7 @@ type Flow struct {
 	// Bidirectional indicates if the flow goes both ways.
 	Bidirectional bool `json:"bidirectional,omitempty"`
 
-	// --- Protocol and security fields (v0.6.0) ---
+	// --- Protocol and security fields (v0.7.0) ---
 
 	// Protocol specifies the transport protocol (http, https, ws, wss, grpc, tcp, etc.).
 	Protocol string `json:"protocol,omitempty"`
@@ -339,7 +339,7 @@ type Attack struct {
 	// Description provides additional context.
 	Description string `json:"description,omitempty"`
 
-	// --- Role-based notes (v0.6.0) ---
+	// --- Role-based notes (v0.7.0) ---
 
 	// RedTeamNotes provides exploitation guidance for this specific step.
 	RedTeamNotes string `json:"redTeamNotes,omitempty"`
