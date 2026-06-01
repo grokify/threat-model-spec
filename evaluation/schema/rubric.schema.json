@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/grokify/threat-model-spec/evaluation/schema/rubric.schema.json",
+  "title": "LLM-as-Judge Evaluation Rubric",
+  "description": "Schema for defining evaluation rubrics optimized for LLM-as-Judge workflows",
+  "type": "object",
+  "required": ["id", "name", "version", "categories", "passCriteria"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the rubric",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the rubric",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Purpose and scope of this rubric"
+    },
+    "evaluationType": {
+      "type": "string",
+      "enum": ["analytic", "holistic"],
+      "default": "analytic",
+      "description": "Analytic scores per-criterion; holistic gives single score"
+    },
+    "outputFormat": {
+      "type": "string",
+      "enum": ["json", "yaml", "text"],
+      "default": "json",
+      "description": "Expected output format from LLM judge"
+    },
+    "passCriteria": {
+      "type": "object",
+      "description": "Criteria for overall pass/fail determination",
+      "properties": {
+        "minCategoriesPassing": {
+          "oneOf": [
+            {"type": "string", "enum": ["all", "all_required"]},
+            {"type": "integer", "minimum": 1}
+          ],
+          "description": "How many categories must pass"
+        },
+        "maxFindingsSeverity": {
+          "type": "object",
+          "description": "Maximum allowed findings by severity",
+          "properties": {
+            "critical": {"type": "integer", "minimum": 0},
+            "high": {"type": "integer", "minimum": 0},
+            "medium": {"type": "integer", "minimum": -1},
+            "low": {"type": "integer", "minimum": -1}
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "Evaluation categories/dimensions",
+      "items": {
+        "$ref": "#/$defs/category"
+      },
+      "minItems": 1
+    },
+    "judgePromptTemplate": {
+      "type": "string",
+      "description": "Prompt template for LLM judge with {placeholders}"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata",
+      "properties": {
+        "createdAt": {"type": "string", "format": "date"},
+        "author": {"type": "string"},
+        "basedOn": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Research or frameworks this rubric is based on"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "category": {
+      "type": "object",
+      "required": ["id", "name", "description", "scale"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique category identifier",
+          "pattern": "^[a-z_]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable category name"
+        },
+        "description": {
+          "type": "string",
+          "description": "What this category evaluates"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 1.0,
+          "description": "Relative importance weight"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this category must pass for overall pass"
+        },
+        "scale": {
+          "oneOf": [
+            {"$ref": "#/$defs/categoricalScale"},
+            {"$ref": "#/$defs/checklistScale"},
+            {"$ref": "#/$defs/binaryScale"}
+          ]
+        },
+        "evaluationPrompt": {
+          "type": "string",
+          "description": "Specific prompt for evaluating this category"
+        },
+        "examples": {
+          "type": "object",
+          "description": "Few-shot examples for this category",
+          "properties": {
+            "pass": {"$ref": "#/$defs/example"},
+            "partial": {"$ref": "#/$defs/example"},
+            "fail": {"$ref": "#/$defs/example"}
+          }
+        }
+      }
+    },
+    "categoricalScale": {
+      "type": "object",
+      "required": ["type", "options"],
+      "properties": {
+        "type": {
+          "const": "categorical"
+        },
+        "options": {
+          "type": "array",
+          "description": "Scoring options (recommend 2-3 for LLM evaluation)",
+          "items": {
+            "type": "object",
+            "required": ["value", "label", "criteria"],
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Machine-readable value"
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable label"
+              },
+              "criteria": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Criteria that must be met for this score"
+              }
+            }
+          },
+          "minItems": 2,
+          "maxItems": 5
+        }
+      }
+    },
+    "checklistScale": {
+      "type": "object",
+      "required": ["type", "requiredItems"],
+      "properties": {
+        "type": {
+          "const": "checklist"
+        },
+        "requiredItems": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Items that must be present"
+        },
+        "optionalItems": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Items that add value but aren't required"
+        },
+        "passingThreshold": {
+          "type": "object",
+          "properties": {
+            "required": {
+              "oneOf": [
+                {"const": "all"},
+                {"type": "integer"}
+              ]
+            },
+            "optional": {
+              "type": "integer",
+              "description": "Minimum optional items needed"
+            }
+          }
+        }
+      }
+    },
+    "binaryScale": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "const": "binary"
+        },
+        "passLabel": {
+          "type": "string",
+          "default": "pass"
+        },
+        "failLabel": {
+          "type": "string",
+          "default": "fail"
+        },
+        "criteria": {
+          "type": "object",
+          "properties": {
+            "pass": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "fail": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "required": ["excerpt", "reasoning"],
+      "properties": {
+        "excerpt": {
+          "type": "string",
+          "description": "Example content from an article"
+        },
+        "reasoning": {
+          "type": "string",
+          "description": "Explanation of why this gets this score"
+        }
+      }
+    }
+  }
+}

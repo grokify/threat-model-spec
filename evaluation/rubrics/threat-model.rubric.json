@@ -1,0 +1,264 @@
+{
+  "id": "threat-model-v1",
+  "name": "Threat Model JSON Evaluation Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for threat-model.json files following the threat-model-spec schema.",
+  "evaluationType": "analytic",
+
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 5
+    }
+  },
+
+  "categories": [
+    {
+      "id": "schema_compliance",
+      "name": "Schema Compliance",
+      "description": "Adherence to threat-model-spec JSON schema",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Passes JSON schema validation with no errors",
+              "All required fields populated",
+              "Uses current schema version",
+              "Consistent ID formats (asset-*, threat-*, mit-*)"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Passes validation but has warnings",
+              "Some optional fields missing that would add value"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Schema validation errors present",
+              "Missing required fields",
+              "Invalid structure"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Validate the threat model against the schema. Check: (1) Does it pass schema validation? (2) Are all required fields present? (3) Are ID formats consistent?"
+    },
+    {
+      "id": "asset_identification",
+      "name": "Asset Identification",
+      "description": "Complete identification of assets at risk",
+      "weight": 1.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "All assets identified including primary targets and secondary assets",
+              "Classifications accurate (crown-jewel, high, medium, low)",
+              "Data types specified",
+              "Ownership clear"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Primary assets identified with correct classification",
+              "Some secondary assets may be missing"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Assets missing or poorly defined",
+              "Classification inconsistent or wrong"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check asset identification. Are all assets at risk identified? Are classifications appropriate? Is ownership specified?"
+    },
+    {
+      "id": "attack_modeling",
+      "name": "Attack Modeling",
+      "description": "Quality of attack chain, attack tree, and sequence modeling",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Attack chain complete with all steps documented",
+              "Each step has MITRE tactic/technique mapping",
+              "Prerequisites and outcomes specified",
+              "Attack tree or sequence diagram present"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Attack chain present but may have gaps",
+              "Limited MITRE mappings",
+              "Missing attack tree or sequence"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Attack chain incomplete or illogical",
+              "Missing MITRE mappings",
+              "Attack modeling absent or incorrect"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Evaluate attack modeling. Is the attack chain complete? Does each step have MITRE mappings? Are there attack trees or sequence diagrams?"
+    },
+    {
+      "id": "mapping_accuracy",
+      "name": "Mapping Accuracy",
+      "description": "Accuracy of CVE, CWE, MITRE ATT&CK, and OWASP mappings",
+      "weight": 1.25,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "CVE details match NVD exactly",
+              "CVSS vector is correct and parses",
+              "CWEs identify actual root cause",
+              "MITRE techniques match observable behaviors"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Core mappings accurate",
+              "Minor omissions of relevant secondary mappings"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "CVE details don't match source",
+              "Multiple mapping errors",
+              "Fabricated or incorrect IDs"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Verify mapping accuracy. Do CVE details match NVD? Are CWEs root causes? Do MITRE techniques match the actual attack behaviors?"
+    },
+    {
+      "id": "mitigation_quality",
+      "name": "Mitigation Quality",
+      "description": "Completeness of documented mitigations",
+      "weight": 1.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Mitigations address all identified threats",
+              "Status tracked (implemented/planned/rejected)",
+              "Owners assigned",
+              "Links to STRIDE categories"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Key mitigations documented",
+              "Status tracking inconsistent"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Few mitigations documented",
+              "No status or ownership",
+              "Mitigations don't address threats"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Evaluate mitigation quality. Do mitigations address all threats? Is status tracked? Are owners assigned?"
+    },
+    {
+      "id": "diagram_integration",
+      "name": "Diagram Integration",
+      "description": "Quality of embedded diagrams and consistency with threat model",
+      "weight": 0.75,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Multiple diagram types present (DFD, attack-chain, sequence)",
+              "Element IDs consistent with threat model",
+              "Trust boundaries marked",
+              "Flows match documented attacks"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Key diagrams present",
+              "Some inconsistencies with main document"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Diagrams missing or incorrect",
+              "IDs don't match threat model",
+              "Contradicts documented attacks"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check diagram integration. Are diagrams present? Do element IDs match the threat model? Are trust boundaries marked?"
+    }
+  ],
+
+  "metadata": {
+    "createdAt": "2026-05-18",
+    "author": "threat-model-spec"
+  }
+}

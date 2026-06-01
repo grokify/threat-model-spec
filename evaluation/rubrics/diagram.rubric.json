@@ -1,0 +1,263 @@
+{
+  "id": "diagram-v1",
+  "name": "Security Diagram Evaluation Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for security diagrams (DFD, attack chain, sequence, attack tree).",
+  "evaluationType": "analytic",
+
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 3
+    }
+  },
+
+  "categories": [
+    {
+      "id": "trust_boundaries",
+      "name": "Trust Boundaries",
+      "description": "Clear identification and marking of trust boundaries",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "All trust boundaries clearly marked with dashed lines or containers",
+              "Boundary types labeled (network, process, sandbox, origin)",
+              "Implicit trust assumptions documented",
+              "Boundary violations highlighted for attack flows"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Key trust boundaries marked and labeled",
+              "Some relevant boundaries may be missing"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Trust boundaries missing in security diagram",
+              "Boundaries incorrectly placed"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check trust boundaries. Are all boundaries clearly marked? Are they labeled with type? Are violations highlighted?"
+    },
+    {
+      "id": "attack_flow_clarity",
+      "name": "Attack Flow Clarity",
+      "description": "Clear representation of attack steps and sequence",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Attack steps numbered chronologically",
+              "Outcomes at each step shown",
+              "MITRE techniques annotated",
+              "Attack flows visually distinct from normal flows"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Attack flow understandable",
+              "Numbering or annotations incomplete"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Attack flow confusing or incorrect",
+              "Sequence unclear",
+              "Missing steps"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Evaluate attack flow clarity. Are steps numbered? Are outcomes shown? Are attack flows visually distinct?"
+    },
+    {
+      "id": "notation_standards",
+      "name": "Notation Standards",
+      "description": "Use of standard diagram notation",
+      "weight": 1.25,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Uses correct DFD notation (circles=processes, rectangles=external entities)",
+              "Sequence diagrams follow UML conventions",
+              "Attack trees use standard AND/OR notation",
+              "Consistent shape usage throughout"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Notation mostly standard",
+              "Minor deviations that don't impair understanding"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Non-standard notation without explanation",
+              "Inconsistent shape usage",
+              "Shapes used arbitrarily"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check notation standards. Does the diagram use standard DFD/UML notation? Are shapes used consistently?"
+    },
+    {
+      "id": "data_flow_accuracy",
+      "name": "Data Flow Accuracy",
+      "description": "Accuracy of data flow representation",
+      "weight": 1.25,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "All flows labeled with protocol (HTTPS, WebSocket, etc.)",
+              "Data types indicated (credentials, PII, commands)",
+              "Flow direction correct",
+              "Authentication state shown where relevant"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Key flows labeled correctly",
+              "Some protocol information missing"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Flows incorrect or missing labels",
+              "Direction errors",
+              "Critical flows not shown"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check data flow accuracy. Are flows labeled with protocols? Are directions correct? Are data types indicated?"
+    },
+    {
+      "id": "consistency",
+      "name": "Consistency",
+      "description": "Consistency with accompanying article and threat model",
+      "weight": 1.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Element IDs match threat model JSON",
+              "Names match article text",
+              "Attack steps align with narrative",
+              "No contradictions between diagram and text"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Generally consistent",
+              "Minor naming variations"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Diagram contradicts article/threat model",
+              "Element IDs don't match",
+              "Attack flow differs from narrative"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Check consistency. Do element IDs match the threat model? Does the attack flow match the article narrative?"
+    },
+    {
+      "id": "rendering_quality",
+      "name": "Rendering Quality",
+      "description": "Technical quality of diagram rendering",
+      "weight": 0.75,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {
+            "value": "pass",
+            "label": "Pass",
+            "criteria": [
+              "Renders correctly in target format",
+              "Clean layout with no overlapping elements",
+              "Consistent spacing",
+              "Readable at normal zoom"
+            ]
+          },
+          {
+            "value": "partial",
+            "label": "Partial",
+            "criteria": [
+              "Renders but with minor layout issues",
+              "Some elements crowded"
+            ]
+          },
+          {
+            "value": "fail",
+            "label": "Fail",
+            "criteria": [
+              "Doesn't render correctly",
+              "Overlapping makes unreadable",
+              "Layout severely impairs understanding"
+            ]
+          }
+        ]
+      },
+      "evaluationPrompt": "Evaluate rendering quality. Does the diagram render correctly? Is the layout clean and readable?"
+    }
+  ],
+
+  "metadata": {
+    "createdAt": "2026-05-18",
+    "author": "threat-model-spec"
+  }
+}
