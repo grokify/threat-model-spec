@@ -370,36 +370,34 @@ This rubric is designed to integrate with the [structured-evaluation](https://gi
 
 ```go
 import (
-    "github.com/plexusone/structured-evaluation/evaluation"
+    "github.com/plexusone/structured-evaluation/rubric"
     tmseval "github.com/grokify/threat-model-spec/evaluation"
 )
 
 // Create report
-report := evaluation.NewEvaluationReport("vulnerability-article", "vulnerability-article.md")
+report := rubric.NewRubric("vulnerability-article", "vulnerability-article.md")
 
 // Add category scores
-for _, rubric := range tmseval.VulnerabilityArticleRubricSet() {
-    report.AddCategory(evaluation.CategoryScore{
-        Category:      string(rubric.Category),
-        Score:         8.5, // Evaluated score
-        MaxScore:      10.0,
-        Weight:        rubric.Weight,
-        Justification: "...",
+for _, cat := range tmseval.VulnerabilityArticleRubricSet() {
+    report.AddCategoryResult(rubric.CategoryResult{
+        Category:  string(cat.Category),
+        Score:     rubric.ScorePass, // or ScorePartial, ScoreFail
+        Reasoning: "...",
     })
 }
 
 // Add findings
-report.AddFinding(evaluation.Finding{
+report.AddFinding(rubric.Finding{
     ID:             "ART-M001",
     Category:       "framework_mappings",
-    Severity:       "medium",
+    Severity:       rubric.SeverityMedium,
     Title:          "Missing relevant CWE mapping",
     Description:    "Article does not map to CWE-346 (Origin Validation Error)",
     Recommendation: "Add CWE-346 to CWE Mappings section",
 })
 
 // Finalize with pass criteria
-report.Finalize("sevaluation check report.json")
+report.Finalize(nil, "sevaluation check report.json")
 ```
 
 ### CLI Usage

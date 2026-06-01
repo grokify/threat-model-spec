@@ -5,18 +5,18 @@ import (
 	"time"
 
 	"github.com/plexusone/structured-evaluation/claims"
-	"github.com/plexusone/structured-evaluation/evaluation"
+	"github.com/plexusone/structured-evaluation/rubric"
 )
 
 // ToEvaluationReport converts an EvaluationResult to a structured-evaluation EvaluationReport.
 // This enables integration with the broader structured-evaluation ecosystem.
-func (er *EvaluationResult) ToEvaluationReport(document string) *evaluation.EvaluationReport {
-	report := evaluation.NewEvaluationReport(er.RubricID, document)
+func (er *EvaluationResult) ToEvaluationReport(document string) *rubric.Rubric {
+	report := rubric.NewRubric(er.RubricID, document)
 	report.RubricVersion = er.RubricVersion
 
 	// Convert categories
 	for _, cat := range er.Categories {
-		result := evaluation.CategoryResult{
+		result := rubric.CategoryResult{
 			Category:  cat.Category,
 			Score:     mapScoreValue(cat.Score),
 			Reasoning: cat.Reasoning,
@@ -26,7 +26,7 @@ func (er *EvaluationResult) ToEvaluationReport(document string) *evaluation.Eval
 
 	// Convert findings
 	for _, f := range er.Findings {
-		finding := evaluation.Finding{
+		finding := rubric.Finding{
 			Severity:       mapSeverity(f.Severity),
 			Category:       f.Category,
 			Title:          f.Title,
@@ -108,34 +108,34 @@ func (er *EvaluationResult) ToClaimsReport(document string) *claims.ClaimsReport
 }
 
 // mapScoreValue converts local score strings to structured-evaluation ScoreValue.
-func mapScoreValue(score string) evaluation.ScoreValue {
+func mapScoreValue(score string) rubric.ScoreValue {
 	switch score {
 	case "pass":
-		return evaluation.ScorePass
+		return rubric.ScorePass
 	case "partial":
-		return evaluation.ScorePartial
+		return rubric.ScorePartial
 	case "fail":
-		return evaluation.ScoreFail
+		return rubric.ScoreFail
 	default:
-		return evaluation.ScoreFail
+		return rubric.ScoreFail
 	}
 }
 
 // mapSeverity converts local Severity to structured-evaluation Severity.
-func mapSeverity(s Severity) evaluation.Severity {
+func mapSeverity(s Severity) rubric.Severity {
 	switch s {
 	case SeverityCritical:
-		return evaluation.SeverityCritical
+		return rubric.SeverityCritical
 	case SeverityHigh:
-		return evaluation.SeverityHigh
+		return rubric.SeverityHigh
 	case SeverityMedium:
-		return evaluation.SeverityMedium
+		return rubric.SeverityMedium
 	case SeverityLow:
-		return evaluation.SeverityLow
+		return rubric.SeverityLow
 	case SeverityInfo:
-		return evaluation.SeverityInfo
+		return rubric.SeverityInfo
 	default:
-		return evaluation.SeverityInfo
+		return rubric.SeverityInfo
 	}
 }
 
@@ -168,8 +168,8 @@ func categorizeEvidence(categoryID string) claims.ClaimCategory {
 }
 
 // FindingTemplateToFinding converts a FindingTemplate to a structured-evaluation Finding.
-func FindingTemplateToFinding(ft FindingTemplate) evaluation.Finding {
-	return evaluation.Finding{
+func FindingTemplateToFinding(ft FindingTemplate) rubric.Finding {
+	return rubric.Finding{
 		Severity:       mapSeverity(ft.Severity),
 		Category:       ft.Category,
 		Title:          ft.Title,

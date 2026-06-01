@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/plexusone/structured-evaluation/claims"
-	"github.com/plexusone/structured-evaluation/evaluation"
+	"github.com/plexusone/structured-evaluation/rubric"
 )
 
 func TestEvaluationResult_ToEvaluationReport(t *testing.T) {
@@ -53,10 +53,10 @@ func TestEvaluationResult_ToEvaluationReport(t *testing.T) {
 	if len(report.Categories) != 2 {
 		t.Fatalf("expected 2 categories, got %d", len(report.Categories))
 	}
-	if report.Categories[0].Score != evaluation.ScorePass {
+	if report.Categories[0].Score != rubric.ScorePass {
 		t.Errorf("expected first category to be pass, got %v", report.Categories[0].Score)
 	}
-	if report.Categories[1].Score != evaluation.ScorePartial {
+	if report.Categories[1].Score != rubric.ScorePartial {
 		t.Errorf("expected second category to be partial, got %v", report.Categories[1].Score)
 	}
 
@@ -64,7 +64,7 @@ func TestEvaluationResult_ToEvaluationReport(t *testing.T) {
 	if len(report.Findings) != 1 {
 		t.Fatalf("expected 1 finding, got %d", len(report.Findings))
 	}
-	if report.Findings[0].Severity != evaluation.SeverityMedium {
+	if report.Findings[0].Severity != rubric.SeverityMedium {
 		t.Errorf("expected severity medium, got %v", report.Findings[0].Severity)
 	}
 }
@@ -122,12 +122,12 @@ func TestEvaluationResult_ToClaimsReport(t *testing.T) {
 func TestMapScoreValue(t *testing.T) {
 	tests := []struct {
 		input    string
-		expected evaluation.ScoreValue
+		expected rubric.ScoreValue
 	}{
-		{"pass", evaluation.ScorePass},
-		{"partial", evaluation.ScorePartial},
-		{"fail", evaluation.ScoreFail},
-		{"unknown", evaluation.ScoreFail},
+		{"pass", rubric.ScorePass},
+		{"partial", rubric.ScorePartial},
+		{"fail", rubric.ScoreFail},
+		{"unknown", rubric.ScoreFail},
 	}
 
 	for _, tt := range tests {
@@ -143,13 +143,13 @@ func TestMapScoreValue(t *testing.T) {
 func TestMapSeverity(t *testing.T) {
 	tests := []struct {
 		input    Severity
-		expected evaluation.Severity
+		expected rubric.Severity
 	}{
-		{SeverityCritical, evaluation.SeverityCritical},
-		{SeverityHigh, evaluation.SeverityHigh},
-		{SeverityMedium, evaluation.SeverityMedium},
-		{SeverityLow, evaluation.SeverityLow},
-		{SeverityInfo, evaluation.SeverityInfo},
+		{SeverityCritical, rubric.SeverityCritical},
+		{SeverityHigh, rubric.SeverityHigh},
+		{SeverityMedium, rubric.SeverityMedium},
+		{SeverityLow, rubric.SeverityLow},
+		{SeverityInfo, rubric.SeverityInfo},
 	}
 
 	for _, tt := range tests {
@@ -175,7 +175,7 @@ func TestFindingTemplateToFinding(t *testing.T) {
 
 	finding := FindingTemplateToFinding(template)
 
-	if finding.Severity != evaluation.SeverityCritical {
+	if finding.Severity != rubric.SeverityCritical {
 		t.Errorf("expected severity critical, got %v", finding.Severity)
 	}
 	if finding.Category != "technical_accuracy" {

@@ -19,5 +19,3 @@ require (
 	github.com/spf13/pflag v1.0.10 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.4 // indirect
 )
-
-replace github.com/plexusone/structured-evaluation => /Users/johnwang/go/src/github.com/plexusone/structured-evaluation

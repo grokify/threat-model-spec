@@ -13,6 +13,8 @@ github.com/invopop/jsonschema v0.14.0 h1:MHQqLhvpNUZfw+hM3AZDYK7jxO8FZoQeQM77g8i
 github.com/invopop/jsonschema v0.14.0/go.mod h1:ygm6C2EaVNMBDPpaPlnOA2pFAxBnxGjFlMZABxm9n2I=
 github.com/pb33f/ordered-map/v2 v2.3.1 h1:5319HDO0aw4DA4gzi+zv4FXU9UlSs3xGZ40wcP1nBjY=
 github.com/pb33f/ordered-map/v2 v2.3.1/go.mod h1:qxFQgd0PkVUtOMCkTapqotNgzRhMPL7VvaHKbd1HnmQ=
+github.com/plexusone/structured-evaluation v0.6.0 h1:YQ/ypjHf6xXAVwFgJ9uYMr1g9lWkCBc+qDCrrpK2kAY=
+github.com/plexusone/structured-evaluation v0.6.0/go.mod h1:aqkP0xYPPXNg1ZB7MkDqFcWbrXLahrpRtAoYCav72bg=
 github.com/plexusone/w3pilot v0.8.0 h1:HoUsWPDzVinKNWW7NEMx9GhP1r8CT3AY3G5olw2UZbg=
 github.com/plexusone/w3pilot v0.8.0/go.mod h1:SVjmGBuj1ixyLImRE8+df+bNQzbuBhLHGtwffzyZdYs=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
