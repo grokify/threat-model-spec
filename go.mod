@@ -2,9 +2,8 @@ module github.com/grokify/threat-model-spec
 
 go 1.25.0
 
-require github.com/gorilla/websocket v1.5.3
-
 require (
+	github.com/gorilla/websocket v1.5.3
 	github.com/invopop/jsonschema v0.14.0
 	github.com/plexusone/structured-evaluation v0.6.0
 	github.com/plexusone/w3pilot v0.8.0
