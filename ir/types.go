@@ -53,13 +53,27 @@ const (
 	BoundaryTypeNetwork   BoundaryType = "network"
 	BoundaryTypeCloud     BoundaryType = "cloud"
 	BoundaryTypeBreached  BoundaryType = "breached"
+
+	// Additional boundary types (v0.7.0)
+
+	// BoundaryTypeContainer represents a container boundary.
+	BoundaryTypeContainer BoundaryType = "container"
+
+	// BoundaryTypeSandbox represents an application sandbox boundary.
+	BoundaryTypeSandbox BoundaryType = "sandbox"
+
+	// BoundaryTypeAgent represents an AI agent execution boundary.
+	BoundaryTypeAgent BoundaryType = "agent"
+
+	// BoundaryTypeOrigin represents a browser same-origin boundary.
+	BoundaryTypeOrigin BoundaryType = "origin"
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for BoundaryType.
 func (BoundaryType) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"browser", "localhost", "network", "cloud", "breached"},
+		Enum: []any{"browser", "localhost", "network", "cloud", "breached", "container", "sandbox", "agent", "origin"},
 	}
 }
 
@@ -70,13 +84,27 @@ const (
 	FlowTypeNormal FlowType = "normal"
 	FlowTypeAttack FlowType = "attack"
 	FlowTypeExfil  FlowType = "exfil"
+
+	// Additional flow types for specific attack patterns (v0.7.0)
+
+	// FlowTypeCredential indicates credential/token transmission.
+	FlowTypeCredential FlowType = "credential"
+
+	// FlowTypeWebSocket indicates a WebSocket connection.
+	FlowTypeWebSocket FlowType = "websocket"
+
+	// FlowTypeCSWSH indicates a Cross-Site WebSocket Hijacking flow.
+	FlowTypeCSWSH FlowType = "cswsh"
+
+	// FlowTypeLateral indicates lateral movement within a network.
+	FlowTypeLateral FlowType = "lateral"
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for FlowType.
 func (FlowType) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"normal", "attack", "exfil"},
+		Enum: []any{"normal", "attack", "exfil", "credential", "websocket", "cswsh", "lateral"},
 	}
 }
 
