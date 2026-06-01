@@ -7,6 +7,88 @@
   "maintainers": ["grokify"],
   "releases": [
     {
+      "version": "v0.7.0",
+      "date": "2026-06-01",
+      "commit": "7c716a2",
+      "highlights": [
+        {"description": "Agentic AI threat modeling with agent capabilities and execution context"},
+        {"description": "Credential flow tracking for token exfiltration and replay attack modeling"},
+        {"description": "WebSocket security configuration and CSWSH modeling"},
+        {"description": "LLM-as-Judge evaluation package with structured-evaluation integration"}
+      ],
+      "added": [
+        {"description": "`AgentCapabilities` type for AI agent tool access and autonomy levels", "commit": "73cdb1a"},
+        {"description": "`ExecutionContext` type for runtime environment and privilege modeling", "commit": "6fc628f"},
+        {"description": "`CredentialFlow` type for token lifecycle tracking", "commit": "839bbf2"},
+        {"description": "`AttackPattern` type for reusable attack pattern templates", "commit": "8d84b0e"},
+        {"description": "`WebSocketConfig` type for WebSocket endpoint security", "commit": "03bd00b"},
+        {"description": "Trust modeling fields: `ImplicitlyTrusted`, `TrustAssumption`, `TrustViolationRisk` on Boundary", "commit": "f08b533"},
+        {"description": "Flow security fields: `Protocol`, `Encrypted`, `Authenticated`, `CrossOrigin`", "commit": "f08b533"},
+        {"description": "New boundary types: `container`, `sandbox`, `agent`, `origin`", "commit": "e1088c7"},
+        {"description": "New flow types: `credential`, `websocket`, `cswsh`, `lateral`", "commit": "e1088c7"},
+        {"description": "`evaluation` package for LLM-as-Judge workflows", "commit": "ae518ae"},
+        {"description": "Embedded rubrics: `VulnerabilityArticleRubric()`, `ThreatModelRubric()`, `DiagramRubric()`", "commit": "ae518ae"},
+        {"description": "`ToEvaluationReport()` and `ToClaimsReport()` conversion methods", "commit": "de42ab8"},
+        {"description": "Vulnerability article template for security advisory evaluation", "commit": "ba6fcc0"}
+      ],
+      "changed": [
+        {"description": "JSON schemas regenerated for v0.7.0 types", "commit": "e922b4f"},
+        {"description": "Updated `structured-evaluation` dependency to v0.6.0", "commit": "57c149a"},
+        {"description": "`ThreatModel` extended with `CredentialFlows` and `AttackPatterns` fields", "commit": "e8030e9"}
+      ],
+      "fixed": [
+        {"description": "Windows compatibility for embedded rubric loading (`path.Join` for `embed.FS`)", "commit": "5d2785b"}
+      ],
+      "documentation": [
+        {"description": "v0.7.0 release notes with agentic AI and evaluation features", "commit": "7c716a2"}
+      ]
+    },
+    {
+      "version": "v0.6.0",
+      "date": "2026-05-02",
+      "commit": "a09ce96",
+      "highlights": [
+        {"description": "Role-based security data for Red Team, Blue Team, and Remediation workflows"},
+        {"description": "FAIR risk assessment with annualized loss expectancy calculations"},
+        {"description": "Purple team capabilities with Atomic Red Team mapping and detection coverage"},
+        {"description": "Supply chain security with SBOM integration and VEX statements"},
+        {"description": "OWASP Agentic Security Top 10 (ASI 2026) support"}
+      ],
+      "added": [
+        {"description": "`OWASPCategoryAgentic` for OWASP ASI 2026 mappings", "commit": "4b11ee2"},
+        {"description": "`ExploitationGuidance` type for red team exploitation steps", "commit": "6d46d99"},
+        {"description": "`DefenseGuidance` type for blue team detection rules and IOCs", "commit": "b458b62"},
+        {"description": "`RemediationGuidance` type for developer fix patterns", "commit": "2fdfa71"},
+        {"description": "`IncidentPlaybook` type for IR procedures", "commit": "f4aa70e"},
+        {"description": "`FAIRAssessment` type with ALE calculation", "commit": "a070bc0"},
+        {"description": "`EPSSData` type for exploit prediction scoring", "commit": "606b93f"},
+        {"description": "`KEVEntry` type for CISA KEV catalog", "commit": "8fe4ca3"},
+        {"description": "`AtomicTestMapping` type for Atomic Red Team tests", "commit": "c5d9af2"},
+        {"description": "`DetectionCoverageMatrix` type for ATT&CK coverage", "commit": "67d29a8"},
+        {"description": "`SecurityMetrics` type for MTTD/MTTR/MTTC", "commit": "e0c8f6e"},
+        {"description": "`SSVCAssessment` type for CISA SSVC prioritization", "commit": "6a2fb26"},
+        {"description": "`SBOMReference` and `VEXStatement` types for supply chain", "commit": "bd020f9"},
+        {"description": "`AttackGraph` and `AttackPath` types for path analysis", "commit": "4fe2bcc"},
+        {"description": "STIX 2.1 export with IOCs and detection rules", "commit": "390dcdc"},
+        {"description": "`TestReference` type for app-test-spec integration", "commit": "0490ece"}
+      ],
+      "changed": [
+        {"description": "`ThreatModel` extended with role-based guidance fields", "commit": "abb1492"},
+        {"description": "`Attack` struct extended with role-based notes", "commit": "4e0ec8a"},
+        {"description": "JSON schemas regenerated for v0.6.0", "commit": "1c4caab"}
+      ],
+      "documentation": [
+        {"description": "v0.6.0 release notes", "commit": "49bd42c"},
+        {"description": "v0.6.0 versioned specification", "commit": "f8c0691"},
+        {"description": "OWASP ASI documentation", "commit": "c6fe925"},
+        {"description": "Homepage updated with v0.6.0 features", "commit": "f714846"},
+        {"description": "Mappings spec with OWASP agentic category", "commit": "a09ce96"}
+      ],
+      "tests": [
+        {"description": "Mappings and attack tree validation tests", "commit": "52b36f7"}
+      ]
+    },
+    {
       "version": "v0.5.0",
       "date": "2026-04-19",
       "highlights": [
