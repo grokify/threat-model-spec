@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"path/filepath"
+	"path"
 )
 
 //go:embed rubrics/*.json
@@ -29,7 +29,7 @@ func LoadRubricFromFile(path string) (*RubricSet, error) {
 // LoadEmbeddedRubric loads a rubric from the embedded rubrics directory.
 // Name should be the filename without path (e.g., "vulnerability-article.rubric.json").
 func LoadEmbeddedRubric(name string) (*RubricSet, error) {
-	data, err := embeddedRubrics.ReadFile(filepath.Join("rubrics", name))
+	data, err := embeddedRubrics.ReadFile(path.Join("rubrics", name))
 	if err != nil {
 		return nil, fmt.Errorf("reading embedded rubric %s: %w", name, err)
 	}
@@ -51,7 +51,7 @@ func ListEmbeddedRubrics() ([]string, error) {
 
 	var names []string
 	for _, entry := range entries {
-		if !entry.IsDir() && filepath.Ext(entry.Name()) == ".json" {
+		if !entry.IsDir() && path.Ext(entry.Name()) == ".json" {
 			names = append(names, entry.Name())
 		}
 	}
