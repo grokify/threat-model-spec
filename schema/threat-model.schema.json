@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/threat-model.schema.json",
+  "$id": "https://github.com/grokify/threat-model-spec/docs/versions/v0.7.0/threat-model.schema.json",
   "$ref": "#/$defs/ThreatModel",
   "$defs": {
     "Actor": {
@@ -23,6 +23,289 @@
       "required": [
         "id",
         "label"
+      ]
+    },
+    "AgentCapabilities": {
+      "properties": {
+        "tools": {
+          "items": {
+            "$ref": "#/$defs/AgentTool"
+          },
+          "type": "array"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/$defs/AgentPermission"
+          },
+          "type": "array"
+        },
+        "sandboxLevel": {
+          "$ref": "#/$defs/AgentSandboxLevel"
+        },
+        "requiresApproval": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "approvalBypassable": {
+          "type": "boolean"
+        },
+        "maxExecutionTime": {
+          "type": "string"
+        },
+        "resourceLimits": {
+          "$ref": "#/$defs/AgentResourceLimits"
+        },
+        "networkRestrictions": {
+          "$ref": "#/$defs/AgentNetworkRestrictions"
+        },
+        "integratedServices": {
+          "items": {
+            "$ref": "#/$defs/AgentIntegration"
+          },
+          "type": "array"
+        },
+        "escalationPaths": {
+          "items": {
+            "$ref": "#/$defs/AgentEscalationPath"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "AgentCapabilityType": {
+      "type": "string",
+      "enum": [
+        "code-execution",
+        "file-access",
+        "network-access",
+        "shell-access",
+        "database-access",
+        "api-access",
+        "browser-control",
+        "messaging",
+        "memory-access",
+        "tool-invocation"
+      ]
+    },
+    "AgentEscalationPath": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceCapability": {
+          "$ref": "#/$defs/AgentCapabilityType"
+        },
+        "targetCapability": {
+          "$ref": "#/$defs/AgentCapabilityType"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "mitigations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "asiIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "sourceCapability",
+        "targetCapability"
+      ]
+    },
+    "AgentIntegration": {
+      "properties": {
+        "service": {
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "credentialId": {
+          "type": "string"
+        },
+        "scopes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "service"
+      ]
+    },
+    "AgentNetworkRestrictions": {
+      "properties": {
+        "allowedHosts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "blockedHosts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "allowedPorts": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "internetAccess": {
+          "type": "boolean"
+        },
+        "localhostAccess": {
+          "type": "boolean"
+        },
+        "internalNetworkAccess": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "AgentPermission": {
+      "properties": {
+        "resource": {
+          "type": "string"
+        },
+        "actions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "resource"
+      ]
+    },
+    "AgentResourceLimits": {
+      "properties": {
+        "maxMemoryMb": {
+          "type": "integer"
+        },
+        "maxCpuPercent": {
+          "type": "integer"
+        },
+        "maxDiskMb": {
+          "type": "integer"
+        },
+        "maxOpenFiles": {
+          "type": "integer"
+        },
+        "maxProcesses": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "AgentSandboxLevel": {
+      "type": "string",
+      "enum": [
+        "none",
+        "process",
+        "container",
+        "vm",
+        "remote"
+      ]
+    },
+    "AgentTool": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "capabilityType": {
+          "$ref": "#/$defs/AgentCapabilityType"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "requiresApproval": {
+          "type": "boolean"
+        },
+        "riskLevel": {
+          "$ref": "#/$defs/RiskLevel"
+        },
+        "parameters": {
+          "items": {
+            "$ref": "#/$defs/AgentToolParameter"
+          },
+          "type": "array"
+        },
+        "asiIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "capabilityType"
+      ]
+    },
+    "AgentToolParameter": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "validation": {
+          "type": "string"
+        },
+        "sensitiveData": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
       ]
     },
     "AlertThreshold": {
@@ -317,6 +600,141 @@
         "label"
       ]
     },
+    "AttackPattern": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AttackPatternType"
+        },
+        "description": {
+          "type": "string"
+        },
+        "prerequisites": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "attackSteps": {
+          "items": {
+            "$ref": "#/$defs/AttackPatternStep"
+          },
+          "type": "array"
+        },
+        "vulnerablePatterns": {
+          "items": {
+            "$ref": "#/$defs/PatternCodeExample"
+          },
+          "type": "array"
+        },
+        "securePatterns": {
+          "items": {
+            "$ref": "#/$defs/PatternCodeExample"
+          },
+          "type": "array"
+        },
+        "detectionPatterns": {
+          "items": {
+            "$ref": "#/$defs/PatternDetection"
+          },
+          "type": "array"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mitreTechniques": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "owaspIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "asiIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "references": {
+          "items": {
+            "$ref": "#/$defs/Reference"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "AttackPatternStep": {
+      "properties": {
+        "step": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "mitreTactic": {
+          "$ref": "#/$defs/MITRETactic"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "step",
+        "name"
+      ]
+    },
+    "AttackPatternType": {
+      "type": "string",
+      "enum": [
+        "cswsh",
+        "token-exfiltration",
+        "sandbox-escape",
+        "local-priv-esc",
+        "agent-manipulation",
+        "ssrf",
+        "prompt-injection",
+        "tool-abuse",
+        "session-hijacking",
+        "url-param-injection"
+      ]
+    },
     "AttackTree": {
       "properties": {
         "rootId": {
@@ -431,6 +849,24 @@
         },
         "description": {
           "type": "string"
+        },
+        "implicitlyTrusted": {
+          "type": "boolean"
+        },
+        "trustAssumption": {
+          "type": "string"
+        },
+        "trustViolationRisk": {
+          "type": "string"
+        },
+        "breachVector": {
+          "type": "string"
+        },
+        "authenticationRequired": {
+          "type": "boolean"
+        },
+        "authorizationEnforced": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false,
@@ -448,8 +884,42 @@
         "localhost",
         "network",
         "cloud",
-        "breached"
+        "breached",
+        "container",
+        "sandbox",
+        "agent",
+        "origin"
       ]
+    },
+    "BrowserExecutionInfo": {
+      "properties": {
+        "origin": {
+          "type": "string"
+        },
+        "sameSite": {
+          "type": "string"
+        },
+        "crossOriginIsolated": {
+          "type": "boolean"
+        },
+        "serviceWorker": {
+          "type": "boolean"
+        },
+        "webWorker": {
+          "type": "boolean"
+        },
+        "localStorageAccess": {
+          "type": "boolean"
+        },
+        "cookieAccess": {
+          "type": "boolean"
+        },
+        "localhostAccess": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "BusinessImpact": {
       "properties": {
@@ -843,6 +1313,42 @@
         "name"
       ]
     },
+    "ContainerExecutionInfo": {
+      "properties": {
+        "runtime": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "privileged": {
+          "type": "boolean"
+        },
+        "hostPid": {
+          "type": "boolean"
+        },
+        "hostNetwork": {
+          "type": "boolean"
+        },
+        "volumes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "readOnlyRootFs": {
+          "type": "boolean"
+        },
+        "dropCapabilities": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "Controls": {
       "properties": {
         "nistCsf": {
@@ -921,6 +1427,122 @@
         "notCovered",
         "coveragePercent",
         "effectiveCoveragePercent"
+      ]
+    },
+    "CredentialFlow": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/CredentialType"
+        },
+        "assetId": {
+          "type": "string"
+        },
+        "stages": {
+          "items": {
+            "$ref": "#/$defs/CredentialFlowEvent"
+          },
+          "type": "array"
+        },
+        "expirationDuration": {
+          "type": "string"
+        },
+        "revocable": {
+          "type": "boolean"
+        },
+        "rotationPolicy": {
+          "type": "string"
+        },
+        "scope": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "riskLevel": {
+          "$ref": "#/$defs/RiskLevel"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "CredentialFlowEvent": {
+      "properties": {
+        "stage": {
+          "$ref": "#/$defs/CredentialFlowStage"
+        },
+        "elementId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "transportProtocol": {
+          "type": "string"
+        },
+        "transportMechanism": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "boolean"
+        },
+        "attackStep": {
+          "type": "integer"
+        },
+        "vulnerability": {
+          "type": "string"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "stage"
+      ]
+    },
+    "CredentialFlowStage": {
+      "type": "string",
+      "enum": [
+        "created",
+        "stored",
+        "transmitted",
+        "exfiltrated",
+        "reused",
+        "revoked",
+        "expired"
+      ]
+    },
+    "CredentialType": {
+      "type": "string",
+      "enum": [
+        "api-key",
+        "bearer-token",
+        "refresh-token",
+        "jwt",
+        "session-token",
+        "password",
+        "private-key",
+        "certificate",
+        "oauth",
+        "websocket-token"
       ]
     },
     "Currency": {
@@ -1419,6 +2041,12 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "agentCapabilities": {
+          "$ref": "#/$defs/AgentCapabilities"
+        },
+        "executionContext": {
+          "$ref": "#/$defs/ExecutionContext"
         }
       },
       "additionalProperties": false,
@@ -1439,6 +2067,211 @@
         "browser",
         "agent",
         "api"
+      ]
+    },
+    "EscapeVector": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceContext": {
+          "$ref": "#/$defs/ExecutionEnvironmentType"
+        },
+        "targetContext": {
+          "$ref": "#/$defs/ExecutionEnvironmentType"
+        },
+        "targetPrivilegeLevel": {
+          "$ref": "#/$defs/ExecutionPrivilegeLevel"
+        },
+        "mechanism": {
+          "type": "string"
+        },
+        "prerequisites": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mitreTechnique": {
+          "type": "string"
+        },
+        "mitigations": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "sourceContext",
+        "targetContext"
+      ]
+    },
+    "ExecutionContext": {
+      "properties": {
+        "environmentType": {
+          "$ref": "#/$defs/ExecutionEnvironmentType"
+        },
+        "privilegeLevel": {
+          "$ref": "#/$defs/ExecutionPrivilegeLevel"
+        },
+        "user": {
+          "type": "string"
+        },
+        "groups": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "processName": {
+          "type": "string"
+        },
+        "workingDirectory": {
+          "type": "string"
+        },
+        "environmentVariables": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "capabilities": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "selinuxContext": {
+          "type": "string"
+        },
+        "appArmorProfile": {
+          "type": "string"
+        },
+        "seccompProfile": {
+          "type": "string"
+        },
+        "containerInfo": {
+          "$ref": "#/$defs/ContainerExecutionInfo"
+        },
+        "browserInfo": {
+          "$ref": "#/$defs/BrowserExecutionInfo"
+        },
+        "networkAccess": {
+          "$ref": "#/$defs/ExecutionNetworkAccess"
+        },
+        "filesystemAccess": {
+          "$ref": "#/$defs/ExecutionFilesystemAccess"
+        },
+        "escapeVectors": {
+          "items": {
+            "$ref": "#/$defs/EscapeVector"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "environmentType",
+        "privilegeLevel"
+      ]
+    },
+    "ExecutionEnvironmentType": {
+      "type": "string",
+      "enum": [
+        "host",
+        "container",
+        "vm",
+        "browser",
+        "serverless",
+        "sandbox"
+      ]
+    },
+    "ExecutionFilesystemAccess": {
+      "properties": {
+        "readPaths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "writePaths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "executePaths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mountPoints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tempDirectory": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "ExecutionNetworkAccess": {
+      "properties": {
+        "canAccessInternet": {
+          "type": "boolean"
+        },
+        "canAccessLocalhost": {
+          "type": "boolean"
+        },
+        "canAccessInternalNetwork": {
+          "type": "boolean"
+        },
+        "allowedPorts": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "blockedPorts": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "dnsAccess": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "ExecutionPrivilegeLevel": {
+      "type": "string",
+      "enum": [
+        "root",
+        "admin",
+        "user",
+        "service",
+        "restricted",
+        "none"
       ]
     },
     "ExploitDifficulty": {
@@ -1585,6 +2418,30 @@
         },
         "bidirectional": {
           "type": "boolean"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "boolean"
+        },
+        "authenticated": {
+          "type": "boolean"
+        },
+        "crossOrigin": {
+          "type": "boolean"
+        },
+        "credentialFlowId": {
+          "type": "string"
+        },
+        "dataClassification": {
+          "$ref": "#/$defs/AssetClassification"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -1599,7 +2456,11 @@
       "enum": [
         "normal",
         "attack",
-        "exfil"
+        "exfil",
+        "credential",
+        "websocket",
+        "cswsh",
+        "lateral"
       ]
     },
     "FrequencyEstimate": {
@@ -2360,6 +3221,24 @@
         },
         "cloud": {
           "$ref": "#/$defs/CloudInfo"
+        },
+        "webSocket": {
+          "$ref": "#/$defs/WebSocketConfig"
+        },
+        "allowedOrigins": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "originValidation": {
+          "type": "boolean"
+        },
+        "rateLimitRps": {
+          "type": "integer"
+        },
+        "rateLimitConnections": {
+          "type": "integer"
         }
       },
       "additionalProperties": false,
@@ -2418,6 +3297,58 @@
         },
         "license": {
           "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "PatternCodeExample": {
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "framework": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "language",
+        "code"
+      ]
+    },
+    "PatternDetection": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "format": {
+          "$ref": "#/$defs/DetectionFormat"
+        },
+        "rule": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "falsePositives": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -3522,6 +4453,18 @@
             "$ref": "#/$defs/DependencyRisk"
           },
           "type": "array"
+        },
+        "credentialFlows": {
+          "items": {
+            "$ref": "#/$defs/CredentialFlow"
+          },
+          "type": "array"
+        },
+        "attackPatterns": {
+          "items": {
+            "$ref": "#/$defs/AttackPattern"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -3602,6 +4545,104 @@
         "validated",
         "invalidated",
         "pending"
+      ]
+    },
+    "WebSocketConfig": {
+      "properties": {
+        "protocol": {
+          "$ref": "#/$defs/WebSocketProtocol"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "allowedOrigins": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "originValidation": {
+          "type": "boolean"
+        },
+        "csrfProtection": {
+          "type": "boolean"
+        },
+        "authenticationRequired": {
+          "type": "boolean"
+        },
+        "authenticationMethod": {
+          "type": "string"
+        },
+        "rateLimitRps": {
+          "type": "integer"
+        },
+        "rateLimitConnections": {
+          "type": "integer"
+        },
+        "messageSizeLimit": {
+          "type": "integer"
+        },
+        "subProtocols": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "vulnerabilities": {
+          "items": {
+            "$ref": "#/$defs/WebSocketVulnerability"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "WebSocketProtocol": {
+      "type": "string",
+      "enum": [
+        "ws",
+        "wss"
+      ]
+    },
+    "WebSocketVulnType": {
+      "type": "string",
+      "enum": [
+        "cswsh",
+        "no-origin-validation",
+        "no-rate-limit",
+        "no-authentication",
+        "weak-authentication",
+        "no-encryption",
+        "message-injection",
+        "denial-of-service"
+      ]
+    },
+    "WebSocketVulnerability": {
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/WebSocketVulnType"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cweIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "exploitable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type"
       ]
     }
   }
