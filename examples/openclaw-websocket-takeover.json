@@ -1,0 +1,625 @@
+{
+  "id": "openclaw-websocket-localhost-takeover",
+  "title": "OpenClaw WebSocket Localhost Takeover",
+  "description": "A malicious webpage opens a WebSocket connection to a localhost control service that implicitly trusts local connections. The service has no origin validation, no rate limiting on authentication, and auto-approves device pairing, allowing the page's JavaScript to brute-force the password, register as a trusted device, and exfiltrate API keys, logs, configuration, and the device list — all without the victim's knowledge.",
+  "version": "1.0.0",
+  "phase": "production",
+  "authors": [
+    {
+      "name": "Threat Model Spec Security Research"
+    }
+  ],
+  "references": [
+    {
+      "title": "OpenClaw Vulnerability - Oasis Security",
+      "url": "https://www.oasis.security/blog/openclaw-vulnerability",
+      "type": "advisory"
+    }
+  ],
+  "mappings": {
+    "mitreAttack": [
+      {
+        "tacticId": "TA0001",
+        "tacticName": "Initial Access",
+        "techniqueId": "T1189",
+        "techniqueName": "Drive-by Compromise",
+        "description": "Victim visits attacker-controlled webpage that autonomously initiates the WebSocket attack."
+      }
+    ],
+    "owasp": [
+      {
+        "category": "api",
+        "id": "API2:2023",
+        "name": "Broken Authentication",
+        "description": "No rate limiting on WebSocket password authentication allows brute force from an untrusted origin."
+      }
+    ],
+    "cwe": [
+      {
+        "id": "CWE-346",
+        "name": "Origin Validation Error",
+        "description": "The WebSocket endpoint accepts connections from any origin, including attacker-controlled webpages."
+      }
+    ],
+    "stride": [
+      {
+        "category": "S",
+        "name": "Spoofing",
+        "description": "Lack of origin validation lets a malicious webpage spoof a legitimate local client.",
+        "affectedComponents": [
+          "ws-gateway"
+        ]
+      },
+      {
+        "category": "I",
+        "name": "Information Disclosure",
+        "description": "Exfiltration of API keys, logs, configuration, and device list once the session is hijacked.",
+        "affectedComponents": [
+          "protected-data"
+        ]
+      },
+      {
+        "category": "E",
+        "name": "Elevation of Privilege",
+        "description": "Auto-approved device registration grants the attacker's page a trusted device identity with no user confirmation.",
+        "affectedComponents": [
+          "ws-gateway"
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "type": "dfd",
+      "title": "Data Flow: Browser to Local Service",
+      "description": "Shows the attacker's malicious webpage reaching the local WebSocket service through the browser, and the local service's access to protected data.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "attacker",
+          "label": "Attacker",
+          "type": "external-entity",
+          "description": "Operator of the malicious webpage."
+        },
+        {
+          "id": "browser",
+          "label": "Victim Browser",
+          "type": "browser",
+          "parentId": "browser-boundary"
+        },
+        {
+          "id": "ws-gateway",
+          "label": "WebSocket Gateway",
+          "type": "gateway",
+          "parentId": "localhost-boundary",
+          "description": "Accepts WebSocket connections on ws://localhost:9999/ws.",
+          "network": {
+            "host": "localhost",
+            "ports": [
+              9999
+            ],
+            "protocols": [
+              "ws"
+            ],
+            "zone": "localhost",
+            "webSocket": {
+              "protocol": "ws",
+              "endpoint": "/ws",
+              "authenticationRequired": true,
+              "authenticationMethod": "first-message",
+              "vulnerabilities": [
+                {
+                  "type": "no-origin-validation",
+                  "description": "The gateway accepts WebSocket upgrades from any Origin header.",
+                  "cweIds": [
+                    "CWE-346"
+                  ],
+                  "severity": "high",
+                  "exploitable": true
+                },
+                {
+                  "type": "no-rate-limit",
+                  "description": "No rate limiting on password authentication attempts.",
+                  "severity": "high",
+                  "exploitable": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "protected-data",
+          "label": "API Keys, Logs, Config, Devices",
+          "type": "datastore",
+          "parentId": "localhost-boundary",
+          "classification": "high",
+          "assetIds": [
+            "asset-api-keys",
+            "asset-logs",
+            "asset-config",
+            "asset-device-list"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "id": "browser-boundary",
+          "label": "Browser Sandbox",
+          "type": "browser"
+        },
+        {
+          "id": "localhost-boundary",
+          "label": "Localhost",
+          "type": "localhost",
+          "implicitlyTrusted": true,
+          "trustAssumption": "Localhost connections are trusted without authentication or origin checks.",
+          "trustViolationRisk": "A browser tab can open a WebSocket to localhost on the victim's behalf, bypassing the trust assumption (Cross-Site WebSocket Hijacking)."
+        }
+      ],
+      "flows": [
+        {
+          "from": "attacker",
+          "to": "browser",
+          "label": "Serves malicious webpage",
+          "type": "normal",
+          "protocol": "https",
+          "encrypted": true
+        },
+        {
+          "from": "browser",
+          "to": "ws-gateway",
+          "label": "WebSocket connection (no origin check)",
+          "type": "websocket",
+          "protocol": "ws",
+          "authenticated": true,
+          "crossOrigin": true,
+          "credentialFlowId": "cred-session-token",
+          "dataClassification": "high",
+          "cweIds": [
+            "CWE-346"
+          ]
+        },
+        {
+          "from": "ws-gateway",
+          "to": "protected-data",
+          "label": "Reads config/logs/devices",
+          "type": "normal",
+          "protocol": "internal",
+          "authenticated": true
+        },
+        {
+          "from": "ws-gateway",
+          "to": "browser",
+          "label": "Returns exfiltrated data",
+          "type": "exfil",
+          "protocol": "ws",
+          "dataClassification": "high"
+        }
+      ]
+    },
+    {
+      "type": "attack-chain",
+      "title": "Attack Chain: Localhost Takeover",
+      "description": "Ordered attack steps from serving the malicious page to exfiltrating protected data.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "attacker",
+          "label": "Attacker",
+          "type": "external-entity"
+        },
+        {
+          "id": "browser",
+          "label": "Victim Browser",
+          "type": "browser"
+        },
+        {
+          "id": "ws-gateway",
+          "label": "WebSocket Gateway",
+          "type": "gateway"
+        },
+        {
+          "id": "protected-data",
+          "label": "Protected Data",
+          "type": "datastore",
+          "classification": "high"
+        }
+      ],
+      "attacks": [
+        {
+          "step": 1,
+          "from": "attacker",
+          "to": "browser",
+          "label": "Deliver malicious webpage",
+          "action": "Host a page whose JavaScript opens a WebSocket to ws://localhost:9999/ws on load.",
+          "outcome": "Victim's browser establishes a WebSocket connection to the local service.",
+          "mitreTactic": "TA0001",
+          "mitreTechnique": "T1189",
+          "owaspIds": [
+            "API2:2023"
+          ],
+          "strideThreats": [
+            "S"
+          ],
+          "redTeamNotes": "Use a simple static HTTP server to host the page.",
+          "blueTeamNotes": "Flag cross-origin WebSocket connections lacking an allow-listed Origin.",
+          "remediationNote": "Validate the Origin header before accepting the WebSocket upgrade."
+        },
+        {
+          "step": 2,
+          "from": "browser",
+          "to": "ws-gateway",
+          "label": "Brute-force password authentication",
+          "action": "Send repeated auth messages with different password guesses; no rate limiting blocks the attempts.",
+          "outcome": "A valid session token is obtained.",
+          "mitreTactic": "TA0006",
+          "mitreTechnique": "T1110",
+          "strideThreats": [
+            "S"
+          ],
+          "redTeamNotes": "Automate password guesses over the open WebSocket connection.",
+          "blueTeamNotes": "Alert on a high volume of failed auth messages from a single connection.",
+          "remediationNote": "Apply rate limiting to authentication attempts from all sources."
+        },
+        {
+          "step": 3,
+          "from": "browser",
+          "to": "ws-gateway",
+          "label": "Auto-approved device registration",
+          "action": "Send a register message with an attacker-chosen device name.",
+          "outcome": "The attacker's page becomes a trusted device with no user confirmation.",
+          "mitreTactic": "TA0003",
+          "strideThreats": [
+            "E"
+          ],
+          "redTeamNotes": "Registration succeeds immediately; no UI prompt is shown to the victim.",
+          "blueTeamNotes": "Alert on device registrations from a connection with no prior established trust.",
+          "remediationNote": "Require explicit user confirmation for device pairing."
+        },
+        {
+          "step": 4,
+          "from": "browser",
+          "to": "ws-gateway",
+          "label": "Request sensitive data",
+          "action": "Send getConfig, getLogs, and getDevices commands over the authenticated session.",
+          "outcome": "The gateway returns configuration, logs, and the device list.",
+          "mitreTactic": "TA0009",
+          "strideThreats": [
+            "I"
+          ],
+          "remediationNote": "Scope data access by device trust level and require re-authentication for sensitive reads."
+        },
+        {
+          "step": 5,
+          "from": "ws-gateway",
+          "to": "browser",
+          "label": "Exfiltrate data to attacker page",
+          "action": "Data is returned over the WebSocket connection to the page's JavaScript, which forwards it to the attacker.",
+          "outcome": "API keys, logs, configuration, and device list are exfiltrated.",
+          "mitreTactic": "TA0010",
+          "strideThreats": [
+            "I"
+          ],
+          "remediationNote": "Encrypt sensitive fields at rest so a raw read does not yield usable credentials."
+        }
+      ],
+      "targets": [
+        {
+          "elementId": "protected-data",
+          "classification": "high",
+          "strideThreats": [
+            "I"
+          ],
+          "impact": "Full exfiltration of API keys, logs, configuration, and device list."
+        }
+      ]
+    }
+  ],
+  "threatActors": [
+    {
+      "id": "actor-web-attacker",
+      "name": "Opportunistic Web Attacker",
+      "type": "criminal",
+      "description": "An attacker who lures victims to a malicious webpage to attack locally running services reachable from the browser.",
+      "sophistication": "low",
+      "motivations": [
+        "financial"
+      ],
+      "resources": "minimal",
+      "primaryGoals": [
+        "Exfiltrate credentials and data from locally running services"
+      ],
+      "ttps": [
+        "T1189"
+      ]
+    }
+  ],
+  "mitigations": [
+    {
+      "id": "mit-rate-limit",
+      "title": "Rate limit authentication attempts",
+      "description": "Apply rate limiting to WebSocket authentication for all sources, including localhost.",
+      "threatIds": [
+        "attack-2"
+      ],
+      "strideCategories": [
+        "S"
+      ],
+      "status": "planned",
+      "owner": "platform-security"
+    },
+    {
+      "id": "mit-explicit-pairing",
+      "title": "Require explicit user confirmation for device pairing",
+      "description": "Device registration must require an explicit user action in the UI, not be auto-approved from localhost.",
+      "threatIds": [
+        "attack-3"
+      ],
+      "strideCategories": [
+        "E"
+      ],
+      "status": "planned",
+      "owner": "platform-security"
+    },
+    {
+      "id": "mit-origin-validation",
+      "title": "Validate the WebSocket Origin header",
+      "description": "Reject WebSocket upgrade requests whose Origin header is not an explicitly allowed value.",
+      "threatIds": [
+        "attack-1"
+      ],
+      "strideCategories": [
+        "S"
+      ],
+      "status": "planned",
+      "owner": "platform-security"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-api-keys",
+      "name": "Stored API Keys",
+      "description": "Third-party API keys held by the local service for its integrations.",
+      "type": "credential",
+      "classification": "restricted"
+    },
+    {
+      "id": "asset-logs",
+      "name": "Local Service Logs",
+      "description": "Operational logs that may contain sensitive request/response data.",
+      "type": "data",
+      "classification": "confidential"
+    },
+    {
+      "id": "asset-config",
+      "name": "Configuration Files",
+      "description": "Local service configuration, including connected integrations.",
+      "type": "data",
+      "classification": "confidential"
+    },
+    {
+      "id": "asset-device-list",
+      "name": "Paired Device List",
+      "description": "The list of devices trusted by the local service.",
+      "type": "identity",
+      "classification": "internal"
+    },
+    {
+      "id": "asset-session-token",
+      "name": "Session Token",
+      "description": "Bearer token issued after successful password authentication.",
+      "type": "credential",
+      "classification": "restricted"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-localhost-takeover",
+      "title": "Malicious webpage takes over the local service via WebSocket",
+      "description": "An attacker lures the victim to a webpage that autonomously connects to the local WebSocket service, brute-forces the password, registers as a trusted device, and exfiltrates sensitive data.",
+      "type": "external-attack",
+      "threatActorId": "actor-web-attacker",
+      "preconditions": [
+        "Victim's browser can reach ws://localhost:9999/ws",
+        "The local service performs no origin validation",
+        "The local service does not rate-limit authentication attempts"
+      ],
+      "attackPath": [
+        "attack-1",
+        "attack-2",
+        "attack-3",
+        "attack-4",
+        "attack-5"
+      ],
+      "targetAssetIds": [
+        "asset-api-keys",
+        "asset-logs",
+        "asset-config",
+        "asset-device-list",
+        "asset-session-token"
+      ],
+      "targetElementIds": [
+        "ws-gateway",
+        "protected-data"
+      ],
+      "outcome": "The attacker's webpage obtains a valid session, registers as a trusted device, and downloads API keys, logs, configuration, and the device list without any user interaction or confirmation.",
+      "businessImpact": "Full compromise of the local service's data and integrations; downstream compromise of any system reachable via the exfiltrated API keys.",
+      "mitigationIds": [
+        "mit-rate-limit",
+        "mit-explicit-pairing",
+        "mit-origin-validation"
+      ]
+    }
+  ],
+  "redTeam": {
+    "prerequisites": [
+      "Target must have the WebSocket gateway enabled on localhost:9999",
+      "Victim must visit the attacker-controlled webpage while the target service is running"
+    ],
+    "exploitationSteps": [
+      {
+        "step": 1,
+        "action": "Host a malicious webpage",
+        "description": "Serve a page whose JavaScript opens a WebSocket to ws://localhost:9999/ws on load.",
+        "tool": "Python HTTP server",
+        "expectedResult": "Page is accessible to the victim and the WebSocket connects without an origin check."
+      },
+      {
+        "step": 2,
+        "action": "Brute-force the password",
+        "description": "Send repeated {\"type\": \"auth\", \"payload\": {\"password\": \"...\"}} messages; no rate limiting blocks the attempts.",
+        "expectedResult": "A successful auth response returns a session ID.",
+        "mitreTechnique": "T1110"
+      },
+      {
+        "step": 3,
+        "action": "Register as a trusted device",
+        "description": "Send {\"type\": \"register\", \"payload\": {\"deviceName\": \"Attacker Device\"}}; registration is auto-approved from localhost.",
+        "expectedResult": "The attacker's page is now a trusted device with no user confirmation required."
+      },
+      {
+        "step": 4,
+        "action": "Exfiltrate data",
+        "description": "Send getConfig, getLogs, and getDevices commands over the authenticated session.",
+        "expectedResult": "API keys, logs, configuration, and the device list are returned to the page's JavaScript."
+      }
+    ],
+    "tools": [
+      {
+        "name": "Burp Suite",
+        "purpose": "WebSocket interception and replay",
+        "url": "https://portswigger.net/burp"
+      }
+    ],
+    "payloadPatterns": [
+      {
+        "type": "websocket",
+        "pattern": "new WebSocket('ws://localhost:9999/ws')"
+      }
+    ],
+    "successIndicators": [
+      "Auth response has success: true",
+      "Device registration response has success: true",
+      "Config/logs/devices data is returned to the page"
+    ],
+    "difficulty": "low",
+    "timeToExploit": "\u003c 1 minute",
+    "skillLevel": "low"
+  },
+  "blueTeam": {
+    "detectionRules": [
+      {
+        "id": "det-cross-origin-ws",
+        "name": "Cross-Origin WebSocket Connection",
+        "format": "sigma",
+        "rule": "title: Cross-Origin WebSocket\nlogsource:\n  category: webserver\ndetection:\n  selection:\n    ws_origin|not: 'trusted.example.com'\n  condition: selection",
+        "description": "Flags WebSocket connections whose Origin header does not match an allow-listed value.",
+        "severity": "high"
+      }
+    ],
+    "iocs": [
+      {
+        "type": "pattern",
+        "value": "ws://localhost:*",
+        "description": "Localhost WebSocket connection from a browser context.",
+        "confidence": "medium"
+      }
+    ],
+    "logSources": [
+      {
+        "name": "WebSocket gateway logs",
+        "description": "Connection and auth events from the local WebSocket service.",
+        "category": "application",
+        "platform": "json"
+      }
+    ],
+    "huntingQueries": [
+      {
+        "name": "Find cross-origin WebSocket connections",
+        "platform": "splunk",
+        "query": "index=ws origin!=trusted.example.com"
+      }
+    ],
+    "alertThresholds": [
+      {
+        "metric": "cross_origin_ws_count",
+        "threshold": "5",
+        "window": "5m",
+        "severity": "high"
+      }
+    ]
+  },
+  "remediation": {
+    "vulnerablePatterns": [
+      {
+        "language": "javascript",
+        "description": "WebSocket upgrade handler with no origin check.",
+        "code": "wss.on('connection', (ws) =\u003e { /* no origin check */ });",
+        "cwe": "CWE-346"
+      }
+    ],
+    "securePatterns": [
+      {
+        "language": "javascript",
+        "description": "WebSocket upgrade handler that validates the Origin header before accepting the connection.",
+        "code": "wss.on('connection', (ws, req) =\u003e {\n  if (req.headers.origin !== 'https://trusted.example.com') {\n    ws.close();\n    return;\n  }\n});",
+        "cwe": "CWE-346"
+      }
+    ],
+    "reviewChecklist": [
+      {
+        "item": "Validate the WebSocket Origin header",
+        "required": true,
+        "category": "input-validation"
+      },
+      {
+        "item": "Rate limit authentication attempts from all sources, including localhost",
+        "required": true,
+        "category": "authentication"
+      },
+      {
+        "item": "Require explicit user confirmation for device pairing",
+        "required": true,
+        "category": "authorization"
+      }
+    ],
+    "timeToFix": "\u003c 1 day",
+    "complexity": "low"
+  },
+  "credentialFlows": [
+    {
+      "id": "cred-session-token",
+      "name": "WebSocket Session Token",
+      "description": "Bearer session token issued after password authentication over the vulnerable WebSocket endpoint.",
+      "type": "session-token",
+      "assetId": "asset-session-token",
+      "stages": [
+        {
+          "stage": "created",
+          "elementId": "ws-gateway",
+          "description": "Session token issued after the brute-forced password is accepted."
+        },
+        {
+          "stage": "transmitted",
+          "elementId": "ws-gateway",
+          "description": "Token used to authorize subsequent commands over the same WebSocket connection.",
+          "transportProtocol": "ws",
+          "transportMechanism": "websocket-message"
+        },
+        {
+          "stage": "exfiltrated",
+          "elementId": "attacker",
+          "description": "Attacker's page retains the session token for the duration of the connection.",
+          "attackStep": 2,
+          "vulnerability": "No rate limiting allowed brute-force acquisition of a valid session.",
+          "cweIds": [
+            "CWE-346"
+          ]
+        }
+      ],
+      "expirationDuration": "24h",
+      "revocable": true,
+      "riskLevel": "high"
+    }
+  ]
+}

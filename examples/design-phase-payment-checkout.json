@@ -1,0 +1,238 @@
+{
+  "id": "design-phase-payment-checkout",
+  "title": "Checkout Service — Design-Phase Threat Model",
+  "description": "A pre-implementation threat model for a new checkout microservice, produced during technical design before any code is written. Captures architecture, trust boundaries, and STRIDE threats derived from the proposed design so mitigations can be built in from the start.",
+  "version": "0.1.0",
+  "phase": "design",
+  "authors": [
+    {
+      "name": "Threat Model Spec Security Research"
+    }
+  ],
+  "mappings": {
+    "stride": [
+      {
+        "category": "S",
+        "name": "Spoofing",
+        "description": "A caller could spoof the payment provider's webhook to forge a payment-completed event.",
+        "affectedComponents": [
+          "checkout-api"
+        ]
+      },
+      {
+        "category": "T",
+        "name": "Tampering",
+        "description": "Order totals could be tampered with in transit between the web frontend and the checkout API if requests are not integrity-protected.",
+        "affectedComponents": [
+          "checkout-api"
+        ]
+      },
+      {
+        "category": "E",
+        "name": "Elevation of Privilege",
+        "description": "Without server-side price validation, a client could set an arbitrary order total.",
+        "affectedComponents": [
+          "checkout-api",
+          "order-db"
+        ]
+      }
+    ]
+  },
+  "diagrams": [
+    {
+      "type": "dfd",
+      "title": "Checkout Service — Proposed Data Flow",
+      "description": "Proposed architecture for the checkout service: web frontend, checkout API, payment provider integration, and order database.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "customer",
+          "label": "Customer",
+          "type": "external-entity"
+        },
+        {
+          "id": "web-frontend",
+          "label": "Web Frontend",
+          "type": "process",
+          "parentId": "app-boundary"
+        },
+        {
+          "id": "checkout-api",
+          "label": "Checkout API",
+          "type": "api",
+          "parentId": "app-boundary",
+          "description": "Validates and processes checkout requests."
+        },
+        {
+          "id": "order-db",
+          "label": "Order Database",
+          "type": "datastore",
+          "parentId": "app-boundary",
+          "classification": "high"
+        },
+        {
+          "id": "payment-provider",
+          "label": "Payment Provider",
+          "type": "external-entity",
+          "description": "Third-party payment processor; not controlled by this service."
+        }
+      ],
+      "boundaries": [
+        {
+          "id": "app-boundary",
+          "label": "Checkout Service Trust Boundary",
+          "type": "network"
+        }
+      ],
+      "flows": [
+        {
+          "from": "customer",
+          "to": "web-frontend",
+          "label": "Places order",
+          "type": "normal",
+          "protocol": "https",
+          "encrypted": true
+        },
+        {
+          "from": "web-frontend",
+          "to": "checkout-api",
+          "label": "Submit checkout request",
+          "type": "normal",
+          "protocol": "https",
+          "encrypted": true,
+          "authenticated": true
+        },
+        {
+          "from": "checkout-api",
+          "to": "order-db",
+          "label": "Write order record",
+          "type": "normal",
+          "protocol": "internal",
+          "authenticated": true,
+          "dataClassification": "high"
+        },
+        {
+          "from": "payment-provider",
+          "to": "checkout-api",
+          "label": "Payment-completed webhook",
+          "type": "normal",
+          "protocol": "https",
+          "encrypted": true
+        }
+      ]
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "assume-webhook-signed",
+      "title": "Payment provider webhooks are signed",
+      "description": "The checkout API will verify a cryptographic signature on every payment-completed webhook before trusting it.",
+      "type": "security",
+      "rationale": "Without signature verification, any caller could forge a payment-completed event and mark an unpaid order as paid.",
+      "impact": "An attacker could obtain goods without payment.",
+      "impactSeverity": "critical",
+      "validationStatus": "not-validated"
+    },
+    {
+      "id": "assume-price-server-side",
+      "title": "Order totals are computed server-side",
+      "description": "The checkout API recomputes the order total from catalog prices; it does not trust a client-submitted total.",
+      "type": "security",
+      "rationale": "A client-submitted price can be tampered with to purchase items below their real price.",
+      "impactSeverity": "high",
+      "validationStatus": "not-validated"
+    }
+  ],
+  "prerequisites": [
+    {
+      "id": "prereq-webhook-secret",
+      "title": "Shared webhook signing secret provisioned",
+      "description": "A signing secret must be provisioned and stored before the payment-completed webhook handler can verify signatures.",
+      "type": "operational",
+      "required": true,
+      "status": "not-met"
+    }
+  ],
+  "mitigations": [
+    {
+      "id": "mit-verify-webhook-signature",
+      "title": "Verify payment provider webhook signatures",
+      "description": "Reject any payment-completed webhook whose signature does not match the shared secret.",
+      "threatIds": [
+        "scenario-forged-webhook"
+      ],
+      "strideCategories": [
+        "S"
+      ],
+      "status": "planned",
+      "owner": "checkout-team"
+    },
+    {
+      "id": "mit-server-side-pricing",
+      "title": "Compute order totals server-side",
+      "description": "The checkout API must recompute the order total from catalog prices and ignore any client-submitted total.",
+      "threatIds": [
+        "scenario-client-supplied-price"
+      ],
+      "strideCategories": [
+        "T",
+        "E"
+      ],
+      "status": "planned",
+      "owner": "checkout-team"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-order-state",
+      "name": "Order Payment State",
+      "description": "Whether an order has been paid; controls whether goods are shipped.",
+      "type": "data",
+      "classification": "restricted"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-forged-webhook",
+      "title": "What if an attacker forges a payment-completed webhook?",
+      "description": "If webhook signature verification is missing or broken, a caller could POST a forged payment-completed event directly to the checkout API's webhook endpoint.",
+      "type": "external-attack",
+      "preconditions": [
+        "The webhook endpoint is reachable externally",
+        "Signature validation is missing or can be bypassed"
+      ],
+      "targetAssetIds": [
+        "asset-order-state"
+      ],
+      "targetElementIds": [
+        "checkout-api"
+      ],
+      "outcome": "An order is marked paid without a real payment having occurred.",
+      "businessImpact": "Direct financial loss from goods shipped without payment.",
+      "mitigationIds": [
+        "mit-verify-webhook-signature"
+      ]
+    },
+    {
+      "id": "scenario-client-supplied-price",
+      "title": "What if the client submits an order total?",
+      "description": "If the checkout API trusts a client-submitted price rather than computing it server-side, a modified request could purchase items below their real price.",
+      "type": "external-attack",
+      "preconditions": [
+        "The checkout API accepts a price/total field from the client",
+        "The API does not recompute the total from catalog prices"
+      ],
+      "targetAssetIds": [
+        "asset-order-state"
+      ],
+      "targetElementIds": [
+        "checkout-api"
+      ],
+      "outcome": "An order is created with an incorrect, attacker-favorable total.",
+      "businessImpact": "Direct financial loss from underpriced orders.",
+      "mitigationIds": [
+        "mit-server-side-pricing"
+      ]
+    }
+  ]
+}

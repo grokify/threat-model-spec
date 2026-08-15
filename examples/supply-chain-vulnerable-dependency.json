@@ -1,0 +1,106 @@
+{
+  "id": "supply-chain-vulnerable-dependency",
+  "title": "Vulnerable Dependency — Supply Chain Risk",
+  "description": "Demonstrates supply-chain security fields: an SBOM reference, VEX statements for two components, and dependency risk data for a known-vulnerable open-source library.",
+  "version": "1.0.0",
+  "phase": "production",
+  "authors": [
+    {
+      "name": "Threat Model Spec Security Research"
+    }
+  ],
+  "diagrams": [
+    {
+      "type": "dfd",
+      "title": "Service Depending on a Vulnerable Library",
+      "description": "A single service that depends on a vulnerable version of an open-source utility library.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "app-service",
+          "label": "Application Service",
+          "type": "process",
+          "description": "Depends on pkg:npm/lodash@4.17.20."
+        },
+        {
+          "id": "data-store",
+          "label": "Application Data",
+          "type": "datastore",
+          "classification": "medium"
+        }
+      ],
+      "flows": [
+        {
+          "from": "app-service",
+          "to": "data-store",
+          "label": "Read/write application data",
+          "type": "normal",
+          "protocol": "internal",
+          "authenticated": true
+        }
+      ]
+    }
+  ],
+  "sbom": {
+    "format": "cyclonedx",
+    "version": "1.5",
+    "uri": "./sbom.cdx.json",
+    "components": [
+      {
+        "id": "pkg:npm/lodash@4.17.20",
+        "purl": "pkg:npm/lodash@4.17.20",
+        "name": "lodash",
+        "version": "4.17.20",
+        "supplier": "OpenJS Foundation",
+        "license": "MIT",
+        "vulnerabilityIds": [
+          "CVE-2021-23337"
+        ]
+      }
+    ]
+  },
+  "vexStatements": [
+    {
+      "id": "vex-lodash-cve-2021-23337",
+      "vulnerabilityId": "CVE-2021-23337",
+      "status": "affected",
+      "impactStatement": "The vulnerable lodash.template function is reachable from user-controlled template input in this service.",
+      "actionStatement": "Upgrade to lodash@4.17.21 or later.",
+      "products": [
+        "pkg:npm/lodash@4.17.20"
+      ],
+      "timestamp": "2026-04-28T10:00:00Z",
+      "lastUpdated": "2026-04-28T10:00:00Z"
+    },
+    {
+      "id": "vex-lodash-cve-2021-23337-other-service",
+      "vulnerabilityId": "CVE-2021-23337",
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "impactStatement": "This service imports lodash only for array utilities; the vulnerable template function is never called.",
+      "products": [
+        "pkg:npm/lodash@4.17.20"
+      ],
+      "timestamp": "2026-04-28T10:00:00Z",
+      "lastUpdated": "2026-04-28T10:00:00Z"
+    }
+  ],
+  "dependencyRisks": [
+    {
+      "componentRef": {
+        "purl": "pkg:npm/lodash@4.17.20",
+        "name": "lodash",
+        "version": "4.17.20",
+        "vulnerabilityIds": [
+          "CVE-2021-23337"
+        ]
+      },
+      "riskLevel": "high",
+      "vulnerabilityCount": 1,
+      "highCount": 1,
+      "outdatedBy": 1,
+      "directDependency": true,
+      "notes": "Upgrade to lodash@4.17.21 to remediate CVE-2021-23337."
+    }
+  ]
+}
