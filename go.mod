@@ -6,7 +6,7 @@ require (
 	github.com/ProductBuildersHQ/specification-workflow-spec v0.0.0-00010101000000-000000000000
 	github.com/gorilla/websocket v1.5.3
 	github.com/invopop/jsonschema v0.14.0
-	github.com/plexusone/structured-evaluation v0.13.0
+	github.com/plexusone/structured-evaluation v0.14.0
 	github.com/plexusone/w3pilot v0.9.0
 	github.com/spf13/cobra v1.10.2
 )

@@ -13,8 +13,8 @@ github.com/invopop/jsonschema v0.14.0 h1:MHQqLhvpNUZfw+hM3AZDYK7jxO8FZoQeQM77g8i
 github.com/invopop/jsonschema v0.14.0/go.mod h1:ygm6C2EaVNMBDPpaPlnOA2pFAxBnxGjFlMZABxm9n2I=
 github.com/pb33f/ordered-map/v2 v2.3.1 h1:5319HDO0aw4DA4gzi+zv4FXU9UlSs3xGZ40wcP1nBjY=
 github.com/pb33f/ordered-map/v2 v2.3.1/go.mod h1:qxFQgd0PkVUtOMCkTapqotNgzRhMPL7VvaHKbd1HnmQ=
-github.com/plexusone/structured-evaluation v0.13.0 h1:/veXuje2D1PgkQQfaeUtAKeMHA6LBdnUd6JV3cwaLBs=
-github.com/plexusone/structured-evaluation v0.13.0/go.mod h1:mwlSwQfhy7wn4MJjLshzrkGCB0BNFkR/6nTro+CFIYE=
+github.com/plexusone/structured-evaluation v0.14.0 h1:gACNOB//bGD78F8WQlUhCtfBNY4FcRPxcLsbEWGzBc0=
+github.com/plexusone/structured-evaluation v0.14.0/go.mod h1:C7/anlUnYBxXMGRggHD7f2eQ+6ejXvXEIsCadG/D1kg=
 github.com/plexusone/w3pilot v0.9.0 h1:nqFZP5jQI7CDFF5F2xl/Pzlp77mEFML5tDLtNKYdIOQ=
 github.com/plexusone/w3pilot v0.9.0/go.mod h1:wdBroLheLKpd1RowKV3PPGBGrNiKX0FmD4aM5VXtpZg=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
