@@ -275,6 +275,49 @@ func TestComputeAttackTreeReport_FallsBackToFirstDiagram(t *testing.T) {
 	}
 }
 
+func TestFrameworkReportDigest_DeterministicForSameInput(t *testing.T) {
+	tm := minimalThreatModelForFrameworkReport()
+	tm.Mappings = &Mappings{STRIDE: []STRIDEMapping{{Category: STRIDESpoofing}}}
+
+	d1, err := FrameworkReportDigest(tm, FrameworkSTRIDE)
+	if err != nil {
+		t.Fatalf("FrameworkReportDigest: %v", err)
+	}
+	d2, err := FrameworkReportDigest(tm, FrameworkSTRIDE)
+	if err != nil {
+		t.Fatalf("FrameworkReportDigest: %v", err)
+	}
+	if d1 != d2 {
+		t.Errorf("digest not deterministic: %q != %q", d1, d2)
+	}
+}
+
+func TestFrameworkReportDigest_ChangesWithModelContent(t *testing.T) {
+	tm := minimalThreatModelForFrameworkReport()
+	tm.Mappings = &Mappings{STRIDE: []STRIDEMapping{{Category: STRIDESpoofing}}}
+	before, err := FrameworkReportDigest(tm, FrameworkSTRIDE)
+	if err != nil {
+		t.Fatalf("FrameworkReportDigest: %v", err)
+	}
+
+	tm.Mappings.STRIDE = append(tm.Mappings.STRIDE, STRIDEMapping{Category: STRIDETampering})
+	after, err := FrameworkReportDigest(tm, FrameworkSTRIDE)
+	if err != nil {
+		t.Fatalf("FrameworkReportDigest: %v", err)
+	}
+
+	if before == after {
+		t.Error("digest did not change after adding a new STRIDE mapping")
+	}
+}
+
+func TestFrameworkReportDigest_UnknownFramework(t *testing.T) {
+	tm := minimalThreatModelForFrameworkReport()
+	if _, err := FrameworkReportDigest(tm, FrameworkID("not-a-real-framework")); err == nil {
+		t.Fatal("expected an error for an unknown framework")
+	}
+}
+
 // TestComputeFrameworkReport_RealExamples smoke-tests every framework
 // against the repo's real example models, catching panics or nil-pointer
 // issues that a synthetic fixture might not exercise (e.g. a Mappings
