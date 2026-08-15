@@ -2,7 +2,6 @@ package evaluation
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/plexusone/structured-evaluation/claims"
 	"github.com/plexusone/structured-evaluation/rubric"
@@ -67,7 +66,7 @@ func (er *EvaluationResult) ToClaimsReport(document string) *claims.ClaimsReport
 				false, // LLM evaluations are not fully reproducible
 			)
 			validation.Internal.ValidatedBy = "LLM-as-Judge"
-			validation.Internal.ValidatedAt = time.Now().UTC()
+			// ValidatedAt is already set to time.Now().UTC() by NewInternalValidation.
 			claim.SetValidation(validation)
 
 			// Set verdict based on category score
