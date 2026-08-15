@@ -1,6 +1,10 @@
 package ir
 
-import "testing"
+import (
+	"encoding/json"
+	"reflect"
+	"testing"
+)
 
 func minimalThreatModelForFrameworkReport() *ThreatModel {
 	return &ThreatModel{
@@ -315,6 +319,51 @@ func TestFrameworkReportDigest_UnknownFramework(t *testing.T) {
 	tm := minimalThreatModelForFrameworkReport()
 	if _, err := FrameworkReportDigest(tm, FrameworkID("not-a-real-framework")); err == nil {
 		t.Fatal("expected an error for an unknown framework")
+	}
+}
+
+// TestFrameworkReport_MaterializedRoundTrip proves PRD success metric 5
+// ("no information loss on round-trip of materialized reports"): compute
+// a report, materialize it onto ThreatModel.FrameworkReports, marshal the
+// whole model to JSON, unmarshal it back, and confirm the report that
+// comes back out is identical to the one that was computed — not just
+// structurally similar, but field-for-field equal.
+func TestFrameworkReport_MaterializedRoundTrip(t *testing.T) {
+	tm, err := LoadThreatModelFromFile("../examples/openclaw-websocket-takeover.json")
+	if err != nil {
+		t.Fatalf("loading example: %v", err)
+	}
+
+	for _, fw := range []FrameworkID{FrameworkSTRIDE, FrameworkLINDDUN, FrameworkMITREAttack, FrameworkOWASP, FrameworkAttackTree} {
+		fw := fw
+		t.Run(string(fw), func(t *testing.T) {
+			original, err := ComputeFrameworkReport(tm, fw)
+			if err != nil {
+				t.Fatalf("ComputeFrameworkReport(%s): %v", fw, err)
+			}
+			original.GeneratedAt = "2026-01-01T00:00:00Z"
+			original.SourceRevision = "test-digest"
+
+			materialized := *tm
+			materialized.FrameworkReports = []FrameworkReport{*original}
+
+			data, err := json.Marshal(materialized)
+			if err != nil {
+				t.Fatalf("marshaling model: %v", err)
+			}
+
+			var roundTripped ThreatModel
+			if err := json.Unmarshal(data, &roundTripped); err != nil {
+				t.Fatalf("unmarshaling model: %v", err)
+			}
+			if len(roundTripped.FrameworkReports) != 1 {
+				t.Fatalf("len(FrameworkReports) = %d, want 1", len(roundTripped.FrameworkReports))
+			}
+
+			if !reflect.DeepEqual(*original, roundTripped.FrameworkReports[0]) {
+				t.Errorf("round-tripped report != original.\noriginal:  %+v\nroundtrip: %+v", *original, roundTripped.FrameworkReports[0])
+			}
+		})
 	}
 }
 
