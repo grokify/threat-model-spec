@@ -1,7 +1,7 @@
 {
-  "name": "threat-model-diagrams",
+  "name": "threat-model-spec-toolkit",
   "version": "1.0.0",
-  "description": "Multi-agent team for creating threat modeling diagrams with D2, including DFDs, attack flows, and sequence diagrams with STRIDE, MITRE ATT&CK, and OWASP annotations",
+  "description": "Multi-agent team for D2 threat modeling diagrams (DFDs, attack flows, sequence diagrams with STRIDE/MITRE ATT&CK/OWASP annotations) and PDLC stage analysis (product-definition through product-operations) via tms analyze",
   "author": "grokify",
   "license": "MIT",
   "repository": "https://github.com/grokify/threat-model-spec",
@@ -9,10 +9,10 @@
   "commands": "commands",
   "skills": "skills",
   "agents": "agents",
-  "context": "# Threat Model Diagrams\n\nThis plugin provides agents for creating security threat modeling diagrams using D2. Diagrams include Data Flow Diagrams (DFDs), attack chain visualizations, and sequence diagrams with annotations for STRIDE, MITRE ATT&CK, MITRE ATLAS, and OWASP frameworks.",
+  "context": "# Threat Model Spec Toolkit\n\nThis plugin provides two families of agents. Diagram agents (dfd-creator, attack-flow-visualizer, diagram-quality-reviewer) create security threat modeling diagrams using D2 — Data Flow Diagrams, attack chain visualizations, and sequence diagrams with annotations for STRIDE, MITRE ATT&CK, MITRE ATLAS, and OWASP frameworks. PDLC stage analyst agents (product-definition-analyst, builder-definition-analyst, implementation-analyst, deployment-analyst, builder-operations-analyst, product-operations-analyst) produce per-stage threat model analysis reports via `tms analyze`, one per PDLC stage.",
   "dependencies": [
-    {"name": "d2", "command": "d2 --version"},
-    {"name": "rsvg-convert", "command": "rsvg-convert --version", "optional": true},
-    {"name": "tms", "command": "tms --version", "optional": true}
+    {"name": "tms", "command": "tms --version"},
+    {"name": "d2", "command": "d2 --version", "optional": true},
+    {"name": "rsvg-convert", "command": "rsvg-convert --version", "optional": true}
   ]
 }

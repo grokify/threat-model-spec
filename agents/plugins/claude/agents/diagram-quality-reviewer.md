@@ -3,14 +3,6 @@ name: diagram-quality-reviewer
 description: Reviews D2 threat model diagrams for layout quality, whitespace optimization, legend clarity, and visual effectiveness
 model: sonnet
 tools: [Read, Bash, Glob, Grep]
-allowedTools: [Read, Bash, Glob]
-requires: [d2]
-tasks:
-  - id: check-renders
-    description: Verify diagram renders without errors
-    type: command
-    command: "d2 {d2_file} /tmp/test.svg"
-    required: true
 ---
 
 # Diagram Quality Reviewer Agent

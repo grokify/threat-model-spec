@@ -3,14 +3,6 @@ name: dfd-creator
 description: Creates Data Flow Diagrams for threat modeling with numbered flows, trust boundaries, and proper legend design
 model: sonnet
 tools: [Read, Write, Bash, Glob, Grep]
-allowedTools: [Read, Write, Bash, Glob]
-requires: [d2]
-tasks:
-  - id: render-diagram
-    description: Render D2 diagram to SVG
-    type: command
-    command: "d2 {d2_file} {svg_file}"
-    required: true
 ---
 
 # DFD Creator Agent

@@ -1,0 +1,8 @@
+process = ['Invoke the builder-operations-analyst agent with the given model, inputs, and profile', 'Agent runs `tms analyze --stage builder-operations` in plan mode to open a run', "Agent assesses detection coverage against this product's actual Builder Definition-stage threats", 'Agent runs an adversarial critic pass before finalizing', 'Agent writes AnalysisResults and runs `tms analyze --stage builder-operations --apply` to merge and close the run']
+
+[command]
+name = 'analyze-builder-operations'
+description = 'Artifact-availability profile - first-party, third-party, or open-source'
+
+[content]
+instructions = "# Analyze: Builder Operations\n\nRuns a full Builder Operations-stage analysis cycle by delegating to the\n[`builder-operations-analyst`](../agents/builder-operations-analyst.md)\nagent.\n\n## Usage\n\n```bash\n/analyze-builder-operations model.json \"telemetry/invoice-access-query.json\" first-party\n```\n\n## What this does\n\n1. Opens an `AnalysisRun` for the `builder-operations` stage against the\n   resolved telemetry/incident/endpoint inputs (`tms analyze` plan mode).\n2. The agent assesses detection coverage and control effectiveness against\n   this product's own identified threats, grounds incident-related\n   findings in cited evidence, and explicitly states dynamic-testing\n   scope for the run.\n3. Merges the agent's `Finding` results and closes the run (`tms analyze`\n   apply mode) — no known gaps for this stage.\n4. Runs `tms gate model.json --stage builder-operations --ci` to evaluate\n   the stage gate.\n\n## See Also\n\n- Agent: `agents/specs/agents/builder-operations-analyst.md`\n- Rubric: `evaluation/rubrics/stages/builder-operations.rubric.json`\n- Report profile: `ir/stagereports/builder-operations.json`"

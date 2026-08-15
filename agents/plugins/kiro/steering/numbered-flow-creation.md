@@ -1,9 +1,6 @@
----
-name: numbered-flow-creation
-description: Guidelines for creating numbered data flow sequences in threat model diagrams
-triggers: [numbered, flow, sequence, steps, attack chain]
-dependencies: [d2]
----
+# Numbered Flow Creation
+
+Guidelines for creating numbered data flow sequences in threat model diagrams
 
 # Numbered Flow Creation
 

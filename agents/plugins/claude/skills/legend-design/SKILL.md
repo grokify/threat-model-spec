@@ -7,6 +7,12 @@ dependencies: [d2]
 
 # Legend Design
 
+Best practices for designing clear, informative legends in threat model diagrams
+
+## Instructions
+
+# Legend Design
+
 Best practices for creating legends that clearly explain diagram elements.
 
 ## Legend Positioning
@@ -225,3 +231,4 @@ legend: Legend {
 - [ ] Labels describe what is colored (box fill, arrow, border)
 - [ ] No color conflicts between categories
 - [ ] Consistent color families within categories
+

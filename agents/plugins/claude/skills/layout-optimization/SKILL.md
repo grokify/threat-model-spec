@@ -7,6 +7,12 @@ dependencies: [d2]
 
 # Layout Optimization
 
+Guidelines for optimizing D2 diagram layout to reduce whitespace and improve visual clarity
+
+## Instructions
+
+# Layout Optimization
+
 Guidelines for optimizing D2 diagram layouts to reduce whitespace and improve clarity.
 
 ## Key Metrics
@@ -300,3 +306,4 @@ container.x -> container.y: "Connection"  # Visible arrow
 - [ ] Labels are descriptive but not too long
 - [ ] Aspect ratio matches direction
 - [ ] Whitespace < 50%
+

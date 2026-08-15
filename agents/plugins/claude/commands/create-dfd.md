@@ -1,24 +1,25 @@
 ---
-name: create-dfd
-description: Create a Data Flow Diagram for threat modeling with numbered flows and proper legend
-arguments:
-  - name: name
-    type: string
-    required: true
-    description: Base name for the diagram files (e.g., "openclaw")
-  - name: type
-    type: string
-    required: false
-    default: both
-    description: Diagram type - "normal", "attack", or "both"
-dependencies: [d2, rsvg-convert]
-process:
-  - Gather system architecture information
-  - Identify trust boundaries and components
-  - Map data flows with numbered sequences
-  - Create D2 diagram with proper legend
-  - Render to SVG and optionally PNG
+description: Diagram type - "normal", "attack", or "both
 ---
+
+# Create Dfd
+
+Diagram type - "normal", "attack", or "both
+
+## Process
+
+1. Gather system architecture information
+2. Identify trust boundaries and components
+3. Map data flows with numbered sequences
+4. Create D2 diagram with proper legend
+5. Render to SVG and optionally PNG
+
+## Dependencies
+
+- `d2`
+- `rsvg-convert`
+
+## Instructions
 
 # Create DFD Command
 

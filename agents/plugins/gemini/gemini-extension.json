@@ -6,7 +6,5 @@
   "license": "MIT",
   "repository": "https://github.com/grokify/threat-model-spec",
   "homepage": "https://github.com/grokify/threat-model-spec",
-  "commands": "./commands/",
-  "skills": "./skills/",
-  "agents": "./agents/"
+  "contextFileName": "GEMINI.md"
 }

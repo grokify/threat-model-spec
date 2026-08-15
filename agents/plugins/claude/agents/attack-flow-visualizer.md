@@ -3,14 +3,6 @@ name: attack-flow-visualizer
 description: Creates attack chain and attack flow diagrams with MITRE ATT&CK/ATLAS and STRIDE annotations
 model: sonnet
 tools: [Read, Write, Bash, Glob, Grep, WebFetch]
-allowedTools: [Read, Write, Bash, Glob]
-requires: [d2]
-tasks:
-  - id: render-diagram
-    description: Render D2 diagram to SVG
-    type: command
-    command: "d2 {d2_file} {svg_file}"
-    required: true
 ---
 
 # Attack Flow Visualizer Agent

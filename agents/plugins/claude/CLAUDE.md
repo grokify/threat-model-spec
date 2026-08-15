@@ -1,26 +1,47 @@
-# Threat Model Diagrams Plugin
+# Threat Model Spec Toolkit Plugin
 
-This plugin provides agents for creating security threat modeling diagrams using D2.
+This plugin provides two families of agents: diagram agents for creating
+security threat modeling diagrams using D2, and PDLC stage analyst agents
+that produce per-stage threat model analysis reports via `tms analyze`.
 
 ## Available Agents
 
-### dfd-creator
+### Diagram Agents
+
+#### dfd-creator
 Creates Data Flow Diagrams with numbered flows, trust boundaries, and proper legends.
 - Generates both normal operation and attack flow variants
 - Uses consistent color coding for element types
 - Applies layout optimization best practices
 
-### attack-flow-visualizer
+#### attack-flow-visualizer
 Creates attack chain diagrams with MITRE ATT&CK and STRIDE annotations.
 - Maps attack steps to framework tactics/techniques
 - Highlights crown jewels and exfiltration paths
 - Uses red color coding for attack flows
 
-### diagram-quality-reviewer
+#### diagram-quality-reviewer
 Reviews diagrams for layout quality, whitespace, and legend clarity.
 - Checks aspect ratio and whitespace metrics
 - Detects color conflicts in legends
 - Verifies arrow visibility and label clarity
+
+### PDLC Stage Analyst Agents
+
+One agent per PDLC stage, each producing a threat model analysis report via
+`tms analyze` (plan mode opens an `AnalysisRun`; apply mode merges the
+agent's `AnalysisResults` and closes it). See each agent's spec in
+`agents/specs/agents/` for its full inputs, process, output-object
+contract, rubric reference, and worked example.
+
+| Agent | Stage | Inputs |
+|-------|-------|--------|
+| product-definition-analyst | product-definition | PRD/UXD/MRD and other product specs |
+| builder-definition-analyst | builder-definition | TRD/TPD/IRD technical specs |
+| implementation-analyst | implementation | source tree, dependency manifest, SBOM |
+| deployment-analyst | deployment | IaC, deployment manifest |
+| builder-operations-analyst | builder-operations | runtime endpoint, telemetry, incident |
+| product-operations-analyst | product-operations | telemetry, incident |
 
 ## Available Commands
 
@@ -31,6 +52,17 @@ Create a Data Flow Diagram for threat modeling.
 /create-dfd myapp              # Create both normal and attack DFDs
 /create-dfd myapp --type normal   # Normal operation only
 /create-dfd myapp --type attack   # Attack flow only
+```
+
+### /analyze-\<stage\>
+Run a full stage analysis cycle for one of the six PDLC stages, delegating
+to that stage's analyst agent: `/analyze-product-definition`,
+`/analyze-builder-definition`, `/analyze-implementation`,
+`/analyze-deployment`, `/analyze-builder-operations`,
+`/analyze-product-operations`.
+
+```bash
+/analyze-implementation model.json "internal/billing/query.go go.sum" first-party
 ```
 
 ## Skills
@@ -92,5 +124,6 @@ Guidelines for reducing whitespace and improving clarity.
 
 ## Dependencies
 
-- **d2** (required): D2 diagramming language CLI
+- **tms** (required): threat-model-spec CLI, used by all stage analyst agents (`tms analyze`, `tms gate`, `tms validate`)
+- **d2** (optional): D2 diagramming language CLI, used by the diagram agents
 - **rsvg-convert** (optional): Convert SVG to PNG for documents
