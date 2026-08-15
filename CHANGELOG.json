@@ -4,43 +4,234 @@
   "repository": "https://github.com/grokify/threat-model-spec",
   "versioning": "semver",
   "commitConvention": "conventional",
-  "maintainers": ["grokify"],
+  "maintainers": [
+    "grokify"
+  ],
   "releases": [
+    {
+      "version": "v0.8.0",
+      "date": "2026-08-15",
+      "commit": "13d50d2",
+      "highlights": [
+        {
+          "description": "PDLC-aware lifecycle analysis: seven new object types (Artifact, AnalysisRun, Evidence, Finding, SecurityRequirement, ArchitectureAssertion, Gate) tracking stage-by-stage analysis across a six-stage Product Development Lifecycle"
+        },
+        {
+          "description": "10-domain Application Security Posture Management (ASPM) overlay on the three builder-side PDLC stages"
+        },
+        {
+          "description": "StageReportProfile and ArtifactAvailabilityProfile: normative per-stage report contracts and first-party/third-party/open-source availability profiles, so every stage is always accounted for"
+        },
+        {
+          "description": "Six calibrated stage rubrics and EvaluateStageGate, distinguishing an unevaluated coverage check from a failed one"
+        },
+        {
+          "description": "tms analyze: two-phase plan/apply orchestration around an AI agent's reasoning step, with atomic apply"
+        },
+        {
+          "description": "tms status, tms report, tms gate, tms profile: read verbs with human and --json output modes and CI-meaningful exit codes"
+        },
+        {
+          "description": "FrameworkReport: computed STRIDE/LINDDUN/MITRE ATT&CK/OWASP/attack-tree views derived fresh from the canonical model, with staleness detection for materialized snapshots"
+        },
+        {
+          "description": "Six PDLC stage-analyst agent specs generated into Claude Code, Kiro, and Gemini plugins"
+        },
+        {
+          "description": "Two real dogfood runs (first-party self-assessment; open-source-profile assessment of lodash/CVE-2021-23337), both graded honestly against the new rubrics"
+        }
+      ],
+      "added": [
+        {
+          "description": "`ir.Stage` enum and ASPM domain overlay (`ir.ASPMDomain`)",
+          "commit": "47e2e99"
+        },
+        {
+          "description": "PDLC lifecycle IR objects: `Artifact`, `AnalysisRun`, `Evidence`, `Finding`, `SecurityRequirement`, `ArchitectureAssertion`, `Gate`",
+          "commit": "2ba1338"
+        },
+        {
+          "description": "`evaluation.StageReviewType` and Finding-status/claims.Verdict conventions",
+          "commit": "a5fa190"
+        },
+        {
+          "description": "`StageReportProfile` and `ArtifactAvailabilityProfile` (first-party/third-party/open-source)",
+          "commit": "6b93b0e"
+        },
+        {
+          "description": "Six stage rubrics with calibration fixtures (`evaluation/rubrics/stages/`)",
+          "commit": "bf2be21"
+        },
+        {
+          "description": "`evaluation.EvaluateStageGate`",
+          "commit": "42d7fa1"
+        },
+        {
+          "description": "`tms gate` command",
+          "commit": "57280fd"
+        },
+        {
+          "description": "Six PDLC stage-analyst agent specs and `/analyze-<stage>` slash commands",
+          "commit": "1eedc17"
+        },
+        {
+          "description": "`AnalysisResults` output-object contract; `producerRunId` provenance on `Asset`/`ThreatActor`/`Scenario`/`Mitigation`",
+          "commit": "304f240"
+        },
+        {
+          "description": "`tms analyze` command (plan/apply orchestration)",
+          "commit": "bbc4f64"
+        },
+        {
+          "description": "`FrameworkReport` computed views (STRIDE/LINDDUN/MITRE ATT&CK/OWASP/attack-tree)",
+          "commit": "2065652"
+        },
+        {
+          "description": "`FrameworkReport.RenderMarkdown()` and `ir.FrameworkReportDigest` for staleness detection",
+          "commit": "2d1ff3a"
+        },
+        {
+          "description": "`tms report` command and `tms validate` staleness warning",
+          "commit": "d3247af"
+        },
+        {
+          "description": "`--json` output on `tms gate`",
+          "commit": "b21da97"
+        },
+        {
+          "description": "`tms status` command",
+          "commit": "369e880"
+        },
+        {
+          "description": "`tms profile` command",
+          "commit": "204fa44"
+        }
+      ],
+      "changed": [
+        {
+          "description": "Cross-repo dependencies added: `github.com/ProductBuildersHQ/pdlc`, `specification-workflow-spec`, `productbuildershq-frameworks`",
+          "commit": "bf564e6"
+        },
+        {
+          "description": "`structured-evaluation` updated to v0.14.0",
+          "commit": "de45034"
+        },
+        {
+          "description": "`agents/plugins/{claude,kiro,gemini}/` regenerated to include the six new stage-analyst agents alongside the existing three diagram agents",
+          "commit": "763f5e0"
+        },
+        {
+          "description": "JSON schemas regenerated for the full PDLC lifecycle IR; schema version bumped to v0.8.0 (additive, fully backward compatible with v0.7.0)",
+          "commit": "3e6e691"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "Stage report and artifact-availability specification sections",
+          "commit": "b7058b7"
+        },
+        {
+          "description": "v0.8.0 versioned specification, release notes, and CHANGELOG"
+        }
+      ]
+    },
     {
       "version": "v0.7.0",
       "date": "2026-06-01",
       "commit": "7c716a2",
       "highlights": [
-        {"description": "Agentic AI threat modeling with agent capabilities and execution context"},
-        {"description": "Credential flow tracking for token exfiltration and replay attack modeling"},
-        {"description": "WebSocket security configuration and CSWSH modeling"},
-        {"description": "LLM-as-Judge evaluation package with structured-evaluation integration"}
+        {
+          "description": "Agentic AI threat modeling with agent capabilities and execution context"
+        },
+        {
+          "description": "Credential flow tracking for token exfiltration and replay attack modeling"
+        },
+        {
+          "description": "WebSocket security configuration and CSWSH modeling"
+        },
+        {
+          "description": "LLM-as-Judge evaluation package with structured-evaluation integration"
+        }
       ],
       "added": [
-        {"description": "`AgentCapabilities` type for AI agent tool access and autonomy levels", "commit": "73cdb1a"},
-        {"description": "`ExecutionContext` type for runtime environment and privilege modeling", "commit": "6fc628f"},
-        {"description": "`CredentialFlow` type for token lifecycle tracking", "commit": "839bbf2"},
-        {"description": "`AttackPattern` type for reusable attack pattern templates", "commit": "8d84b0e"},
-        {"description": "`WebSocketConfig` type for WebSocket endpoint security", "commit": "03bd00b"},
-        {"description": "Trust modeling fields: `ImplicitlyTrusted`, `TrustAssumption`, `TrustViolationRisk` on Boundary", "commit": "f08b533"},
-        {"description": "Flow security fields: `Protocol`, `Encrypted`, `Authenticated`, `CrossOrigin`", "commit": "f08b533"},
-        {"description": "New boundary types: `container`, `sandbox`, `agent`, `origin`", "commit": "e1088c7"},
-        {"description": "New flow types: `credential`, `websocket`, `cswsh`, `lateral`", "commit": "e1088c7"},
-        {"description": "`evaluation` package for LLM-as-Judge workflows", "commit": "ae518ae"},
-        {"description": "Embedded rubrics: `VulnerabilityArticleRubric()`, `ThreatModelRubric()`, `DiagramRubric()`", "commit": "ae518ae"},
-        {"description": "`ToEvaluationReport()` and `ToClaimsReport()` conversion methods", "commit": "de42ab8"},
-        {"description": "Vulnerability article template for security advisory evaluation", "commit": "ba6fcc0"}
+        {
+          "description": "`AgentCapabilities` type for AI agent tool access and autonomy levels",
+          "commit": "73cdb1a"
+        },
+        {
+          "description": "`ExecutionContext` type for runtime environment and privilege modeling",
+          "commit": "6fc628f"
+        },
+        {
+          "description": "`CredentialFlow` type for token lifecycle tracking",
+          "commit": "839bbf2"
+        },
+        {
+          "description": "`AttackPattern` type for reusable attack pattern templates",
+          "commit": "8d84b0e"
+        },
+        {
+          "description": "`WebSocketConfig` type for WebSocket endpoint security",
+          "commit": "03bd00b"
+        },
+        {
+          "description": "Trust modeling fields: `ImplicitlyTrusted`, `TrustAssumption`, `TrustViolationRisk` on Boundary",
+          "commit": "f08b533"
+        },
+        {
+          "description": "Flow security fields: `Protocol`, `Encrypted`, `Authenticated`, `CrossOrigin`",
+          "commit": "f08b533"
+        },
+        {
+          "description": "New boundary types: `container`, `sandbox`, `agent`, `origin`",
+          "commit": "e1088c7"
+        },
+        {
+          "description": "New flow types: `credential`, `websocket`, `cswsh`, `lateral`",
+          "commit": "e1088c7"
+        },
+        {
+          "description": "`evaluation` package for LLM-as-Judge workflows",
+          "commit": "ae518ae"
+        },
+        {
+          "description": "Embedded rubrics: `VulnerabilityArticleRubric()`, `ThreatModelRubric()`, `DiagramRubric()`",
+          "commit": "ae518ae"
+        },
+        {
+          "description": "`ToEvaluationReport()` and `ToClaimsReport()` conversion methods",
+          "commit": "de42ab8"
+        },
+        {
+          "description": "Vulnerability article template for security advisory evaluation",
+          "commit": "ba6fcc0"
+        }
       ],
       "changed": [
-        {"description": "JSON schemas regenerated for v0.7.0 types", "commit": "e922b4f"},
-        {"description": "Updated `structured-evaluation` dependency to v0.6.0", "commit": "57c149a"},
-        {"description": "`ThreatModel` extended with `CredentialFlows` and `AttackPatterns` fields", "commit": "e8030e9"}
+        {
+          "description": "JSON schemas regenerated for v0.7.0 types",
+          "commit": "e922b4f"
+        },
+        {
+          "description": "Updated `structured-evaluation` dependency to v0.6.0",
+          "commit": "57c149a"
+        },
+        {
+          "description": "`ThreatModel` extended with `CredentialFlows` and `AttackPatterns` fields",
+          "commit": "e8030e9"
+        }
       ],
       "fixed": [
-        {"description": "Windows compatibility for embedded rubric loading (`path.Join` for `embed.FS`)", "commit": "5d2785b"}
+        {
+          "description": "Windows compatibility for embedded rubric loading (`path.Join` for `embed.FS`)",
+          "commit": "5d2785b"
+        }
       ],
       "documentation": [
-        {"description": "v0.7.0 release notes with agentic AI and evaluation features", "commit": "7c716a2"}
+        {
+          "description": "v0.7.0 release notes with agentic AI and evaluation features",
+          "commit": "7c716a2"
+        }
       ]
     },
     {
@@ -48,206 +239,574 @@
       "date": "2026-05-02",
       "commit": "a09ce96",
       "highlights": [
-        {"description": "Role-based security data for Red Team, Blue Team, and Remediation workflows"},
-        {"description": "FAIR risk assessment with annualized loss expectancy calculations"},
-        {"description": "Purple team capabilities with Atomic Red Team mapping and detection coverage"},
-        {"description": "Supply chain security with SBOM integration and VEX statements"},
-        {"description": "OWASP Agentic Security Top 10 (ASI 2026) support"}
+        {
+          "description": "Role-based security data for Red Team, Blue Team, and Remediation workflows"
+        },
+        {
+          "description": "FAIR risk assessment with annualized loss expectancy calculations"
+        },
+        {
+          "description": "Purple team capabilities with Atomic Red Team mapping and detection coverage"
+        },
+        {
+          "description": "Supply chain security with SBOM integration and VEX statements"
+        },
+        {
+          "description": "OWASP Agentic Security Top 10 (ASI 2026) support"
+        }
       ],
       "added": [
-        {"description": "`OWASPCategoryAgentic` for OWASP ASI 2026 mappings", "commit": "4b11ee2"},
-        {"description": "`ExploitationGuidance` type for red team exploitation steps", "commit": "6d46d99"},
-        {"description": "`DefenseGuidance` type for blue team detection rules and IOCs", "commit": "b458b62"},
-        {"description": "`RemediationGuidance` type for developer fix patterns", "commit": "2fdfa71"},
-        {"description": "`IncidentPlaybook` type for IR procedures", "commit": "f4aa70e"},
-        {"description": "`FAIRAssessment` type with ALE calculation", "commit": "a070bc0"},
-        {"description": "`EPSSData` type for exploit prediction scoring", "commit": "606b93f"},
-        {"description": "`KEVEntry` type for CISA KEV catalog", "commit": "8fe4ca3"},
-        {"description": "`AtomicTestMapping` type for Atomic Red Team tests", "commit": "c5d9af2"},
-        {"description": "`DetectionCoverageMatrix` type for ATT&CK coverage", "commit": "67d29a8"},
-        {"description": "`SecurityMetrics` type for MTTD/MTTR/MTTC", "commit": "e0c8f6e"},
-        {"description": "`SSVCAssessment` type for CISA SSVC prioritization", "commit": "6a2fb26"},
-        {"description": "`SBOMReference` and `VEXStatement` types for supply chain", "commit": "bd020f9"},
-        {"description": "`AttackGraph` and `AttackPath` types for path analysis", "commit": "4fe2bcc"},
-        {"description": "STIX 2.1 export with IOCs and detection rules", "commit": "390dcdc"},
-        {"description": "`TestReference` type for app-test-spec integration", "commit": "0490ece"}
+        {
+          "description": "`OWASPCategoryAgentic` for OWASP ASI 2026 mappings",
+          "commit": "4b11ee2"
+        },
+        {
+          "description": "`ExploitationGuidance` type for red team exploitation steps",
+          "commit": "6d46d99"
+        },
+        {
+          "description": "`DefenseGuidance` type for blue team detection rules and IOCs",
+          "commit": "b458b62"
+        },
+        {
+          "description": "`RemediationGuidance` type for developer fix patterns",
+          "commit": "2fdfa71"
+        },
+        {
+          "description": "`IncidentPlaybook` type for IR procedures",
+          "commit": "f4aa70e"
+        },
+        {
+          "description": "`FAIRAssessment` type with ALE calculation",
+          "commit": "a070bc0"
+        },
+        {
+          "description": "`EPSSData` type for exploit prediction scoring",
+          "commit": "606b93f"
+        },
+        {
+          "description": "`KEVEntry` type for CISA KEV catalog",
+          "commit": "8fe4ca3"
+        },
+        {
+          "description": "`AtomicTestMapping` type for Atomic Red Team tests",
+          "commit": "c5d9af2"
+        },
+        {
+          "description": "`DetectionCoverageMatrix` type for ATT&CK coverage",
+          "commit": "67d29a8"
+        },
+        {
+          "description": "`SecurityMetrics` type for MTTD/MTTR/MTTC",
+          "commit": "e0c8f6e"
+        },
+        {
+          "description": "`SSVCAssessment` type for CISA SSVC prioritization",
+          "commit": "6a2fb26"
+        },
+        {
+          "description": "`SBOMReference` and `VEXStatement` types for supply chain",
+          "commit": "bd020f9"
+        },
+        {
+          "description": "`AttackGraph` and `AttackPath` types for path analysis",
+          "commit": "4fe2bcc"
+        },
+        {
+          "description": "STIX 2.1 export with IOCs and detection rules",
+          "commit": "390dcdc"
+        },
+        {
+          "description": "`TestReference` type for app-test-spec integration",
+          "commit": "0490ece"
+        }
       ],
       "changed": [
-        {"description": "`ThreatModel` extended with role-based guidance fields", "commit": "abb1492"},
-        {"description": "`Attack` struct extended with role-based notes", "commit": "4e0ec8a"},
-        {"description": "JSON schemas regenerated for v0.6.0", "commit": "1c4caab"}
+        {
+          "description": "`ThreatModel` extended with role-based guidance fields",
+          "commit": "abb1492"
+        },
+        {
+          "description": "`Attack` struct extended with role-based notes",
+          "commit": "4e0ec8a"
+        },
+        {
+          "description": "JSON schemas regenerated for v0.6.0",
+          "commit": "1c4caab"
+        }
       ],
       "documentation": [
-        {"description": "v0.6.0 release notes", "commit": "49bd42c"},
-        {"description": "v0.6.0 versioned specification", "commit": "f8c0691"},
-        {"description": "OWASP ASI documentation", "commit": "c6fe925"},
-        {"description": "Homepage updated with v0.6.0 features", "commit": "f714846"},
-        {"description": "Mappings spec with OWASP agentic category", "commit": "a09ce96"}
+        {
+          "description": "v0.6.0 release notes",
+          "commit": "49bd42c"
+        },
+        {
+          "description": "v0.6.0 versioned specification",
+          "commit": "f8c0691"
+        },
+        {
+          "description": "OWASP ASI documentation",
+          "commit": "c6fe925"
+        },
+        {
+          "description": "Homepage updated with v0.6.0 features",
+          "commit": "f714846"
+        },
+        {
+          "description": "Mappings spec with OWASP agentic category",
+          "commit": "a09ce96"
+        }
       ],
       "tests": [
-        {"description": "Mappings and attack tree validation tests", "commit": "52b36f7"}
+        {
+          "description": "Mappings and attack tree validation tests",
+          "commit": "52b36f7"
+        }
       ]
     },
     {
       "version": "v0.5.0",
       "date": "2026-04-19",
       "highlights": [
-        {"description": "Design-time threat modeling for proactive security analysis during SDLC"},
-        {"description": "Structured risk assessment with likelihood × impact scoring"},
-        {"description": "Asset inventory with sensitivity classification and compliance mapping"},
-        {"description": "What-if scenario modeling for attack path analysis"},
-        {"description": "Network topology mapping for infrastructure diagrams"}
+        {
+          "description": "Design-time threat modeling for proactive security analysis during SDLC"
+        },
+        {
+          "description": "Structured risk assessment with likelihood \u00d7 impact scoring"
+        },
+        {
+          "description": "Asset inventory with sensitivity classification and compliance mapping"
+        },
+        {
+          "description": "What-if scenario modeling for attack path analysis"
+        },
+        {
+          "description": "Network topology mapping for infrastructure diagrams"
+        }
       ],
       "added": [
-        {"description": "`RiskAssessment` type with likelihood × impact scoring (1-5 scales)", "commit": "cf1bb0d"},
-        {"description": "`RiskLevel` categorical risk levels (critical/high/medium/low/info)", "commit": "cf1bb0d"},
-        {"description": "`ModelPhase` for SDLC phase tracking (design/development/review/production/incident)", "commit": "cf1bb0d"},
-        {"description": "`Asset` type with sensitivity classification and compliance mapping", "commit": "cf1bb0d"},
-        {"description": "`SensitivityLevel` for data classification (public/internal/confidential/restricted/secret)", "commit": "cf1bb0d"},
-        {"description": "`Scenario` type for what-if attack scenario modeling", "commit": "cf1bb0d"},
-        {"description": "`ScenarioType` categorization (external-attack/insider-threat/supply-chain/etc.)", "commit": "cf1bb0d"},
-        {"description": "`NetworkInfo` and `CloudInfo` for network topology mapping", "commit": "aa4390a"},
-        {"description": "`ThreatStatusPotential` for hypothetical threats from design review", "commit": "48dcc7c"},
-        {"description": "`ThreatStatusTheoretical` for threats derived from STRIDE/LINDDUN", "commit": "48dcc7c"},
-        {"description": "Design-time threat modeling guide with SDLC integration", "commit": "c10ab34"},
-        {"description": "Risk assessment guide with likelihood/impact scales", "commit": "c10ab34"}
+        {
+          "description": "`RiskAssessment` type with likelihood \u00d7 impact scoring (1-5 scales)",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`RiskLevel` categorical risk levels (critical/high/medium/low/info)",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`ModelPhase` for SDLC phase tracking (design/development/review/production/incident)",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`Asset` type with sensitivity classification and compliance mapping",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`SensitivityLevel` for data classification (public/internal/confidential/restricted/secret)",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`Scenario` type for what-if attack scenario modeling",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`ScenarioType` categorization (external-attack/insider-threat/supply-chain/etc.)",
+          "commit": "cf1bb0d"
+        },
+        {
+          "description": "`NetworkInfo` and `CloudInfo` for network topology mapping",
+          "commit": "aa4390a"
+        },
+        {
+          "description": "`ThreatStatusPotential` for hypothetical threats from design review",
+          "commit": "48dcc7c"
+        },
+        {
+          "description": "`ThreatStatusTheoretical` for threats derived from STRIDE/LINDDUN",
+          "commit": "48dcc7c"
+        },
+        {
+          "description": "Design-time threat modeling guide with SDLC integration",
+          "commit": "c10ab34"
+        },
+        {
+          "description": "Risk assessment guide with likelihood/impact scales",
+          "commit": "c10ab34"
+        }
       ],
       "changed": [
-        {"description": "`ThreatModel` extended with Phase, Assets, and Scenarios fields", "commit": "48dcc7c"},
-        {"description": "`ThreatEntry` extended with Risk, LINDDUNCategory, AffectedAssets, AttackVector, Preconditions", "commit": "48dcc7c"},
-        {"description": "`Element` extended with Network and AssetIDs fields", "commit": "aa4390a"},
-        {"description": "JSON schemas regenerated for v0.5.0", "commit": "5a09bac"}
+        {
+          "description": "`ThreatModel` extended with Phase, Assets, and Scenarios fields",
+          "commit": "48dcc7c"
+        },
+        {
+          "description": "`ThreatEntry` extended with Risk, LINDDUNCategory, AffectedAssets, AttackVector, Preconditions",
+          "commit": "48dcc7c"
+        },
+        {
+          "description": "`Element` extended with Network and AssetIDs fields",
+          "commit": "aa4390a"
+        },
+        {
+          "description": "JSON schemas regenerated for v0.5.0",
+          "commit": "5a09bac"
+        }
       ],
       "documentation": [
-        {"description": "Design-time threat modeling guide (`guides/design-time-threat-modeling.md`)", "commit": "c10ab34"},
-        {"description": "Risk assessment guide (`guides/risk-assessment.md`)", "commit": "c10ab34"},
-        {"description": "MkDocs Guides section added to navigation", "commit": "c10ab34"}
+        {
+          "description": "Design-time threat modeling guide (`guides/design-time-threat-modeling.md`)",
+          "commit": "c10ab34"
+        },
+        {
+          "description": "Risk assessment guide (`guides/risk-assessment.md`)",
+          "commit": "c10ab34"
+        },
+        {
+          "description": "MkDocs Guides section added to navigation",
+          "commit": "c10ab34"
+        }
       ]
     },
     {
       "version": "v0.4.0",
       "date": "2026-04-19",
       "highlights": [
-        {"description": "Versioned specification structure following OpenAPI pattern (`versions/v0.4.0/`)"},
-        {"description": "Comprehensive security lifecycle: mitigations, detections, and response actions"},
-        {"description": "Attack tree diagrams with AND/OR logic gates"},
-        {"description": "LINDDUN privacy threat framework with D2 rendering"},
-        {"description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001"},
-        {"description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP"}
+        {
+          "description": "Versioned specification structure following OpenAPI pattern (`versions/v0.4.0/`)"
+        },
+        {
+          "description": "Comprehensive security lifecycle: mitigations, detections, and response actions"
+        },
+        {
+          "description": "Attack tree diagrams with AND/OR logic gates"
+        },
+        {
+          "description": "LINDDUN privacy threat framework with D2 rendering"
+        },
+        {
+          "description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001"
+        },
+        {
+          "description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, FedRAMP"
+        }
       ],
       "added": [
-        {"description": "Security lifecycle types: `Assumption`, `AttackTree`, `Compliance`, `Controls`, `Detection`, `LINDDUN`, `Mitigation`, `ThreatActor`", "commit": "b117a41"},
-        {"description": "Attack tree diagram type with AND/OR logic gates (`attack-tree`)", "commit": "b117a41"},
-        {"description": "LINDDUN privacy threat framework with 7 categories (L, I, N, D, Di, U, Nc)", "commit": "b117a41"},
-        {"description": "Mitigations tracking with status lifecycle (planned, implemented, partial, accepted, transferred)", "commit": "b117a41"},
-        {"description": "Threat status tracking with `ThreatEntry` and `ThreatStatus` types", "commit": "80479b5"},
-        {"description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001", "commit": "b117a41"},
-        {"description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, CCPA, FedRAMP, NIST SP 800-53", "commit": "b117a41"},
-        {"description": "Threat actor profiles with sophistication, motivation, and resources", "commit": "b117a41"},
-        {"description": "Detection capabilities with coverage levels and data sources", "commit": "b117a41"},
-        {"description": "Response actions for incident response workflows", "commit": "80479b5"},
-        {"description": "Assumptions and prerequisites for documenting model constraints", "commit": "b117a41"},
-        {"description": "CVE references in mappings (`CVEMapping` type)", "commit": "80479b5"},
-        {"description": "D2 legend rendering for LINDDUN threats and mitigation status", "commit": "80479b5"},
-        {"description": "Attack tree D2 rendering with AND/OR gate visualization", "commit": "80479b5"},
-        {"description": "STIX 2.1 export for CVE, OWASP, and mitigations", "commit": "09d37e2"},
-        {"description": "Version parameter for genschema command", "commit": "a5be772"},
-        {"description": "Versioned specification structure (`versions/v0.4.0/`)", "commit": "f3cceee"}
+        {
+          "description": "Security lifecycle types: `Assumption`, `AttackTree`, `Compliance`, `Controls`, `Detection`, `LINDDUN`, `Mitigation`, `ThreatActor`",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Attack tree diagram type with AND/OR logic gates (`attack-tree`)",
+          "commit": "b117a41"
+        },
+        {
+          "description": "LINDDUN privacy threat framework with 7 categories (L, I, N, D, Di, U, Nc)",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Mitigations tracking with status lifecycle (planned, implemented, partial, accepted, transferred)",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Threat status tracking with `ThreatEntry` and `ThreatStatus` types",
+          "commit": "80479b5"
+        },
+        {
+          "description": "Control framework mappings: NIST CSF, CIS Controls v8, ISO 27001",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Compliance framework references: SOC 2, PCI-DSS, HIPAA, GDPR, CCPA, FedRAMP, NIST SP 800-53",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Threat actor profiles with sophistication, motivation, and resources",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Detection capabilities with coverage levels and data sources",
+          "commit": "b117a41"
+        },
+        {
+          "description": "Response actions for incident response workflows",
+          "commit": "80479b5"
+        },
+        {
+          "description": "Assumptions and prerequisites for documenting model constraints",
+          "commit": "b117a41"
+        },
+        {
+          "description": "CVE references in mappings (`CVEMapping` type)",
+          "commit": "80479b5"
+        },
+        {
+          "description": "D2 legend rendering for LINDDUN threats and mitigation status",
+          "commit": "80479b5"
+        },
+        {
+          "description": "Attack tree D2 rendering with AND/OR gate visualization",
+          "commit": "80479b5"
+        },
+        {
+          "description": "STIX 2.1 export for CVE, OWASP, and mitigations",
+          "commit": "09d37e2"
+        },
+        {
+          "description": "Version parameter for genschema command",
+          "commit": "a5be772"
+        },
+        {
+          "description": "Versioned specification structure (`versions/v0.4.0/`)",
+          "commit": "f3cceee"
+        }
       ],
       "changed": [
-        {"description": "`Mappings` struct extended with CVE, LINDDUN, Controls, and Compliance fields", "commit": "80479b5"},
-        {"description": "`DiagramIR` extended with AttackTree, Threats, Mitigations, Detections, ResponseActions", "commit": "80479b5"},
-        {"description": "`Legend` extended with ShowLINDDUN and ShowMitigations options", "commit": "80479b5"},
-        {"description": "JSON schemas regenerated to include all new types", "commit": "22cbf10"}
+        {
+          "description": "`Mappings` struct extended with CVE, LINDDUN, Controls, and Compliance fields",
+          "commit": "80479b5"
+        },
+        {
+          "description": "`DiagramIR` extended with AttackTree, Threats, Mitigations, Detections, ResponseActions",
+          "commit": "80479b5"
+        },
+        {
+          "description": "`Legend` extended with ShowLINDDUN and ShowMitigations options",
+          "commit": "80479b5"
+        },
+        {
+          "description": "JSON schemas regenerated to include all new types",
+          "commit": "22cbf10"
+        }
       ],
       "documentation": [
-        {"description": "Versioned specification document (`versions/v0.4.0/specification.md`)", "commit": "f3cceee"},
-        {"description": "v0.4.0 release notes", "commit": "2f6bdf4"},
-        {"description": "README updated with new framework tables and usage examples", "commit": "f3cceee"}
+        {
+          "description": "Versioned specification document (`versions/v0.4.0/specification.md`)",
+          "commit": "f3cceee"
+        },
+        {
+          "description": "v0.4.0 release notes",
+          "commit": "2f6bdf4"
+        },
+        {
+          "description": "README updated with new framework tables and usage examples",
+          "commit": "f3cceee"
+        }
       ]
     },
     {
       "version": "v0.3.0",
       "date": "2026-04-18",
       "highlights": [
-        { "description": "Agent specifications and Claude Code plugin for threat model diagram creation" },
-        { "description": "Examples moved to separate repository for focused maintenance" }
+        {
+          "description": "Agent specifications and Claude Code plugin for threat model diagram creation"
+        },
+        {
+          "description": "Examples moved to separate repository for focused maintenance"
+        }
       ],
       "added": [
-        { "description": "Agent specifications for threat model visualization (attack-flow-visualizer, diagram-quality-reviewer, dfd-creator)", "commit": "989e963" },
-        { "description": "Claude Code plugin with agents, commands, and skills", "commit": "989e963" }
+        {
+          "description": "Agent specifications for threat model visualization (attack-flow-visualizer, diagram-quality-reviewer, dfd-creator)",
+          "commit": "989e963"
+        },
+        {
+          "description": "Claude Code plugin with agents, commands, and skills",
+          "commit": "989e963"
+        }
       ],
       "changed": [
-        { "description": "Examples directory removed (moved to separate repository)", "commit": "cddf666" }
+        {
+          "description": "Examples directory removed (moved to separate repository)",
+          "commit": "cddf666"
+        }
       ],
       "dependencies": [
-        { "description": "Update `github.com/plexusone/vibium-go` to v0.4.0", "commit": "6b5857d" },
-        { "description": "Update GitHub Actions workflows to v0.4.0", "commit": "d9dd5fa" }
+        {
+          "description": "Update `github.com/plexusone/vibium-go` to v0.4.0",
+          "commit": "6b5857d"
+        },
+        {
+          "description": "Update GitHub Actions workflows to v0.4.0",
+          "commit": "d9dd5fa"
+        }
       ]
     },
     {
       "version": "v0.2.0",
       "date": "2026-03-02",
       "highlights": [
-        { "description": "ThreatModel canonical format for multi-diagram threat models with shared metadata and framework mappings" },
-        { "description": "JSON Schema generation and embedding for validation support" }
+        {
+          "description": "ThreatModel canonical format for multi-diagram threat models with shared metadata and framework mappings"
+        },
+        {
+          "description": "JSON Schema generation and embedding for validation support"
+        }
       ],
       "added": [
-        { "description": "`ThreatModel` type as canonical format for multi-diagram threat models with shared metadata", "commit": "70801bd" },
-        { "description": "`schema/` package with JSON Schema generation and embedding (`threat-model.schema.json`, `diagram.schema.json`)", "commit": "70801bd" },
-        { "description": "`cmd/genschema` tool for generating JSON schemas from Go types", "commit": "70801bd" },
-        { "description": "CLI auto-detection of ThreatModel vs DiagramIR format", "commit": "2763dc1" },
-        { "description": "CLI generates separate D2 files for each diagram when processing ThreatModel", "commit": "2763dc1" },
-        { "description": "STIX 2.1 export for OpenClaw example", "commit": "4d7e2f1" }
+        {
+          "description": "`ThreatModel` type as canonical format for multi-diagram threat models with shared metadata",
+          "commit": "70801bd"
+        },
+        {
+          "description": "`schema/` package with JSON Schema generation and embedding (`threat-model.schema.json`, `diagram.schema.json`)",
+          "commit": "70801bd"
+        },
+        {
+          "description": "`cmd/genschema` tool for generating JSON schemas from Go types",
+          "commit": "70801bd"
+        },
+        {
+          "description": "CLI auto-detection of ThreatModel vs DiagramIR format",
+          "commit": "2763dc1"
+        },
+        {
+          "description": "CLI generates separate D2 files for each diagram when processing ThreatModel",
+          "commit": "2763dc1"
+        },
+        {
+          "description": "STIX 2.1 export for OpenClaw example",
+          "commit": "4d7e2f1"
+        }
       ],
       "changed": [
-        { "description": "Unified `examples/openclaw/openclaw.json` replaces separate diagram files", "commit": "70801bd" },
-        { "description": "CLI `validate` command reports ThreatModel format and diagram count", "commit": "2763dc1" },
-        { "description": "Consolidated STIX exports into single vulnerability file", "commit": "65585f1" }
+        {
+          "description": "Unified `examples/openclaw/openclaw.json` replaces separate diagram files",
+          "commit": "70801bd"
+        },
+        {
+          "description": "CLI `validate` command reports ThreatModel format and diagram count",
+          "commit": "2763dc1"
+        },
+        {
+          "description": "Consolidated STIX exports into single vulnerability file",
+          "commit": "65585f1"
+        }
       ],
       "documentation": [
-        { "description": "Architecture diagram added to README showing ThreatModel flow", "commit": "433e1a2" },
-        { "description": "README updated for ThreatModel as recommended format", "commit": "3d12567" },
-        { "description": "MkDocs documentation updated for ThreatModel format", "commit": "6c120a5" },
-        { "description": "JSON Schema documentation page added", "commit": "2763dc1" }
+        {
+          "description": "Architecture diagram added to README showing ThreatModel flow",
+          "commit": "433e1a2"
+        },
+        {
+          "description": "README updated for ThreatModel as recommended format",
+          "commit": "3d12567"
+        },
+        {
+          "description": "MkDocs documentation updated for ThreatModel format",
+          "commit": "6c120a5"
+        },
+        {
+          "description": "JSON Schema documentation page added",
+          "commit": "2763dc1"
+        }
       ]
     },
     {
       "version": "v0.1.0",
       "date": "2026-03-01",
       "highlights": [
-        { "description": "JSON-based intermediate representation for threat modeling diagrams with D2 and STIX 2.1 export" },
-        { "description": "Comprehensive security framework mappings: MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API/LLM/Web), CWE, CVSS, STRIDE" }
+        {
+          "description": "JSON-based intermediate representation for threat modeling diagrams with D2 and STIX 2.1 export"
+        },
+        {
+          "description": "Comprehensive security framework mappings: MITRE ATT&CK, MITRE ATLAS, OWASP Top 10 (API/LLM/Web), CWE, CVSS, STRIDE"
+        }
       ],
       "added": [
-        { "description": "JSON IR schema for threat modeling diagrams (DFD, Attack Chain, Sequence)", "commit": "cf579f5" },
-        { "description": "`ir` package with types for elements, boundaries, flows, attacks, actors, and messages", "commit": "cf579f5" },
-        { "description": "`ir/mappings.go` with framework mapping types for MITRE ATT&CK, ATLAS, OWASP, CWE, CVSS, and STRIDE", "commit": "cf579f5" },
-        { "description": "`diagram` package for programmatic diagram construction with D2 rendering", "commit": "622761e" },
-        { "description": "`stix` package for STIX 2.1 export (Bundle, AttackPattern, ThreatActor, Infrastructure, Indicator, Vulnerability)", "commit": "a04d572" },
-        { "description": "`stride` package with STRIDE threat category types and color mappings", "commit": "06828c7" },
-        { "description": "`killchain` package with MITRE ATT&CK tactics and Lockheed Martin Cyber Kill Chain phases", "commit": "156ae02" },
-        { "description": "`tms` CLI with `generate`, `validate`, and `version` subcommands", "commit": "38cb8fa" },
-        { "description": "`tms generate --stix` flag for STIX 2.1 JSON export", "commit": "38cb8fa" },
-        { "description": "`tms generate --svg` flag to render D2 diagrams to SVG", "commit": "38cb8fa" },
-        { "description": "D2 style library with classes for STRIDE threats, trust boundaries, DFD elements, and attack flows", "commit": "fb84caf" },
-        { "description": "OpenClaw WebSocket vulnerability example with DFD, attack chain, and sequence diagrams", "commit": "923f9b8" },
-        { "description": "Demo vulnerable server and malicious page for educational attack demonstration", "commit": "29d839c" },
-        { "description": "Validation for diagram type-specific field requirements", "commit": "cf579f5" }
+        {
+          "description": "JSON IR schema for threat modeling diagrams (DFD, Attack Chain, Sequence)",
+          "commit": "cf579f5"
+        },
+        {
+          "description": "`ir` package with types for elements, boundaries, flows, attacks, actors, and messages",
+          "commit": "cf579f5"
+        },
+        {
+          "description": "`ir/mappings.go` with framework mapping types for MITRE ATT&CK, ATLAS, OWASP, CWE, CVSS, and STRIDE",
+          "commit": "cf579f5"
+        },
+        {
+          "description": "`diagram` package for programmatic diagram construction with D2 rendering",
+          "commit": "622761e"
+        },
+        {
+          "description": "`stix` package for STIX 2.1 export (Bundle, AttackPattern, ThreatActor, Infrastructure, Indicator, Vulnerability)",
+          "commit": "a04d572"
+        },
+        {
+          "description": "`stride` package with STRIDE threat category types and color mappings",
+          "commit": "06828c7"
+        },
+        {
+          "description": "`killchain` package with MITRE ATT&CK tactics and Lockheed Martin Cyber Kill Chain phases",
+          "commit": "156ae02"
+        },
+        {
+          "description": "`tms` CLI with `generate`, `validate`, and `version` subcommands",
+          "commit": "38cb8fa"
+        },
+        {
+          "description": "`tms generate --stix` flag for STIX 2.1 JSON export",
+          "commit": "38cb8fa"
+        },
+        {
+          "description": "`tms generate --svg` flag to render D2 diagrams to SVG",
+          "commit": "38cb8fa"
+        },
+        {
+          "description": "D2 style library with classes for STRIDE threats, trust boundaries, DFD elements, and attack flows",
+          "commit": "fb84caf"
+        },
+        {
+          "description": "OpenClaw WebSocket vulnerability example with DFD, attack chain, and sequence diagrams",
+          "commit": "923f9b8"
+        },
+        {
+          "description": "Demo vulnerable server and malicious page for educational attack demonstration",
+          "commit": "29d839c"
+        },
+        {
+          "description": "Validation for diagram type-specific field requirements",
+          "commit": "cf579f5"
+        }
       ],
       "changed": [
-        { "description": "CLI migrated from `flag` to Cobra framework for consistent experience and extensibility", "commit": "5c4bc99" }
+        {
+          "description": "CLI migrated from `flag` to Cobra framework for consistent experience and extensibility",
+          "commit": "5c4bc99"
+        }
       ],
       "build": [
-        { "description": "GitHub Actions workflows for CI, lint, and CodeQL SAST", "commit": "cf9f749" },
-        { "description": "Dependabot configuration for Go modules and GitHub Actions", "commit": "d9ddcdc" }
+        {
+          "description": "GitHub Actions workflows for CI, lint, and CodeQL SAST",
+          "commit": "cf9f749"
+        },
+        {
+          "description": "Dependabot configuration for Go modules and GitHub Actions",
+          "commit": "d9ddcdc"
+        }
       ],
       "documentation": [
-        { "description": "README with installation, quick start, and framework mapping reference", "commit": "084c3a1" },
-        { "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings", "commit": "923f9b8" },
-        { "description": "D2 style reference for STRIDE threat annotations and trust boundaries", "commit": "084c3a1" },
-        { "description": "README badges for CI, lint, SAST, Go Report Card, and docs", "commit": "b356c7a" },
-        { "description": "MkDocs documentation site with Material theme", "commit": "ece6be6" }
+        {
+          "description": "README with installation, quick start, and framework mapping reference",
+          "commit": "084c3a1"
+        },
+        {
+          "description": "OpenClaw article.html with comprehensive vulnerability analysis and OWASP mappings",
+          "commit": "923f9b8"
+        },
+        {
+          "description": "D2 style reference for STRIDE threat annotations and trust boundaries",
+          "commit": "084c3a1"
+        },
+        {
+          "description": "README badges for CI, lint, SAST, Go Report Card, and docs",
+          "commit": "b356c7a"
+        },
+        {
+          "description": "MkDocs documentation site with Material theme",
+          "commit": "ece6be6"
+        }
       ]
     }
   ]
