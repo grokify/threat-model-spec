@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/plexusone/multi-agent-spec/main/schema/deployment/deployment.schema.json",
+  "team": "threat-model-spec",
+  "targets": [
+    {
+      "name": "dist-claude",
+      "platform": "claude-code",
+      "mode": "single-process",
+      "priority": "p1",
+      "output": "agents/plugins/claude",
+      "config": {"format": "markdown"}
+    },
+    {
+      "name": "dist-kiro",
+      "platform": "kiro-cli",
+      "mode": "single-process",
+      "priority": "p1",
+      "output": "agents/plugins/kiro",
+      "config": {"format": "json"}
+    },
+    {
+      "name": "dist-gemini",
+      "platform": "gemini-cli",
+      "mode": "single-process",
+      "priority": "p2",
+      "output": "agents/plugins/gemini",
+      "config": {}
+    }
+  ]
+}
