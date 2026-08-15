@@ -1,0 +1,77 @@
+{
+  "id": "builder-definition-v1",
+  "name": "Builder Definition Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Builder Definition PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 1, "medium": 3}
+  },
+  "categories": [
+    {
+      "id": "boundary_coverage",
+      "name": "Trust Boundary Coverage",
+      "description": "Whether the diagram identifies every place attacker-controlled input crosses into a more-trusted zone.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every external-entity-to-process flow crosses a declared trust boundary"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most boundaries declared but at least one external-facing flow crosses no boundary"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No trust boundaries declared despite external-facing components"]}
+        ]
+      },
+      "evaluationPrompt": "Does every flow from an external-entity element cross at least one declared trust boundary?"
+    },
+    {
+      "id": "threat_completeness",
+      "name": "Threat Completeness",
+      "description": "Whether STRIDE/LINDDUN threats are systematically applied to every boundary-crossing flow, not just an arbitrary subset.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every boundary-crossing flow has at least one STRIDE-mapped Finding of type threat-candidate"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most flows covered but at least one boundary-crossing flow has no threat mapping"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Flows exist that cross a trust boundary with no threat analysis at all"]}
+        ]
+      },
+      "evaluationPrompt": "Is there at least one Finding (type threat-candidate) for every flow that crosses a trust boundary?"
+    },
+    {
+      "id": "control_mapping",
+      "name": "Control Mapping",
+      "description": "Whether every validated threat has at least one proposed Mitigation.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every validated threat-candidate Finding has a specific, actionable Mitigation"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most threats have mitigations but a required control is missing or generic"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Threats identified with no corresponding mitigation"]}
+        ]
+      },
+      "evaluationPrompt": "Does every validated threat-candidate Finding have at least one specific, actionable Mitigation, not a generic 'add validation'?"
+    },
+    {
+      "id": "api_contract_drift",
+      "name": "API Contract Drift Check",
+      "description": "Whether the report checks the finalized API contract against Product Definition's advisory draft.",
+      "weight": 1.0,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["An ArchitectureAssertion compares the finalized contract to the Product Definition draft with evidence on both sides"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Drift mentioned narratively but not recorded as an ArchitectureAssertion"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No comparison to the Product Definition draft at all, despite one existing"]}
+        ]
+      },
+      "evaluationPrompt": "When a Product Definition OpenAPI draft exists, does the report record an ArchitectureAssertion comparing it to the finalized contract?"
+    }
+  ]
+}

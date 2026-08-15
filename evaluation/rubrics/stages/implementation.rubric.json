@@ -1,0 +1,77 @@
+{
+  "id": "implementation-v1",
+  "name": "Implementation Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Implementation PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 1, "medium": 5}
+  },
+  "categories": [
+    {
+      "id": "evidence_support",
+      "name": "Evidence Support",
+      "description": "Whether every finding cites specific, verifiable evidence rather than an unsupported assertion.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every Finding cites at least one Evidence with a file+line locator or equivalent"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most findings cite evidence but at least one is unsupported"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Findings present with no cited evidence at all"]}
+        ]
+      },
+      "evaluationPrompt": "Does every Finding's evidenceIds resolve to a real Evidence object with a specific locator (not just a vague description)?"
+    },
+    {
+      "id": "reachability",
+      "name": "Reachability",
+      "description": "Whether findings establish that attacker-controlled input can actually reach the vulnerable operation, not just that a risky pattern exists in isolation.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Findings trace a path from an untrusted input source to the vulnerable sink"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Vulnerable pattern identified but reachability from untrusted input not established"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Findings describe theoretical patterns with no reachability analysis"]}
+        ]
+      },
+      "evaluationPrompt": "For each vulnerability Finding, does the description or evidence establish that attacker-controlled input can reach the flagged code, not just that the pattern exists somewhere?"
+    },
+    {
+      "id": "aspm_domain_coverage",
+      "name": "ASPM Domain Coverage",
+      "description": "Whether the report addresses all five implementation-stage ASPM domains, or explicitly states which were out of scope.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["All 5 domains (git-posture, code-security, secret-pii-scan, open-source-security, sbom) analyzed or explicitly marked not-applicable"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most domains covered but at least one silently omitted"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Only one domain covered with no statement about the rest"]}
+        ]
+      },
+      "evaluationPrompt": "Does the report address every implementation-stage ASPM domain, or explicitly state which were skipped and why?"
+    },
+    {
+      "id": "drift_detection",
+      "name": "Drift Detection",
+      "description": "Whether implementation is checked against the Builder Definition design, not evaluated in isolation.",
+      "weight": 1.0,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["At least one ArchitectureAssertion compares implementation reality to the Builder Definition design"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Some awareness of the design intent but no formal ArchitectureAssertion recorded"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No comparison to design intent at all"]}
+        ]
+      },
+      "evaluationPrompt": "Is there at least one ArchitectureAssertion comparing what was implemented to what the Builder Definition stage required?"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "product-operations-v1",
+  "name": "Product Operations Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Product Operations PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 1, "medium": 5}
+  },
+  "categories": [
+    {
+      "id": "invariant_drift_detection",
+      "name": "Invariant Drift Detection",
+      "description": "Whether critical security invariants from Product Definition are actually checked against production reality.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every critical-criticality SecurityRequirement has a corresponding ArchitectureAssertion checked against production telemetry"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Some invariants checked but at least one critical invariant is unaddressed"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No invariant drift checks against production data"]}
+        ]
+      },
+      "evaluationPrompt": "Is every critical-criticality SecurityRequirement from Product Definition checked against actual production telemetry via an ArchitectureAssertion?"
+    },
+    {
+      "id": "adoption_signal_completeness",
+      "name": "Adoption Signal Completeness",
+      "description": "Whether the report includes adoption/usage signal, not solely incident-driven findings.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Report includes adoption/usage/retention signal alongside any incident findings"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Some adoption signal present but thin or disconnected from security invariants"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Report is entirely incident-reactive with no adoption/usage signal"]}
+        ]
+      },
+      "evaluationPrompt": "Does the report include adoption or usage signal (not just incident data), so an absence of incidents is never mistaken for validated safety?"
+    },
+    {
+      "id": "evidence_grounding",
+      "name": "Evidence Grounding",
+      "description": "Whether findings cite specific telemetry or incident evidence rather than general impressions.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every Finding cites specific telemetry-query or incident Evidence"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most findings cite evidence but at least one is a general impression"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Findings present with no cited evidence"]}
+        ]
+      },
+      "evaluationPrompt": "Does every Finding cite a specific Evidence object (a telemetry query or incident record), not a general impression of production behavior?"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "product-definition-v1",
+  "name": "Product Definition Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Product Definition PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 0, "medium": 3}
+  },
+  "categories": [
+    {
+      "id": "asset_coverage",
+      "name": "Asset Coverage",
+      "description": "Whether the sensitive data, credentials, and services worth protecting are identified.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["All materially sensitive assets identified with classification", "No obvious high-value asset omitted"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Some assets identified but classification is missing or a secondary asset is omitted"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No assets identified, or a clearly primary asset is missing entirely"]}
+        ]
+      },
+      "evaluationPrompt": "Given the product spec(s) analyzed, are all materially sensitive assets (data, credentials, services) represented as Asset objects with a classification?"
+    },
+    {
+      "id": "invariant_completeness",
+      "name": "Invariant Completeness",
+      "description": "Whether security invariants and prohibited outcomes are derived from the product's stated requirements, not generic boilerplate.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Invariants are specific, falsifiable statements traceable to the source spec", "Prohibited outcomes cover the product's stated tenancy/authorization model"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Invariants present but generic (e.g. 'the system should be secure') or missing traceability to an origin artifact"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No invariants, or invariants contradict the source spec"]}
+        ]
+      },
+      "evaluationPrompt": "Are the SecurityRequirement invariants specific and falsifiable, each with originArtifactId pointing at real source content — not generic security platitudes?"
+    },
+    {
+      "id": "threat_actor_realism",
+      "name": "Threat Actor Realism",
+      "description": "Whether identified threat actors are plausible for this specific product, not a generic adversary list.",
+      "weight": 1.0,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Threat actors match the product's actual exposure and user base"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Threat actors present but generic or not clearly tied to the product's context"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No threat actors identified for a product with material external exposure"]}
+        ]
+      },
+      "evaluationPrompt": "Are the ThreatActor profiles plausible for this product's actual users and exposure, not a boilerplate adversary list?"
+    },
+    {
+      "id": "abuse_case_grounding",
+      "name": "Abuse Case Grounding",
+      "description": "Whether Scenario abuse cases have concrete preconditions and a stated business impact, not vague hypotheticals.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Each scenario has concrete preconditions, a target asset, and a stated business impact"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Scenarios present but missing preconditions or business impact"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No abuse scenarios, or scenarios with no target asset"]}
+        ]
+      },
+      "evaluationPrompt": "Does each Scenario have concrete preconditions, a targetAssetIds reference, and a stated businessImpact — not a vague 'attacker could do bad things'?"
+    }
+  ]
+}

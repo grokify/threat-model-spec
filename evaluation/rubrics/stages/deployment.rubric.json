@@ -1,0 +1,77 @@
+{
+  "id": "deployment-v1",
+  "name": "Deployment Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Deployment PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 1, "medium": 5}
+  },
+  "categories": [
+    {
+      "id": "evidence_support",
+      "name": "Evidence Support",
+      "description": "Whether every finding cites specific evidence from IaC or deployment manifests.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every Finding cites Evidence with a config-locator (path + keyPath) or equivalent"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most findings cite evidence but at least one is unsupported"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Findings present with no cited evidence"]}
+        ]
+      },
+      "evaluationPrompt": "Does every Finding's evidenceIds resolve to a real Evidence object with a specific config or IaC locator?"
+    },
+    {
+      "id": "deployed_control_verification",
+      "name": "Deployed Control Verification",
+      "description": "Whether controls required by Builder Definition are actually checked against the deployed configuration, not just assumed present.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Each required control from Builder Definition has an explicit deployed-state check"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Some controls checked but at least one required control is unaddressed"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No required controls checked against actual deployment state"]}
+        ]
+      },
+      "evaluationPrompt": "For each control required by the Builder Definition stage, does this report verify it against the actual deployed configuration, not just assume it's present because it was designed?"
+    },
+    {
+      "id": "aspm_domain_coverage",
+      "name": "ASPM Domain Coverage",
+      "description": "Whether the report addresses all four deployment-stage ASPM domains, or explicitly states which were out of scope.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["All 4 domains (iac-scan, cicd-posture, container-security, artifact-security) analyzed or explicitly marked not-applicable"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Most domains covered but at least one silently omitted"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Only one domain covered with no statement about the rest"]}
+        ]
+      },
+      "evaluationPrompt": "Does the report address every deployment-stage ASPM domain, or explicitly state which were skipped and why?"
+    },
+    {
+      "id": "exposure_drift",
+      "name": "Exposure Drift Detection",
+      "description": "Whether deployed network/access exposure is checked against the design's stated exposure intent.",
+      "weight": 1.5,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["At least one ArchitectureAssertion compares deployed exposure to the design's stated exposure intent"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Exposure noted but not compared against design intent"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No exposure analysis at all"]}
+        ]
+      },
+      "evaluationPrompt": "Is there an ArchitectureAssertion checking whether a component's actual deployed network exposure (predicate: network-exposure) matches what the design required?"
+    }
+  ]
+}

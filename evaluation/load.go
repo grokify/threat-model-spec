@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"os"
 	"path"
+
+	"github.com/grokify/threat-model-spec/ir"
 )
 
-//go:embed rubrics/*.json
+//go:embed rubrics/*.json rubrics/stages/*.json
 var embeddedRubrics embed.FS
 
 // LoadRubricFromFile loads a rubric set from a JSON file.
@@ -71,6 +73,36 @@ func ThreatModelRubric() (*RubricSet, error) {
 // DiagramRubric loads the embedded diagram rubric.
 func DiagramRubric() (*RubricSet, error) {
 	return LoadEmbeddedRubric("diagram.rubric.json")
+}
+
+// StageRubric loads the embedded rubric for a single PDLC stage
+// (evaluation/rubrics/stages/<stage>.rubric.json). Its ReviewType
+// convention is set by StageReviewType (pdlc_conventions.go, RMI-105).
+func StageRubric(stage ir.Stage) (*RubricSet, error) {
+	data, err := embeddedRubrics.ReadFile(path.Join("rubrics", "stages", string(stage)+".rubric.json"))
+	if err != nil {
+		return nil, fmt.Errorf("reading embedded stage rubric for %q: %w", stage, err)
+	}
+
+	var rubric RubricSet
+	if err := json.Unmarshal(data, &rubric); err != nil {
+		return nil, fmt.Errorf("parsing stage rubric JSON for %q: %w", stage, err)
+	}
+	return &rubric, nil
+}
+
+// StageRubrics loads all six embedded stage rubrics, in pdlc's canonical
+// stage order.
+func StageRubrics() ([]*RubricSet, error) {
+	rubrics := make([]*RubricSet, 0, len(ir.AllStages()))
+	for _, stage := range ir.AllStages() {
+		r, err := StageRubric(stage)
+		if err != nil {
+			return nil, err
+		}
+		rubrics = append(rubrics, r)
+	}
+	return rubrics, nil
 }
 
 // ToJSON serializes a rubric set to JSON.

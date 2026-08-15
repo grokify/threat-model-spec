@@ -1,0 +1,77 @@
+{
+  "id": "builder-operations-v1",
+  "name": "Builder Operations Stage Analysis Rubric",
+  "version": "1.0.0",
+  "description": "Evaluation criteria for a Threat Model Spec Analysis Report produced at the Builder Operations PDLC stage.",
+  "evaluationType": "analytic",
+  "passCriteria": {
+    "minCategoriesPassing": "all_required",
+    "maxFindingsSeverity": {"critical": 0, "high": 1, "medium": 5}
+  },
+  "categories": [
+    {
+      "id": "detection_coverage",
+      "name": "Detection Coverage",
+      "description": "Whether detection capability is assessed against the actual techniques relevant to this product, not a generic checklist.",
+      "weight": 2.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Detection coverage assessed for the specific techniques a Builder Definition threat model identified as relevant"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Generic detection coverage stated without connecting to this product's actual threats"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No detection coverage assessment"]}
+        ]
+      },
+      "evaluationPrompt": "Is detection coverage assessed against the techniques this specific product's threat model identifies, not a generic industry checklist?"
+    },
+    {
+      "id": "incident_evidence_grounding",
+      "name": "Incident Evidence Grounding",
+      "description": "Whether findings that reference an incident actually cite it as evidence.",
+      "weight": 1.5,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Every incident-related Finding cites the incident Artifact as Evidence"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Incident referenced narratively without a formal Evidence citation"]},
+          {"value": "fail", "label": "Fail", "criteria": ["Incident findings with no supporting evidence at all"]}
+        ]
+      },
+      "evaluationPrompt": "When the report discusses an incident, does the relevant Finding cite the incident artifact as Evidence?"
+    },
+    {
+      "id": "dynamic_testing_disclosure",
+      "name": "Dynamic Testing Disclosure",
+      "description": "Whether the report explicitly states if dynamic testing (DAST/pen test/red team) was in scope, so its absence is never silently read as a clean result.",
+      "weight": 1.0,
+      "required": true,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Report explicitly states whether dynamic testing was performed and, if not, that it was out of scope for this run"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Dynamic testing status implied but not stated explicitly"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No mention of dynamic testing scope at all — absence could be misread as 'nothing found'"]}
+        ]
+      },
+      "evaluationPrompt": "Does the report explicitly state whether dynamic testing was in scope for this analysis run, so a reader can't mistake silence for a clean bill of health?"
+    },
+    {
+      "id": "control_effectiveness",
+      "name": "Control Effectiveness",
+      "description": "Whether findings assess whether existing controls actually work, not just whether they exist.",
+      "weight": 1.0,
+      "required": false,
+      "scale": {
+        "type": "categorical",
+        "options": [
+          {"value": "pass", "label": "Pass", "criteria": ["Findings assess whether controls detect/prevent in practice, with supporting evidence"]},
+          {"value": "partial", "label": "Partial", "criteria": ["Controls listed as present but effectiveness not assessed"]},
+          {"value": "fail", "label": "Fail", "criteria": ["No control effectiveness discussion"]}
+        ]
+      },
+      "evaluationPrompt": "Do findings assess whether operational controls actually detect or prevent the threats they're meant to address, not just that they exist on paper?"
+    }
+  ]
+}
