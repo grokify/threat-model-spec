@@ -1,6 +1,37 @@
 package ir
 
-import "fmt"
+import (
+	"crypto/sha256"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+)
+
+// FrameworkReportDigest computes a content digest for the framework's
+// current computed state, for comparison against a materialized
+// FrameworkReport.SourceRevision — the same bare-string-digest convention
+// as Artifact.Digest/Evidence.Digest, computed here since (unlike those)
+// there's no caller-supplied source content to hash; the "source" is the
+// model itself. ID/GeneratedAt/SourceRevision are excluded from the
+// digest since they are metadata about a specific computation, not model
+// content — including them would make every computation "stale" relative
+// to itself.
+func FrameworkReportDigest(tm *ThreatModel, framework FrameworkID) (string, error) {
+	report, err := ComputeFrameworkReport(tm, framework)
+	if err != nil {
+		return "", err
+	}
+	report.ID = ""
+	report.GeneratedAt = ""
+	report.SourceRevision = ""
+
+	data, err := json.Marshal(report)
+	if err != nil {
+		return "", fmt.Errorf("marshaling framework report for digest: %w", err)
+	}
+	sum := sha256.Sum256(data)
+	return hex.EncodeToString(sum[:]), nil
+}
 
 // ComputeFrameworkReport derives a FrameworkReport for the given framework
 // from the canonical model. It reads model data only — it never mutates tm
