@@ -1,10 +1,14 @@
 package main
 
 import (
+	"encoding/json"
+	"io"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/grokify/threat-model-spec/ir"
 )
 
 // resetFlags clears the package-level flag variables between subtests.
@@ -18,6 +22,7 @@ func resetFlags() {
 	strictValidation = false
 	gateStage = ""
 	gateCI = false
+	gateJSON = false
 }
 
 var exampleFiles = []string{
@@ -200,6 +205,48 @@ func TestGate_PassedStagePrintsResult(t *testing.T) {
 	rootCmd.SetArgs([]string{"gate", path, "--stage", "deployment"})
 	if err := rootCmd.Execute(); err != nil {
 		t.Fatalf("gate: %v", err)
+	}
+}
+
+// captureStdout redirects os.Stdout for the duration of fn and returns
+// whatever was written to it.
+func captureStdout(t *testing.T, fn func()) string {
+	t.Helper()
+	orig := os.Stdout
+	r, w, err := os.Pipe()
+	if err != nil {
+		t.Fatalf("creating pipe: %v", err)
+	}
+	os.Stdout = w
+	defer func() { os.Stdout = orig }()
+
+	fn()
+
+	_ = w.Close()
+	out, err := io.ReadAll(r)
+	if err != nil {
+		t.Fatalf("reading captured stdout: %v", err)
+	}
+	return string(out)
+}
+
+func TestGate_JSONOutput(t *testing.T) {
+	resetFlags()
+	path := modelWithGate(t, "deployment", "passed")
+
+	rootCmd.SetArgs([]string{"gate", path, "--stage", "deployment", "--json"})
+	out := captureStdout(t, func() {
+		if err := rootCmd.Execute(); err != nil {
+			t.Fatalf("gate --json: %v", err)
+		}
+	})
+
+	var gate ir.Gate
+	if err := json.Unmarshal([]byte(out), &gate); err != nil {
+		t.Fatalf("unmarshaling gate JSON: %v\noutput: %s", err, out)
+	}
+	if gate.Stage != "deployment" || gate.Result != ir.GateResultPassed {
+		t.Errorf("gate = %+v, want stage=deployment result=passed", gate)
 	}
 }
 
