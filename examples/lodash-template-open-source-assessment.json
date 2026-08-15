@@ -1,0 +1,400 @@
+{
+  "id": "lodash-template-open-source-assessment",
+  "title": "lodash `_.template` — Open-Source Profile Assessment (Dogfood Run 2)",
+  "description": "Second dogfood run for INIT-THREATMODELSPEC-002 (RMI-THREATMODELSPEC-117): a real third-party open-source dependency (lodash, https://github.com/lodash/lodash) analyzed under the 'open-source' artifact-availability profile — public documentation and source code only, no telemetry or deployment visibility. Grounded in CVE-2021-23337 (GitHub Advisory GHSA-35jh-r3h4-6jhm), a real, publicly disclosed and patched command-injection vulnerability in lodash's `_.template` function, verified via WebFetch against the live GitHub Advisory Database and lodash's own README/docs during this analysis.",
+  "version": "1.0.0",
+  "phase": "production",
+  "authors": [
+    {
+      "name": "product-definition-analyst, builder-definition-analyst, implementation-analyst (tms analyze dogfood run 2, open-source profile)"
+    }
+  ],
+  "diagrams": [
+    {
+      "type": "dfd",
+      "title": "Downstream Consumer Using lodash _.template",
+      "description": "How a downstream application's use of lodash's _.template function processes potentially untrusted input.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "external-input",
+          "label": "External / User-Controlled Input",
+          "type": "external-entity",
+          "description": "Content that could reach a downstream application's template rendering path (form input, uploaded content, etc.)."
+        },
+        {
+          "id": "downstream-app",
+          "label": "Downstream Consumer Application",
+          "type": "process",
+          "description": "Any Node.js application that depends on lodash and calls _.template — outside the scope of what lodash itself controls."
+        },
+        {
+          "id": "lodash-template",
+          "label": "lodash _.template()",
+          "type": "process",
+          "description": "Compiles a template string into a JS function using configurable escape/evaluate/interpolate delimiters and a templateSettings.variable/sourceURL option set."
+        },
+        {
+          "id": "process-execution",
+          "label": "Application Process (Node.js runtime)",
+          "type": "datastore",
+          "classification": "restricted",
+          "description": "The execution context compromised if template compilation evaluates attacker-controlled code."
+        }
+      ],
+      "flows": [
+        {
+          "from": "external-input",
+          "to": "downstream-app",
+          "label": "1. submit content",
+          "type": "normal",
+          "protocol": "application"
+        },
+        {
+          "from": "downstream-app",
+          "to": "lodash-template",
+          "label": "2. compile template (string + options)",
+          "type": "normal",
+          "protocol": "function-call"
+        },
+        {
+          "from": "lodash-template",
+          "to": "process-execution",
+          "label": "3. evaluate compiled function",
+          "type": "normal",
+          "protocol": "function-call"
+        }
+      ]
+    }
+  ],
+  "threatActors": [
+    {
+      "id": "actor-template-input-attacker",
+      "name": "Attacker able to influence content reaching a downstream app's template pipeline",
+      "type": "criminal",
+      "description": "CVE-2021-23337 is a publicly disclosed, well-documented vulnerability with known exploitation patterns — low sophistication is sufficient once a downstream app is found to pass untrusted input into _.template.",
+      "sophistication": "low",
+      "primaryGoals": [
+        "Achieve remote code/command execution in a downstream application that uses vulnerable lodash versions"
+      ],
+      "producerRunId": "run-product-definition-1786829427870994000"
+    }
+  ],
+  "mitigations": [
+    {
+      "id": "mitigation-upgrade-and-never-pass-untrusted-options",
+      "title": "Upgrade to lodash \u003e= 4.17.21 and never construct _.template's options/source from untrusted input",
+      "description": "Per the GitHub Advisory, lodash 4.17.21 contains the fix for CVE-2021-23337. Independent of the version fix, downstream callers should never pass user-controlled data as the template source string or the templateSettings/options object; if user data must appear in output, it must only ever flow through the interpolate delimiter as data, never as part of the template source or evaluate-delimited code.",
+      "threatIds": [
+        "finding-template-evaluate-trust-boundary"
+      ],
+      "status": "planned",
+      "owner": "downstream consumer applications (not lodash itself)",
+      "producerRunId": "run-builder-definition-1786829504299779000"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-downstream-process-execution",
+      "name": "Downstream application process execution context",
+      "description": "The Node.js process of any application that depends on lodash and calls _.template — not an asset lodash itself holds data in, but one whose integrity depends on how lodash's template compilation behaves.",
+      "type": "infrastructure",
+      "classification": "restricted",
+      "value": "Full compromise (arbitrary command execution) if template compilation evaluates attacker-controlled input, per CVE-2021-23337.",
+      "producerRunId": "run-product-definition-1786829427870994000"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-lodash-template-command-injection",
+      "title": "Command injection via lodash _.template (CVE-2021-23337)",
+      "type": "supply-chain",
+      "threatActorId": "actor-template-input-attacker",
+      "preconditions": [
+        "Downstream application depends on lodash \u003c 4.17.21",
+        "Downstream application passes user-influenced content into _.template's string or options argument"
+      ],
+      "attackPath": [
+        "Attacker identifies a downstream application feature that renders user content through lodash's _.template",
+        "Attacker crafts input exploiting the template compilation's evaluate/sourceURL handling to inject executable code",
+        "The compiled template function executes the injected code with the downstream application's own privileges"
+      ],
+      "targetAssetIds": [
+        "asset-downstream-process-execution"
+      ],
+      "outcome": "Arbitrary command/code execution within the downstream application's Node.js process.",
+      "businessImpact": "A single vulnerable transitive dependency (lodash \u003c 4.17.21) can grant full remote code execution in any consuming application that reaches the vulnerable code path — the real-world supply-chain risk this repo's own supply-chain-vulnerable-dependency.json example was built to represent.",
+      "producerRunId": "run-product-definition-1786829427870994000"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-product-definition-1",
+      "type": "",
+      "uri": "https://github.com/lodash/lodash",
+      "stage": "product-definition",
+      "observedAt": "2026-08-15T21:30:27Z"
+    },
+    {
+      "id": "artifact-builder-definition-1",
+      "type": "",
+      "uri": "https://lodash.com/docs/4.17.15#template",
+      "stage": "builder-definition",
+      "observedAt": "2026-08-15T21:31:44Z"
+    },
+    {
+      "id": "artifact-implementation-1",
+      "type": "",
+      "uri": "https://raw.githubusercontent.com/lodash/lodash/4.17.20/lodash.js",
+      "stage": "implementation",
+      "observedAt": "2026-08-15T21:32:21Z"
+    }
+  ],
+  "analysisRuns": [
+    {
+      "id": "run-product-definition-1786829427870994000",
+      "stage": "product-definition",
+      "profile": "open-source",
+      "producer": {
+        "type": "agent",
+        "name": "product-definition-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-product-definition-1"
+      ],
+      "startedAt": "2026-08-15T21:30:27Z",
+      "completedAt": "2026-08-15T21:31:37Z",
+      "status": "completed"
+    },
+    {
+      "id": "run-builder-definition-1786829504299779000",
+      "stage": "builder-definition",
+      "profile": "open-source",
+      "producer": {
+        "type": "agent",
+        "name": "builder-definition-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-builder-definition-1"
+      ],
+      "startedAt": "2026-08-15T21:31:44Z",
+      "completedAt": "2026-08-15T21:32:16Z",
+      "status": "completed"
+    },
+    {
+      "id": "run-implementation-1786829541802072000",
+      "stage": "implementation",
+      "profile": "open-source",
+      "producer": {
+        "type": "agent",
+        "name": "implementation-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-implementation-1"
+      ],
+      "startedAt": "2026-08-15T21:32:21Z",
+      "completedAt": "2026-08-15T21:32:56Z",
+      "status": "completed"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-lodash-readme",
+      "locator": {
+        "type": "url",
+        "url": "https://github.com/lodash/lodash",
+        "observedAt": "2026-08-15T21:00:00Z"
+      },
+      "excerpt": "A modern JavaScript utility library delivering modularity, performance, \u0026 extras.",
+      "summary": "lodash's own README describes it as a general-purpose utility library — iterating arrays/objects/strings, manipulating/testing values, creating composite functions. No stated scope around executing untrusted input as code."
+    },
+    {
+      "id": "evidence-ghsa-35jh",
+      "locator": {
+        "type": "url",
+        "url": "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+        "observedAt": "2026-08-15T21:00:00Z"
+      },
+      "excerpt": "Lodash versions prior to 4.17.21 are vulnerable to Command Injection via the template function.",
+      "summary": "GitHub Advisory Database entry for CVE-2021-23337 (CVSS 7.2, High): command injection via lodash's template function, affecting npm lodash \u003c 4.17.21, fixed in 4.17.21. Verified live via WebFetch during this analysis run."
+    },
+    {
+      "id": "evidence-templatesettings-docs",
+      "locator": {
+        "type": "url",
+        "url": "https://lodash.com/docs/4.17.15#template",
+        "observedAt": "2026-08-15T21:00:00Z"
+      },
+      "excerpt": "_.templateSettings: escape (pattern for escaped text), evaluate (pattern for code evaluation), interpolate (pattern for variable interpolation), variable (variable name for template data), imports._ (methods available within templates).",
+      "summary": "lodash's own documentation confirms _.template's evaluate delimiter exists specifically to embed and execute JavaScript inside a compiled template — the exact mechanism CVE-2021-23337 abuses when an options object is built from untrusted input."
+    },
+    {
+      "id": "evidence-lodash-source-fetch-attempt",
+      "locator": {
+        "type": "url",
+        "url": "https://raw.githubusercontent.com/lodash/lodash/4.17.20/lodash.js",
+        "observedAt": "2026-08-15T21:32:00Z"
+      },
+      "excerpt": "(source-tree fetch attempted; template() function not reached before tool summarization truncated the file)",
+      "summary": "The open-source profile grants source-tree access in principle, but this run's read-only web-fetch tooling summarized/truncated lodash.js before reaching the template() function, so no direct file+line citation for the vulnerable code path was obtained in this run. This is a real limitation of the tooling used, not of the profile or the vulnerability's confirmed existence (CVE-2021-23337 is independently confirmed via evidence-ghsa-35jh from the product-definition stage) — recorded honestly rather than fabricating a line citation."
+    }
+  ],
+  "securityRequirements": [
+    {
+      "id": "sr-template-no-untrusted-evaluation",
+      "statement": "The _.template function must never evaluate attacker-controlled input as executable JavaScript when invoked with default or documented options, regardless of what options object a downstream caller constructs.",
+      "type": "invariant",
+      "criticality": "critical",
+      "originArtifactId": "artifact-product-definition-1"
+    }
+  ],
+  "architectureAssertions": [
+    {
+      "id": "assertion-builder-definition-mitigation-not-yet-verified-in-source",
+      "subjectId": "lodash-template",
+      "predicate": "mitigation-verified-in-source",
+      "expected": "mitigation-upgrade-and-never-pass-untrusted-options (builder-definition stage) is verifiable against the actual source: either the dependency is pinned \u003e= 4.17.21, or no call site passes untrusted data into template()'s source/options.",
+      "observed": "Not verified in this run — see evidence-lodash-source-fetch-attempt. A real static-analysis pass over a cloned source tree (not attempted here) would be needed to check this for real, not just cite the advisory.",
+      "expectedEvidenceIds": [
+        "evidence-templatesettings-docs"
+      ],
+      "observedEvidenceIds": [
+        "evidence-lodash-source-fetch-attempt"
+      ],
+      "status": "unverified"
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-template-evaluate-trust-boundary",
+      "type": "threat-candidate",
+      "stage": "builder-definition",
+      "title": "_.template's evaluate/sourceURL/variable options are a code-execution trust boundary with no built-in caller-side guardrail",
+      "description": "The boundary crossed here is: 'external-input' -\u003e 'downstream-app' -\u003e 'lodash-template' (per this run's DFD). lodash's own documentation confirms the evaluate delimiter's purpose is to embed and execute arbitrary JS in the compiled template. Nothing in the documented API prevents a caller from constructing that options object (or the template string itself) from unsanitized external input — the library provides the capability, the calling application owns the trust decision entirely. CVE-2021-23337 is exactly this boundary being crossed carelessly by callers.",
+      "targetRefs": [
+        "lodash-template",
+        "process-execution"
+      ],
+      "evidenceIds": [
+        "evidence-templatesettings-docs",
+        "evidence-ghsa-35jh"
+      ],
+      "confidence": 0.9,
+      "status": "validated",
+      "producerRunId": "run-builder-definition-1786829504299779000"
+    },
+    {
+      "id": "finding-lodash-cve-2021-23337-confirmed",
+      "type": "vulnerability",
+      "stage": "implementation",
+      "title": "lodash \u003c 4.17.21 template() is vulnerable to command injection (CVE-2021-23337)",
+      "description": "Confirmed via the GitHub Advisory Database (GHSA-35jh-r3h4-6jhm, evidence-ghsa-35jh from the product-definition stage): lodash versions prior to 4.17.21 are vulnerable to command injection via the template function, CVSS 7.2 (High), fixed in 4.17.21. This finding is recorded at implementation-stage confidence (not merely a design-level candidate) because the CVE is a publicly disclosed, third-party-confirmed, already-patched vulnerability — not a hypothesis requiring further validation.",
+      "targetRefs": [
+        "lodash-template"
+      ],
+      "evidenceIds": [
+        "evidence-ghsa-35jh",
+        "evidence-lodash-source-fetch-attempt"
+      ],
+      "confidence": 0.95,
+      "status": "validated",
+      "aspmDomainId": "open-source-security",
+      "producerRunId": "run-implementation-1786829541802072000"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate-product-definition",
+      "stage": "product-definition",
+      "criteria": [
+        {
+          "metric": "has-assets",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-invariant",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-threat-actor",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-prohibited-outcome",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-lodash-readme",
+        "evidence-ghsa-35jh"
+      ],
+      "evaluatedAt": "2026-08-15T21:34:10Z"
+    },
+    {
+      "id": "gate-builder-definition",
+      "stage": "builder-definition",
+      "criteria": [
+        {
+          "metric": "has-trust-boundaries",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-stride-mapping",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-required-controls",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-api-contract-drift-check",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-templatesettings-docs"
+      ],
+      "evaluatedAt": "2026-08-15T21:34:10Z"
+    },
+    {
+      "id": "gate-implementation",
+      "stage": "implementation",
+      "criteria": [
+        {
+          "metric": "all-aspm-domains-covered",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-evidence-per-finding",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-drift-check",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-ghsa-35jh",
+        "evidence-lodash-source-fetch-attempt"
+      ],
+      "evaluatedAt": "2026-08-15T21:34:10Z"
+    }
+  ]
+}
