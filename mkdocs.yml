@@ -91,6 +91,7 @@ nav:
     - Flow Types: specification/flows.md
     - Framework Mappings: specification/mappings.md
   - Versions:
+    - v0.7.0: versions/v0.7.0/specification.md
     - v0.6.0: versions/v0.6.0/specification.md
     - v0.5.0: versions/v0.5.0/specification.md
     - v0.4.0: versions/v0.4.0/specification.md

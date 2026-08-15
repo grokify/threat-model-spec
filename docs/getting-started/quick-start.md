@@ -194,6 +194,18 @@ Threat Model Spec supports three diagram types:
 }
 ```
 
+## Complete Examples
+
+The snippets above are illustrative fragments. For complete, validated threat models, see the [`examples/`](https://github.com/grokify/threat-model-spec/tree/main/examples) directory in the repository:
+
+| Example | Demonstrates |
+|---------|---------------|
+| `openclaw-websocket-takeover.json` | A fully implemented vulnerability: multiple diagrams, framework mappings, red/blue team guidance, remediation, and credential-flow/WebSocket-security fields |
+| `design-phase-payment-checkout.json` | Pre-implementation threat modeling: assumptions, prerequisites, and STRIDE threats derived from an architecture that doesn't exist yet |
+| `supply-chain-vulnerable-dependency.json` | Supply chain security: SBOM reference, VEX statements, and dependency risk tracking |
+
+Each example passes `tms validate --strict` and is checked in CI on every change.
+
 ## Next Steps
 
 - [Diagram Types](../concepts/diagram-types.md) — Detailed diagram type reference

@@ -3,7 +3,6 @@
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
 [![Go SAST][go-sast-svg]][go-sast-url]
-[![Go Report Card][goreport-svg]][goreport-url]
 [![Docs][docs-godoc-svg]][docs-godoc-url]
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
@@ -14,8 +13,6 @@
  [go-lint-url]: https://github.com/grokify/threat-model-spec/actions/workflows/go-lint.yaml
  [go-sast-svg]: https://github.com/grokify/threat-model-spec/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
  [go-sast-url]: https://github.com/grokify/threat-model-spec/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/threat-model-spec
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/threat-model-spec
  [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/threat-model-spec
  [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/threat-model-spec
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
@@ -91,7 +88,7 @@ Threat Model Spec is an open-source library for creating security threat modelin
 - **Validation** — Type-specific field validation with strict mode
 - **AI Agents** — Claude Code plugin for AI-assisted diagram creation
 
-### v0.6.0 Security Enhancement Features
+### Security Enhancement Features (v0.6.0+)
 
 - **Role-Based Security Guidance**
   - **Red Team** — Exploitation steps, offensive tools, payload patterns, difficulty ratings
@@ -129,6 +126,26 @@ Threat Model Spec is an open-source library for creating security threat modelin
   - **Path Finding** — Find all paths, shortest paths (Dijkstra), and critical paths
   - **Risk Calculation** — Path-based risk scoring and reachability analysis
   - **Graph Construction** — Build attack graphs from threat model diagrams
+
+### v0.7.0 Agentic AI & Evaluation Features
+
+- **Agentic AI Threat Modeling**
+  - **Agent Capabilities** — Tool access, permissions, sandboxing, and approval controls
+  - **Execution Context** — Runtime environment and privilege level
+  - **New Boundary Types** — `container`, `sandbox`, `agent`, `origin`
+
+- **Credential & WebSocket Security**
+  - **Credential Flow Tracking** — Model token exfiltration and replay attacks across lifecycle stages
+  - **WebSocket Security Configuration** — Origin validation, CSRF protection, and known vulnerability types
+  - **Trust Modeling** — Record implicit trust assumptions on boundaries and how they can be violated
+  - **New Flow Types** — `credential`, `websocket`, `cswsh`, `lateral`
+
+- **Attack Patterns**
+  - **Reusable Templates** — Prerequisites, attack chains, vulnerable/secure code, and detection patterns shared across models
+
+- **LLM-as-Judge Evaluation**
+  - **structured-evaluation Integration** — Embedded rubrics for threat models, vulnerability articles, and diagrams
+  - **Report Conversion** — Export evaluation results as structured-evaluation rubric and claims reports
 
 ## Installation
 
@@ -180,6 +197,22 @@ A ThreatModel is the canonical format containing shared metadata and multiple di
 ```
 
 Single-diagram files (DiagramIR format) are also supported for simpler use cases.
+
+### Examples
+
+The [`examples/`](examples/) directory contains complete, validated threat models covering different parts of the format:
+
+| Example | Demonstrates |
+|---------|---------------|
+| [`openclaw-websocket-takeover.json`](examples/openclaw-websocket-takeover.json) | A fully implemented vulnerability: DFD + attack-chain diagrams, framework mappings, red/blue team guidance, remediation, and v0.7.0 credential-flow/WebSocket-security fields |
+| [`design-phase-payment-checkout.json`](examples/design-phase-payment-checkout.json) | Pre-implementation threat modeling: assumptions, prerequisites, and STRIDE threats derived from an architecture that doesn't exist yet |
+| [`supply-chain-vulnerable-dependency.json`](examples/supply-chain-vulnerable-dependency.json) | Supply chain security: SBOM reference, VEX statements, and dependency risk tracking |
+
+Validate any example with the CLI:
+
+```bash
+tms validate examples/openclaw-websocket-takeover.json --strict
+```
 
 ### Generate Diagrams
 
@@ -387,15 +420,18 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 
 | Version | Schema | Specification |
 |---------|--------|---------------|
-| v0.6.0 | [threat-model.schema.json](docs/versions/v0.6.0/threat-model.schema.json) | Comprehensive security enhancement |
+| v0.7.0 | [threat-model.schema.json](docs/versions/v0.7.0/threat-model.schema.json) | [specification.md](docs/versions/v0.7.0/specification.md) |
+| v0.6.0 | [threat-model.schema.json](docs/versions/v0.6.0/threat-model.schema.json) | [specification.md](docs/versions/v0.6.0/specification.md) |
 | v0.5.0 | [threat-model.schema.json](docs/versions/v0.5.0/threat-model.schema.json) | [specification.md](docs/versions/v0.5.0/specification.md) |
 | v0.4.0 | [threat-model.schema.json](docs/versions/v0.4.0/threat-model.schema.json) | [specification.md](docs/versions/v0.4.0/specification.md) |
 
 ### Schema URLs
 
+The links above resolve on GitHub for browsing. For `$schema` references that require raw JSON (validators, editors), use the published documentation site instead — GitHub's web UI serves an HTML wrapper, not raw JSON:
+
 ```
-https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/threat-model.schema.json
-https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/diagram.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.7.0/threat-model.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.7.0/diagram.schema.json
 ```
 
 ### Using the Schema
@@ -404,7 +440,7 @@ Reference the schema in your threat model JSON:
 
 ```json
 {
-  "$schema": "https://github.com/grokify/threat-model-spec/docs/versions/v0.6.0/threat-model.schema.json",
+  "$schema": "https://grokify.github.io/threat-model-spec/versions/v0.7.0/threat-model.schema.json",
   "id": "my-threat-model",
   "title": "My Application Threat Model",
   "diagrams": [...]
@@ -413,7 +449,7 @@ Reference the schema in your threat model JSON:
 
 ## Requirements
 
-- Go 1.24+
+- Go 1.25+
 - [D2](https://d2lang.com) v0.6+ for SVG rendering
 
 ## License
