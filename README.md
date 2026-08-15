@@ -147,6 +147,30 @@ Threat Model Spec is an open-source library for creating security threat modelin
   - **structured-evaluation Integration** — Embedded rubrics for threat models, vulnerability articles, and diagrams
   - **Report Conversion** — Export evaluation results as structured-evaluation rubric and claims reports
 
+### v0.8.0 PDLC Lifecycle Analysis Features
+
+- **PDLC-Aware Analysis**
+  - **Six PDLC Stages** — product-definition, builder-definition, implementation, deployment, builder-operations, product-operations
+  - **Lifecycle Objects** — `Artifact`, `AnalysisRun`, `Evidence`, `Finding`, `SecurityRequirement`, `ArchitectureAssertion`, `Gate`
+  - **ASPM Overlay** — 10 Application Security Posture Management domains mapped onto the three builder-side stages
+
+- **Stage Report Profiles and Grading**
+  - **StageReportProfile** — Normative per-stage contract: input mode, required output objects, coverage checks, rubric
+  - **ArtifactAvailabilityProfile** — first-party/third-party/open-source profiles declaring which stages are credibly analyzable given what's actually available
+  - **Six Stage Rubrics** — Calibrated grading criteria per stage with seeded-defect fixtures
+  - **Gate Evaluation** — Deterministic coverage checks + rubric verdicts → GO/WARN/NO-GO per stage
+
+- **`tms analyze` and Read Verbs**
+  - **`tms analyze`** — Two-phase plan/apply orchestration around an AI agent's reasoning step; atomic merge (an invalid apply writes nothing)
+  - **`tms status` / `tms report` / `tms gate` / `tms profile`** — Read verbs with human and `--json` output modes and CI-meaningful exit codes
+
+- **Computed Framework Reports**
+  - **FrameworkReport** — STRIDE/LINDDUN coverage, MITRE ATT&CK mapping-to-coverage join, OWASP coverage, attack-tree path analysis — all derived fresh from one canonical model
+  - **Staleness Detection** — `tms validate` warns when a materialized report has drifted from a fresh computation
+
+- **PDLC Stage-Analyst Agents**
+  - **Six Agent Specs** — One `multi-agent-spec` agent (+ slash command) per PDLC stage, generated into Claude/Kiro/Gemini plugins
+
 ## Installation
 
 ### Go Library
@@ -207,6 +231,8 @@ The [`examples/`](examples/) directory contains complete, validated threat model
 | [`openclaw-websocket-takeover.json`](examples/openclaw-websocket-takeover.json) | A fully implemented vulnerability: DFD + attack-chain diagrams, framework mappings, red/blue team guidance, remediation, and v0.7.0 credential-flow/WebSocket-security fields |
 | [`design-phase-payment-checkout.json`](examples/design-phase-payment-checkout.json) | Pre-implementation threat modeling: assumptions, prerequisites, and STRIDE threats derived from an architecture that doesn't exist yet |
 | [`supply-chain-vulnerable-dependency.json`](examples/supply-chain-vulnerable-dependency.json) | Supply chain security: SBOM reference, VEX statements, and dependency risk tracking |
+| [`threat-model-spec-self-assessment.json`](examples/threat-model-spec-self-assessment.json) | PDLC lifecycle analysis, first-party profile: a real three-stage `tms analyze` run against this project's own artifacts, graded with recorded Gates |
+| [`lodash-template-open-source-assessment.json`](examples/lodash-template-open-source-assessment.json) | PDLC lifecycle analysis, open-source profile: a real external dependency (lodash, CVE-2021-23337) analyzed under a partial-artifact profile |
 
 Validate any example with the CLI:
 
@@ -228,6 +254,23 @@ tms generate threat-model.json --stix -o threat-model.stix.json
 
 # Validate only
 tms validate threat-model.json
+```
+
+### PDLC Stage Analysis
+
+```bash
+# Plan a stage analysis: resolve inputs, open an AnalysisRun
+tms analyze threat-model.json --stage implementation --profile first-party \
+  --producer implementation-analyst src/handler.go
+
+# Apply an agent's results: validate + merge atomically, close the run
+tms analyze threat-model.json --stage implementation --apply results.json --run <run-id>
+
+# Read lifecycle state, gate results, and computed framework reports
+tms status threat-model.json
+tms gate threat-model.json --stage implementation --ci
+tms report threat-model.json --framework stride --format markdown
+tms profile open-source
 ```
 
 ## Diagram Types
@@ -420,6 +463,7 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 
 | Version | Schema | Specification |
 |---------|--------|---------------|
+| v0.8.0 | [threat-model.schema.json](docs/versions/v0.8.0/threat-model.schema.json) | [specification.md](docs/versions/v0.8.0/specification.md) |
 | v0.7.0 | [threat-model.schema.json](docs/versions/v0.7.0/threat-model.schema.json) | [specification.md](docs/versions/v0.7.0/specification.md) |
 | v0.6.0 | [threat-model.schema.json](docs/versions/v0.6.0/threat-model.schema.json) | [specification.md](docs/versions/v0.6.0/specification.md) |
 | v0.5.0 | [threat-model.schema.json](docs/versions/v0.5.0/threat-model.schema.json) | [specification.md](docs/versions/v0.5.0/specification.md) |
@@ -430,8 +474,8 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 The links above resolve on GitHub for browsing. For `$schema` references that require raw JSON (validators, editors), use the published documentation site instead — GitHub's web UI serves an HTML wrapper, not raw JSON:
 
 ```
-https://grokify.github.io/threat-model-spec/versions/v0.7.0/threat-model.schema.json
-https://grokify.github.io/threat-model-spec/versions/v0.7.0/diagram.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.8.0/threat-model.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.8.0/diagram.schema.json
 ```
 
 ### Using the Schema
@@ -440,7 +484,7 @@ Reference the schema in your threat model JSON:
 
 ```json
 {
-  "$schema": "https://grokify.github.io/threat-model-spec/versions/v0.7.0/threat-model.schema.json",
+  "$schema": "https://grokify.github.io/threat-model-spec/versions/v0.8.0/threat-model.schema.json",
   "id": "my-threat-model",
   "title": "My Application Threat Model",
   "diagrams": [...]
