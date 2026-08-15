@@ -77,6 +77,21 @@ var versionCmd = &cobra.Command{
 	},
 }
 
+var gateCmd = &cobra.Command{
+	Use:   "gate <input.json>",
+	Short: "Evaluate a stage gate from recorded criteria",
+	Long: `Print the recorded Gate result for a PDLC stage.
+
+tms gate is read-only: it reports a Gate already recorded in the model's
+"gates" array (written by an analysis run), it does not compute one. Use
+--ci to exit non-zero when the gate has not passed — a gate with no
+recorded result yet ("pending") is treated as not passing.`,
+	Args: cobra.ExactArgs(1),
+	Run:  runGate,
+	Example: `  tms gate threat-model.json --stage deployment
+  tms gate threat-model.json --stage deployment --ci`,
+}
+
 // Generate command flags
 var (
 	outputFile string
@@ -87,6 +102,12 @@ var (
 // Validate command flags
 var strictValidation bool
 
+// Gate command flags
+var (
+	gateStage string
+	gateCI    bool
+)
+
 func init() {
 	// Generate command flags
 	generateCmd.Flags().StringVarP(&outputFile, "output", "o", "", "Output file (default: stdout)")
@@ -96,10 +117,16 @@ func init() {
 	// Validate command flags
 	validateCmd.Flags().BoolVar(&strictValidation, "strict", false, "Use strict validation (includes warnings)")
 
+	// Gate command flags
+	gateCmd.Flags().StringVar(&gateStage, "stage", "", "PDLC stage to evaluate (required)")
+	gateCmd.Flags().BoolVar(&gateCI, "ci", false, "Exit non-zero if the gate has not passed")
+	_ = gateCmd.MarkFlagRequired("stage")
+
 	// Add subcommands
 	rootCmd.AddCommand(generateCmd)
 	rootCmd.AddCommand(validateCmd)
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(gateCmd)
 }
 
 func main() {
@@ -262,5 +289,47 @@ func runValidate(_ *cobra.Command, args []string) {
 			os.Exit(1)
 		}
 		fmt.Printf("Validation passed: %s\n", inputPath)
+	}
+}
+
+func runGate(_ *cobra.Command, args []string) {
+	inputPath := args[0]
+
+	// Belt-and-suspenders: don't rely solely on cobra's MarkFlagRequired
+	// for --stage. An empty gateStage would otherwise silently match
+	// nothing and print a confusing "no gate recorded" error.
+	if gateStage == "" {
+		fmt.Fprintln(os.Stderr, "Error: --stage is required")
+		os.Exit(1)
+	}
+
+	tm, err := ir.LoadThreatModelFromFile(inputPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error loading %s: %v\n", inputPath, err)
+		os.Exit(1)
+	}
+
+	var gate *ir.Gate
+	for i := range tm.Gates {
+		if string(tm.Gates[i].Stage) == gateStage {
+			gate = &tm.Gates[i]
+			break
+		}
+	}
+	if gate == nil {
+		fmt.Fprintf(os.Stderr, "No gate recorded for stage %q in %s\n", gateStage, inputPath)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Gate: stage=%s result=%s\n", gate.Stage, gate.Result)
+	for _, c := range gate.Criteria {
+		fmt.Printf("  - %s %s %s\n", c.Metric, c.Operator, c.Value)
+	}
+	if gate.EvaluatedBy != "" {
+		fmt.Printf("Evaluated by: %s\n", gate.EvaluatedBy)
+	}
+
+	if gateCI && gate.Result != ir.GateResultPassed {
+		os.Exit(1)
 	}
 }
