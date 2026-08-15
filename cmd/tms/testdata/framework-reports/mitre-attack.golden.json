@@ -1,0 +1,18 @@
+{
+  "id": "framework-report-mitre-attack",
+  "framework": "mitre-attack",
+  "mitreAttackBody": {
+    "mappings": [
+      {
+        "tacticId": "TA0001",
+        "tacticName": "Initial Access",
+        "techniqueId": "T1189",
+        "techniqueName": "Drive-by Compromise",
+        "description": "Victim visits attacker-controlled webpage that autonomously initiates the WebSocket attack."
+      }
+    ],
+    "mappedTechniquesWithoutCoverage": [
+      "T1189"
+    ]
+  }
+}

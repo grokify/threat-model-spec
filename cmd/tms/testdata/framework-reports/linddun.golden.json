@@ -1,0 +1,18 @@
+{
+  "id": "framework-report-linddun",
+  "framework": "linddun",
+  "linddunBody": {
+    "mappings": null,
+    "coverageByCategory": {},
+    "categoriesCovered": null,
+    "categoriesMissing": [
+      "L",
+      "I",
+      "N",
+      "D",
+      "Di",
+      "U",
+      "Nc"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "framework-report-owasp",
+  "framework": "owasp",
+  "owaspBody": {
+    "mappings": [
+      {
+        "category": "api",
+        "id": "API2:2023",
+        "name": "Broken Authentication",
+        "description": "No rate limiting on WebSocket password authentication allows brute force from an untrusted origin."
+      }
+    ],
+    "coverageByList": {
+      "api": 1
+    }
+  }
+}

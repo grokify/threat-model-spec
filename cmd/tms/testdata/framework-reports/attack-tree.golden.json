@@ -1,0 +1,18 @@
+{
+  "id": "framework-report-attack-tree",
+  "framework": "attack-tree",
+  "attackTreeBody": {
+    "sourceDiagramType": "attack-chain",
+    "entryPointHeuristic": "entry points inferred as external-entity elements; targets inferred as datastore elements (diagrams do not author these explicitly)",
+    "pathAnalysis": {
+      "reachableNodes": [
+        "attacker",
+        "browser",
+        "ws-gateway"
+      ],
+      "unreachableTargets": [
+        "protected-data"
+      ]
+    }
+  }
+}

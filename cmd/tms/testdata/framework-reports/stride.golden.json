@@ -1,0 +1,47 @@
+{
+  "id": "framework-report-stride",
+  "framework": "stride",
+  "strideBody": {
+    "mappings": [
+      {
+        "category": "S",
+        "name": "Spoofing",
+        "description": "Lack of origin validation lets a malicious webpage spoof a legitimate local client.",
+        "affectedComponents": [
+          "ws-gateway"
+        ]
+      },
+      {
+        "category": "I",
+        "name": "Information Disclosure",
+        "description": "Exfiltration of API keys, logs, configuration, and device list once the session is hijacked.",
+        "affectedComponents": [
+          "protected-data"
+        ]
+      },
+      {
+        "category": "E",
+        "name": "Elevation of Privilege",
+        "description": "Auto-approved device registration grants the attacker's page a trusted device identity with no user confirmation.",
+        "affectedComponents": [
+          "ws-gateway"
+        ]
+      }
+    ],
+    "coverageByCategory": {
+      "E": 1,
+      "I": 1,
+      "S": 1
+    },
+    "categoriesCovered": [
+      "S",
+      "I",
+      "E"
+    ],
+    "categoriesMissing": [
+      "T",
+      "R",
+      "D"
+    ]
+  }
+}
