@@ -12,8 +12,11 @@ import (
 )
 
 const (
-	baseURL        = "https://github.com/grokify/threat-model-spec"
-	currentVersion = "v0.6.0"
+	// baseURL is the published documentation site, which serves the schema
+	// files under docs/versions/ as static assets (see mkdocs.yml site_url).
+	// The github.com web UI does not serve raw JSON, so it cannot be used here.
+	baseURL        = "https://grokify.github.io/threat-model-spec"
+	currentVersion = "v0.7.0"
 )
 
 func main() {
@@ -60,8 +63,8 @@ func generateSchema(outputDir, filename, version string, v any) error {
 	}
 
 	schema := reflector.Reflect(v)
-	// Use versioned URL: https://github.com/grokify/threat-model-spec/docs/versions/v0.4.0/threat-model.schema.json
-	schema.ID = jsonschema.ID(fmt.Sprintf("%s/docs/versions/%s/%s", baseURL, version, filename))
+	// Use versioned URL: https://grokify.github.io/threat-model-spec/versions/v0.7.0/threat-model.schema.json
+	schema.ID = jsonschema.ID(fmt.Sprintf("%s/versions/%s/%s", baseURL, version, filename))
 
 	data, err := json.MarshalIndent(schema, "", "  ")
 	if err != nil {
