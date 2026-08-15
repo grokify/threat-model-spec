@@ -97,4 +97,9 @@ type Asset struct {
 
 	// RetentionPeriod indicates how long the asset is retained.
 	RetentionPeriod string `json:"retentionPeriod,omitempty"`
+
+	// ProducerRunID references the AnalysisRun that produced this asset,
+	// when it was derived from a PDLC stage analysis rather than authored
+	// directly.
+	ProducerRunID string `json:"producerRunId,omitempty"`
 }

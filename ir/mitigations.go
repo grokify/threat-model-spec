@@ -108,6 +108,11 @@ type Mitigation struct {
 
 	// Notes provides additional context or implementation details.
 	Notes string `json:"notes,omitempty"`
+
+	// ProducerRunID references the AnalysisRun that produced this
+	// mitigation, when it was derived from a PDLC stage analysis rather
+	// than authored directly.
+	ProducerRunID string `json:"producerRunId,omitempty"`
 }
 
 // ThreatEntry represents a threat with status tracking.

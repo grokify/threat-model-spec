@@ -88,4 +88,9 @@ type Scenario struct {
 
 	// Notes provides additional analysis or commentary.
 	Notes string `json:"notes,omitempty"`
+
+	// ProducerRunID references the AnalysisRun that produced this
+	// scenario, when it was derived from a PDLC stage analysis rather
+	// than authored directly.
+	ProducerRunID string `json:"producerRunId,omitempty"`
 }

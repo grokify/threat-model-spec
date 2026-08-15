@@ -149,4 +149,9 @@ type ThreatActor struct {
 
 	// References provides external links about this threat actor.
 	References []string `json:"references,omitempty"`
+
+	// ProducerRunID references the AnalysisRun that produced this threat
+	// actor, when it was derived from a PDLC stage analysis rather than
+	// authored directly.
+	ProducerRunID string `json:"producerRunId,omitempty"`
 }

@@ -934,5 +934,29 @@ func (tm *ThreatModel) validateLifecycle() ValidationErrors {
 		}
 	}
 
+	for _, a := range tm.Assets {
+		if a.ProducerRunID != "" && !runIDs[a.ProducerRunID] {
+			errs = append(errs, ValidationError{"assets", fmt.Sprintf("asset %q references unknown analysisRun %q", a.ID, a.ProducerRunID)})
+		}
+	}
+
+	for _, ta := range tm.ThreatActors {
+		if ta.ProducerRunID != "" && !runIDs[ta.ProducerRunID] {
+			errs = append(errs, ValidationError{"threatActors", fmt.Sprintf("threatActor %q references unknown analysisRun %q", ta.ID, ta.ProducerRunID)})
+		}
+	}
+
+	for _, s := range tm.Scenarios {
+		if s.ProducerRunID != "" && !runIDs[s.ProducerRunID] {
+			errs = append(errs, ValidationError{"scenarios", fmt.Sprintf("scenario %q references unknown analysisRun %q", s.ID, s.ProducerRunID)})
+		}
+	}
+
+	for _, m := range tm.Mitigations {
+		if m.ProducerRunID != "" && !runIDs[m.ProducerRunID] {
+			errs = append(errs, ValidationError{"mitigations", fmt.Sprintf("mitigation %q references unknown analysisRun %q", m.ID, m.ProducerRunID)})
+		}
+	}
+
 	return errs
 }
