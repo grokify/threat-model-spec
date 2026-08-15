@@ -1,0 +1,502 @@
+{
+  "id": "threat-model-spec-self-assessment",
+  "title": "Threat Model Spec — First-Party PDLC Self-Assessment (Dogfood Run 1)",
+  "description": "First-party threat model analysis of the threat-model-spec project itself, produced via tms analyze across the product-definition, builder-definition, and implementation PDLC stages (INIT-THREATMODELSPEC-002, RMI-THREATMODELSPEC-113). The system under review is the tms analyze analysis pipeline: the mechanism by which AI agents read PDLC-stage artifacts, produce structured claims, and merge them into a canonical ThreatModel document.",
+  "version": "1.0.0",
+  "phase": "production",
+  "authors": [
+    {
+      "name": "product-definition-analyst, builder-definition-analyst, implementation-analyst (tms analyze dogfood run 1)"
+    }
+  ],
+  "diagrams": [
+    {
+      "type": "dfd",
+      "title": "tms analyze Pipeline",
+      "description": "How PDLC-stage artifacts become canonical ThreatModel content: an agent reasons over resolved inputs and returns structured claims, which tms validates and merges atomically.",
+      "direction": "right",
+      "elements": [
+        {
+          "id": "pdlc-artifacts",
+          "label": "PDLC-Stage Artifacts",
+          "type": "external-entity",
+          "description": "Specs, source code, IaC, telemetry — resolved as Artifact objects in plan mode. May be first-party, third-party, or open-source; not always fully trusted."
+        },
+        {
+          "id": "tms-cli",
+          "label": "tms analyze",
+          "type": "process",
+          "description": "Orchestrates: resolves inputs, opens an AnalysisRun, and atomically validates+merges an agent's AnalysisResults. Performs no analytical reasoning itself."
+        },
+        {
+          "id": "analysis-agent",
+          "label": "Stage Analyst Agent",
+          "type": "external-entity",
+          "description": "Reads the resolved artifacts and PDLC-stage report profile, reasons about them, and writes an AnalysisResults JSON file. The reasoning step happens entirely outside tms."
+        },
+        {
+          "id": "threat-model-doc",
+          "label": "Canonical ThreatModel Document",
+          "type": "datastore",
+          "classification": "medium",
+          "description": "The merged, validated model — read by humans and by later-stage agents as trusted input."
+        }
+      ],
+      "flows": [
+        {
+          "from": "pdlc-artifacts",
+          "to": "tms-cli",
+          "label": "1. resolve inputs (plan mode)",
+          "type": "normal",
+          "protocol": "filesystem"
+        },
+        {
+          "from": "tms-cli",
+          "to": "analysis-agent",
+          "label": "2. hand agent resolved artifacts + report profile",
+          "type": "normal",
+          "protocol": "process"
+        },
+        {
+          "from": "analysis-agent",
+          "to": "tms-cli",
+          "label": "3. AnalysisResults JSON (--apply)",
+          "type": "normal",
+          "protocol": "filesystem"
+        },
+        {
+          "from": "tms-cli",
+          "to": "threat-model-doc",
+          "label": "4. validate + merge atomically",
+          "type": "normal",
+          "protocol": "filesystem"
+        },
+        {
+          "from": "threat-model-doc",
+          "to": "analysis-agent",
+          "label": "5. read by a later-stage agent as trusted context",
+          "type": "normal",
+          "protocol": "filesystem"
+        }
+      ]
+    }
+  ],
+  "threatActors": [
+    {
+      "id": "actor-adversarial-artifact-author",
+      "name": "Adversarial content author (compromised dependency, malicious PR, or attacker-controlled analyzed system)",
+      "type": "criminal",
+      "description": "An actor who cannot directly compromise tms itself, but can influence the content of an artifact that a stage-analyst agent will read (e.g. a compromised third-party repo under the third-party profile, or a malicious pull request to a first-party repo under CI).",
+      "sophistication": "medium",
+      "primaryGoals": [
+        "Suppress or misdirect a real finding by manipulating what an analysis agent reads or what its output claims",
+        "Embed instructions in analyzed content that a downstream AI agent might follow when it later reads the merged model"
+      ],
+      "producerRunId": "run-product-definition-1786726804355777000"
+    }
+  ],
+  "mitigations": [
+    {
+      "id": "mitigation-provenance-warning-on-agent-content",
+      "title": "Document that agent/artifact-sourced free-text fields are untrusted data, not instructions, at every point they're read",
+      "description": "Add an explicit warning to tms analyze's own help text and to every stage-analyst agent spec's process, stating that Evidence.Excerpt, Finding.Title/Description, and ArchitectureAssertion.Observed originate from analyzed content or another agent's output and must never be interpreted as instructions by whoever reads them next (human or agent) — matches sr-agent-content-not-instructions from the product-definition stage.",
+      "threatIds": [
+        "finding-untrusted-merge-boundary"
+      ],
+      "status": "planned",
+      "owner": "threat-model-spec maintainers",
+      "producerRunId": "run-builder-definition-1786727947617471000"
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-user-threat-model-documents",
+      "name": "User-authored ThreatModel documents",
+      "description": "ThreatModel JSON files end users create to describe their own systems' architecture, assets, threats, and mitigations.",
+      "type": "data",
+      "classification": "confidential",
+      "dataTypes": [
+        "security-posture",
+        "architecture"
+      ],
+      "value": "Reveals a user's own attack surface, unpatched risk, and control gaps if disclosed to an adversary targeting that user's system.",
+      "producerRunId": "run-product-definition-1786726804355777000"
+    },
+    {
+      "id": "asset-analysis-pipeline-trust-chain",
+      "name": "tms analyze trust chain (Artifact -\u003e AnalysisResults -\u003e canonical ThreatModel)",
+      "description": "The sequence by which artifact content and agent-authored claims become part of the canonical, trusted ThreatModel document that humans and later-stage agents rely on.",
+      "type": "service",
+      "classification": "internal",
+      "value": "If this chain can be manipulated, the canonical threat model itself becomes an unreliable security record — the core value proposition of the product.",
+      "producerRunId": "run-product-definition-1786726804355777000"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "scenario-prompt-injection-via-merged-analysis",
+      "title": "Prompt injection via merged analysis-result content",
+      "type": "supply-chain",
+      "threatActorId": "actor-adversarial-artifact-author",
+      "preconditions": [
+        "Attacker controls or influences content that will be resolved as an Artifact for a stage analysis (e.g. a third-party repo's README, or a first-party repo's PR diff analyzed in CI)",
+        "A stage-analyst agent reads that content, and its raw reasoning output becomes an AnalysisResults file merged into the canonical model without independent verification of the claims themselves"
+      ],
+      "attackPath": [
+        "Attacker embeds adversarial instructions in analyzed artifact content (e.g. a code comment, README section, or commit message worded to look like a directive to an AI reader)",
+        "A stage-analyst agent, reasoning over that artifact, is influenced by the embedded instructions and produces AnalysisResults reflecting the attacker's intent rather than an honest assessment",
+        "tms analyze --apply merges the result: schema and referential-integrity validation pass (the JSON is well-formed), but nothing checks the semantic honesty of the claims",
+        "A later PDLC-stage agent, or a human reviewer, reads the merged model's free-text fields as trusted context and is itself misled or manipulated"
+      ],
+      "targetAssetIds": [
+        "asset-analysis-pipeline-trust-chain",
+        "asset-user-threat-model-documents"
+      ],
+      "outcome": "A real vulnerability could be recorded as resolved/false-positive, or a fabricated finding could waste review time — either way, the canonical threat model's authority as a security record is undermined without any schema-visible sign of tampering.",
+      "businessImpact": "Erodes the core value proposition of the product (PRD Goal 1: 'one JSON-based ThreatModel type is the source of truth') if the source of truth can be steered by adversarial input with no structural guardrail against it.",
+      "producerRunId": "run-product-definition-1786726804355777000"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact-product-definition-1",
+      "type": "",
+      "uri": "PRD.md",
+      "stage": "product-definition",
+      "observedAt": "2026-08-14T17:00:04Z"
+    },
+    {
+      "id": "artifact-builder-definition-1",
+      "type": "",
+      "uri": "docs/specs/initiatives/INIT-THREATMODELSPEC-002/TRD.md",
+      "stage": "builder-definition",
+      "observedAt": "2026-08-14T17:19:07Z"
+    },
+    {
+      "id": "artifact-builder-definition-2",
+      "type": "",
+      "uri": "docs/specs/initiatives/INIT-THREATMODELSPEC-002/TPD.md",
+      "stage": "builder-definition",
+      "observedAt": "2026-08-14T17:19:07Z"
+    },
+    {
+      "id": "artifact-implementation-1",
+      "type": "",
+      "uri": "cmd/tms/analyze.go",
+      "stage": "implementation",
+      "observedAt": "2026-08-14T18:59:18Z"
+    },
+    {
+      "id": "artifact-implementation-2",
+      "type": "",
+      "uri": "ir/analysis_results.go",
+      "stage": "implementation",
+      "observedAt": "2026-08-14T18:59:18Z"
+    }
+  ],
+  "analysisRuns": [
+    {
+      "id": "run-product-definition-1786726804355777000",
+      "stage": "product-definition",
+      "profile": "first-party",
+      "producer": {
+        "type": "agent",
+        "name": "product-definition-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-product-definition-1"
+      ],
+      "startedAt": "2026-08-14T17:00:04Z",
+      "completedAt": "2026-08-14T17:05:40Z",
+      "status": "completed"
+    },
+    {
+      "id": "run-builder-definition-1786727947617471000",
+      "stage": "builder-definition",
+      "profile": "first-party",
+      "producer": {
+        "type": "agent",
+        "name": "builder-definition-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-builder-definition-1",
+        "artifact-builder-definition-2"
+      ],
+      "startedAt": "2026-08-14T17:19:07Z",
+      "completedAt": "2026-08-14T18:59:07Z",
+      "status": "completed"
+    },
+    {
+      "id": "run-implementation-1786733958263300000",
+      "stage": "implementation",
+      "profile": "first-party",
+      "producer": {
+        "type": "agent",
+        "name": "implementation-analyst"
+      },
+      "inputArtifactIds": [
+        "artifact-implementation-1",
+        "artifact-implementation-2"
+      ],
+      "startedAt": "2026-08-14T18:59:18Z",
+      "completedAt": "2026-08-14T19:00:26Z",
+      "status": "completed"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence-prd-uc5-agent-judge",
+      "locator": {
+        "type": "document",
+        "uri": "PRD.md",
+        "section": "UC5: Agent-Assisted Threat Modeling with LLM-as-Judge Evaluation"
+      },
+      "excerpt": "An AI agent produces or extends a threat model from an architecture description; a judge pipeline ... grades the result ... before a human reviews it.",
+      "summary": "PRD commits the product to AI agents reading and writing ThreatModel documents as a primary use case, not an edge case."
+    },
+    {
+      "id": "evidence-prd-fr10-fr13",
+      "locator": {
+        "type": "document",
+        "uri": "PRD.md",
+        "section": "Functional Requirements (FR10, FR13)"
+      },
+      "excerpt": "FR10: LLM-as-Judge evaluation integration ... FR13: Agentic AI threat modeling fields: agent capabilities, execution context, credential flow tracking",
+      "summary": "The product explicitly models AI-agent execution and credential-flow risk elsewhere in its own domain vocabulary, but has no stated invariant governing trust in content that agents themselves author into the canonical document."
+    },
+    {
+      "id": "evidence-prd-non-goal-2",
+      "locator": {
+        "type": "document",
+        "uri": "PRD.md",
+        "section": "Non-Goals #2"
+      },
+      "excerpt": "Threat Model Spec does not implement SAST, DAST ... It is the data format those activities' inputs and outputs are represented in — a scanner or agent produces findings; Threat Model Spec is where those findings live, referenceable and mappable.",
+      "summary": "By design, tms is a durable record for analysis output produced by other tools/agents — which makes the trustworthiness of that stored output a first-party product concern, not something tms can defer to 'the scanner's problem.'"
+    },
+    {
+      "id": "evidence-trd-step4-step5",
+      "locator": {
+        "type": "document",
+        "uri": "docs/specs/initiatives/INIT-THREATMODELSPEC-002/TRD.md",
+        "section": "4. Agent Workflows ... The tms analyze command"
+      },
+      "excerpt": "(4) hand the agent the workflow spec and gathered inputs — the agent reasons and returns findings/evidence/claims as the output-object contract; (5) validate and write them into the model under the run",
+      "summary": "The TRD's own architecture description confirms step 5 validates structure (schema, referential integrity) but does not describe any check on the semantic honesty of what the agent claims in step 4 — the trust boundary crossed here is architectural, not a bug."
+    },
+    {
+      "id": "evidence-trd-orchestration-not-reasoning",
+      "locator": {
+        "type": "document",
+        "uri": "docs/specs/initiatives/INIT-THREATMODELSPEC-002/TRD.md",
+        "section": "Architecture Overview"
+      },
+      "excerpt": "AI coding agent (Claude Code) ── runs ──▶ tms analyze --stage \u003cs\u003e --profile \u003cp\u003e (does the reasoning) (loads profile + inputs, drives workflow, writes the run, grades it — no reasoning)",
+      "summary": "tms is explicitly scoped to never reason about content — by design, it cannot itself distinguish an honest agent claim from a manipulated one. Any such check has to live either in the agent or in a later human/judge review step."
+    },
+    {
+      "id": "evidence-analyzego-merge-loop",
+      "locator": {
+        "type": "file",
+        "path": "cmd/tms/analyze.go",
+        "startLine": 247,
+        "endLine": 254
+      },
+      "excerpt": "candidate.Findings = append(append([]ir.Finding{}, tm.Findings...), results.Findings...)\ncandidate.Evidence = append(append([]ir.Evidence{}, tm.Evidence...), results.Evidence...)\n...\ncandidate.Assets = append(append([]ir.Asset{}, tm.Assets...), results.Assets...)\n...\ncandidate.Mitigations = append(append([]ir.Mitigation{}, tm.Mitigations...), results.Mitigations...)",
+      "summary": "Every AnalysisResults object is appended into the canonical model verbatim. No field is sanitized, truncated, or tagged as originating from analyzed content — the only gate before the write is candidate.Validate() at line 260, which checks structure and referential integrity, not content."
+    },
+    {
+      "id": "evidence-analysisresults-plain-strings",
+      "locator": {
+        "type": "file",
+        "path": "ir/analysis_results.go",
+        "startLine": 9,
+        "endLine": 23
+      },
+      "excerpt": "type AnalysisResults struct {\n\tFindings []Finding `json:\"findings,omitempty\"`\n\tEvidence []Evidence `json:\"evidence,omitempty\"`\n\t...\n}",
+      "summary": "AnalysisResults and the types it carries (Finding.Description, Evidence.Excerpt, ArchitectureAssertion.Observed, etc.) use plain Go string fields with no wrapper type, struct tag, or doc comment marking them as untrusted/agent-sourced content requiring careful handling by a reader."
+    }
+  ],
+  "securityRequirements": [
+    {
+      "id": "sr-agent-content-not-instructions",
+      "statement": "Free-text fields populated from analyzed artifacts or agent-authored AnalysisResults (Evidence.Excerpt, Finding.Title/Description, ArchitectureAssertion.Observed) must never be treated as executable instructions by a human reviewer or by a downstream AI agent reading the merged ThreatModel — they are data describing what was found, not directives to follow.",
+      "type": "invariant",
+      "criticality": "high",
+      "originArtifactId": "artifact-product-definition-1"
+    },
+    {
+      "id": "sr-no-invalid-merge-persists",
+      "statement": "A ThreatModel document merged via tms analyze --apply must pass full referential-integrity validation before any bytes are written to disk — no partially-invalid document is ever persisted as canonical.",
+      "type": "invariant",
+      "criticality": "critical",
+      "originArtifactId": "artifact-product-definition-1"
+    }
+  ],
+  "architectureAssertions": [
+    {
+      "id": "assertion-apply-mode-atomicity",
+      "subjectId": "tms-cli",
+      "predicate": "apply-mode-atomicity",
+      "expected": "An invalid merge (dangling references, malformed structure) must never be partially or fully persisted to the canonical model file.",
+      "observed": "Confirmed during this very dogfood run: an earlier apply attempt with a SecurityRequirement.originArtifactId pointing at an Evidence ID instead of an Artifact ID was rejected outright, and the model file was left byte-for-byte unchanged (cmd/tms/analyze.go runApplyMode builds a candidate copy and calls candidate.Validate() before any write).",
+      "expectedEvidenceIds": [
+        "evidence-trd-step4-step5"
+      ],
+      "observedEvidenceIds": [
+        "evidence-trd-step4-step5"
+      ],
+      "status": "supported"
+    },
+    {
+      "id": "assertion-mitigation-documented",
+      "subjectId": "tms-cli",
+      "predicate": "provenance-warning-documented",
+      "expected": "Per builder-definition's mitigation-provenance-warning-on-agent-content, tms analyze's help text and every stage-analyst agent spec should warn that merged free-text content is untrusted data, not instructions.",
+      "observed": "As of this analysis run, no such warning exists in cmd/tms/analyze.go's Long help text or in any agents/specs/agents/*.md file.",
+      "expectedEvidenceIds": [
+        "evidence-analyzego-merge-loop"
+      ],
+      "observedEvidenceIds": [
+        "evidence-analyzego-merge-loop"
+      ],
+      "status": "contradicted"
+    }
+  ],
+  "findings": [
+    {
+      "id": "finding-untrusted-merge-boundary",
+      "type": "threat-candidate",
+      "stage": "builder-definition",
+      "title": "Agent-authored AnalysisResults cross a trust boundary into the canonical model with no semantic verification, only structural validation",
+      "description": "The boundary from 'artifact content + an agent's own untrusted reasoning' to 'canonical ThreatModel content read as ground truth by humans and later-stage agents' is crossed by tms analyze --apply with only schema and referential-integrity checks (TRD step 5). This is a real, design-level trust boundary per the product-definition stage's scenario-prompt-injection-via-merged-analysis finding, now localized to the exact architectural seam that crosses it.",
+      "targetRefs": [
+        "tms-cli",
+        "threat-model-doc"
+      ],
+      "evidenceIds": [
+        "evidence-trd-step4-step5",
+        "evidence-trd-orchestration-not-reasoning"
+      ],
+      "confidence": 0.85,
+      "status": "validated",
+      "producerRunId": "run-builder-definition-1786727947617471000"
+    },
+    {
+      "id": "finding-no-provenance-tag-on-freetext",
+      "type": "control-gap",
+      "stage": "implementation",
+      "title": "AnalysisResults free-text fields carry no structural or documented signal that their content is untrusted",
+      "description": "This confirms at the implementation level what the builder-definition stage flagged at the design level (finding-untrusted-merge-boundary): runApplyMode's merge loop (cmd/tms/analyze.go:247-254) appends every AnalysisResults field into the canonical model with zero sanitization, truncation, or provenance-warning attached to the content itself. The only gate is candidate.Validate() at line 260, which is purely structural (schema shape + referential integrity — see ir/validate.go), not a content check. AnalysisResults' own type definition (ir/analysis_results.go) uses bare Go strings with no doc-comment or wrapper signaling 'this text originated from analyzed material, treat as data not instruction.' Reachable: any tms analyze --apply invocation feeds this path, including one driven by an agent reading attacker-influenced artifact content under any profile (first-party CI on an external PR, third-party, or open-source).",
+      "targetRefs": [
+        "cmd/tms/analyze.go:247-254",
+        "ir/analysis_results.go"
+      ],
+      "evidenceIds": [
+        "evidence-analyzego-merge-loop",
+        "evidence-analysisresults-plain-strings"
+      ],
+      "confidence": 0.9,
+      "status": "validated",
+      "aspmDomainId": "code-security",
+      "producerRunId": "run-implementation-1786733958263300000"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate-product-definition",
+      "stage": "product-definition",
+      "criteria": [
+        {
+          "metric": "has-assets",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-invariant",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-threat-actor",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-prohibited-outcome",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-prd-uc5-agent-judge",
+        "evidence-prd-fr10-fr13",
+        "evidence-prd-non-goal-2"
+      ],
+      "evaluatedAt": "2026-08-14T20:39:40Z"
+    },
+    {
+      "id": "gate-builder-definition",
+      "stage": "builder-definition",
+      "criteria": [
+        {
+          "metric": "has-trust-boundaries",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-stride-mapping",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-required-controls",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-api-contract-drift-check",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-trd-step4-step5",
+        "evidence-trd-orchestration-not-reasoning"
+      ],
+      "evaluatedAt": "2026-08-14T20:39:40Z"
+    },
+    {
+      "id": "gate-implementation",
+      "stage": "implementation",
+      "criteria": [
+        {
+          "metric": "all-aspm-domains-covered",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-evidence-per-finding",
+          "operator": "equals",
+          "value": "true"
+        },
+        {
+          "metric": "has-drift-check",
+          "operator": "equals",
+          "value": "true"
+        }
+      ],
+      "result": "failed",
+      "evaluatedBy": "evaluation.EvaluateStageGate",
+      "evidenceIds": [
+        "evidence-analyzego-merge-loop",
+        "evidence-analysisresults-plain-strings"
+      ],
+      "evaluatedAt": "2026-08-14T20:39:40Z"
+    }
+  ]
+}
