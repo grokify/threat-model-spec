@@ -16,7 +16,7 @@ const (
 	// files under docs/versions/ as static assets (see mkdocs.yml site_url).
 	// The github.com web UI does not serve raw JSON, so it cannot be used here.
 	baseURL        = "https://grokify.github.io/threat-model-spec"
-	currentVersion = "v0.7.0"
+	currentVersion = "v0.8.0"
 )
 
 func main() {
