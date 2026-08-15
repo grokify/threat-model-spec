@@ -7,6 +7,9 @@
 //	tms generate input.json --stix -o out.json  # Export to STIX 2.1
 //	tms validate input.json                     # Validate only
 //	tms validate input.json --strict            # Strict validation
+//	tms analyze input.json --stage <s> ...      # PDLC stage analysis (plan/apply)
+//	tms gate input.json --stage <s>             # Read a recorded stage gate result
+//	tms report input.json --framework <f>       # Derive a framework-specific report
 package main
 
 import (
@@ -252,6 +255,8 @@ func runValidate(_ *cobra.Command, args []string) {
 			fmt.Fprintf(os.Stderr, "Validation failed: %v\n", err)
 			os.Exit(1)
 		}
+
+		warnStaleFrameworkReports(tm)
 
 		// For strict validation, also validate each diagram strictly
 		if strictValidation {
