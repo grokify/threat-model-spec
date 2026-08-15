@@ -40,6 +40,11 @@ func TestValidateLifecycle_ValidModel(t *testing.T) {
 		ID: "finding-1", Type: FindingTypeVulnerability, Status: FindingStatusCandidate,
 		EvidenceIDs: []string{"evidence-1"}, ProducerRunID: "run-1", ASPMDomainID: ASPMDomainCodeSecurity,
 	}}
+	tm.Assets = []Asset{{ID: "asset-1", Name: "Test Asset", Classification: SensitivityConfidential, ProducerRunID: "run-1"}}
+	tm.ThreatActors = []ThreatActor{{ID: "actor-1", Name: "Test Actor", Type: ThreatActorTypeCriminal, ProducerRunID: "run-1"}}
+	tm.Scenarios = []Scenario{{ID: "scenario-1", Title: "Test Scenario", ProducerRunID: "run-1"}}
+	tm.Mitigations = []Mitigation{{ID: "mitigation-1", Title: "Test Mitigation", Status: MitigationStatusPlanned, ProducerRunID: "run-1"}}
+
 	if err := tm.Validate(); err != nil {
 		t.Fatalf("expected valid model, got error: %v", err)
 	}
@@ -81,6 +86,42 @@ func TestValidateLifecycle_UnknownProducerRun(t *testing.T) {
 	err := tm.Validate()
 	if err == nil {
 		t.Fatal("expected validation error for finding referencing unknown analysisRun")
+	}
+}
+
+func TestValidateLifecycle_UnknownAssetProducerRun(t *testing.T) {
+	tm := minimalValidThreatModel()
+	tm.Assets = []Asset{{ID: "asset-1", Name: "Test Asset", Classification: SensitivityConfidential, ProducerRunID: "does-not-exist"}}
+	err := tm.Validate()
+	if err == nil {
+		t.Fatal("expected validation error for asset referencing unknown analysisRun")
+	}
+}
+
+func TestValidateLifecycle_UnknownThreatActorProducerRun(t *testing.T) {
+	tm := minimalValidThreatModel()
+	tm.ThreatActors = []ThreatActor{{ID: "actor-1", Name: "Test Actor", Type: ThreatActorTypeCriminal, ProducerRunID: "does-not-exist"}}
+	err := tm.Validate()
+	if err == nil {
+		t.Fatal("expected validation error for threatActor referencing unknown analysisRun")
+	}
+}
+
+func TestValidateLifecycle_UnknownScenarioProducerRun(t *testing.T) {
+	tm := minimalValidThreatModel()
+	tm.Scenarios = []Scenario{{ID: "scenario-1", Title: "Test Scenario", ProducerRunID: "does-not-exist"}}
+	err := tm.Validate()
+	if err == nil {
+		t.Fatal("expected validation error for scenario referencing unknown analysisRun")
+	}
+}
+
+func TestValidateLifecycle_UnknownMitigationProducerRun(t *testing.T) {
+	tm := minimalValidThreatModel()
+	tm.Mitigations = []Mitigation{{ID: "mitigation-1", Title: "Test Mitigation", Status: MitigationStatusPlanned, ProducerRunID: "does-not-exist"}}
+	err := tm.Validate()
+	if err == nil {
+		t.Fatal("expected validation error for mitigation referencing unknown analysisRun")
 	}
 }
 
