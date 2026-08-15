@@ -13,6 +13,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -109,6 +110,7 @@ var strictValidation bool
 var (
 	gateStage string
 	gateCI    bool
+	gateJSON  bool
 )
 
 func init() {
@@ -123,6 +125,7 @@ func init() {
 	// Gate command flags
 	gateCmd.Flags().StringVar(&gateStage, "stage", "", "PDLC stage to evaluate (required)")
 	gateCmd.Flags().BoolVar(&gateCI, "ci", false, "Exit non-zero if the gate has not passed")
+	gateCmd.Flags().BoolVar(&gateJSON, "json", false, "Output as JSON")
 	_ = gateCmd.MarkFlagRequired("stage")
 
 	// Add subcommands
@@ -326,12 +329,21 @@ func runGate(_ *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Gate: stage=%s result=%s\n", gate.Stage, gate.Result)
-	for _, c := range gate.Criteria {
-		fmt.Printf("  - %s %s %s\n", c.Metric, c.Operator, c.Value)
-	}
-	if gate.EvaluatedBy != "" {
-		fmt.Printf("Evaluated by: %s\n", gate.EvaluatedBy)
+	if gateJSON {
+		data, err := json.MarshalIndent(gate, "", "  ")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error encoding gate: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Println(string(data))
+	} else {
+		fmt.Printf("Gate: stage=%s result=%s\n", gate.Stage, gate.Result)
+		for _, c := range gate.Criteria {
+			fmt.Printf("  - %s %s %s\n", c.Metric, c.Operator, c.Value)
+		}
+		if gate.EvaluatedBy != "" {
+			fmt.Printf("Evaluated by: %s\n", gate.EvaluatedBy)
+		}
 	}
 
 	if gateCI && gate.Result != ir.GateResultPassed {
