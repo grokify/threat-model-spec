@@ -1,0 +1,9 @@
+{
+  "stage": "implementation",
+  "inputMode": "artifact-types",
+  "artifactTypes": ["source-tree", "dependency-manifest", "sbom"],
+  "aspmDomainIds": ["git-posture", "code-security", "secret-pii-scan", "open-source-security", "sbom"],
+  "outputObjects": ["Finding", "ArchitectureAssertion"],
+  "coverageChecks": ["all-aspm-domains-covered", "has-evidence-per-finding", "has-drift-check"],
+  "rubricId": "implementation"
+}

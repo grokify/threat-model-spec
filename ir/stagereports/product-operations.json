@@ -1,0 +1,8 @@
+{
+  "stage": "product-operations",
+  "inputMode": "artifact-types",
+  "artifactTypes": ["telemetry", "incident"],
+  "outputObjects": ["Finding", "ArchitectureAssertion"],
+  "coverageChecks": ["has-invariant-drift-check", "has-adoption-signal"],
+  "rubricId": "product-operations"
+}

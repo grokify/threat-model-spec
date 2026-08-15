@@ -1,0 +1,7 @@
+{
+  "stage": "builder-definition",
+  "inputMode": "workflow-specs",
+  "outputObjects": ["Finding", "Mitigation", "ArchitectureAssertion", "SecurityRequirement"],
+  "coverageChecks": ["has-trust-boundaries", "has-stride-mapping", "has-required-controls", "has-api-contract-drift-check"],
+  "rubricId": "builder-definition"
+}

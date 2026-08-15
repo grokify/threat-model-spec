@@ -1,0 +1,9 @@
+{
+  "stage": "deployment",
+  "inputMode": "artifact-types",
+  "artifactTypes": ["iac", "deployment-manifest"],
+  "aspmDomainIds": ["iac-scan", "cicd-posture", "container-security", "artifact-security"],
+  "outputObjects": ["Finding", "ArchitectureAssertion"],
+  "coverageChecks": ["all-aspm-domains-covered", "has-evidence-per-finding", "has-deployed-control-verification"],
+  "rubricId": "deployment"
+}

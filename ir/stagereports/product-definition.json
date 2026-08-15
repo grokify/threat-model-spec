@@ -1,0 +1,7 @@
+{
+  "stage": "product-definition",
+  "inputMode": "workflow-specs",
+  "outputObjects": ["Asset", "ThreatActor", "Scenario", "SecurityRequirement"],
+  "coverageChecks": ["has-assets", "has-invariant", "has-threat-actor", "has-prohibited-outcome"],
+  "rubricId": "product-definition"
+}

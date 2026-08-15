@@ -1,0 +1,11 @@
+{
+  "profile": "third-party",
+  "description": "Public documentation and a live site only, typical of assessing a vendor or partner product. Product-definition analysis draws on public docs; deployment and builder-operations analysis draws on external observation of the live endpoint. No access to internal specs, source code, or telemetry.",
+  "availableArtifactTypes": ["product-spec", "api-spec", "runtime-endpoint"],
+  "permittedStages": ["product-definition", "deployment", "builder-operations"],
+  "notAnalyzableStages": [
+    {"stage": "builder-definition", "reason": "no access to internal technical specs (TRD/IRD)"},
+    {"stage": "implementation", "reason": "no access to source code"},
+    {"stage": "product-operations", "reason": "no access to internal telemetry or incident data"}
+  ]
+}

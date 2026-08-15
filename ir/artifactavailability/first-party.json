@@ -1,0 +1,13 @@
+{
+  "profile": "first-party",
+  "description": "Full artifact access: specs, code, IaC, deployment manifests, telemetry, and incident records. All six stages can be credibly analyzed.",
+  "availableArtifactTypes": [
+    "product-spec", "technical-spec", "architecture-diagram", "api-spec",
+    "source-tree", "dependency-manifest", "sbom", "iac", "deployment-manifest",
+    "runtime-endpoint", "telemetry", "incident"
+  ],
+  "permittedStages": [
+    "product-definition", "builder-definition", "implementation",
+    "deployment", "builder-operations", "product-operations"
+  ]
+}

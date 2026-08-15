@@ -1,0 +1,11 @@
+{
+  "profile": "open-source",
+  "description": "Public documentation and source code, typical of assessing an open-source dependency. Product- and builder-definition analysis draws on README/design docs; implementation analysis draws on the source tree itself. No visibility into how the project is actually deployed, operated, or used in production by downstream consumers.",
+  "availableArtifactTypes": ["product-spec", "technical-spec", "source-tree", "dependency-manifest", "sbom"],
+  "permittedStages": ["product-definition", "builder-definition", "implementation"],
+  "notAnalyzableStages": [
+    {"stage": "deployment", "reason": "no visibility into how downstream users actually deploy the project"},
+    {"stage": "builder-operations", "reason": "no visibility into any specific runtime or operational posture"},
+    {"stage": "product-operations", "reason": "no visibility into production usage, adoption, or telemetry"}
+  ]
+}

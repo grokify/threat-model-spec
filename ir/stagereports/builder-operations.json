@@ -1,0 +1,9 @@
+{
+  "stage": "builder-operations",
+  "inputMode": "artifact-types",
+  "artifactTypes": ["runtime-endpoint", "telemetry", "incident"],
+  "aspmDomainIds": ["cloud-context"],
+  "outputObjects": ["Finding"],
+  "coverageChecks": ["has-detection-coverage", "has-incident-evidence", "has-dynamic-testing-note"],
+  "rubricId": "builder-operations"
+}
