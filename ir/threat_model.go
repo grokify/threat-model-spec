@@ -158,6 +158,13 @@ type ThreatModel struct {
 
 	// Gates record stage-gate evaluation criteria and results.
 	Gates []Gate `json:"gates,omitempty"`
+
+	// FrameworkReports hold materialized framework-specific views
+	// (STRIDE, LINDDUN, MITRE ATT&CK, OWASP, attack-tree), computed by
+	// ComputeFrameworkReport and optionally stored here as an audit
+	// snapshot. Computed-first: absence here does not mean absence of
+	// data — see FrameworkReport's doc comment.
+	FrameworkReports []FrameworkReport `json:"frameworkReports,omitempty"`
 }
 
 // Author represents a contributor to the threat model.
