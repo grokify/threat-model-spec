@@ -24,6 +24,11 @@ type ThreatModel struct {
 	// Phase indicates the SDLC phase of this threat model.
 	// Use "design" for pre-implementation threat modeling,
 	// "production" for live systems, "incident" for post-incident analysis.
+	//
+	// Deprecated: retained for backward compatibility. A lifecycle-aware
+	// model accumulates analysis from multiple PDLC stages simultaneously,
+	// which a single Phase cannot represent. Use Lifecycle.CurrentStage and
+	// the Stage field on AnalysisRun/Artifact/Finding/Gate instead.
 	Phase ModelPhase `json:"phase,omitempty"`
 
 	// Authors lists the people who created or contributed to this threat model.
@@ -123,6 +128,36 @@ type ThreatModel struct {
 	// AttackPatterns contains reusable attack pattern templates applied to this model.
 	// These can be instantiated from built-in patterns or custom-defined.
 	AttackPatterns []AttackPattern `json:"attackPatterns,omitempty"`
+
+	// --- PDLC Lifecycle Analysis (v0.8.0) ---
+
+	// Lifecycle groups stage-tracking state for the model as a whole.
+	// Supersedes Phase for lifecycle-aware analysis; see the Lifecycle doc.
+	Lifecycle *Lifecycle `json:"lifecycle,omitempty"`
+
+	// Artifacts are the source inputs analysis runs were performed against.
+	Artifacts []Artifact `json:"artifacts,omitempty"`
+
+	// AnalysisRuns record who analyzed what, how, and when.
+	AnalysisRuns []AnalysisRun `json:"analysisRuns,omitempty"`
+
+	// Evidence is inspectable material findings and assertions cite.
+	Evidence []Evidence `json:"evidence,omitempty"`
+
+	// SecurityRequirements are invariants and prohibited outcomes derived
+	// from product-definition-stage analysis, with verification links.
+	SecurityRequirements []SecurityRequirement `json:"securityRequirements,omitempty"`
+
+	// ArchitectureAssertions capture intended-vs-observed properties for
+	// drift detection between design and implementation/deployment.
+	ArchitectureAssertions []ArchitectureAssertion `json:"architectureAssertions,omitempty"`
+
+	// Findings are analyzer claims requiring adjudication: threat
+	// candidates, vulnerabilities, weaknesses, drift, and control gaps.
+	Findings []Finding `json:"findings,omitempty"`
+
+	// Gates record stage-gate evaluation criteria and results.
+	Gates []Gate `json:"gates,omitempty"`
 }
 
 // Author represents a contributor to the threat model.
@@ -321,6 +356,10 @@ func (tm *ThreatModel) Validate() error {
 			}
 		}
 	}
+
+	// Validate lifecycle objects (Artifacts, AnalysisRuns, Evidence,
+	// SecurityRequirements, ArchitectureAssertions, Findings, Gates)
+	errs = append(errs, tm.validateLifecycle()...)
 
 	if errs.HasErrors() {
 		return errs

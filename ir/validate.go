@@ -792,3 +792,147 @@ func (tm *ThreatModel) ValidateOWASPMappings() []string {
 
 	return warnings
 }
+
+// validateLifecycle checks referential integrity across the PDLC lifecycle
+// objects (Artifacts, AnalysisRuns, Evidence, SecurityRequirements,
+// ArchitectureAssertions, Findings, Gates): duplicate IDs within each
+// collection, and every cross-reference between collections resolves.
+func (tm *ThreatModel) validateLifecycle() ValidationErrors {
+	var errs ValidationErrors
+
+	artifactIDs := make(map[string]bool)
+	for i, a := range tm.Artifacts {
+		if a.ID == "" {
+			errs = append(errs, ValidationError{"artifacts", fmt.Sprintf("artifacts[%d] missing required id", i)})
+			continue
+		}
+		if artifactIDs[a.ID] {
+			errs = append(errs, ValidationError{"artifacts", fmt.Sprintf("duplicate artifact id %q", a.ID)})
+		}
+		artifactIDs[a.ID] = true
+	}
+
+	runIDs := make(map[string]bool)
+	for i, r := range tm.AnalysisRuns {
+		if r.ID == "" {
+			errs = append(errs, ValidationError{"analysisRuns", fmt.Sprintf("analysisRuns[%d] missing required id", i)})
+			continue
+		}
+		if runIDs[r.ID] {
+			errs = append(errs, ValidationError{"analysisRuns", fmt.Sprintf("duplicate analysisRun id %q", r.ID)})
+		}
+		runIDs[r.ID] = true
+
+		for _, aid := range r.InputArtifactIDs {
+			if !artifactIDs[aid] {
+				errs = append(errs, ValidationError{"analysisRuns", fmt.Sprintf("analysisRun %q references unknown artifact %q", r.ID, aid)})
+			}
+		}
+	}
+
+	evidenceIDs := make(map[string]bool)
+	for i, e := range tm.Evidence {
+		if e.ID == "" {
+			errs = append(errs, ValidationError{"evidence", fmt.Sprintf("evidence[%d] missing required id", i)})
+			continue
+		}
+		if evidenceIDs[e.ID] {
+			errs = append(errs, ValidationError{"evidence", fmt.Sprintf("duplicate evidence id %q", e.ID)})
+		}
+		evidenceIDs[e.ID] = true
+
+		if e.ArtifactID != "" && !artifactIDs[e.ArtifactID] {
+			errs = append(errs, ValidationError{"evidence", fmt.Sprintf("evidence %q references unknown artifact %q", e.ID, e.ArtifactID)})
+		}
+	}
+
+	gateIDs := make(map[string]bool)
+	for i, g := range tm.Gates {
+		if g.ID == "" {
+			errs = append(errs, ValidationError{"gates", fmt.Sprintf("gates[%d] missing required id", i)})
+			continue
+		}
+		if gateIDs[g.ID] {
+			errs = append(errs, ValidationError{"gates", fmt.Sprintf("duplicate gate id %q", g.ID)})
+		}
+		gateIDs[g.ID] = true
+
+		for _, eid := range g.EvidenceIDs {
+			if !evidenceIDs[eid] {
+				errs = append(errs, ValidationError{"gates", fmt.Sprintf("gate %q references unknown evidence %q", g.ID, eid)})
+			}
+		}
+	}
+
+	reqIDs := make(map[string]bool)
+	for i, req := range tm.SecurityRequirements {
+		if req.ID == "" {
+			errs = append(errs, ValidationError{"securityRequirements", fmt.Sprintf("securityRequirements[%d] missing required id", i)})
+			continue
+		}
+		if reqIDs[req.ID] {
+			errs = append(errs, ValidationError{"securityRequirements", fmt.Sprintf("duplicate securityRequirement id %q", req.ID)})
+		}
+		reqIDs[req.ID] = true
+
+		if req.OriginArtifactID != "" && !artifactIDs[req.OriginArtifactID] {
+			errs = append(errs, ValidationError{"securityRequirements", fmt.Sprintf("securityRequirement %q references unknown artifact %q", req.ID, req.OriginArtifactID)})
+		}
+		for _, vid := range req.VerificationIDs {
+			if !runIDs[vid] && !gateIDs[vid] {
+				errs = append(errs, ValidationError{"securityRequirements", fmt.Sprintf("securityRequirement %q references unknown analysisRun/gate %q", req.ID, vid)})
+			}
+		}
+	}
+
+	assertionIDs := make(map[string]bool)
+	for i, a := range tm.ArchitectureAssertions {
+		if a.ID == "" {
+			errs = append(errs, ValidationError{"architectureAssertions", fmt.Sprintf("architectureAssertions[%d] missing required id", i)})
+			continue
+		}
+		if assertionIDs[a.ID] {
+			errs = append(errs, ValidationError{"architectureAssertions", fmt.Sprintf("duplicate architectureAssertion id %q", a.ID)})
+		}
+		assertionIDs[a.ID] = true
+
+		for _, eid := range a.ExpectedEvidenceIDs {
+			if !evidenceIDs[eid] {
+				errs = append(errs, ValidationError{"architectureAssertions", fmt.Sprintf("architectureAssertion %q references unknown evidence %q", a.ID, eid)})
+			}
+		}
+		for _, eid := range a.ObservedEvidenceIDs {
+			if !evidenceIDs[eid] {
+				errs = append(errs, ValidationError{"architectureAssertions", fmt.Sprintf("architectureAssertion %q references unknown evidence %q", a.ID, eid)})
+			}
+		}
+	}
+
+	findingIDs := make(map[string]bool)
+	for i, f := range tm.Findings {
+		if f.ID == "" {
+			errs = append(errs, ValidationError{"findings", fmt.Sprintf("findings[%d] missing required id", i)})
+			continue
+		}
+		if findingIDs[f.ID] {
+			errs = append(errs, ValidationError{"findings", fmt.Sprintf("duplicate finding id %q", f.ID)})
+		}
+		findingIDs[f.ID] = true
+
+		for _, eid := range f.EvidenceIDs {
+			if !evidenceIDs[eid] {
+				errs = append(errs, ValidationError{"findings", fmt.Sprintf("finding %q references unknown evidence %q", f.ID, eid)})
+			}
+		}
+		if f.ProducerRunID != "" && !runIDs[f.ProducerRunID] {
+			errs = append(errs, ValidationError{"findings", fmt.Sprintf("finding %q references unknown analysisRun %q", f.ID, f.ProducerRunID)})
+		}
+		if f.ASPMDomainID != "" {
+			if _, ok := ASPMDomainByID(f.ASPMDomainID); !ok {
+				errs = append(errs, ValidationError{"findings", fmt.Sprintf("finding %q references unknown ASPM domain %q", f.ID, f.ASPMDomainID)})
+			}
+		}
+	}
+
+	return errs
+}
