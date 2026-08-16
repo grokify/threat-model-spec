@@ -247,4 +247,5 @@ tms validate model.json --strict
 - [Element Types](elements.md) — Process, datastore, external entity, etc.
 - [Boundary Types](boundaries.md) — Browser, localhost, network, etc.
 - [Flow Types](flows.md) — Normal, attack, exfil
+- [Lifecycle IR Objects](lifecycle-objects.md) — Artifact, AnalysisRun, Finding, Gate, and the rest of the PDLC lifecycle-analysis layer
 - [Framework Mappings](mappings.md) — MITRE, OWASP, STRIDE, etc.

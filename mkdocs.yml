@@ -90,6 +90,8 @@ nav:
     - Boundary Types: specification/boundaries.md
     - Flow Types: specification/flows.md
     - Framework Mappings: specification/mappings.md
+    - Lifecycle IR Objects: specification/lifecycle-objects.md
+    - Stage Report Profiles: specification/stage-reports/index.md
   - Versions:
     - v0.8.0: versions/v0.8.0/specification.md
     - v0.7.0: versions/v0.7.0/specification.md
