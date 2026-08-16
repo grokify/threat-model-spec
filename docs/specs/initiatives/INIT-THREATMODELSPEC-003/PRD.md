@@ -15,7 +15,7 @@ Every gap below was discovered empirically — by real dogfood runs or by the re
 1. **`ir.Finding` has no structured framework categorization.** Both dogfood runs failed the `has-stride-mapping` coverage check for the same reason: the STRIDE category the analyst clearly reasoned about only ever lived in `Finding.Description` free text. There is nothing queryable, and the coverage check itself can only be self-reported, not computed.
 2. **`prohibited-outcome` is never authored.** The `SecurityRequirementType` enum has carried `prohibited-outcome` since v0.8.0, yet neither dogfood run produced a single requirement typed with it — both runs' `has-prohibited-outcome` check failed identically. Either agent guidance never asks for it (authoring gap) or the invariant/prohibited-outcome distinction doesn't earn its keep (design gap).
 3. **CLI documentation stops at v0.5.0-era verbs.** The MkDocs CLI Reference documents `generate` and `validate` only; `gate`, `analyze`, `report`, `status`, and `profile` — the verbs this whole initiative family added — have no doc pages.
-4. **No analysis outlives the JSON file.** Judge runs, assessments, gates, and framework reports exist only inside a single ThreatModel document. There is no append-only history, no audit trail of who/what graded when, and no way to query across models or over time. DoltDB persistence was deferred from INIT-002's TRD (§9) from day one.
+4. **No analysis outlives the JSON file.** Judge runs, assessments, gates, and framework reports exist only inside a single ThreatModel document — no append-only history, no audit trail of who/what graded when, no way to query across models or over time. DoltDB persistence was deferred from INIT-002's TRD (§9) from day one. **Resolved by scoping this out of this repo entirely** — see Goals and TRD §4: this is a `visionstudio-cloud` premium-feature initiative, not a `threat-model-spec` one.
 5. **Three stages have zero real-run evidence** (`deployment`, `builder-operations`, `product-operations`), and **`builder-definition`'s rubric has only proven discrimination synthetically** — real content scored uniformly all-pass in both runs. *Deferred: closing these requires a target with real IaC, a live endpoint, telemetry, and incident history — data this repo cannot supply itself.*
 
 ## Goals
@@ -23,12 +23,11 @@ Every gap below was discovered empirically — by real dogfood runs or by the re
 - A `Finding`'s framework categorization (STRIDE, OWASP, ATT&CK) is structured, validated, and queryable — and the coverage checks that depend on it become deterministic computations instead of self-reports.
 - `prohibited-outcome` requirements actually get authored (or the type distinction is consciously revised) — resolved by investigation, not assumption.
 - Every `tms` verb has a reference page.
-- Analysis history persists: an opt-in embedded Dolt store records judge runs, assessments, analysis runs, gates, and materialized framework reports append-only, with a Dolt commit audit envelope. `tms` remains fully functional with no store configured.
 - The deferred dogfood work is specified with concrete data-requirements acceptance criteria so it can start the moment a qualifying target is named.
 
 ## Non-Goals
 
-- No hosted service, server mode, or multi-user store — the persistence layer is a local embedded database, same operating model as visionstudio's.
+- **No persistence layer of any kind in this repo.** `threat-model-spec` stays a pure JSON IR spec plus a local, standalone `tms` CLI — no database, embedded or otherwise. Analysis history/aggregation as a premium capability is out of scope here; see TRD §4 for where it actually belongs (`visionstudio-cloud`).
 - No reimplementation of SAST/DAST/SCA scanners (unchanged from INIT-002).
 - No new stages, rubrics, or report profiles.
 - Dogfooding the three untouched stages is **not promised by this initiative's release** — it is scoped, data-gated, and executes when a qualifying target exists.
@@ -51,12 +50,9 @@ Every gap below was discovered empirically — by real dogfood runs or by the re
 
 - `docs/cli/` gains per-command pages for `gate`, `analyze`, `report`, `status`, `profile`, in the established `generate`/`validate` page format, wired into mkdocs nav; strict build passes.
 
-### FR4 — Persistence (fuller store)
+### FR4 — Persistence: cancelled, redirected
 
-- New storage package: embedded Dolt via Ent (org standard), opt-in via flag/env; zero behavior change when unset.
-- Append-only tables: `judge_runs`, `judge_assessments`, `analysis_runs`, `gates`, `framework_reports`.
-- Every write batch lands as one Dolt commit referencing the producing run ID (audit envelope).
-- A read verb lists persisted history (at minimum: runs per model/stage with gate results).
+Originally scoped as a new embedded-Dolt storage package in this repo. Cancelled — see TRD §4 for the original design and the rationale for abandoning it. The actual capability (persisted, queryable analysis history) is redirected to a new `visionstudio-cloud` initiative, which is out of scope for this PRD.
 
 ### FR5 — Empirical dogfood (deferred, data-gated)
 
@@ -68,11 +64,9 @@ Every gap below was discovered empirically — by real dogfood runs or by the re
 1. Both v0.8.0 dogfood models, re-analyzed (or minimally retrofitted), pass `has-stride-mapping` via the deterministic computation — no self-report.
 2. The flagship example carries ≥1 `prohibited-outcome` requirement, or a documented design decision says why not.
 3. `mkdocs build --strict` passes with all seven CLI verbs documented.
-4. With a store configured, a full `tms analyze` plan→apply→gate cycle produces queryable rows in all five tables and exactly one Dolt commit per write batch; with no store configured, the identical cycle produces byte-identical model output to v0.8.0 behavior.
-5. Existing v0.8.0 models validate unchanged against the regenerated schema.
+4. Existing v0.8.0 models validate unchanged against the regenerated schema.
 
 ## Dependencies
 
 - INIT-THREATMODELSPEC-002 (released, v0.8.0) — all IR types, profiles, rubrics this builds on.
-- `entgo.io/ent` + embedded Dolt driver (org-standard stack; versions verified at implementation time).
 - FR5 additionally depends on a qualifying dogfood target being named (external to this repo).

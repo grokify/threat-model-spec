@@ -5,7 +5,7 @@
 
 ## Architecture Overview
 
-Four independent work streams over the v0.8.0 codebase: (1) an additive IR change on `ir.Finding` plus deterministic coverage-check computation; (2) an authoring-guidance fix resolved by spike; (3) documentation; (4) a new, opt-in storage package. Nothing changes for a user who ignores the new store — the JSON ThreatModel document remains the source of truth; the store is an append-only audit/history projection of it.
+Three independent work streams over the v0.8.0 codebase: (1) an additive IR change on `ir.Finding` plus deterministic coverage-check computation; (2) an authoring-guidance fix resolved by spike; (3) documentation. A fourth stream — an embedded-Dolt persistence package inside this repo — was originally planned and is now cancelled; see §4.
 
 ## 1. Finding Framework Categorization (`ir/findings.go`)
 
@@ -73,40 +73,30 @@ Deliverable either way: a written root-cause note in the spike's RMI and the cor
 
 Five new pages — `gate.md`, `analyze.md`, `report.md`, `status.md`, `profile.md` — following the existing `generate.md`/`validate.md` format (synopsis, flags, examples against `examples/*.json`, exit codes). Nav order matches verb workflow: analyze → gate → report → status → profile. `mkdocs build --strict` gates the change.
 
-## 4. Persistence — Fuller Store (`store/`)
+## 4. Persistence — Cancelled
 
-### Stack and operating model
+**This section is retained as a record of the original design and why it was abandoned, not as a build plan.**
 
-- **Ent** (`entgo.io/ent`) over **embedded Dolt** (`github.com/dolthub/driver`, MySQL-compatible) — the org-standard pairing, and the same embedded-local model visionstudio uses (`~/.productbuildershq/visionstudio`). Versions verified against upstream releases at implementation time per org convention.
-- Opt-in: `--data-dir` flag / `TMS_DATA_DIR` env on `tms`. Unset → the store package is never initialized; every existing code path is untouched (success metric: byte-identical output).
-- Default location when enabled without a path: `~/.productbuildershq/tms`.
+The original plan below — an Ent-over-embedded-Dolt store package living inside `threat-model-spec` itself — was cancelled before implementation. Root cause: it conflicts with the open-core split that governs the broader ProductBuildersHQ ecosystem (documented in `visionstudio-cloud`'s README): *capture and record locally = open (`visionstudio`); aggregate, serve, and analyze in the cloud = private (`visionstudio-cloud`)*. `threat-model-spec` is a public, standalone spec plus a local `tms` CLI, used by anyone independent of this organization's tooling — giving it its own database would mean every external `tms` user's optional persistence feature depends on a repo-specific Ent schema and migration cadence that has nothing to do with the spec itself. The `ThreatModel` JSON document already is the local record; nothing more is needed for `threat-model-spec`'s own scope.
 
-### Schema (append-only)
+Where this capability actually belongs instead:
 
-Five Ent entities, one row per event, no updates or deletes (append-only enforced by the store API surface — no update/delete methods generated into the public interface):
+- A **local, open** history of judge/gate runs, if ever wanted, is `visionstudio`'s concern, not this repo's — it already has `JudgeResult`/`JudgeRubric` entities doing almost exactly this for spec-quality grading (a `structured-evaluation` rubric report stored as JSON, keyed to an initiative), and extending that pattern with a threat-model-shaped entity would be a natural, non-breaking addition there.
+- **Premium, hosted, multi-tenant** threat-modeling history and cross-repo/cross-initiative aggregation belongs in `visionstudio-cloud`, which already exists as real infrastructure for exactly this kind of paid capability (multi-tenant serving, per-tenant metering, tenant provisioning). It would import `threat-model-spec` as a library (or invoke `tms`) to perform analysis, then own storing and serving results multi-tenant. That work is scoped as its own initiative in `visionstudio-cloud`, informed by but not implemented in this repo.
 
-| Table | Row per | Key columns |
-|---|---|---|
-| `analysis_runs` | AnalysisRun opened or completed | run_id, model_id, stage, profile, status, opened_at, completed_at |
-| `judge_runs` | rubric evaluation executed | judge_run_id, run_id, rubric_id, evaluated_by, evaluated_at |
-| `judge_assessments` | per-category assessment within a judge run | judge_run_id, category_id, score, severity |
-| `gates` | Gate evaluated | run_id, stage, result, check_results (JSON), evaluated_at |
-| `framework_reports` | FrameworkReport materialized | model_id, framework, digest, body (JSON), computed_at |
+### Original design (abandoned)
 
-All IDs are the IR's stable strings (INIT-002 TRD §9 guaranteed this: "all IDs are stable strings and all assessments carry producer run IDs, so tabular persistence needs no schema change") — no mapping layer.
+<details>
+<summary>Ent-over-embedded-Dolt store package (not built)</summary>
 
-### Audit envelope
+- **Stack:** Ent (`entgo.io/ent`) over embedded Dolt (`github.com/dolthub/driver`, MySQL-compatible), opt-in via `--data-dir`/`TMS_DATA_DIR`, default location `~/.productbuildershq/tms`.
+- **Schema (append-only):** five entities — `analysis_runs` (run_id, model_id, stage, profile, status, opened_at, completed_at), `judge_runs` (judge_run_id, run_id, rubric_id, evaluated_by, evaluated_at), `judge_assessments` (judge_run_id, category_id, score, severity), `gates` (run_id, stage, result, check_results JSON, evaluated_at), `framework_reports` (model_id, framework, digest, body JSON, computed_at). All IDs reuse the IR's stable strings — no mapping layer.
+- **Audit envelope:** one Dolt commit per `tms` write batch (`tms: <verb> <run-id>`) — Dolt's commit graph as the audit trail, no separate table.
+- **Write/read paths:** write hooks in `cmd/tms` after analyze/gate/report; a `tms history` read verb.
 
-Each `tms` write batch (e.g. one `analyze --apply`) commits once to Dolt with message `tms: <verb> <run-id>` — Dolt's commit graph *is* the audit trail. No separate audit table.
+Of the five tables, only `framework_reports` was genuinely threat-model-spec-domain-specific (STRIDE/LINDDUN/MITRE/OWASP/attack-tree). `judge_runs`/`judge_assessments` are `structured-evaluation`'s vocabulary, not this repo's; `analysis_runs`/`gates` map to this IR's types but are structurally generic. This overlap with `structured-evaluation` and `visionstudio`'s existing `JudgeResult`/`JudgeRubric` was itself part of why the design was reconsidered.
 
-### Write and read paths
-
-- Write hooks in `cmd/tms`: after a successful model write in `analyze` (plan: run opened; apply: run completed + judge rows if grading ran), after `gate`, after `report`.
-- Read verb: `tms history <model.json|--model-id id>` — lists persisted runs (stage, status, gate result, timestamps), `--format json|table`.
-
-### Testing
-
-Unit tests against a `t.TempDir()` embedded Dolt database — no external server, CI-safe on all three OSes (embedded driver needs no `dolt` binary). Round-trip test: full plan→apply→gate cycle with store enabled, assert row counts and single-commit-per-batch; disabled-store test asserts output parity.
+</details>
 
 ## 5. Deferred: Empirical Dogfood (data-gated)
 
@@ -117,4 +107,3 @@ Not designed here beyond acceptance criteria (PRD FR5); the stage report profile
 - Schema: additive only; `TestExamplesValidate` (all five canonical examples) must stay green with zero example edits before any retrofit commits.
 - Coverage-check semantics change (computed > self-reported) is behavior-visible in `tms gate`: called out in CHANGELOG and release notes.
 - Per-package conventions unchanged: enum value tests, JSON round-trips, golden files (`UPDATE_GOLDEN=1`), calibration fixtures.
-- Store package targets the same bar as the rest of the repo: unit tests, no integration-test-only coverage.

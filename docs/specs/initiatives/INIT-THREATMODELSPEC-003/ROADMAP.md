@@ -11,25 +11,26 @@ This initiative uses the RMI-THREATMODELSPEC-2xx block (INIT-001 used 0xx, INIT-
 
 **Theme:** The gaps both dogfood runs hit identically get structural fixes — framework categorization becomes queryable data with deterministically computed coverage checks, prohibited-outcome gets authored, and the CLI reference catches up to the shipped verbs
 
-- [ ] `RMI-THREATMODELSPEC-200` Finding framework categorization fields
+- [x] `RMI-THREATMODELSPEC-200` Finding framework categorization fields
   - `strideCategories`/`owaspIds`/`attackTechniqueIds` on `ir.Finding`, validated via existing `STRIDEThreat`/`ValidateOWASPID`/`ValidateTechniqueID`; lifecycle-validation warnings; schema regenerated, all v0.8.0 examples validate unchanged; enum/round-trip tests
-- [ ] `RMI-THREATMODELSPEC-201` Deterministic coverage-check computation
+- [x] `RMI-THREATMODELSPEC-201` Deterministic coverage-check computation
   - `evaluation.ComputeCoverageChecks` computing has-stride-mapping, has-prohibited-outcome, has-assets, has-threat-actor, has-invariant, has-evidence-per-finding from the model; `tms gate`/`analyze --apply` prefer computed results over self-reports (warning on conflict); agent specs + regenerated plugins populate the new fields
-- [ ] `RMI-THREATMODELSPEC-202` prohibited-outcome spike and resolution
+- [x] `RMI-THREATMODELSPEC-202` prohibited-outcome spike and resolution
   - Root-cause note (authoring vs design gap) with evidence from both dogfood models; expected fix: product-definition agent guidance + worked example + flagship-example requirement; alternative fix: documented decision + coverage-check change (enum value stays)
-- [ ] `RMI-THREATMODELSPEC-203` CLI reference pages for the five undocumented verbs
+- [x] `RMI-THREATMODELSPEC-203` CLI reference pages for the five undocumented verbs
   - docs/cli/{analyze,gate,report,status,profile}.md in the generate/validate page format; mkdocs nav; strict build green
+- [x] `RMI-THREATMODELSPEC-210` Document lifecycle IR objects in the Specification guide *(added mid-phase — the published guide predated INIT-002's whole lifecycle-IR layer)*
+  - New Lifecycle IR Objects specification page; wired into nav
 
-## Phase 2 — Persistence (Fuller Store)
+## Phase 2 — Persistence (Cancelled)
 
-**Theme:** Analysis history outlives the JSON document — an opt-in embedded Dolt store records runs, assessments, gates, and framework reports append-only with a Dolt-commit audit envelope, while `tms` without a store stays byte-identical to v0.8.0
+**Theme:** ~~Analysis history outlives the JSON document — an opt-in embedded Dolt store records runs, assessments, gates, and framework reports append-only with a Dolt-commit audit envelope, while `tms` without a store stays byte-identical to v0.8.0~~
 
-- [ ] `RMI-THREATMODELSPEC-204` Store package: Ent schema over embedded Dolt
-  - `store/` with five append-only entities (analysis_runs, judge_runs, judge_assessments, gates, framework_reports); embedded `dolthub/driver` (no dolt binary); `--data-dir`/`TMS_DATA_DIR` opt-in with `~/.productbuildershq/tms` default; dependency versions verified at implementation time
-- [ ] `RMI-THREATMODELSPEC-205` tms persistence integration and history verb
-  - Write hooks in analyze/gate/report with one Dolt commit per write batch (`tms: <verb> <run-id>`); `tms history` read verb (table/json); parity test proves disabled-store output identical; store round-trip test on all three CI OSes
-- [ ] `RMI-THREATMODELSPEC-206` v0.9.0 release
-  - CHANGELOG.json + regenerated CHANGELOG.md, release notes, versioned specification (schema changed in RMI-200), mkdocs nav, README; push, CI green on ubuntu/macos/windows, tag, record release in visionstudio
+**Cancelled.** `threat-model-spec` does not get its own persistence layer. Per `visionstudio-cloud`'s open-core split — *capture and record locally = open (`visionstudio`); aggregate, serve, and analyze in the cloud = private (`visionstudio-cloud`)* — an embedded Dolt store inside this repo doesn't fit: `threat-model-spec` stays a pure JSON IR spec plus a local, standalone `tms` CLI with no database at all. The `ThreatModel` JSON document already is the local record. Threat-modeling history/aggregation as a paid, multi-tenant capability belongs in `visionstudio-cloud` instead, as its own initiative there — informed by, but not implemented in, this repo.
+
+- [x] ~~`RMI-THREATMODELSPEC-204` Store package: Ent schema over embedded Dolt~~ — cancelled
+- [x] ~~`RMI-THREATMODELSPEC-205` tms persistence integration and history verb~~ — cancelled
+- [x] ~~`RMI-THREATMODELSPEC-206` v0.9.0 release~~ — cancelled (a v0.9.0 release may still happen for unrelated reasons, but not as this RMI)
 
 ## Phase 3 — Empirical Dogfood (deferred, data-gated)
 
