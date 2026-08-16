@@ -109,6 +109,11 @@ nav:
     - Overview: cli/index.md
     - generate: cli/generate.md
     - validate: cli/validate.md
+    - analyze: cli/analyze.md
+    - gate: cli/gate.md
+    - report: cli/report.md
+    - status: cli/status.md
+    - profile: cli/profile.md
   - Releases:
     - v0.8.0: releases/v0.8.0.md
     - v0.7.0: releases/v0.7.0.md
