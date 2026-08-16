@@ -83,6 +83,32 @@ Add tests for new types in `ir/*_test.go`:
 - Field tests for structs (e.g., `TestXxx_Fields`)
 - Method tests if applicable (e.g., `TestRiskAssessment_Calculate`)
 
+### Agent/Command/Skill Plugin Generation
+
+`agents/specs/` is the source of truth, written against the
+[multi-agent-spec](https://github.com/plexusone/multi-agent-spec) schema
+(agents/commands/skills as platform-agnostic Markdown+frontmatter or JSON).
+`agents/plugins/{claude,kiro,gemini}/` are **generated output** — never
+hand-edit files under `agents/plugins/` directly, including to fix a
+one-off formatting issue. A hand-edit can silently diverge from what the
+generator actually produces (e.g. Go's JSON encoder HTML-escapes `<`/`>`/`&`
+by default; a manual Python-based edit will not, and the divergence won't
+show up until the next real regeneration overwrites it).
+
+After changing anything under `agents/specs/`, regenerate all platform
+outputs with [assistantkit](https://github.com/plexusone/assistantkit):
+
+```bash
+assistantkit generate --specs=agents/specs --target=dist --output=.
+```
+
+Then verify with the freshness tests, which fail if a spec and its
+generated plugin output have drifted apart:
+
+```bash
+go test ./agents/... -run Fresh
+```
+
 ## Commit Convention
 
 Follow conventional commits. Common types for this project:
