@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/cli/validate/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/specification/lifecycle-objects/">
       
       
-        <link rel="prev" href="../generate/">
+        <link rel="prev" href="../mappings/">
       
       
-        <link rel="next" href="../../releases/v0.8.0/">
+        <link rel="next" href="../stage-reports/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>validate - Threat Model Spec</title>
+        <title>Lifecycle IR Objects - Threat Model Spec</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tms-validate" class="md-skip">
+        <a href="#lifecycle-ir-objects" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              validate
+              Lifecycle IR Objects
             
           </span>
         </div>
@@ -892,8 +892,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -904,13 +906,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -931,7 +931,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -949,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
@@ -977,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/schema/" class="md-nav__link">
+      <a href="../schema/" class="md-nav__link">
         
   
   
@@ -1005,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/elements/" class="md-nav__link">
+      <a href="../elements/" class="md-nav__link">
         
   
   
@@ -1033,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/boundaries/" class="md-nav__link">
+      <a href="../boundaries/" class="md-nav__link">
         
   
   
@@ -1061,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/flows/" class="md-nav__link">
+      <a href="../flows/" class="md-nav__link">
         
   
   
@@ -1089,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/mappings/" class="md-nav__link">
+      <a href="../mappings/" class="md-nav__link">
         
   
   
@@ -1114,10 +1114,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../specification/lifecycle-objects/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lifecycle IR Objects
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1133,6 +1160,125 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Artifact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysisrun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AnalysisRun
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evidence
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#securityrequirement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SecurityRequirement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architectureassertion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ArchitectureAssertion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1145,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../specification/stage-reports/" class="md-nav__link">
+      <a href="../stage-reports/" class="md-nav__link">
         
   
   
@@ -1606,8 +1752,6 @@
       
   
   
-    
-  
   
   
     
@@ -1620,11 +1764,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
         
           
           <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
@@ -1645,7 +1791,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1663,7 +1809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../cli/" class="md-nav__link">
         
   
   
@@ -1691,7 +1837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../generate/" class="md-nav__link">
+      <a href="../../cli/generate/" class="md-nav__link">
         
   
   
@@ -1716,37 +1862,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    validate
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../cli/validate/" class="md-nav__link">
         
   
   
@@ -1762,236 +1881,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#synopsis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Synopsis
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Description
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Flags
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Examples
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strict-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Strict Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation-failure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Failure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Rules
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation Rules">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#required-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Required Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-specific-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type-Specific Requirements
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#element-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Element Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reference Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#attack-chain-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Attack Chain Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#strict-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Strict Mode
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exit-codes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exit Codes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Integration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation-vs-generate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation vs Generate
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        See Also
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2488,10 +2377,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#synopsis" class="md-nav__link">
+  <a href="#artifact" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Synopsis
+        Artifact
       
     </span>
   </a>
@@ -2499,10 +2388,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
+  <a href="#analysisrun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Description
+        AnalysisRun
       
     </span>
   </a>
@@ -2510,10 +2399,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#flags" class="md-nav__link">
+  <a href="#evidence" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Flags
+        Evidence
       
     </span>
   </a>
@@ -2521,132 +2410,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#finding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Examples
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#strict-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Strict Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#validation-failure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Failure
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation-rules" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Validation Rules
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Validation Rules">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#required-fields" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Required Fields
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-specific-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type-Specific Requirements
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#element-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Element Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reference Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#attack-chain-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Attack Chain Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#strict-mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Strict Mode
+        Finding
       
     </span>
   </a>
@@ -2654,10 +2421,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#exit-codes" class="md-nav__link">
+  <a href="#securityrequirement" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exit Codes
+        SecurityRequirement
       
     </span>
   </a>
@@ -2665,10 +2432,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration" class="md-nav__link">
+  <a href="#architectureassertion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integration
+        ArchitectureAssertion
       
     </span>
   </a>
@@ -2676,10 +2443,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validation-vs-generate" class="md-nav__link">
+  <a href="#gate" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validation vs Generate
+        Gate
       
     </span>
   </a>
@@ -2687,10 +2454,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
+  <a href="#lifecycle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        See Also
+        Lifecycle
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
       
     </span>
   </a>
@@ -2717,158 +2495,546 @@
   
 
 
-<h1 id="tms-validate">tms validate<a class="headerlink" href="#tms-validate" title="Permanent link">&para;</a></h1>
-<p>Validate threat model JSON files.</p>
-<h2 id="synopsis">Synopsis<a class="headerlink" href="#synopsis" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>tms<span class="w"> </span>validate<span class="w"> </span>&lt;input.json&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
+<h1 id="lifecycle-ir-objects">Lifecycle IR Objects<a class="headerlink" href="#lifecycle-ir-objects" title="Permanent link">&para;</a></h1>
+<p>Beyond the diagram-centric <code>ThreatModel</code> fields (<code>diagrams</code>, <code>mappings</code>, <code>assets</code>, <code>threatActors</code>, <code>scenarios</code>, <code>mitigations</code>), the IR carries a second layer of objects for PDLC lifecycle-aware analysis: what was analyzed, when, by whom, what was found, and whether a stage's gate passed. These accumulate across multiple <code>tms analyze</code> runs over the lifetime of a model — a model can carry <code>product-definition</code> and <code>implementation</code>-stage analysis simultaneously, each with its own trail of runs, findings, and gates.</p>
+<p>For how these objects get populated by an agent-driven analysis cycle, see <a href="../stage-reports/">Stage Report Profiles</a> and <a href="../../agents/">AI Agents</a>. This page documents the objects themselves.</p>
+<h2 id="artifact">Artifact<a class="headerlink" href="#artifact" title="Permanent link">&para;</a></h2>
+<p>A source input an <code>AnalysisRun</code> was performed against — a spec document, a source tree, an SBOM, a deployment manifest, and so on.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;artifact-implementation-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;source-tree&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internal/billing/&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">&quot;observedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-08-14T17:00:04Z&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>The <code>validate</code> command checks threat model JSON files for:</p>
-<ul>
-<li>Valid JSON syntax</li>
-<li>Required fields present</li>
-<li>Correct field types</li>
-<li>Valid enum values</li>
-<li>Element ID uniqueness</li>
-<li>Valid references (from/to point to existing elements)</li>
-<li>Type-specific field requirements</li>
-</ul>
-<h2 id="flags">Flags<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Flag</th>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>--strict</code></td>
-<td>Use strict validation (includes warnings)</td>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
 </tr>
 <tr>
-<td><code>--help</code>, <code>-h</code></td>
-<td>Show help</td>
+<td><code>type</code></td>
+<td>string</td>
+<td>No</td>
+<td>Artifact kind — <code>product-spec</code>, <code>technical-spec</code>, <code>architecture-diagram</code>, <code>api-spec</code>, <code>source-tree</code>, <code>dependency-manifest</code>, <code>sbom</code>, <code>iac</code>, <code>deployment-manifest</code>, <code>runtime-endpoint</code>, <code>telemetry</code>, <code>incident</code></td>
+</tr>
+<tr>
+<td><code>uri</code></td>
+<td>string</td>
+<td>No</td>
+<td>Repo-relative path or <code>repo://</code> URI</td>
+</tr>
+<tr>
+<td><code>revision</code></td>
+<td>string</td>
+<td>No</td>
+<td>Version analyzed, e.g. a git SHA</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>string</td>
+<td>No</td>
+<td>PDLC stage this artifact belongs to</td>
+</tr>
+<tr>
+<td><code>digest</code></td>
+<td>string</td>
+<td>No</td>
+<td>Content hash at the analyzed revision</td>
+</tr>
+<tr>
+<td><code>observedAt</code></td>
+<td>string</td>
+<td>No</td>
+<td>RFC 3339 timestamp when observed/collected</td>
 </tr>
 </tbody>
 </table>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="basic-validation">Basic Validation<a class="headerlink" href="#basic-validation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tms<span class="w"> </span>validate<span class="w"> </span>attack.json
+<h2 id="analysisrun">AnalysisRun<a class="headerlink" href="#analysisrun" title="Permanent link">&para;</a></h2>
+<p>Records who analyzed what, how, and when. <code>Finding</code>, <code>Evidence</code>, and <code>Gate</code> reference the <code>AnalysisRun</code> that produced them (<code>producerRunId</code> / <code>evaluatedBy</code>), giving every claim in the model a traceable origin.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-implementation-1786726804355777000&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">&quot;profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;first-party&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">&quot;producer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agent&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation-analyst&quot;</span><span class="p">},</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">&quot;inputArtifactIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;artifact-implementation-1&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">&quot;startedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-08-14T17:00:04Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="nt">&quot;completedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-08-14T17:05:40Z&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;completed&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
 </code></pre></div>
-<p>Output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Validation passed: attack.json
-</code></pre></div></p>
-<h3 id="strict-validation">Strict Validation<a class="headerlink" href="#strict-validation" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tms<span class="w"> </span>validate<span class="w"> </span>attack.json<span class="w"> </span>--strict
-</code></pre></div>
-<p>Output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Strict validation passed: attack.json
-</code></pre></div></p>
-<h3 id="validation-failure">Validation Failure<a class="headerlink" href="#validation-failure" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>tms<span class="w"> </span>validate<span class="w"> </span>invalid.json
-</code></pre></div>
-<p>Output:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Validation failed: type is required
-</code></pre></div></p>
-<h2 id="validation-rules">Validation Rules<a class="headerlink" href="#validation-rules" title="Permanent link">&para;</a></h2>
-<h3 id="required-fields">Required Fields<a class="headerlink" href="#required-fields" title="Permanent link">&para;</a></h3>
-<p>All diagrams require:</p>
-<ul>
-<li><code>type</code> — Diagram type (dfd, attack-chain, sequence)</li>
-<li><code>title</code> — Diagram title</li>
-</ul>
-<h3 id="type-specific-requirements">Type-Specific Requirements<a class="headerlink" href="#type-specific-requirements" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
+<th>Field</th>
 <th>Type</th>
-<th>Required Fields</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>dfd</code></td>
-<td>elements</td>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
 </tr>
 <tr>
-<td><code>attack-chain</code></td>
-<td>elements, attacks</td>
+<td><code>stage</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>PDLC stage this run analyzed</td>
 </tr>
 <tr>
-<td><code>sequence</code></td>
-<td>actors, messages</td>
+<td><code>method</code></td>
+<td>string</td>
+<td>No</td>
+<td>Analysis method, e.g. <code>threat-modeling</code>, <code>sast</code>, <code>sca</code>, <code>dast</code>, <code>llm-judge</code></td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>string</td>
+<td>No</td>
+<td>Artifact-availability profile that governed this run: <code>first-party</code>, <code>third-party</code>, <code>open-source</code></td>
+</tr>
+<tr>
+<td><code>producer</code></td>
+<td>object</td>
+<td>Yes</td>
+<td><code>{type, name, version}</code> — who or what performed the run</td>
+</tr>
+<tr>
+<td><code>inputArtifactIds</code></td>
+<td>array</td>
+<td>No</td>
+<td><code>Artifact</code> IDs this run analyzed</td>
+</tr>
+<tr>
+<td><code>startedAt</code> / <code>completedAt</code></td>
+<td>string</td>
+<td>No</td>
+<td>RFC 3339 timestamps</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>in-progress</code>, <code>completed</code>, or <code>failed</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="element-validation">Element Validation<a class="headerlink" href="#element-validation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>IDs must be unique</li>
-<li>Labels are required</li>
-<li>Types must be valid enum values</li>
-</ul>
-<h3 id="reference-validation">Reference Validation<a class="headerlink" href="#reference-validation" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>from</code> and <code>to</code> in flows must reference existing elements</li>
-<li><code>parentId</code> must reference existing boundaries</li>
-<li><code>elementId</code> in targets must reference existing elements</li>
-</ul>
-<h3 id="attack-chain-validation">Attack Chain Validation<a class="headerlink" href="#attack-chain-validation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Steps must be sequential (1, 2, 3...)</li>
-<li>MITRE technique IDs should match pattern (T####)</li>
-</ul>
-<h2 id="strict-mode">Strict Mode<a class="headerlink" href="#strict-mode" title="Permanent link">&para;</a></h2>
-<p>Strict validation (<code>--strict</code>) adds additional checks:</p>
-<ul>
-<li>Recommended fields present</li>
-<li>Description fields populated</li>
-<li>Framework mappings complete</li>
-<li>CVSS vector valid</li>
-</ul>
-<h2 id="exit-codes">Exit Codes<a class="headerlink" href="#exit-codes" title="Permanent link">&para;</a></h2>
+<p><code>tms analyze</code> opens a run in plan mode and completes it in apply mode — see <a href="../../cli/"><code>tms analyze</code></a>.</p>
+<h2 id="evidence">Evidence<a class="headerlink" href="#evidence" title="Permanent link">&para;</a></h2>
+<p>A specific, locatable excerpt backing a <code>Finding</code>, <code>SecurityRequirement</code>, <code>ArchitectureAssertion</code>, or <code>Gate</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evidence-billing-query-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;artifactId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;artifact-implementation-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;locator&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internal/billing/query.go&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;startLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;endLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">},</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;excerpt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;query := fmt.Sprintf(\&quot;SELECT * FROM invoices WHERE id = %s\&quot;, id)&quot;</span><span class="p">,</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invoice lookup builds SQL via string formatting, not a parameterized query.&quot;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
+</code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Meaning</th>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0</td>
-<td>Validation passed</td>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
 </tr>
 <tr>
-<td>1</td>
-<td>Validation failed</td>
+<td><code>artifactId</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>Artifact</code> this evidence was extracted from</td>
+</tr>
+<tr>
+<td><code>locator</code></td>
+<td>object</td>
+<td>Yes</td>
+<td>Tagged union: <code>type</code> selects <code>file</code> (<code>path</code>/<code>startLine</code>/<code>endLine</code>), <code>document</code> (<code>uri</code>/<code>section</code>), <code>config</code> (<code>path</code>/<code>keyPath</code>), <code>query</code> (<code>dataSource</code>/<code>query</code>/<code>timeWindow</code>), or <code>url</code> (<code>url</code>/<code>observedAt</code>)</td>
+</tr>
+<tr>
+<td><code>digest</code></td>
+<td>string</td>
+<td>No</td>
+<td>Content hash of the referenced material</td>
+</tr>
+<tr>
+<td><code>excerpt</code></td>
+<td>string</td>
+<td>No</td>
+<td>Short relevant excerpt, reviewable inline</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>string</td>
+<td>No</td>
+<td>One-line description of what this evidence shows</td>
 </tr>
 </tbody>
 </table>
-<h2 id="integration">Integration<a class="headerlink" href="#integration" title="Permanent link">&para;</a></h2>
-<p>Use in CI/CD pipelines:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>models/*.json<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span>tms<span class="w"> </span>validate<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>--strict<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">done</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;All models valid&quot;</span>
+<h2 id="finding">Finding<a class="headerlink" href="#finding" title="Permanent link">&para;</a></h2>
+<p>An analyzer's claim requiring adjudication: a threat candidate, vulnerability, weakness, drift assertion, or control gap. A near-direct fact (e.g. "admin-api is exposed to the public internet") is recorded as a <code>Finding</code> with <code>type: observation</code> and confidence near 1.0, rather than as a separate object type.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;finding-sql-string-format&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vulnerability&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invoice lookup builds SQL via string formatting&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;internal/billing/query.go concatenates the id parameter directly into a SQL string instead of using a parameterized query, enabling SQL injection.&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="nt">&quot;targetRefs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;component:billing-service&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">&quot;evidenceIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-billing-query-1&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;validated&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">&quot;strideThreats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">&quot;owaspIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;A03:2021&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">&quot;mitreTechniques&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;T1190&quot;</span><span class="p">],</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">  </span><span class="nt">&quot;producerRunId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-implementation-1786726804355777000&quot;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="validation-vs-generate">Validation vs Generate<a class="headerlink" href="#validation-vs-generate" title="Permanent link">&para;</a></h2>
-<p>Both commands validate input, but:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>observation</code>, <code>threat-candidate</code>, <code>vulnerability</code>, <code>weakness</code>, <code>drift</code>, <code>control-gap</code></td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>string</td>
+<td>No</td>
+<td>PDLC stage this finding was produced at</td>
+</tr>
+<tr>
+<td><code>title</code> / <code>description</code></td>
+<td>string</td>
+<td>Yes / No</td>
+<td>Summary and detailed explanation</td>
+</tr>
+<tr>
+<td><code>targetRefs</code></td>
+<td>array</td>
+<td>No</td>
+<td>Affected component/element/asset IDs</td>
+</tr>
+<tr>
+<td><code>evidenceIds</code></td>
+<td>array</td>
+<td>No</td>
+<td><code>Evidence</code> IDs supporting this finding</td>
+</tr>
+<tr>
+<td><code>confidence</code></td>
+<td>number</td>
+<td>No</td>
+<td>Producer's confidence, 0.0–1.0</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>candidate</code>, <code>validated</code>, <code>rejected</code>, <code>insufficient-evidence</code></td>
+</tr>
+<tr>
+<td><code>aspmDomainId</code></td>
+<td>string</td>
+<td>No</td>
+<td>ASPM domain, for builder-stage findings</td>
+</tr>
+<tr>
+<td><code>strideThreats</code></td>
+<td>array</td>
+<td>No</td>
+<td>STRIDE categories this finding evidences</td>
+</tr>
+<tr>
+<td><code>owaspIds</code></td>
+<td>array</td>
+<td>No</td>
+<td>OWASP Top-10 entries (API/LLM/Web/Agentic) this finding maps to</td>
+</tr>
+<tr>
+<td><code>mitreTechniques</code></td>
+<td>array</td>
+<td>No</td>
+<td>MITRE ATT&amp;CK technique IDs this finding evidences</td>
+</tr>
+<tr>
+<td><code>producerRunId</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>AnalysisRun</code> that produced this finding</td>
+</tr>
+<tr>
+<td><code>promotedToId</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>Scenario</code> ID this finding was promoted to, once validated and synthesized</td>
+</tr>
+</tbody>
+</table>
+<h2 id="securityrequirement">SecurityRequirement<a class="headerlink" href="#securityrequirement" title="Permanent link">&para;</a></h2>
+<p>An invariant or prohibited outcome derived from product-definition-stage analysis, with links to its origin and the runs/gates that verify it.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sr-tenant-isolation&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;statement&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A principal can access resources only within its own tenant&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invariant&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">&quot;criticality&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;critical&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nt">&quot;originArtifactId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;artifact-product-definition-1&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">&quot;verificationIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;run-implementation-1786726804355777000&quot;</span><span class="p">]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>statement</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The requirement in plain language</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>invariant</code>, <code>prohibited-outcome</code>, <code>privacy-requirement</code>, <code>approval-requirement</code>, <code>recovery-requirement</code>, <code>detection-requirement</code></td>
+</tr>
+<tr>
+<td><code>criticality</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>critical</code>, <code>high</code>, <code>medium</code>, <code>low</code></td>
+</tr>
+<tr>
+<td><code>originArtifactId</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>Artifact</code> this requirement was derived from</td>
+</tr>
+<tr>
+<td><code>verificationIds</code></td>
+<td>array</td>
+<td>No</td>
+<td><code>AnalysisRun</code> or <code>Gate</code> IDs that verify this requirement</td>
+</tr>
+</tbody>
+</table>
+<h2 id="architectureassertion">ArchitectureAssertion<a class="headerlink" href="#architectureassertion" title="Permanent link">&para;</a></h2>
+<p>An intended-vs-observed property for drift detection — what the design required, what was actually observed, and whether the two agree.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assertion-admin-api-exposure&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;subjectId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;admin-api&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;predicate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network-exposure&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;expected&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;private&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">&quot;observed&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="nt">&quot;expectedEvidenceIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-trd-network-design&quot;</span><span class="p">],</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="nt">&quot;observedEvidenceIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-ingress-config&quot;</span><span class="p">],</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;contradicted&quot;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>subjectId</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Component/element this assertion is about</td>
+</tr>
+<tr>
+<td><code>predicate</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Property being asserted, e.g. <code>network-exposure</code></td>
+</tr>
+<tr>
+<td><code>expected</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Value the design requires</td>
+</tr>
+<tr>
+<td><code>observed</code></td>
+<td>string</td>
+<td>No</td>
+<td>Value actually observed, once implementation/deployment evidence exists</td>
+</tr>
+<tr>
+<td><code>expectedEvidenceIds</code> / <code>observedEvidenceIds</code></td>
+<td>array</td>
+<td>No</td>
+<td><code>Evidence</code> IDs supporting each side</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>supported</code>, <code>contradicted</code>, <code>unverified</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gate">Gate<a class="headerlink" href="#gate" title="Permanent link">&para;</a></h2>
+<p>A stage-gate evaluation: the criteria checked, who or what evaluated them, and the result. Enforcing gates (e.g. blocking CI) is deliberately the consuming pipeline's responsibility — <code>Gate</code> only records the outcome.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gate-implementation&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;stage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;criteria&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;metric&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;has-evidence-per-finding&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;equals&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">},</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="p">{</span><span class="nt">&quot;metric&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;all-aspm-domains-covered&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;operator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;equals&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="p">],</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;failed&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nt">&quot;evaluatedBy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evaluation.EvaluateStageGate&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="nt">&quot;evidenceIds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;evidence-billing-query-1&quot;</span><span class="p">],</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="nt">&quot;evaluatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-08-14T20:39:40Z&quot;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>PDLC stage this gate evaluates</td>
+</tr>
+<tr>
+<td><code>criteria</code></td>
+<td>array</td>
+<td>No</td>
+<td>Deterministic checks evaluated: <code>{metric, operator, value}</code></td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>passed</code>, <code>failed</code>, <code>pending</code></td>
+</tr>
+<tr>
+<td><code>evaluatedBy</code></td>
+<td>string</td>
+<td>No</td>
+<td>Evaluator identifier, e.g. a policy engine or run ID</td>
+</tr>
+<tr>
+<td><code>evidenceIds</code></td>
+<td>array</td>
+<td>No</td>
+<td><code>Evidence</code> IDs supporting this evaluation</td>
+</tr>
+<tr>
+<td><code>evaluatedAt</code></td>
+<td>string</td>
+<td>No</td>
+<td>RFC 3339 timestamp</td>
+</tr>
+</tbody>
+</table>
+<p><code>tms analyze --apply</code> computes a subset of coverage checks deterministically from the model (<code>has-stride-mapping</code>, <code>has-prohibited-outcome</code>, <code>has-invariant</code>, <code>has-assets</code>, <code>has-threat-actor</code>, <code>has-evidence-per-finding</code>) and records the resulting <code>Gate</code> automatically; <code>tms gate</code> reads back an already-recorded gate and does not compute one itself.</p>
+<h2 id="lifecycle">Lifecycle<a class="headerlink" href="#lifecycle" title="Permanent link">&para;</a></h2>
+<p>Groups stage-tracking state for the model as a whole.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;currentStage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;implementation&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>currentStage</code></td>
+<td>string</td>
+<td>No</td>
+<td>PDLC stage most recently analyzed</td>
+</tr>
+</tbody>
+</table>
+<p><code>currentStage</code> supersedes the older, deprecated top-level <code>phase</code> field: a lifecycle-aware model accumulates <code>AnalysisRuns</code>, <code>Findings</code>, and <code>Evidence</code> from multiple stages simultaneously, so <code>currentStage</code> records only the most recently active stage, not the model's sole phase.</p>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>validate</code> — Only validates, provides detailed errors</li>
-<li><code>generate</code> — Validates then generates output</li>
-</ul>
-<p>Use <code>validate</code> for:</p>
-<ul>
-<li>CI/CD checks</li>
-<li>Pre-commit hooks</li>
-<li>Debugging validation errors</li>
-</ul>
-<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../generate/">generate</a> — Generate diagrams</li>
-<li><a href="../../specification/">JSON IR Specification</a> — Schema reference</li>
+<li><a href="../stage-reports/">Stage Report Profiles</a> — per-stage input/output contracts these objects flow through</li>
+<li><a href="../../agents/">AI Agents</a> — the agent workflows that produce <code>AnalysisResults</code></li>
+<li><a href="../">JSON IR Overview</a> — the diagram-centric <code>ThreatModel</code> fields</li>
 </ul>
 
 

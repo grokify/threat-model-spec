@@ -161,6 +161,10 @@
          <lastmod>2026-08-16</lastmod>
     </url>
     <url>
+         <loc>https://grokify.github.io/threat-model-spec/specification/lifecycle-objects/</loc>
+         <lastmod>2026-08-16</lastmod>
+    </url>
+    <url>
          <loc>https://grokify.github.io/threat-model-spec/specification/mappings/</loc>
          <lastmod>2026-08-16</lastmod>
     </url>
@@ -234,6 +238,22 @@
     </url>
     <url>
          <loc>https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-002/UXD/</loc>
+         <lastmod>2026-08-16</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-003/PLAN/</loc>
+         <lastmod>2026-08-16</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-003/PRD/</loc>
+         <lastmod>2026-08-16</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-003/ROADMAP/</loc>
+         <lastmod>2026-08-16</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-003/TRD/</loc>
          <lastmod>2026-08-16</lastmod>
     </url>
     <url>

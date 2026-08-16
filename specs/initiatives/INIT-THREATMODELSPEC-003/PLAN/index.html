@@ -10,7 +10,7 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-002/TRD/">
+        <link rel="canonical" href="https://grokify.github.io/threat-model-spec/specs/initiatives/INIT-THREATMODELSPEC-003/PLAN/">
       
       
       
@@ -23,7 +23,7 @@
     
     
       
-        <title>TRD — PDLC Threat Modeling — Stage Analysis Reports and Agent Workflows - Threat Model Spec</title>
+        <title>PDLC Lifecycle Analysis — Follow-On Hardening and Persistence — Plan - Threat Model Spec</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#trd-pdlc-threat-modeling-stage-analysis-reports-and-agent-workflows" class="md-skip">
+        <a href="#pdlc-lifecycle-analysis-follow-on-hardening-and-persistence-plan" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TRD — PDLC Threat Modeling — Stage Analysis Reports and Agent Workflows
+              PDLC Lifecycle Analysis — Follow-On Hardening and Persistence — Plan
             
           </span>
         </div>
@@ -2227,10 +2227,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#architecture-overview" class="md-nav__link">
+  <a href="#implementation-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture Overview
+        Implementation Order
       
     </span>
   </a>
@@ -2238,10 +2238,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-lifecycle-ir-objects-irlifecyclego-irevidencego-irfindingsgo" class="md-nav__link">
+  <a href="#verification-gates" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Lifecycle IR Objects (ir/lifecycle.go, ir/evidence.go, ir/findings.go)
+        Verification Gates
       
     </span>
   </a>
@@ -2249,104 +2249,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-pdlc-stages-and-spec-categorization-multi-repo-relationship" class="md-nav__link">
+  <a href="#success-criteria" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. PDLC Stages and Spec Categorization (multi-repo relationship)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-stage-analysis-report-profiles-docsspecificationstage-reports-irreport_profilego" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Stage Analysis Report Profiles (docs/specification/stage-reports/, ir/report_profile.go)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-agent-workflows-agnostic-generated-and-the-tms-analyze-command" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Agent Workflows (agnostic + generated) and the tms analyze Command
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-evaluation-integration-evaluation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Evaluation Integration (evaluation/)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Evaluation Integration (evaluation/)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#structured-evaluation-gap-assessment-fr54-resolved-rmi-threatmodelspec-105" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        structured-evaluation gap assessment (FR5.4) — RESOLVED, RMI-THREATMODELSPEC-105
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-framework-reports-irframework_reportgo-cmdtms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Framework Reports (ir/framework_report.go, cmd/tms)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-schema-and-compatibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Schema and Compatibility
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-testing-strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Testing Strategy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-storage-note-out-of-scope-forward-compatible" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. Storage Note (out of scope, forward-compatible)
+        Success Criteria
       
     </span>
   </a>
@@ -2373,192 +2279,29 @@
   
 
 
-<h1 id="trd-pdlc-threat-modeling-stage-analysis-reports-and-agent-workflows">TRD — PDLC Threat Modeling — Stage Analysis Reports and Agent Workflows<a class="headerlink" href="#trd-pdlc-threat-modeling-stage-analysis-reports-and-agent-workflows" title="Permanent link">&para;</a></h1>
-<p><strong>Initiative:</strong> <code>INIT-THREATMODELSPEC-002</code></p>
-<h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PDLC artifacts (specs, code, IaC, deployments, telemetry)
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        │
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        ▼
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>AI coding agent (Claude Code) ── runs ──▶ tms analyze --stage &lt;s&gt; --profile &lt;p&gt;
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>   (does the reasoning)                     (loads profile + inputs, drives workflow,
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        │                                    writes the run, grades it — no reasoning)
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        │  emit claims/patches
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        ▼
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>Threat Model Spec IR (lifecycle objects + existing model)
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        │
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        ├── Deterministic validation (schema, referential integrity, stage rules)
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        ├── structured-evaluation (rubric / claims / summary per stage)   ← judge layer
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        ├── Framework report exports (STRIDE, LINDDUN, ATT&amp;CK, OWASP, attack tree)
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        ├── Diagram rendering (D2) and STIX 2.1 export (existing)
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        └── Gate evaluation (recorded criteria → GO/NO-GO)
-</code></pre></div>
-<p>Spec first, analysis on top: Go structs in <code>ir/</code> remain the source of truth (JSON Schemas generated via invopop/jsonschema → schemakit lint → <code>//go:embed</code>). Built on the format, <code>tms analyze</code> and the shipped agent/subagent specs are the analysis-enablement layer — the agent reasons, <code>tms</code> orchestrates, grades, and stores; neither reimplements a scanner.</p>
-<h2 id="1-lifecycle-ir-objects-irlifecyclego-irevidencego-irfindingsgo">1. Lifecycle IR Objects (<code>ir/lifecycle.go</code>, <code>ir/evidence.go</code>, <code>ir/findings.go</code>)<a class="headerlink" href="#1-lifecycle-ir-objects-irlifecyclego-irevidencego-irfindingsgo" title="Permanent link">&para;</a></h2>
-<p>New top-level optional fields on <code>ThreatModel</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ThreatModel</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// ... existing fields unchanged ...</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1">// Lifecycle groups stage-tracking state.</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">Lifecycle</span><span class="w"> </span><span class="o">*</span><span class="nx">Lifecycle</span><span class="w"> </span><span class="s">`json:&quot;lifecycle,omitempty&quot;`</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="c1">// Artifacts are the inputs analyses ran against.</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nx">Artifacts</span><span class="w"> </span><span class="p">[]</span><span class="nx">Artifact</span><span class="w"> </span><span class="s">`json:&quot;artifacts,omitempty&quot;`</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1">// AnalysisRuns record who analyzed what, how, and when.</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nx">AnalysisRuns</span><span class="w"> </span><span class="p">[]</span><span class="nx">AnalysisRun</span><span class="w"> </span><span class="s">`json:&quot;analysisRuns,omitempty&quot;`</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="c1">// Evidence is inspectable material findings and assertions cite.</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nx">Evidence</span><span class="w"> </span><span class="p">[]</span><span class="nx">Evidence</span><span class="w"> </span><span class="s">`json:&quot;evidence,omitempty&quot;`</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c1">// SecurityRequirements are invariants and prohibited outcomes with verification links.</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nx">SecurityRequirements</span><span class="w"> </span><span class="p">[]</span><span class="nx">SecurityRequirement</span><span class="w"> </span><span class="s">`json:&quot;securityRequirements,omitempty&quot;`</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="c1">// ArchitectureAssertions capture intended vs. observed properties (drift detection).</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nx">ArchitectureAssertions</span><span class="w"> </span><span class="p">[]</span><span class="nx">ArchitectureAssertion</span><span class="w"> </span><span class="s">`json:&quot;architectureAssertions,omitempty&quot;`</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="c1">// Findings are analyzer claims requiring adjudication.</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nx">Findings</span><span class="w"> </span><span class="p">[]</span><span class="nx">Finding</span><span class="w"> </span><span class="s">`json:&quot;findings,omitempty&quot;`</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="c1">// Gates record stage-gate criteria and evaluation results.</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nx">Gates</span><span class="w"> </span><span class="p">[]</span><span class="nx">Gate</span><span class="w"> </span><span class="s">`json:&quot;gates,omitempty&quot;`</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="c1">// FrameworkReports hold materialized framework-specific views.</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="nx">FrameworkReports</span><span class="w"> </span><span class="p">[]</span><span class="nx">FrameworkReport</span><span class="w"> </span><span class="s">`json:&quot;frameworkReports,omitempty&quot;`</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="p">}</span>
-</code></pre></div>
-<p>Key type decisions:</p>
-<ul>
-<li><strong>Finding vs. Threat vs. Scenario.</strong> Existing <code>Scenario</code>/threat objects are unchanged. <code>Finding</code> is a new concept: an analyzer's <em>claim</em> (type: <code>threat-candidate</code>, <code>vulnerability</code>, <code>weakness</code>, <code>drift</code>, <code>control-gap</code>) with <code>evidenceIds</code>, <code>confidence</code>, <code>status</code> (<code>candidate</code> → <code>validated</code>/<code>rejected</code>/<code>insufficient-evidence</code>), and <code>producerRunId</code>. A validated threat-candidate finding may be promoted to a Scenario/threat by a synthesis step; the finding records <code>promotedToId</code>.</li>
-<li><strong>Observation folded into Finding.</strong> Rather than a fourth object type, near-direct facts are findings with <code>type: "observation"</code> and confidence ≈ 1.0 (resolves the ideation open question in favor of fewer object types; revisit only if dogfooding shows harm).</li>
-<li><strong>Evidence locators</strong> are a tagged union: <code>file</code> (path, startLine, endLine), <code>document</code> (uri, section), <code>config</code> (path, keyPath), <code>query</code> (dataSource, query, timeWindow), <code>url</code> (url, observedAt). All carry <code>digest</code> and optional <code>excerpt</code>.</li>
-<li><strong>Stage</strong> is a string enum whose values match pdlc's six stage IDs: <code>product-definition</code>, <code>builder-definition</code>, <code>implementation</code>, <code>deployment</code>, <code>builder-operations</code>, <code>product-operations</code>. threat-model-spec imports <code>github.com/ProductBuildersHQ/pdlc</code> directly for the <code>pdlc.Stage*</code> constants (it is not in the pdlc→visionspec→specification-workflow-spec dependency chain, so no cycle). <code>ir.ModelPhase</code> is deprecated (kept, documented as superseded by <code>Lifecycle.CurrentStage</code>).</li>
-<li><strong>IDs</strong> follow existing repo conventions (kebab prefixed: <code>artifact-</code>, <code>run-</code>, <code>evidence-</code>, <code>finding-</code>, <code>req-</code>, <code>assert-</code>, <code>gate-</code>). Validation enforces referential integrity across all new reference fields (extends <code>ir/validate.go</code>).</li>
-</ul>
-<h2 id="2-pdlc-stages-and-spec-categorization-multi-repo-relationship">2. PDLC Stages and Spec Categorization (multi-repo relationship)<a class="headerlink" href="#2-pdlc-stages-and-spec-categorization-multi-repo-relationship" title="Permanent link">&para;</a></h2>
-<p>The stage taxonomy is defined once and consumed downstream — threat-model-spec never learns individual spec types or workflows. Six stages: <code>product-definition</code>, <code>builder-definition</code>, <code>implementation</code>, <code>deployment</code>, <code>builder-operations</code>, <code>product-operations</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>productbuildershq-frameworks/  PDLC catalog entry: 6 stage IDs + AI-DLC crosswalk
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        │  imported + re-exported by
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        ▼
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>pdlc/  pdlc.Stages()/StageByID() + pdlc.Stage* ID constants (normative spec module)
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        │                                    │
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        │  string-constant convention        │  direct Go import
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        │  (NO Go import — cycle:             │  (safe — TMS is outside the
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        │   pdlc→visionspec→spec-wf-spec)     │   pdlc→visionspec→spec-wf-spec chain)
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        ▼                                    ▼
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>specification-workflow-spec/           threat-model-spec/
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  tags each SpecType with a              imports pdlc.Stage* AND
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  PDLCStage string constant              specification-workflow-spec; carries the
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  (matching pdlc&#39;s values)               conformance test asserting the two agree
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        │                                    │
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        │  workflow → {spec → PDLCStage} categorization
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        └──────────────────┬─────────────────┘
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>                           ▼
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>threat-model-spec buckets a workflow&#39;s specs into the stages and analyzes BY STAGE
-</code></pre></div>
-<ul>
-<li><strong>productbuildershq-frameworks</strong> holds the machine-readable PDLC framework catalog entry (six stages, deliverables, gates, dependency graph, and the AI-DLC crosswalk), alongside the existing AIDLC entry. This is the source of truth for the stage IDs.</li>
-<li><strong>pdlc</strong> re-exports the catalog via <code>pdlc.Stages()</code>, <code>pdlc.StageByID()</code>, and <code>pdlc.Stage*</code> ID constants, and describes the six-stage model normatively in <code>docs/specification/lifecycle.md</code>. Stage IDs are the normative machine-readable identifiers.</li>
-<li><strong>specification-workflow-spec</strong> adds a <code>PDLCStage</code> field to <code>SpecType</code> in its registry (<code>pkg/spectype</code>) as <strong>string constants that match pdlc's values by convention, not by Go import</strong> — importing pdlc there would close a dependency cycle (<code>pdlc → visionspec → specification-workflow-spec</code>). Orthogonal to the existing <code>Category</code> (source/gtm/technical): e.g. <code>press</code>/<code>faq</code>/<code>prd</code>/<code>mrd</code> → <code>product-definition</code>; <code>trd</code>/<code>ird</code>/<code>tpd</code> → <code>builder-definition</code>. Execution-tracking types (<code>plan</code>, <code>roadmap</code>) carry no stage.</li>
-<li><strong>threat-model-spec</strong> imports both <code>pdlc</code> (for the <code>pdlc.Stage*</code> constants, mirrored into an <code>ir.Stage</code> enum) and <code>specification-workflow-spec</code> (for the categorization registry) — it is the one repo in the chain that can safely import both, so it <strong>carries the conformance test</strong> asserting specification-workflow-spec's <code>PDLCStage</code> values equal pdlc's stage IDs. Given a workflow, it reads the registry to bucket specs into stages and analyzes by stage — so a new spec workflow or spec type requires <strong>zero</strong> threat-model-spec changes, provided the type is categorized upstream. Non-spec artifacts (code, IaC, deployment manifests, telemetry) are not workflow specs; the implementation/deployment/builder-operations stages ingest those by artifact type directly (see the ASPM overlay, §3).</li>
-<li>Security analysis is documented in pdlc as a per-stage cross-cutting activity pointing at threat-model-spec's report profiles (pdlc stays tool-neutral).</li>
-</ul>
-<h2 id="3-stage-analysis-report-profiles-docsspecificationstage-reports-irreport_profilego">3. Stage Analysis Report Profiles (<code>docs/specification/stage-reports/</code>, <code>ir/report_profile.go</code>)<a class="headerlink" href="#3-stage-analysis-report-profiles-docsspecificationstage-reports-irreport_profilego" title="Permanent link">&para;</a></h2>
-<p>Each profile is both prose (normative spec section) and data (embedded JSON consumed by <code>tms</code>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">StageReportProfile</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">Stage</span><span class="w">         </span><span class="nx">Stage</span><span class="w">    </span><span class="s">`json:&quot;stage&quot;`</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// InputMode is how this stage&#39;s inputs are resolved:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="c1">//   &quot;workflow-specs&quot; — all specs a workflow categorizes into this PDLC stage</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="c1">//                      (product-definition, builder-definition); resolved via</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">//                      the specification-workflow-spec registry, no list here.</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="c1">//   &quot;artifact-types&quot; — non-spec artifacts by type (implementation,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="c1">//                      deployment, builder-operations, product-operations).</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="nx">InputMode</span><span class="w">      </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;inputMode&quot;`</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="nx">ArtifactTypes</span><span class="w">  </span><span class="p">[]</span><span class="nx">ArtifactType</span><span class="w"> </span><span class="s">`json:&quot;artifactTypes,omitempty&quot;`</span><span class="w"> </span><span class="c1">// used when InputMode == artifact-types</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nx">ASPMDomains</span><span class="w">    </span><span class="p">[]</span><span class="nx">ASPMDomain</span><span class="w">   </span><span class="s">`json:&quot;aspmDomains,omitempty&quot;`</span><span class="w">   </span><span class="c1">// builder-side stages: the ASPM domains this stage&#39;s report organizes findings by</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nx">OutputObjects</span><span class="w">  </span><span class="p">[]</span><span class="kt">string</span><span class="w">       </span><span class="s">`json:&quot;outputObjects&quot;`</span><span class="w">  </span><span class="c1">// IR object types the report must populate</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nx">CoverageChecks</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w">       </span><span class="s">`json:&quot;coverageChecks&quot;`</span><span class="w"> </span><span class="c1">// deterministic completeness checks</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nx">RubricID</span><span class="w">       </span><span class="kt">string</span><span class="w">         </span><span class="s">`json:&quot;rubricId&quot;`</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="p">}</span>
-</code></pre></div>
-<p>Contents per stage as specified in PRD FR3 (product-definition → assets/abuse-cases/invariants; builder-definition → boundaries/threats/controls/API-contract-drift; implementation → findings/drift/control-verification, ASPM 1–5; deployment → exposure/exploitability/config, ASPM 6–9; builder-operations → detections/incidents/effectiveness, ASPM 10 + dynamic testing; product-operations → production abuse signal + invariant drift). The spec-driven stages (product-definition, builder-definition) declare no spec-type list — they consume whatever the workflow categorizes into that stage; the builder-side stages enumerate <code>ArtifactTypes</code> and, where applicable, <code>ASPMDomains</code>.</p>
-<p><strong>ASPM overlay (<code>ir/aspm.go</code>).</strong> <code>ASPMDomain</code> is a string enum of the 10 Application Security Posture Management domains, each with a primary PDLC stage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">ASPMDomain</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">           </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;id&quot;`</span><span class="w">           </span><span class="c1">// git-posture | code-security | secret-pii-scan | open-source-security | sbom | iac-scan | cicd-posture | container-security | artifact-security | cloud-context</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">Name</span><span class="w">         </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;name&quot;`</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">PrimaryStage</span><span class="w"> </span><span class="nx">Stage</span><span class="w">  </span><span class="s">`json:&quot;primaryStage&quot;`</span><span class="w"> </span><span class="c1">// implementation | deployment | builder-operations</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
-</code></pre></div>
-<p>Mapping: implementation ← git-posture, code-security, secret-pii-scan, open-source-security, sbom; deployment ← iac-scan, cicd-posture, container-security, artifact-security; builder-operations ← cloud-context. Findings and evidence may carry an <code>aspmDomainId</code> so coverage is measurable per domain. Domains near a stage seam (git-posture, sbom, cicd-posture, iac-scan) carry a <em>primary</em> stage but their evidence may attach to an adjacent stage — the primary/cross-stage distinction is a field, not a hard partition. ASPM is the <em>static-posture</em> slice of the builder stages; dynamic testing (DAST, pen test, red team) rides alongside it and is not an ASPM domain.</p>
-<p><strong>Artifact-availability profiles</strong> (<code>first-party</code>, <code>third-party</code>, <code>open-source</code>) are data files mapping available artifact types → permitted stage analyses → report-scope annotations. <code>AnalysisRun.Profile</code> records which profile governed the run.</p>
-<h2 id="4-agent-workflows-agnostic-generated-and-the-tms-analyze-command">4. Agent Workflows (agnostic + generated) and the <code>tms analyze</code> Command<a class="headerlink" href="#4-agent-workflows-agnostic-generated-and-the-tms-analyze-command" title="Permanent link">&para;</a></h2>
-<p><strong>Agnostic agent/workflow definitions (<code>agents/specs/</code>).</strong> The repo already follows the <code>multi-agent-spec</code> convention: <code>agents/specs/agents/*.md</code>, <code>agents/specs/commands/*.md</code>, <code>agents/specs/skills/*.md</code> (today's diagram-creation agents), with generated tool plugins in <code>agents/plugins/claude/</code>. This initiative adds the six per-stage analysis agents to the same <code>agents/specs/</code> tree — one agent (and slash command) per stage, plus any shared skills. Each stage agent's definition carries the analysis contract: its inputs (resolved by the stage's <code>StageReportProfile</code> — categorized workflow specs for the spec-driven stages, artifact types for the code/deploy/ops stages), ordered analysis steps, output object contract (IR object types + schema fragment refs), adversarial-critic step, and rubric reference. Definitions are validated in tests (contracts parse, referenced rubrics exist, artifact types are known).</p>
-<p><strong>Generated per-tool plugins (<code>agents/plugins/</code>).</strong> <code>assistantkit</code> generates the Claude Code, Kiro, and Gemini plugins from <code>agents/specs/</code> into <code>agents/plugins/{claude,kiro,gemini}/</code>, exactly as the existing diagram agents are generated. No tool gets a hand-authored path — the agnostic spec is the single source. A generation-freshness test (same discipline as the schema <code>//go:embed</code> check) fails if <code>agents/plugins/</code> is stale relative to <code>agents/specs/</code>. This keeps the format's vendor-neutrality intact: Claude Code is one generation target among several.</p>
-<p><strong>The <code>tms analyze</code> command (<code>cmd/tms</code>).</strong> Orchestration entry point an AI coding agent invokes; performs no analytical reasoning itself. Shape:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>tms analyze &lt;model.json&gt; --stage &lt;stage&gt; --profile &lt;artifact-profile&gt; [inputs...]
-</code></pre></div>
-<p>Steps: (1) load the stage's <code>StageReportProfile</code> and the artifact-availability profile; (2) resolve declared input artifacts, recording them as <code>Artifact</code> objects; (3) open an <code>AnalysisRun</code> (method, stage, profile, producer = invoking agent, status <code>in-progress</code>); (4) hand the agent the workflow spec and gathered inputs — the agent reasons and returns findings/evidence/claims as the output-object contract; (5) validate and write them into the model under the run; (6) grade via the stage rubric (structured-evaluation), attaching judge provenance; (7) close the run. The command mutates the model; it is the single writing verb (see UXD). Reasoning lives in the agent; orchestration, structured output, and grading live in <code>tms</code>. When no agent is driving (e.g. plain CI), <code>tms analyze --dry-run</code> reports what <em>would</em> run and what inputs are missing, without invoking an agent.</p>
-<h2 id="5-evaluation-integration-evaluation">5. Evaluation Integration (<code>evaluation/</code>)<a class="headerlink" href="#5-evaluation-integration-evaluation" title="Permanent link">&para;</a></h2>
-<p>Existing: <code>evaluation/</code> loads rubric JSON and converts results to structured-evaluation <code>rubric.Rubric</code> and <code>claims.ClaimsReport</code>. Extensions:</p>
-<ul>
-<li><strong>Six stage rubrics</strong> in <code>evaluation/rubrics/stages/</code> (<code>product-definition.rubric.json</code>, … <code>product-operations.rubric.json</code>) with categories per stage (e.g., builder-definition: boundary-coverage, threat-completeness, control-mapping, validation-plans, evidence-grounding; implementation: evidence-support, reachability, drift-detection, precondition-realism, ASPM-domain-coverage).</li>
-<li><strong>Gate summaries</strong> via <code>summary.SummaryReport</code>: deterministic checks (schema valid, referential integrity, coverage checks) + rubric verdicts + claims verdicts → GO/NO-GO per stage gate; written back into <code>Gate.Result</code> with evidence.</li>
-<li><strong>Judge provenance:</strong> map <code>rubric.JudgeMetadata</code> (judge id/model/version) + rubric version + run id onto <code>AnalysisRun</code> for judge-type runs, so every assessment is attributable.</li>
-</ul>
-<h3 id="structured-evaluation-gap-assessment-fr54-resolved-rmi-threatmodelspec-105">structured-evaluation gap assessment (FR5.4) — RESOLVED, RMI-THREATMODELSPEC-105<a class="headerlink" href="#structured-evaluation-gap-assessment-fr54-resolved-rmi-threatmodelspec-105" title="Permanent link">&para;</a></h3>
-<p>Verified against structured-evaluation v0.13.0, the actual dependency version, in <code>evaluation/pdlc_conventions.go</code>. All four candidate gaps resolved to "use an existing capability via a documented convention" — no upstream PR was needed for the first three; the fourth is a confirmed gap, deliberately deferred.</p>
-<table>
-<thead>
-<tr>
-<th>Candidate gap</th>
-<th>Resolution</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structured evidence locators on <code>claims.Source</code> (file+line, query+window) vs. free-text</td>
-<td><strong>No upstream change.</strong> <code>ir.Evidence</code>/<code>EvidenceLocator</code> (RMI-103) is already the structured, typed locator; <code>claims.InternalValidation.EvidencePath</code> stays free-text by design (it locates evidence within the evaluated document, not an arbitrary artifact) — cite the <code>ir.Evidence</code> ID/Summary there.</td>
-</tr>
-<tr>
-<td><code>insufficient-evidence</code> verdict on claims/rubric</td>
-<td><strong>No upstream change.</strong> <code>claims.VerdictNeedsReview</code> already means this; <code>FindingStatusToVerdict</code>/<code>VerdictToFindingStatus</code> map it to/from <code>ir.FindingStatusInsufficientEvidence</code>, round-trip tested.</td>
-</tr>
-<tr>
-<td>Stage/profile metadata on report envelope</td>
-<td><strong>No upstream change.</strong> <code>rubric.Rubric.ReviewType</code> is the intended carrier — <code>StageReviewType(stage)</code> sets it to the <code>ir.Stage</code> value.</td>
-</tr>
-<tr>
-<td>Multi-judge disagreement representation</td>
-<td><strong>Confirmed gap.</strong> <code>combine.AggregateResults</code>/<code>AggregateWithDAG</code> aggregate <em>different</em> agents' results, not several judges scoring the <em>same</em> subject. Deliberately deferred per the rule below — no Phase 1 code needs it; first consumer is RMI-108/109 (Phase 2 rubrics/gates).</td>
-</tr>
-</tbody>
-</table>
-<p>Rule: prefer conventions over upstream changes; any upstream change must be additive and land before the TMS feature that needs it.</p>
-<h2 id="6-framework-reports-irframework_reportgo-cmdtms">6. Framework Reports (<code>ir/framework_report.go</code>, <code>cmd/tms</code>)<a class="headerlink" href="#6-framework-reports-irframework_reportgo-cmdtms" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kd">type</span><span class="w"> </span><span class="nx">FrameworkReport</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;id&quot;`</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nx">Framework</span><span class="w">   </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;framework&quot;`</span><span class="w"> </span><span class="c1">// stride | linddun | mitre-attack | owasp | attack-tree</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="nx">GeneratedAt</span><span class="w"> </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;generatedAt,omitempty&quot;`</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="nx">SourceRevision</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;sourceRevision,omitempty&quot;`</span><span class="w"> </span><span class="c1">// model version/digest it was derived from</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="nx">Body</span><span class="w">        </span><span class="kt">any</span><span class="w">       </span><span class="s">`json:&quot;body&quot;`</span><span class="w"> </span><span class="c1">// framework-specific typed payload (per-framework structs)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">}</span>
-</code></pre></div>
-<ul>
-<li><strong>Computed-first:</strong> <code>tms report --framework X</code> derives the report from the canonical model (STRIDE coverage from mappings + elements; LINDDUN from privacy mappings; ATT&amp;CK from technique mappings + detection coverage matrix (exists); OWASP from owasp mappings + controls; attack-tree from existing attack-tree/attack-graph analysis).</li>
-<li><strong>Materialization optional:</strong> reports can be stored in <code>FrameworkReports</code> with <code>SourceRevision</code> for audit snapshots; <code>tms validate</code> warns when a materialized report is stale relative to the model.</li>
-<li>Exports: JSON (typed payload) and Markdown (templated); reuses existing render patterns.</li>
-</ul>
-<h2 id="7-schema-and-compatibility">7. Schema and Compatibility<a class="headerlink" href="#7-schema-and-compatibility" title="Permanent link">&para;</a></h2>
-<ul>
-<li>All new fields optional; v0.7.0 documents validate against the new schema (regression test with existing examples).</li>
-<li>Regenerate via <code>go run cmd/genschema/main.go schema vNext</code> (positional args: output dir, then version — <code>genschema</code> takes no flags); copy to <code>docs/versions/vNext/</code>.</li>
-<li>Lint with <code>schemakit lint --property-case snake_case</code>, but treat it as a delta check against the current baseline (373 pre-existing errors as of v0.7.0), not a zero-errors gate — see the next point.</li>
-<li>JSON tags remain camelCase for consistency with the existing published spec (documented as a deliberate spec-local convention; the org snake_case rule is noted as not retroactively applied). This is why schemakit lint reports errors on this repo's schemas by design.</li>
-</ul>
-<h2 id="8-testing-strategy">8. Testing Strategy<a class="headerlink" href="#8-testing-strategy" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Per-type enum/JSON round-trip/field tests (repo convention) for every new IR type.</li>
-<li>Referential-integrity validation tests across all new reference fields.</li>
-<li>Backward-compat suite: all v0.7.0-era example models validate unchanged.</li>
-<li>Report-profile and workflow-definition data files validated in tests.</li>
-<li><strong>Stage conformance test (FR1.4):</strong> <code>ir.Stage</code> values equal <code>pdlc.Stage*</code> constants, and every <code>spectype.PDLCStage*</code> value (from specification-workflow-spec) resolves to a real <code>pdlc</code> stage ID. This is the single guard that the string-constant convention across the three repos cannot drift; it lives here because threat-model-spec is the only repo that imports both.</li>
-<li><strong>ASPM mapping test:</strong> every <code>ASPMDomain.PrimaryStage</code> is one of implementation/deployment/builder-operations, and all 10 domains are present.</li>
-<li>Rubric calibration test: seeded-defect fixture model must produce non-passing categories under each stage rubric (guards against rubber-stamp rubrics).</li>
-<li>Framework export golden tests: canonical example model → expected STRIDE/ATT&amp;CK/OWASP report snapshots.</li>
-</ul>
-<h2 id="9-storage-note-out-of-scope-forward-compatible">9. Storage Note (out of scope, forward-compatible)<a class="headerlink" href="#9-storage-note-out-of-scope-forward-compatible" title="Permanent link">&para;</a></h2>
-<p>DoltDB persistence (judge_runs / judge_assessments append-only tables, Dolt commit audit envelope) is deferred to a follow-on initiative. This TRD's requirement on it: all IDs are stable strings and all assessments carry producer run IDs, so tabular persistence needs no schema change.</p>
+<h1 id="pdlc-lifecycle-analysis-follow-on-hardening-and-persistence-plan">PDLC Lifecycle Analysis — Follow-On Hardening and Persistence — Plan<a class="headerlink" href="#pdlc-lifecycle-analysis-follow-on-hardening-and-persistence-plan" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Status:</strong> 🚧 In Progress</p>
+<p><strong>Goal:</strong> Close the residual gaps from INIT-THREATMODELSPEC-002's success-metric review — structured framework categorization, prohibited-outcome authoring, CLI docs, and opt-in DoltDB persistence — releasing as v0.9.0; empirical dogfooding deferred until a qualifying target is named.</p>
+</blockquote>
+<h2 id="implementation-order">Implementation Order<a class="headerlink" href="#implementation-order" title="Permanent link">&para;</a></h2>
+<p>Phases execute in roadmap order; within Phase 1, RMI-200 blocks RMI-201 (the computation reads the new fields), while RMI-202 and RMI-203 are independent and can interleave.</p>
+<ol>
+<li><strong>RMI-200</strong> — Finding fields + validation + schema regen (foundation for 201)</li>
+<li><strong>RMI-201</strong> — <code>ComputeCoverageChecks</code> + tms wiring + agent-spec/plugin updates</li>
+<li><strong>RMI-202</strong> — prohibited-outcome spike → resolution (independent)</li>
+<li><strong>RMI-203</strong> — CLI reference pages (independent)</li>
+<li><strong>RMI-204</strong> — store package (Ent + embedded Dolt)</li>
+<li><strong>RMI-205</strong> — tms integration + <code>tms history</code> + parity tests</li>
+<li><strong>RMI-206</strong> — v0.9.0 release per repo release workflow</li>
+<li><strong>Phase 3 (207–209)</strong> — deferred; starts when a dogfood target satisfying the data requirements is named</li>
+</ol>
+<h2 id="verification-gates">Verification Gates<a class="headerlink" href="#verification-gates" title="Permanent link">&para;</a></h2>
+<p>Every commit batch: <code>go build ./... &amp;&amp; go vet ./... &amp;&amp; go test ./... &amp;&amp; gofmt -l . &amp;&amp; golangci-lint run</code> clean; <code>mkdocs build --strict</code> for doc-touching changes; <code>TestExamplesValidate</code> green with zero example edits before any deliberate retrofits.</p>
+<p>Phase-1 exit: both dogfood models pass <code>has-stride-mapping</code>/<code>has-prohibited-outcome</code> via computed checks; all seven CLI verbs documented.</p>
+<p>Phase-2 exit: store round-trip test green on all three CI OSes; disabled-store parity test proves byte-identical output; v0.9.0 tagged after CI, recorded in visionstudio.</p>
+<h2 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
+<p>PRD § Success Metrics, verified with evidence in RMI-209's review (same discipline as INIT-002's SUCCESS-METRICS-REVIEW.md).</p>
 
 
 
