@@ -2278,7 +2278,7 @@
 <h2 id="input-modes">Input Modes<a class="headerlink" href="#input-modes" title="Permanent link">&para;</a></h2>
 <p>Every profile declares an <code>inputMode</code>:</p>
 <ul>
-<li><strong><code>workflow-specs</code></strong> — the two spec-driven stages (Product Definition, Builder Definition) consume whatever specs a workflow categorizes into that stage, resolved via the <a href="https://github.com/ProductBuildersHQ/specification-workflow-spec">specification-workflow-spec</a> registry. The profile declares no spec-type list of its own — see the <a href="../../design/">PDLC Threat Modeling design</a> for why this keeps threat-model-spec decoupled from individual spec workflows.</li>
+<li><strong><code>workflow-specs</code></strong> — the two spec-driven stages (Product Definition, Builder Definition) consume whatever specs a workflow categorizes into that stage, resolved via the <a href="https://github.com/ProductBuildersHQ/visionspec">visionspec</a> registry. The profile declares no spec-type list of its own — see the <a href="../../design/">PDLC Threat Modeling design</a> for why this keeps threat-model-spec decoupled from individual spec workflows.</li>
 <li><strong><code>artifact-types</code></strong> — the four builder-side stages consume non-spec artifacts (code, IaC, deployment manifests, telemetry, incidents) enumerated directly on the profile.</li>
 </ul>
 <h2 id="aspm-overlay">ASPM Overlay<a class="headerlink" href="#aspm-overlay" title="Permanent link">&para;</a></h2>
