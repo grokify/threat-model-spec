@@ -113,6 +113,17 @@ type Finding struct {
 	// applicable.
 	ASPMDomainID ASPMDomainID `json:"aspmDomainId,omitempty"`
 
+	// STRIDEThreats lists the STRIDE categories this finding evidences.
+	STRIDEThreats []STRIDEThreat `json:"strideThreats,omitempty"`
+
+	// OWASPIds references OWASP Top-10 entries (API/LLM/Web/Agentic lists)
+	// this finding maps to, e.g. "API2:2023".
+	OWASPIds []string `json:"owaspIds,omitempty"`
+
+	// MITRETechniques lists MITRE ATT&CK techniques this finding evidences,
+	// e.g. "T1110" or "T1110.001".
+	MITRETechniques []string `json:"mitreTechniques,omitempty"`
+
 	// ProducerRunID references the AnalysisRun that produced this finding.
 	ProducerRunID string `json:"producerRunId,omitempty"`
 

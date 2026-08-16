@@ -793,6 +793,38 @@ func (tm *ThreatModel) ValidateOWASPMappings() []string {
 	return warnings
 }
 
+// ValidateFindingFrameworkMappings checks that STRIDE/OWASP/MITRE ATT&CK
+// values referenced by Findings are recognized. Returns warnings (not
+// errors) to allow forward compatibility with new framework values.
+func (tm *ThreatModel) ValidateFindingFrameworkMappings() []string {
+	var warnings []string
+
+	validSTRIDE := make(map[STRIDEThreat]bool, len(allSTRIDECategories()))
+	for _, s := range allSTRIDECategories() {
+		validSTRIDE[s] = true
+	}
+
+	for _, f := range tm.Findings {
+		for _, s := range f.STRIDEThreats {
+			if !validSTRIDE[s] {
+				warnings = append(warnings, fmt.Sprintf("findings[id=%s].strideThreats: unrecognized STRIDE category %q", f.ID, s))
+			}
+		}
+		for _, id := range f.OWASPIds {
+			if !ValidateOWASPID(id) {
+				warnings = append(warnings, fmt.Sprintf("findings[id=%s].owaspIds: unrecognized OWASP ID %q", f.ID, id))
+			}
+		}
+		for _, id := range f.MITRETechniques {
+			if !ValidateTechniqueID(id) {
+				warnings = append(warnings, fmt.Sprintf("findings[id=%s].mitreTechniques: unrecognized MITRE ATT&CK technique ID %q", f.ID, id))
+			}
+		}
+	}
+
+	return warnings
+}
+
 // validateLifecycle checks referential integrity across the PDLC lifecycle
 // objects (Artifacts, AnalysisRuns, Evidence, SecurityRequirements,
 // ArchitectureAssertions, Findings, Gates): duplicate IDs within each
