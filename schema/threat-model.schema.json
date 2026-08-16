@@ -2771,6 +2771,24 @@
         "aspmDomainId": {
           "$ref": "#/$defs/ASPMDomainID"
         },
+        "strideThreats": {
+          "items": {
+            "$ref": "#/$defs/STRIDEThreat"
+          },
+          "type": "array"
+        },
+        "owaspIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mitreTechniques": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "producerRunId": {
           "type": "string"
         },
