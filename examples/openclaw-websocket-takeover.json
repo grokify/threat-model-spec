@@ -621,5 +621,13 @@
       "revocable": true,
       "riskLevel": "high"
     }
+  ],
+  "securityRequirements": [
+    {
+      "id": "sr-no-silent-device-pairing",
+      "statement": "A device must never be registered as trusted without an explicit, out-of-band user confirmation — auto-approval from a localhost connection alone is never sufficient.",
+      "type": "prohibited-outcome",
+      "criticality": "critical"
+    }
   ]
 }
