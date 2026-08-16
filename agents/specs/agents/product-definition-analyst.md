@@ -68,8 +68,17 @@ given profile (first-party/third-party/open-source) actually supplies.
 4. **Derive invariants and prohibited outcomes.** For each `SecurityRequirement`,
    trace it to a specific `originArtifactId` — a specific spec and passage,
    not a generic "the system should be secure." Prefer falsifiable
-   statements ("a principal can only access resources within its own
-   tenant") over aspirational ones.
+   statements over aspirational ones. The two most common types are
+   distinct, and a product-definition analysis is usually incomplete
+   without both:
+     - `invariant`: an ongoing property that must always hold, e.g. "a
+       principal can only access resources within its own tenant."
+     - `prohibited-outcome`: a specific bad state or event that must never
+       occur, e.g. "a customer's payment card number is ever written to
+       application logs." Ask, for each asset and abuse scenario you draft:
+       "what is the single worst concrete thing that could happen to this
+       asset?" — that's a prohibited-outcome candidate, not a restatement
+       of the invariant that guards against it.
 5. **Profile plausible threat actors.** Base `ThreatActor` sophistication and
    motivation on the product's actual exposure (public internet? regulated
    data? high-value target?) rather than a boilerplate adversary list.
@@ -79,9 +88,13 @@ given profile (first-party/third-party/open-source) actually supplies.
 7. **Adversarial critic pass.** Before finalizing, re-read your own draft
    findings/requirements playing the skeptic: for each invariant, ask "is
    this actually falsifiable, or does it just restate the goal?"; for each
+   prohibited outcome, ask "is this a specific bad state, or is it just the
+   invariant's failure case restated with different words?"; for each
    scenario, ask "would this survive a challenge that it's just a generic
    OWASP Top 10 entry with the product's name inserted?" Drop or rewrite
-   anything that doesn't survive.
+   anything that doesn't survive. If the draft has invariants but no
+   prohibited outcomes (or vice versa), that itself is worth a second look
+   before finalizing.
 8. **Write `AnalysisResults`** (see Output-Object Contract below) and run
    `tms analyze --apply` to merge and close the run. `tms` validates the
    merged model before writing anything — if validation fails, nothing is
@@ -143,6 +156,13 @@ tms analyze model.json --stage product-definition --profile first-party \
       "type": "invariant",
       "criticality": "high",
       "originArtifactId": "evidence-prd-invoice-export"
+    },
+    {
+      "id": "sr-invoice-url-no-post-expiry-access",
+      "statement": "A signed invoice download URL must never remain retrievable after its 15-minute validity window has elapsed.",
+      "type": "prohibited-outcome",
+      "criticality": "medium",
+      "originArtifactId": "evidence-prd-invoice-export"
     }
   ],
   "assets": [
@@ -192,6 +212,7 @@ Before completing:
 
 - [ ] Every asset has a `Classification`; no obvious secondary asset omitted
 - [ ] Every `SecurityRequirement.originArtifactId` resolves to real Evidence
+- [ ] At least one `prohibited-outcome` requirement drafted, not only `invariant`s
 - [ ] Every `Scenario` has `Preconditions`, `TargetAssetIDs`, and a business impact
 - [ ] Adversarial critic pass completed — generic/unfalsifiable items removed
 - [ ] `tms validate --strict` passes after the apply-mode merge
