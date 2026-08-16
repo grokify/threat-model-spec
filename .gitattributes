@@ -1,0 +1,6 @@
+# Normalize line endings to LF for all text files regardless of platform or
+# local core.autocrlf settings. Windows CI runners default to
+# core.autocrlf=true, which checks text files out with CRLF; several tests
+# (agents/validate_test.go frontmatter parsing, cmd/tms golden-file byte
+# comparisons) depend on files being exactly what was committed.
+* text=auto eol=lf
