@@ -19,7 +19,7 @@ The machine-readable form of every profile is embedded in the `ir` package (`ir/
 
 Every profile declares an `inputMode`:
 
-- **`workflow-specs`** — the two spec-driven stages (Product Definition, Builder Definition) consume whatever specs a workflow categorizes into that stage, resolved via the [specification-workflow-spec](https://github.com/ProductBuildersHQ/specification-workflow-spec) registry. The profile declares no spec-type list of its own — see the [PDLC Threat Modeling design](../../design/) for why this keeps threat-model-spec decoupled from individual spec workflows.
+- **`workflow-specs`** — the two spec-driven stages (Product Definition, Builder Definition) consume whatever specs a workflow categorizes into that stage, resolved via the [visionspec](https://github.com/ProductBuildersHQ/visionspec) registry. The profile declares no spec-type list of its own — see the [PDLC Threat Modeling design](../../design/) for why this keeps threat-model-spec decoupled from individual spec workflows.
 - **`artifact-types`** — the four builder-side stages consume non-spec artifacts (code, IaC, deployment manifests, telemetry, incidents) enumerated directly on the profile.
 
 ## ASPM Overlay

@@ -8,7 +8,7 @@ Turn the approved Product Baseline into a technical threat model: components, da
 
 ## Inputs
 
-Whatever specs a workflow categorizes into the `builder-definition` PDLC stage — typically TRD, IRD, TPD, architecture specs. Resolved via the specification-workflow-spec registry; this profile enumerates no spec-type list of its own.
+Whatever specs a workflow categorizes into the `builder-definition` PDLC stage — typically TRD, IRD, TPD, architecture specs. Resolved via the visionspec registry; this profile enumerates no spec-type list of its own.
 
 ## Output Objects
 

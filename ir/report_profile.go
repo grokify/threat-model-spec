@@ -9,8 +9,8 @@ const (
 	// StageInputModeWorkflowSpecs means inputs are all specs a workflow
 	// categorizes into this PDLC stage (the two spec-driven stages:
 	// Product Definition, Builder Definition), resolved via the
-	// specification-workflow-spec registry — the profile declares no
-	// spec-type list of its own.
+	// visionspec registry — the profile declares no spec-type list of its
+	// own.
 	StageInputModeWorkflowSpecs StageInputMode = "workflow-specs"
 
 	// StageInputModeArtifactTypes means inputs are non-spec artifacts by

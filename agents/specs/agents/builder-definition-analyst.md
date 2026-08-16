@@ -37,7 +37,7 @@ against. You reason about designed behavior, not what's actually built yet.
 **Input mode:** `workflow-specs`.
 
 Accepts spec types tagged `PDLCStageBuilderDefinition` in
-`specification-workflow-spec`:
+`visionspec`:
 
 | Spec | Typical content this agent reads |
 |------|-----------------------------------|

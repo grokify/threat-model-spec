@@ -8,7 +8,7 @@ Establish the security-relevant facts about *what is being built and for whom*, 
 
 ## Inputs
 
-Whatever specs a workflow categorizes into the `product-definition` PDLC stage — typically PRD, MRD, UXD, press release, FAQ, six-pager, opportunity spec. Resolved via the specification-workflow-spec registry (`SpecType.PDLCStage`); this profile enumerates no spec-type list of its own.
+Whatever specs a workflow categorizes into the `product-definition` PDLC stage — typically PRD, MRD, UXD, press release, FAQ, six-pager, opportunity spec. Resolved via the visionspec registry (`SpecType.PDLCStage`); this profile enumerates no spec-type list of its own.
 
 ## Output Objects
 

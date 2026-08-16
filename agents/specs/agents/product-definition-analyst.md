@@ -37,7 +37,7 @@ account for. You reason about intent and business impact, not implementation.
 systems).
 
 Accepts any spec type tagged `PDLCStageProductDefinition` in
-`specification-workflow-spec` (`pkg/spectype`), most commonly:
+`visionspec` (`pkg/spectype`), most commonly:
 
 | Spec | Typical content this agent reads |
 |------|-----------------------------------|
