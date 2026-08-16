@@ -337,13 +337,7 @@ func runGate(_ *cobra.Command, args []string) {
 		}
 		fmt.Println(string(data))
 	} else {
-		fmt.Printf("Gate: stage=%s result=%s\n", gate.Stage, gate.Result)
-		for _, c := range gate.Criteria {
-			fmt.Printf("  - %s %s %s\n", c.Metric, c.Operator, c.Value)
-		}
-		if gate.EvaluatedBy != "" {
-			fmt.Printf("Evaluated by: %s\n", gate.EvaluatedBy)
-		}
+		printGate(*gate)
 	}
 
 	if gateCI && gate.Result != ir.GateResultPassed {

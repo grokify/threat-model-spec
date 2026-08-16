@@ -8,6 +8,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/grokify/threat-model-spec/evaluation"
 	"github.com/grokify/threat-model-spec/ir"
 )
 
@@ -228,6 +229,9 @@ func runApplyMode(tm *ir.ThreatModel, inputPath string, stage ir.Stage) {
 		if results.Findings[i].ProducerRunID == "" {
 			results.Findings[i].ProducerRunID = run.ID
 		}
+		if results.Findings[i].Stage == "" {
+			results.Findings[i].Stage = stage
+		}
 	}
 	for i := range results.Assets {
 		if results.Assets[i].ProducerRunID == "" {
@@ -265,6 +269,16 @@ func runApplyMode(tm *ir.ThreatModel, inputPath string, stage ir.Stage) {
 	candidateRuns[runIdx].CompletedAt = time.Now().UTC().Format(time.RFC3339)
 	candidate.AnalysisRuns = candidateRuns
 
+	evidenceIDs := make([]string, len(results.Evidence))
+	for i, e := range results.Evidence {
+		evidenceIDs[i] = e.ID
+	}
+	gate, err := computeAndUpsertGate(&candidate, stage, evidenceIDs)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error computing gate for stage %q: %v\n", stage, err)
+		os.Exit(1)
+	}
+
 	if err := candidate.Validate(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: applying %s would produce an invalid model, nothing written: %v\n", analyzeApply, err)
 		os.Exit(1)
@@ -276,6 +290,50 @@ func runApplyMode(tm *ir.ThreatModel, inputPath string, stage ir.Stage) {
 	fmt.Printf("Applied %s to %s: %d finding(s), %d evidence, %d assertion(s), %d requirement(s), %d asset(s), %d threat actor(s), %d scenario(s), %d mitigation(s). Run %s completed.\n",
 		analyzeApply, run.ID, len(results.Findings), len(results.Evidence), len(results.ArchitectureAssertions), len(results.SecurityRequirements),
 		len(results.Assets), len(results.ThreatActors), len(results.Scenarios), len(results.Mitigations), run.ID)
+	printGate(gate)
+}
+
+// computeAndUpsertGate evaluates stage's coverage checks deterministically
+// from tm's current (candidate) state, evaluates the resulting Gate, and
+// upserts it into tm.Gates — replacing any existing gate for the same
+// stage, since a re-applied stage's gate must reflect the model's current
+// cumulative state, not the state at some earlier apply.
+//
+// No rubric EvaluationResult is available at apply time — tms has no CLI
+// path for rubric grading yet, so the gate reflects coverage checks alone.
+// Checks ComputeCoverageChecks cannot derive from the IR (e.g.
+// has-trust-boundaries) are simply absent from the coverage map, which
+// EvaluateStageGate treats as not-yet-evaluated rather than failed.
+func computeAndUpsertGate(tm *ir.ThreatModel, stage ir.Stage, evidenceIDs []string) (ir.Gate, error) {
+	coverage, _, err := evaluation.ComputeCoverageChecks(tm, stage)
+	if err != nil {
+		return ir.Gate{}, err
+	}
+	_, gate, err := evaluation.EvaluateStageGate(tm.ID, stage, coverage, nil, evidenceIDs)
+	if err != nil {
+		return ir.Gate{}, err
+	}
+
+	for i := range tm.Gates {
+		if tm.Gates[i].ID == gate.ID {
+			tm.Gates[i] = gate
+			return gate, nil
+		}
+	}
+	tm.Gates = append(tm.Gates, gate)
+	return gate, nil
+}
+
+// printGate prints a Gate the same way `tms gate`'s non-JSON output does,
+// so the two code paths read identically.
+func printGate(gate ir.Gate) {
+	fmt.Printf("Gate: stage=%s result=%s\n", gate.Stage, gate.Result)
+	for _, c := range gate.Criteria {
+		fmt.Printf("  - %s %s %s\n", c.Metric, c.Operator, c.Value)
+	}
+	if gate.EvaluatedBy != "" {
+		fmt.Printf("Evaluated by: %s\n", gate.EvaluatedBy)
+	}
 }
 
 func writeModel(tm *ir.ThreatModel, path string) {
