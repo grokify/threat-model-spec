@@ -436,5 +436,5 @@ Include threat model updates in PRs that introduce:
 
 - [OWASP Threat Modeling](https://owasp.org/www-community/Threat_Modeling)
 - [Microsoft SDL Threat Modeling](https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling)
-- [STRIDE Threat Model](concepts/frameworks/stride.md)
-- [LINDDUN Privacy Framework](concepts/frameworks/linddun.md)
+- [STRIDE Threat Model](../concepts/frameworks/stride.md)
+- [LINDDUN Privacy Framework](../concepts/frameworks/linddun.md)
