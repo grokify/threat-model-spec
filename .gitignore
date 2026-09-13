@@ -36,3 +36,6 @@ Thumbs.db
 
 # MkDocs generated site
 /site/
+
+# Internal ideation notes (not for publication)
+IDEATION_CHAT*.md
