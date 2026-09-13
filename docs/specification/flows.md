@@ -9,6 +9,7 @@ Flows represent data movement between elements in DFD diagrams and interactions 
 | `normal` | Standard data flow | Solid arrow |
 | `attack` | Malicious flow | Red dashed arrow |
 | `exfil` | Data exfiltration | Orange dashed arrow |
+| `coordination` | Inter-agent coordination channel (covert/emergent) | Teal dashed arrow |
 
 ## Flow Structure (DFD)
 
@@ -63,6 +64,20 @@ Data exfiltration flow.
 ```
 
 **Use for:** Data theft, credential exfiltration, unauthorized data access
+
+### Coordination
+
+Inter-agent coordination channel — a possibly covert or emergent channel over
+which a collective of autonomous agents self-organizes toward shared objectives.
+Rendered like a covert C2 channel but with a distinct teal dashed stroke.
+
+```json
+{"from": "agent-a", "to": "shared-mirror", "label": "Directory-name signaling", "type": "coordination"}
+```
+
+**Use for:** emergent agent-collective coordination, covert side channels
+between agents. See the [Agent Collective](index.md) construct for modeling the
+collective itself.
 
 ## Bidirectional Flows
 
