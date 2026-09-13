@@ -9,6 +9,107 @@
   ],
   "releases": [
     {
+      "version": "v0.9.0",
+      "date": "2026-09-13",
+      "highlights": [
+        {
+          "description": "Agentic-collective modeling: agent collectives, emergent coordination channels, and reward-hacking constructs"
+        },
+        {
+          "description": "Incident modeling: vulnerability inventory (KEV-cross-referenceable), timeline, and alignment-failure-mode mappings"
+        },
+        {
+          "description": "Finding framework categorization (STRIDE/OWASP/MITRE) with deterministic coverage checks and computed stage gates"
+        }
+      ],
+      "added": [
+        {
+          "description": "Agent collective modeling: members, coordination channel, emergent behaviors, population/scale",
+          "commit": "27ec614"
+        },
+        {
+          "description": "`coordination` flow type for covert/emergent inter-agent channels",
+          "commit": "27ec614"
+        },
+        {
+          "description": "`reward-hacking` and `emergent-agent-coordination` attack-pattern templates",
+          "commit": "27ec614"
+        },
+        {
+          "description": "Vulnerability inventory (software CVEs and non-software config/credential/design weaknesses) and Timeline",
+          "commit": "27ec614"
+        },
+        {
+          "description": "AlignmentFailureMode mappings and per-section summaries; flattened MITRE ATLAS mapping (id/name)",
+          "commit": "27ec614"
+        },
+        {
+          "description": "Emergent coordination channel rendering (distinct teal dashed stroke)",
+          "commit": "2dba5f5"
+        },
+        {
+          "description": "Agentic-collective emergent-coordination flagship example",
+          "commit": "2bce3f9"
+        },
+        {
+          "description": "STRIDE/OWASP/MITRE framework categorization fields on Finding",
+          "commit": "21bf4bd"
+        },
+        {
+          "description": "ComputeCoverageChecks for deterministic coverage computation",
+          "commit": "268422d"
+        },
+        {
+          "description": "Compute and record stage gates in `tms analyze --apply`",
+          "commit": "04897ca"
+        },
+        {
+          "description": "Prohibited-outcome requirement in the flagship example",
+          "commit": "91fd8ae"
+        },
+        {
+          "description": "Product-definition-analyst guidance for authoring prohibited outcomes",
+          "commit": "4c9565c"
+        }
+      ],
+      "changed": [
+        {
+          "description": "Regenerate threat-model and diagram JSON schemas for agentic-collective types",
+          "commit": "8a26c12"
+        },
+        {
+          "description": "Regenerate threat-model schema for Finding framework fields",
+          "commit": "09c0365"
+        }
+      ],
+      "documentation": [
+        {
+          "description": "v0.9.0 versioned specification snapshot",
+          "commit": "8b8d098"
+        },
+        {
+          "description": "Document lifecycle IR objects and wire into the spec nav",
+          "commit": "29483fb"
+        },
+        {
+          "description": "CLI reference pages for analyze, gate, report, status, profile",
+          "commit": "6c35d5e"
+        },
+        {
+          "description": "Document the assistantkit regeneration workflow for agent plugins",
+          "commit": "6efce98"
+        },
+        {
+          "description": "Add INIT-THREATMODELSPEC-003 specs (PRD/TRD/PLAN/ROADMAP)",
+          "commit": "b342f0a"
+        },
+        {
+          "description": "Cancel INIT-003 Phase 2 (embedded Dolt persistence)",
+          "commit": "9a3ca31"
+        }
+      ]
+    },
+    {
       "version": "v0.8.0",
       "date": "2026-08-15",
       "commit": "13d50d2",
@@ -372,7 +473,7 @@
           "description": "Design-time threat modeling for proactive security analysis during SDLC"
         },
         {
-          "description": "Structured risk assessment with likelihood \u00d7 impact scoring"
+          "description": "Structured risk assessment with likelihood × impact scoring"
         },
         {
           "description": "Asset inventory with sensitivity classification and compliance mapping"
@@ -386,7 +487,7 @@
       ],
       "added": [
         {
-          "description": "`RiskAssessment` type with likelihood \u00d7 impact scoring (1-5 scales)",
+          "description": "`RiskAssessment` type with likelihood × impact scoring (1-5 scales)",
           "commit": "cf1bb0d"
         },
         {
