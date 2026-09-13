@@ -1230,6 +1230,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../versions/v0.9.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../versions/v0.8.0/specification/" class="md-nav__link">
         
   
@@ -1736,6 +1764,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1796,6 +1964,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2281,27 +2477,25 @@
 
 <h1 id="pdlc-lifecycle-analysis-follow-on-hardening-and-persistence-plan">PDLC Lifecycle Analysis — Follow-On Hardening and Persistence — Plan<a class="headerlink" href="#pdlc-lifecycle-analysis-follow-on-hardening-and-persistence-plan" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><strong>Status:</strong> 🚧 In Progress</p>
-<p><strong>Goal:</strong> Close the residual gaps from INIT-THREATMODELSPEC-002's success-metric review — structured framework categorization, prohibited-outcome authoring, CLI docs, and opt-in DoltDB persistence — releasing as v0.9.0; empirical dogfooding deferred until a qualifying target is named.</p>
+<p><strong>Status:</strong> ✅ Phase 1 Complete · Phase 2 Cancelled · Phase 3 Deferred</p>
+<p><strong>Goal:</strong> Close the residual gaps from INIT-THREATMODELSPEC-002's success-metric review — structured framework categorization, prohibited-outcome authoring, and CLI docs. Persistence (originally planned as opt-in embedded Dolt inside this repo) was cancelled and redirected to a <code>visionstudio-cloud</code> initiative — see TRD §4. Empirical dogfooding remains deferred until a qualifying target is named.</p>
 </blockquote>
 <h2 id="implementation-order">Implementation Order<a class="headerlink" href="#implementation-order" title="Permanent link">&para;</a></h2>
-<p>Phases execute in roadmap order; within Phase 1, RMI-200 blocks RMI-201 (the computation reads the new fields), while RMI-202 and RMI-203 are independent and can interleave.</p>
+<p>Phase 1 executed in roadmap order; RMI-200 blocked RMI-201 (the computation reads the new fields), while RMI-202/203/210 were independent and interleaved.</p>
 <ol>
-<li><strong>RMI-200</strong> — Finding fields + validation + schema regen (foundation for 201)</li>
-<li><strong>RMI-201</strong> — <code>ComputeCoverageChecks</code> + tms wiring + agent-spec/plugin updates</li>
-<li><strong>RMI-202</strong> — prohibited-outcome spike → resolution (independent)</li>
-<li><strong>RMI-203</strong> — CLI reference pages (independent)</li>
-<li><strong>RMI-204</strong> — store package (Ent + embedded Dolt)</li>
-<li><strong>RMI-205</strong> — tms integration + <code>tms history</code> + parity tests</li>
-<li><strong>RMI-206</strong> — v0.9.0 release per repo release workflow</li>
+<li><strong>RMI-200</strong> — Finding fields + validation + schema regen (foundation for 201) — done</li>
+<li><strong>RMI-201</strong> — <code>ComputeCoverageChecks</code> + tms wiring + agent-spec/plugin updates — done</li>
+<li><strong>RMI-202</strong> — prohibited-outcome spike → resolution — done</li>
+<li><strong>RMI-203</strong> — CLI reference pages — done</li>
+<li><strong>RMI-210</strong> — Lifecycle IR objects documentation (added mid-phase) — done</li>
+<li>~~RMI-204/205/206~~ — cancelled; see TRD §4</li>
 <li><strong>Phase 3 (207–209)</strong> — deferred; starts when a dogfood target satisfying the data requirements is named</li>
 </ol>
 <h2 id="verification-gates">Verification Gates<a class="headerlink" href="#verification-gates" title="Permanent link">&para;</a></h2>
 <p>Every commit batch: <code>go build ./... &amp;&amp; go vet ./... &amp;&amp; go test ./... &amp;&amp; gofmt -l . &amp;&amp; golangci-lint run</code> clean; <code>mkdocs build --strict</code> for doc-touching changes; <code>TestExamplesValidate</code> green with zero example edits before any deliberate retrofits.</p>
-<p>Phase-1 exit: both dogfood models pass <code>has-stride-mapping</code>/<code>has-prohibited-outcome</code> via computed checks; all seven CLI verbs documented.</p>
-<p>Phase-2 exit: store round-trip test green on all three CI OSes; disabled-store parity test proves byte-identical output; v0.9.0 tagged after CI, recorded in visionstudio.</p>
+<p>Phase-1 exit (met): both dogfood models pass <code>has-stride-mapping</code>/<code>has-prohibited-outcome</code> via computed checks; all seven CLI verbs documented.</p>
 <h2 id="success-criteria">Success Criteria<a class="headerlink" href="#success-criteria" title="Permanent link">&para;</a></h2>
-<p>PRD § Success Metrics, verified with evidence in RMI-209's review (same discipline as INIT-002's SUCCESS-METRICS-REVIEW.md).</p>
+<p>PRD § Success Metrics. A close-out review is still owed (folded into whatever RMI eventually closes this initiative, given Phase 2's cancellation and Phase 3's deferral — see ROADMAP.md).</p>
 
 
 

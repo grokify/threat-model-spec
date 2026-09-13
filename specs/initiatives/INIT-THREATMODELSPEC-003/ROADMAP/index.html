@@ -1230,6 +1230,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../versions/v0.9.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../versions/v0.8.0/specification/" class="md-nav__link">
         
   
@@ -1736,6 +1764,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1796,6 +1964,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2238,10 +2434,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#phase-2-persistence-fuller-store" class="md-nav__link">
+  <a href="#phase-2-persistence-cancelled" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Phase 2 — Persistence (Fuller Store)
+        Phase 2 — Persistence (Cancelled)
       
     </span>
   </a>
@@ -2289,24 +2485,24 @@
 <h2 id="phase-1-ir-hardening-and-cli-docs">Phase 1 — IR Hardening and CLI Docs<a class="headerlink" href="#phase-1-ir-hardening-and-cli-docs" title="Permanent link">&para;</a></h2>
 <p><strong>Theme:</strong> The gaps both dogfood runs hit identically get structural fixes — framework categorization becomes queryable data with deterministically computed coverage checks, prohibited-outcome gets authored, and the CLI reference catches up to the shipped verbs</p>
 <ul>
-<li>[ ] <code>RMI-THREATMODELSPEC-200</code> Finding framework categorization fields</li>
+<li>[x] <code>RMI-THREATMODELSPEC-200</code> Finding framework categorization fields</li>
 <li><code>strideCategories</code>/<code>owaspIds</code>/<code>attackTechniqueIds</code> on <code>ir.Finding</code>, validated via existing <code>STRIDEThreat</code>/<code>ValidateOWASPID</code>/<code>ValidateTechniqueID</code>; lifecycle-validation warnings; schema regenerated, all v0.8.0 examples validate unchanged; enum/round-trip tests</li>
-<li>[ ] <code>RMI-THREATMODELSPEC-201</code> Deterministic coverage-check computation</li>
+<li>[x] <code>RMI-THREATMODELSPEC-201</code> Deterministic coverage-check computation</li>
 <li><code>evaluation.ComputeCoverageChecks</code> computing has-stride-mapping, has-prohibited-outcome, has-assets, has-threat-actor, has-invariant, has-evidence-per-finding from the model; <code>tms gate</code>/<code>analyze --apply</code> prefer computed results over self-reports (warning on conflict); agent specs + regenerated plugins populate the new fields</li>
-<li>[ ] <code>RMI-THREATMODELSPEC-202</code> prohibited-outcome spike and resolution</li>
+<li>[x] <code>RMI-THREATMODELSPEC-202</code> prohibited-outcome spike and resolution</li>
 <li>Root-cause note (authoring vs design gap) with evidence from both dogfood models; expected fix: product-definition agent guidance + worked example + flagship-example requirement; alternative fix: documented decision + coverage-check change (enum value stays)</li>
-<li>[ ] <code>RMI-THREATMODELSPEC-203</code> CLI reference pages for the five undocumented verbs</li>
+<li>[x] <code>RMI-THREATMODELSPEC-203</code> CLI reference pages for the five undocumented verbs</li>
 <li>docs/cli/{analyze,gate,report,status,profile}.md in the generate/validate page format; mkdocs nav; strict build green</li>
+<li>[x] <code>RMI-THREATMODELSPEC-210</code> Document lifecycle IR objects in the Specification guide <em>(added mid-phase — the published guide predated INIT-002's whole lifecycle-IR layer)</em></li>
+<li>New Lifecycle IR Objects specification page; wired into nav</li>
 </ul>
-<h2 id="phase-2-persistence-fuller-store">Phase 2 — Persistence (Fuller Store)<a class="headerlink" href="#phase-2-persistence-fuller-store" title="Permanent link">&para;</a></h2>
-<p><strong>Theme:</strong> Analysis history outlives the JSON document — an opt-in embedded Dolt store records runs, assessments, gates, and framework reports append-only with a Dolt-commit audit envelope, while <code>tms</code> without a store stays byte-identical to v0.8.0</p>
+<h2 id="phase-2-persistence-cancelled">Phase 2 — Persistence (Cancelled)<a class="headerlink" href="#phase-2-persistence-cancelled" title="Permanent link">&para;</a></h2>
+<p><strong>Theme:</strong> ~~Analysis history outlives the JSON document — an opt-in embedded Dolt store records runs, assessments, gates, and framework reports append-only with a Dolt-commit audit envelope, while <code>tms</code> without a store stays byte-identical to v0.8.0~~</p>
+<p><strong>Cancelled.</strong> <code>threat-model-spec</code> does not get its own persistence layer. Per <code>visionstudio-cloud</code>'s open-core split — <em>capture and record locally = open (<code>visionstudio</code>); aggregate, serve, and analyze in the cloud = private (<code>visionstudio-cloud</code>)</em> — an embedded Dolt store inside this repo doesn't fit: <code>threat-model-spec</code> stays a pure JSON IR spec plus a local, standalone <code>tms</code> CLI with no database at all. The <code>ThreatModel</code> JSON document already is the local record. Threat-modeling history/aggregation as a paid, multi-tenant capability belongs in <code>visionstudio-cloud</code> instead, as its own initiative there — informed by, but not implemented in, this repo.</p>
 <ul>
-<li>[ ] <code>RMI-THREATMODELSPEC-204</code> Store package: Ent schema over embedded Dolt</li>
-<li><code>store/</code> with five append-only entities (analysis_runs, judge_runs, judge_assessments, gates, framework_reports); embedded <code>dolthub/driver</code> (no dolt binary); <code>--data-dir</code>/<code>TMS_DATA_DIR</code> opt-in with <code>~/.productbuildershq/tms</code> default; dependency versions verified at implementation time</li>
-<li>[ ] <code>RMI-THREATMODELSPEC-205</code> tms persistence integration and history verb</li>
-<li>Write hooks in analyze/gate/report with one Dolt commit per write batch (<code>tms: &lt;verb&gt; &lt;run-id&gt;</code>); <code>tms history</code> read verb (table/json); parity test proves disabled-store output identical; store round-trip test on all three CI OSes</li>
-<li>[ ] <code>RMI-THREATMODELSPEC-206</code> v0.9.0 release</li>
-<li>CHANGELOG.json + regenerated CHANGELOG.md, release notes, versioned specification (schema changed in RMI-200), mkdocs nav, README; push, CI green on ubuntu/macos/windows, tag, record release in visionstudio</li>
+<li>[x] ~~<code>RMI-THREATMODELSPEC-204</code> Store package: Ent schema over embedded Dolt~~ — cancelled</li>
+<li>[x] ~~<code>RMI-THREATMODELSPEC-205</code> tms persistence integration and history verb~~ — cancelled</li>
+<li>[x] ~~<code>RMI-THREATMODELSPEC-206</code> v0.9.0 release~~ — cancelled (a v0.9.0 release may still happen for unrelated reasons, but not as this RMI)</li>
 </ul>
 <h2 id="phase-3-empirical-dogfood-deferred-data-gated">Phase 3 — Empirical Dogfood (deferred, data-gated)<a class="headerlink" href="#phase-3-empirical-dogfood-deferred-data-gated" title="Permanent link">&para;</a></h2>
 <p><strong>Theme:</strong> The three never-dogfooded stages and builder-definition's rubric get real-run evidence — execution starts when a target satisfying the data requirements is named, not before</p>

@@ -1230,6 +1230,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../versions/v0.9.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../versions/v0.8.0/specification/" class="md-nav__link">
         
   
@@ -1736,6 +1764,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1796,6 +1964,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2316,10 +2512,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fr4-persistence-fuller-store" class="md-nav__link">
+  <a href="#fr4-persistence-cancelled-redirected" class="md-nav__link">
     <span class="md-ellipsis">
       
-        FR4 — Persistence (fuller store)
+        FR4 — Persistence: cancelled, redirected
       
     </span>
   </a>
@@ -2396,7 +2592,7 @@
 <li><strong><code>ir.Finding</code> has no structured framework categorization.</strong> Both dogfood runs failed the <code>has-stride-mapping</code> coverage check for the same reason: the STRIDE category the analyst clearly reasoned about only ever lived in <code>Finding.Description</code> free text. There is nothing queryable, and the coverage check itself can only be self-reported, not computed.</li>
 <li><strong><code>prohibited-outcome</code> is never authored.</strong> The <code>SecurityRequirementType</code> enum has carried <code>prohibited-outcome</code> since v0.8.0, yet neither dogfood run produced a single requirement typed with it — both runs' <code>has-prohibited-outcome</code> check failed identically. Either agent guidance never asks for it (authoring gap) or the invariant/prohibited-outcome distinction doesn't earn its keep (design gap).</li>
 <li><strong>CLI documentation stops at v0.5.0-era verbs.</strong> The MkDocs CLI Reference documents <code>generate</code> and <code>validate</code> only; <code>gate</code>, <code>analyze</code>, <code>report</code>, <code>status</code>, and <code>profile</code> — the verbs this whole initiative family added — have no doc pages.</li>
-<li><strong>No analysis outlives the JSON file.</strong> Judge runs, assessments, gates, and framework reports exist only inside a single ThreatModel document. There is no append-only history, no audit trail of who/what graded when, and no way to query across models or over time. DoltDB persistence was deferred from INIT-002's TRD (§9) from day one.</li>
+<li><strong>No analysis outlives the JSON file.</strong> Judge runs, assessments, gates, and framework reports exist only inside a single ThreatModel document — no append-only history, no audit trail of who/what graded when, no way to query across models or over time. DoltDB persistence was deferred from INIT-002's TRD (§9) from day one. <strong>Resolved by scoping this out of this repo entirely</strong> — see Goals and TRD §4: this is a <code>visionstudio-cloud</code> premium-feature initiative, not a <code>threat-model-spec</code> one.</li>
 <li><strong>Three stages have zero real-run evidence</strong> (<code>deployment</code>, <code>builder-operations</code>, <code>product-operations</code>), and <strong><code>builder-definition</code>'s rubric has only proven discrimination synthetically</strong> — real content scored uniformly all-pass in both runs. <em>Deferred: closing these requires a target with real IaC, a live endpoint, telemetry, and incident history — data this repo cannot supply itself.</em></li>
 </ol>
 <h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
@@ -2404,12 +2600,11 @@
 <li>A <code>Finding</code>'s framework categorization (STRIDE, OWASP, ATT&amp;CK) is structured, validated, and queryable — and the coverage checks that depend on it become deterministic computations instead of self-reports.</li>
 <li><code>prohibited-outcome</code> requirements actually get authored (or the type distinction is consciously revised) — resolved by investigation, not assumption.</li>
 <li>Every <code>tms</code> verb has a reference page.</li>
-<li>Analysis history persists: an opt-in embedded Dolt store records judge runs, assessments, analysis runs, gates, and materialized framework reports append-only, with a Dolt commit audit envelope. <code>tms</code> remains fully functional with no store configured.</li>
 <li>The deferred dogfood work is specified with concrete data-requirements acceptance criteria so it can start the moment a qualifying target is named.</li>
 </ul>
 <h2 id="non-goals">Non-Goals<a class="headerlink" href="#non-goals" title="Permanent link">&para;</a></h2>
 <ul>
-<li>No hosted service, server mode, or multi-user store — the persistence layer is a local embedded database, same operating model as visionstudio's.</li>
+<li><strong>No persistence layer of any kind in this repo.</strong> <code>threat-model-spec</code> stays a pure JSON IR spec plus a local, standalone <code>tms</code> CLI — no database, embedded or otherwise. Analysis history/aggregation as a premium capability is out of scope here; see TRD §4 for where it actually belongs (<code>visionstudio-cloud</code>).</li>
 <li>No reimplementation of SAST/DAST/SCA scanners (unchanged from INIT-002).</li>
 <li>No new stages, rubrics, or report profiles.</li>
 <li>Dogfooding the three untouched stages is <strong>not promised by this initiative's release</strong> — it is scoped, data-gated, and executes when a qualifying target exists.</li>
@@ -2431,13 +2626,8 @@
 <ul>
 <li><code>docs/cli/</code> gains per-command pages for <code>gate</code>, <code>analyze</code>, <code>report</code>, <code>status</code>, <code>profile</code>, in the established <code>generate</code>/<code>validate</code> page format, wired into mkdocs nav; strict build passes.</li>
 </ul>
-<h3 id="fr4-persistence-fuller-store">FR4 — Persistence (fuller store)<a class="headerlink" href="#fr4-persistence-fuller-store" title="Permanent link">&para;</a></h3>
-<ul>
-<li>New storage package: embedded Dolt via Ent (org standard), opt-in via flag/env; zero behavior change when unset.</li>
-<li>Append-only tables: <code>judge_runs</code>, <code>judge_assessments</code>, <code>analysis_runs</code>, <code>gates</code>, <code>framework_reports</code>.</li>
-<li>Every write batch lands as one Dolt commit referencing the producing run ID (audit envelope).</li>
-<li>A read verb lists persisted history (at minimum: runs per model/stage with gate results).</li>
-</ul>
+<h3 id="fr4-persistence-cancelled-redirected">FR4 — Persistence: cancelled, redirected<a class="headerlink" href="#fr4-persistence-cancelled-redirected" title="Permanent link">&para;</a></h3>
+<p>Originally scoped as a new embedded-Dolt storage package in this repo. Cancelled — see TRD §4 for the original design and the rationale for abandoning it. The actual capability (persisted, queryable analysis history) is redirected to a new <code>visionstudio-cloud</code> initiative, which is out of scope for this PRD.</p>
 <h3 id="fr5-empirical-dogfood-deferred-data-gated">FR5 — Empirical dogfood (deferred, data-gated)<a class="headerlink" href="#fr5-empirical-dogfood-deferred-data-gated" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Acceptance criteria are data requirements: a target with real IaC + deployment manifests, a reachable runtime endpoint, telemetry, and ≥1 incident record.</li>
@@ -2448,13 +2638,11 @@
 <li>Both v0.8.0 dogfood models, re-analyzed (or minimally retrofitted), pass <code>has-stride-mapping</code> via the deterministic computation — no self-report.</li>
 <li>The flagship example carries ≥1 <code>prohibited-outcome</code> requirement, or a documented design decision says why not.</li>
 <li><code>mkdocs build --strict</code> passes with all seven CLI verbs documented.</li>
-<li>With a store configured, a full <code>tms analyze</code> plan→apply→gate cycle produces queryable rows in all five tables and exactly one Dolt commit per write batch; with no store configured, the identical cycle produces byte-identical model output to v0.8.0 behavior.</li>
 <li>Existing v0.8.0 models validate unchanged against the regenerated schema.</li>
 </ol>
 <h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
 <ul>
 <li>INIT-THREATMODELSPEC-002 (released, v0.8.0) — all IR types, profiles, rubrics this builds on.</li>
-<li><code>entgo.io/ent</code> + embedded Dolt driver (org-standard stack; versions verified at implementation time).</li>
 <li>FR5 additionally depends on a qualifying dogfood target being named (external to this repo).</li>
 </ul>
 

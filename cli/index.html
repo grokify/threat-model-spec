@@ -1234,6 +1234,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../versions/v0.9.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../versions/v0.8.0/specification/" class="md-nav__link">
         
   
@@ -1864,6 +1892,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1924,6 +2092,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2474,6 +2670,26 @@
 <td>Validate a threat model JSON file</td>
 </tr>
 <tr>
+<td><a href="analyze/"><code>analyze</code></a></td>
+<td>Run a stage analysis (plan mode) or apply its results (apply mode)</td>
+</tr>
+<tr>
+<td><a href="gate/"><code>gate</code></a></td>
+<td>Print a PDLC stage's recorded gate result (read-only)</td>
+</tr>
+<tr>
+<td><a href="report/"><code>report</code></a></td>
+<td>Derive a framework-specific report (STRIDE, LINDDUN, MITRE ATT&amp;CK, OWASP, attack-tree)</td>
+</tr>
+<tr>
+<td><a href="status/"><code>status</code></a></td>
+<td>Summarize a model's PDLC lifecycle state across all stages</td>
+</tr>
+<tr>
+<td><a href="profile/"><code>profile</code></a></td>
+<td>Print a built-in artifact-availability profile definition</td>
+</tr>
+<tr>
 <td><code>version</code></td>
 <td>Print version information</td>
 </tr>
@@ -2499,8 +2715,26 @@
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># Strict validation</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>tms<span class="w"> </span>validate<span class="w"> </span>model.json<span class="w"> </span>--strict
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># Print version</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>tms<span class="w"> </span>version
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1"># Open a stage analysis run (plan mode)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>tms<span class="w"> </span>analyze<span class="w"> </span>model.json<span class="w"> </span>--stage<span class="w"> </span>builder-definition<span class="w"> </span>--profile<span class="w"> </span>first-party<span class="w"> </span>docs/TRD.md
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1"># Merge an agent&#39;s results (apply mode) — also computes and records the stage&#39;s Gate</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>tms<span class="w"> </span>analyze<span class="w"> </span>model.json<span class="w"> </span>--stage<span class="w"> </span>builder-definition<span class="w"> </span>--apply<span class="w"> </span>results.json<span class="w"> </span>--run<span class="w"> </span>run-builder-definition-1
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="c1"># Read back a recorded gate</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>tms<span class="w"> </span>gate<span class="w"> </span>model.json<span class="w"> </span>--stage<span class="w"> </span>builder-definition
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="c1"># Derive a STRIDE report</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>tms<span class="w"> </span>report<span class="w"> </span>model.json<span class="w"> </span>--framework<span class="w"> </span>stride
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="c1"># Summarize lifecycle state across all stages</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>tms<span class="w"> </span>status<span class="w"> </span>model.json
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="c1"># Inspect an artifact-availability profile</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>tms<span class="w"> </span>profile<span class="w"> </span>first-party
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="c1"># Print version</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>tms<span class="w"> </span>version
 </code></pre></div>
 <h2 id="global-options">Global Options<a class="headerlink" href="#global-options" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>-h, --help   Show help for any command
@@ -2550,6 +2784,11 @@
 <ul>
 <li><a href="generate/">generate</a> — Generate D2 or STIX 2.1</li>
 <li><a href="validate/">validate</a> — Validate threat models</li>
+<li><a href="analyze/">analyze</a> — Run a stage analysis and merge its results</li>
+<li><a href="gate/">gate</a> — Read back a recorded stage gate</li>
+<li><a href="report/">report</a> — Derive a framework-specific report</li>
+<li><a href="status/">status</a> — Summarize lifecycle state across all stages</li>
+<li><a href="profile/">profile</a> — Inspect an artifact-availability profile</li>
 </ul>
 
 

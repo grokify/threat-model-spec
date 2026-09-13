@@ -1230,6 +1230,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../versions/v0.9.0/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../versions/v0.8.0/specification/" class="md-nav__link">
         
   
@@ -1736,6 +1764,146 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/analyze/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    analyze
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/gate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    gate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/status/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../cli/profile/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    profile
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1796,6 +1964,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../releases/v0.9.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.9.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -2299,66 +2495,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-persistence-fuller-store-store" class="md-nav__link">
+  <a href="#4-persistence-cancelled" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Persistence — Fuller Store (store/)
+        4. Persistence — Cancelled
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Persistence — Fuller Store (store/)">
+    <nav class="md-nav" aria-label="4. Persistence — Cancelled">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stack-and-operating-model" class="md-nav__link">
+  <a href="#original-design-abandoned" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stack and operating model
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schema-append-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Schema (append-only)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audit-envelope" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Audit envelope
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#write-and-read-paths" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Write and read paths
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Testing
+        Original design (abandoned)
       
     </span>
   </a>
@@ -2416,7 +2568,7 @@
 <p><strong>Initiative:</strong> <code>INIT-THREATMODELSPEC-003</code>
 <strong>Repository:</strong> <code>github.com/grokify/threat-model-spec</code></p>
 <h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
-<p>Four independent work streams over the v0.8.0 codebase: (1) an additive IR change on <code>ir.Finding</code> plus deterministic coverage-check computation; (2) an authoring-guidance fix resolved by spike; (3) documentation; (4) a new, opt-in storage package. Nothing changes for a user who ignores the new store — the JSON ThreatModel document remains the source of truth; the store is an append-only audit/history projection of it.</p>
+<p>Three independent work streams over the v0.8.0 codebase: (1) an additive IR change on <code>ir.Finding</code> plus deterministic coverage-check computation; (2) an authoring-guidance fix resolved by spike; (3) documentation. A fourth stream — an embedded-Dolt persistence package inside this repo — was originally planned and is now cancelled; see §4.</p>
 <h2 id="1-finding-framework-categorization-irfindingsgo">1. Finding Framework Categorization (<code>ir/findings.go</code>)<a class="headerlink" href="#1-finding-framework-categorization-irfindingsgo" title="Permanent link">&para;</a></h2>
 <p><code>Finding</code> gains three optional fields, mirroring the flat-optional-field style already on the struct (<code>ASPMDomainID</code>, <code>Stage</code>):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// STRIDECategories tags this finding with the STRIDE categories it</span>
@@ -2495,61 +2647,27 @@
 <p>Deliverable either way: a written root-cause note in the spike's RMI and the corresponding fix, not just analysis.</p>
 <h2 id="3-cli-reference-docscli-mkdocsyml">3. CLI Reference (<code>docs/cli/</code>, <code>mkdocs.yml</code>)<a class="headerlink" href="#3-cli-reference-docscli-mkdocsyml" title="Permanent link">&para;</a></h2>
 <p>Five new pages — <code>gate.md</code>, <code>analyze.md</code>, <code>report.md</code>, <code>status.md</code>, <code>profile.md</code> — following the existing <code>generate.md</code>/<code>validate.md</code> format (synopsis, flags, examples against <code>examples/*.json</code>, exit codes). Nav order matches verb workflow: analyze → gate → report → status → profile. <code>mkdocs build --strict</code> gates the change.</p>
-<h2 id="4-persistence-fuller-store-store">4. Persistence — Fuller Store (<code>store/</code>)<a class="headerlink" href="#4-persistence-fuller-store-store" title="Permanent link">&para;</a></h2>
-<h3 id="stack-and-operating-model">Stack and operating model<a class="headerlink" href="#stack-and-operating-model" title="Permanent link">&para;</a></h3>
+<h2 id="4-persistence-cancelled">4. Persistence — Cancelled<a class="headerlink" href="#4-persistence-cancelled" title="Permanent link">&para;</a></h2>
+<p><strong>This section is retained as a record of the original design and why it was abandoned, not as a build plan.</strong></p>
+<p>The original plan below — an Ent-over-embedded-Dolt store package living inside <code>threat-model-spec</code> itself — was cancelled before implementation. Root cause: it conflicts with the open-core split that governs the broader ProductBuildersHQ ecosystem (documented in <code>visionstudio-cloud</code>'s README): <em>capture and record locally = open (<code>visionstudio</code>); aggregate, serve, and analyze in the cloud = private (<code>visionstudio-cloud</code>)</em>. <code>threat-model-spec</code> is a public, standalone spec plus a local <code>tms</code> CLI, used by anyone independent of this organization's tooling — giving it its own database would mean every external <code>tms</code> user's optional persistence feature depends on a repo-specific Ent schema and migration cadence that has nothing to do with the spec itself. The <code>ThreatModel</code> JSON document already is the local record; nothing more is needed for <code>threat-model-spec</code>'s own scope.</p>
+<p>Where this capability actually belongs instead:</p>
 <ul>
-<li><strong>Ent</strong> (<code>entgo.io/ent</code>) over <strong>embedded Dolt</strong> (<code>github.com/dolthub/driver</code>, MySQL-compatible) — the org-standard pairing, and the same embedded-local model visionstudio uses (<code>~/.productbuildershq/visionstudio</code>). Versions verified against upstream releases at implementation time per org convention.</li>
-<li>Opt-in: <code>--data-dir</code> flag / <code>TMS_DATA_DIR</code> env on <code>tms</code>. Unset → the store package is never initialized; every existing code path is untouched (success metric: byte-identical output).</li>
-<li>Default location when enabled without a path: <code>~/.productbuildershq/tms</code>.</li>
+<li>A <strong>local, open</strong> history of judge/gate runs, if ever wanted, is <code>visionstudio</code>'s concern, not this repo's — it already has <code>JudgeResult</code>/<code>JudgeRubric</code> entities doing almost exactly this for spec-quality grading (a <code>structured-evaluation</code> rubric report stored as JSON, keyed to an initiative), and extending that pattern with a threat-model-shaped entity would be a natural, non-breaking addition there.</li>
+<li><strong>Premium, hosted, multi-tenant</strong> threat-modeling history and cross-repo/cross-initiative aggregation belongs in <code>visionstudio-cloud</code>, which already exists as real infrastructure for exactly this kind of paid capability (multi-tenant serving, per-tenant metering, tenant provisioning). It would import <code>threat-model-spec</code> as a library (or invoke <code>tms</code>) to perform analysis, then own storing and serving results multi-tenant. That work is scoped as its own initiative in <code>visionstudio-cloud</code>, informed by but not implemented in this repo.</li>
 </ul>
-<h3 id="schema-append-only">Schema (append-only)<a class="headerlink" href="#schema-append-only" title="Permanent link">&para;</a></h3>
-<p>Five Ent entities, one row per event, no updates or deletes (append-only enforced by the store API surface — no update/delete methods generated into the public interface):</p>
-<table>
-<thead>
-<tr>
-<th>Table</th>
-<th>Row per</th>
-<th>Key columns</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>analysis_runs</code></td>
-<td>AnalysisRun opened or completed</td>
-<td>run_id, model_id, stage, profile, status, opened_at, completed_at</td>
-</tr>
-<tr>
-<td><code>judge_runs</code></td>
-<td>rubric evaluation executed</td>
-<td>judge_run_id, run_id, rubric_id, evaluated_by, evaluated_at</td>
-</tr>
-<tr>
-<td><code>judge_assessments</code></td>
-<td>per-category assessment within a judge run</td>
-<td>judge_run_id, category_id, score, severity</td>
-</tr>
-<tr>
-<td><code>gates</code></td>
-<td>Gate evaluated</td>
-<td>run_id, stage, result, check_results (JSON), evaluated_at</td>
-</tr>
-<tr>
-<td><code>framework_reports</code></td>
-<td>FrameworkReport materialized</td>
-<td>model_id, framework, digest, body (JSON), computed_at</td>
-</tr>
-</tbody>
-</table>
-<p>All IDs are the IR's stable strings (INIT-002 TRD §9 guaranteed this: "all IDs are stable strings and all assessments carry producer run IDs, so tabular persistence needs no schema change") — no mapping layer.</p>
-<h3 id="audit-envelope">Audit envelope<a class="headerlink" href="#audit-envelope" title="Permanent link">&para;</a></h3>
-<p>Each <code>tms</code> write batch (e.g. one <code>analyze --apply</code>) commits once to Dolt with message <code>tms: &lt;verb&gt; &lt;run-id&gt;</code> — Dolt's commit graph <em>is</em> the audit trail. No separate audit table.</p>
-<h3 id="write-and-read-paths">Write and read paths<a class="headerlink" href="#write-and-read-paths" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Write hooks in <code>cmd/tms</code>: after a successful model write in <code>analyze</code> (plan: run opened; apply: run completed + judge rows if grading ran), after <code>gate</code>, after <code>report</code>.</li>
-<li>Read verb: <code>tms history &lt;model.json|--model-id id&gt;</code> — lists persisted runs (stage, status, gate result, timestamps), <code>--format json|table</code>.</li>
-</ul>
-<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
-<p>Unit tests against a <code>t.TempDir()</code> embedded Dolt database — no external server, CI-safe on all three OSes (embedded driver needs no <code>dolt</code> binary). Round-trip test: full plan→apply→gate cycle with store enabled, assert row counts and single-commit-per-batch; disabled-store test asserts output parity.</p>
+<h3 id="original-design-abandoned">Original design (abandoned)<a class="headerlink" href="#original-design-abandoned" title="Permanent link">&para;</a></h3>
+<details>
+<summary>Ent-over-embedded-Dolt store package (not built)</summary>
+
+- **Stack:** Ent (`entgo.io/ent`) over embedded Dolt (`github.com/dolthub/driver`, MySQL-compatible), opt-in via `--data-dir`/`TMS_DATA_DIR`, default location `~/.productbuildershq/tms`.
+- **Schema (append-only):** five entities — `analysis_runs` (run_id, model_id, stage, profile, status, opened_at, completed_at), `judge_runs` (judge_run_id, run_id, rubric_id, evaluated_by, evaluated_at), `judge_assessments` (judge_run_id, category_id, score, severity), `gates` (run_id, stage, result, check_results JSON, evaluated_at), `framework_reports` (model_id, framework, digest, body JSON, computed_at). All IDs reuse the IR's stable strings — no mapping layer.
+- **Audit envelope:** one Dolt commit per `tms` write batch (`tms: <verb> <run-id>`) — Dolt's commit graph as the audit trail, no separate table.
+- **Write/read paths:** write hooks in `cmd/tms` after analyze/gate/report; a `tms history` read verb.
+
+Of the five tables, only `framework_reports` was genuinely threat-model-spec-domain-specific (STRIDE/LINDDUN/MITRE/OWASP/attack-tree). `judge_runs`/`judge_assessments` are `structured-evaluation`'s vocabulary, not this repo's; `analysis_runs`/`gates` map to this IR's types but are structurally generic. This overlap with `structured-evaluation` and `visionstudio`'s existing `JudgeResult`/`JudgeRubric` was itself part of why the design was reconsidered.
+
+</details>
+
 <h2 id="5-deferred-empirical-dogfood-data-gated">5. Deferred: Empirical Dogfood (data-gated)<a class="headerlink" href="#5-deferred-empirical-dogfood-data-gated" title="Permanent link">&para;</a></h2>
 <p>Not designed here beyond acceptance criteria (PRD FR5); the stage report profiles already define the contracts. Target requirements, verbatim from the profiles: <code>deployment</code> needs <code>iac</code> + <code>deployment-manifest</code> artifacts covering 4 ASPM domains; <code>builder-operations</code> needs <code>runtime-endpoint</code> + <code>telemetry</code> + <code>incident</code>; <code>product-operations</code> needs <code>telemetry</code> + <code>incident</code>. Execution starts when a qualifying target is named.</p>
 <h2 id="6-compatibility-and-testing-strategy">6. Compatibility and Testing Strategy<a class="headerlink" href="#6-compatibility-and-testing-strategy" title="Permanent link">&para;</a></h2>
@@ -2557,7 +2675,6 @@
 <li>Schema: additive only; <code>TestExamplesValidate</code> (all five canonical examples) must stay green with zero example edits before any retrofit commits.</li>
 <li>Coverage-check semantics change (computed &gt; self-reported) is behavior-visible in <code>tms gate</code>: called out in CHANGELOG and release notes.</li>
 <li>Per-package conventions unchanged: enum value tests, JSON round-trips, golden files (<code>UPDATE_GOLDEN=1</code>), calibration fixtures.</li>
-<li>Store package targets the same bar as the rest of the repo: unit tests, no integration-test-only coverage.</li>
 </ul>
 
 
