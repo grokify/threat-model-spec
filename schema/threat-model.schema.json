@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://grokify.github.io/threat-model-spec/versions/v0.8.0/threat-model.schema.json",
+  "$id": "https://grokify.github.io/threat-model-spec/versions/v0.9.0/threat-model.schema.json",
   "$ref": "#/$defs/ThreatModel",
   "$defs": {
     "ASPMDomainID": {
@@ -104,6 +104,55 @@
         "messaging",
         "memory-access",
         "tool-invocation"
+      ]
+    },
+    "AgentCollective": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "models": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "population": {
+          "type": "integer"
+        },
+        "coordinationChannel": {
+          "type": "string"
+        },
+        "emergent": {
+          "type": "boolean"
+        },
+        "emergentBehaviors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "rewardHacking": {
+          "$ref": "#/$defs/RewardHacking"
+        },
+        "memberElementIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name"
       ]
     },
     "AgentEscalationPath": {
@@ -346,6 +395,27 @@
       "required": [
         "metric",
         "threshold"
+      ]
+    },
+    "AlignmentFailureMode": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
       ]
     },
     "AnalysisProducer": {
@@ -959,7 +1029,9 @@
         "prompt-injection",
         "tool-abuse",
         "session-hijacking",
-        "url-param-injection"
+        "url-param-injection",
+        "reward-hacking",
+        "emergent-agent-coordination"
       ]
     },
     "AttackTree": {
@@ -2883,7 +2955,8 @@
         "credential",
         "websocket",
         "cswsh",
-        "lateral"
+        "lateral",
+        "coordination"
       ]
     },
     "FrameworkID": {
@@ -3452,16 +3525,10 @@
     },
     "MITREATLASMapping": {
       "properties": {
-        "tacticId": {
+        "id": {
           "type": "string"
         },
-        "tacticName": {
-          "type": "string"
-        },
-        "techniqueId": {
-          "type": "string"
-        },
-        "techniqueName": {
+        "name": {
           "type": "string"
         },
         "description": {
@@ -3474,8 +3541,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "tacticId",
-        "techniqueId"
+        "id"
       ]
     },
     "MITREAttackMapping": {
@@ -3564,6 +3630,12 @@
           },
           "type": "array"
         },
+        "alignmentFailureModes": {
+          "items": {
+            "$ref": "#/$defs/AlignmentFailureMode"
+          },
+          "type": "array"
+        },
         "owasp": {
           "items": {
             "$ref": "#/$defs/OWASPMapping"
@@ -3605,6 +3677,12 @@
             "$ref": "#/$defs/ComplianceMapping"
           },
           "type": "array"
+        },
+        "summaries": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         }
       },
       "additionalProperties": false,
@@ -4337,6 +4415,27 @@
         "id",
         "title"
       ]
+    },
+    "RewardHacking": {
+      "properties": {
+        "objective": {
+          "type": "string"
+        },
+        "intendedPath": {
+          "type": "string"
+        },
+        "unintendedPath": {
+          "type": "string"
+        },
+        "impossibleTaskRate": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
     },
     "RiskAssessment": {
       "properties": {
@@ -5225,6 +5324,24 @@
           },
           "type": "array"
         },
+        "vulnerabilities": {
+          "items": {
+            "$ref": "#/$defs/Vulnerability"
+          },
+          "type": "array"
+        },
+        "timeline": {
+          "items": {
+            "$ref": "#/$defs/TimelineEvent"
+          },
+          "type": "array"
+        },
+        "agentCollectives": {
+          "items": {
+            "$ref": "#/$defs/AgentCollective"
+          },
+          "type": "array"
+        },
         "lifecycle": {
           "$ref": "#/$defs/Lifecycle"
         },
@@ -5298,6 +5415,25 @@
         "monitoring"
       ]
     },
+    "TimelineEvent": {
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "event": {
+          "type": "string"
+        },
+        "phase": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "date",
+        "event"
+      ]
+    },
     "VEXStatement": {
       "properties": {
         "id": {
@@ -5355,6 +5491,52 @@
         "validated",
         "invalidated",
         "pending"
+      ]
+    },
+    "Vulnerability": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "component": {
+          "type": "string"
+        },
+        "cve": {
+          "type": "string"
+        },
+        "discovery": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "preventionClass": {
+          "type": "string"
+        },
+        "disclosureTiming": {
+          "type": "string"
+        },
+        "patchAvailableAtCompromise": {
+          "type": "string"
+        },
+        "chainRole": {
+          "type": "string"
+        },
+        "kevListed": {
+          "type": "boolean"
+        },
+        "kevDateAdded": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "name"
       ]
     },
     "WebSocketConfig": {

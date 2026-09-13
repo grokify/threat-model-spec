@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://grokify.github.io/threat-model-spec/versions/v0.8.0/diagram.schema.json",
+  "$id": "https://grokify.github.io/threat-model-spec/versions/v0.9.0/diagram.schema.json",
   "$ref": "#/$defs/DiagramIR",
   "$defs": {
     "Actor": {
@@ -306,6 +306,27 @@
       "type": "object",
       "required": [
         "name"
+      ]
+    },
+    "AlignmentFailureMode": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
       ]
     },
     "AssetClassification": {
@@ -1043,6 +1064,9 @@
           },
           "type": "array"
         },
+        "showMitigations": {
+          "type": "boolean"
+        },
         "detections": {
           "items": {
             "$ref": "#/$defs/Detection"
@@ -1406,7 +1430,8 @@
         "credential",
         "websocket",
         "cswsh",
-        "lateral"
+        "lateral",
+        "coordination"
       ]
     },
     "ISO27001Mapping": {
@@ -1522,16 +1547,10 @@
     },
     "MITREATLASMapping": {
       "properties": {
-        "tacticId": {
+        "id": {
           "type": "string"
         },
-        "tacticName": {
-          "type": "string"
-        },
-        "techniqueId": {
-          "type": "string"
-        },
-        "techniqueName": {
+        "name": {
           "type": "string"
         },
         "description": {
@@ -1544,8 +1563,7 @@
       "additionalProperties": false,
       "type": "object",
       "required": [
-        "tacticId",
-        "techniqueId"
+        "id"
       ]
     },
     "MITREAttackMapping": {
@@ -1610,6 +1628,12 @@
           },
           "type": "array"
         },
+        "alignmentFailureModes": {
+          "items": {
+            "$ref": "#/$defs/AlignmentFailureMode"
+          },
+          "type": "array"
+        },
         "owasp": {
           "items": {
             "$ref": "#/$defs/OWASPMapping"
@@ -1651,6 +1675,12 @@
             "$ref": "#/$defs/ComplianceMapping"
           },
           "type": "array"
+        },
+        "summaries": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         }
       },
       "additionalProperties": false,
