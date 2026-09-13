@@ -49,10 +49,8 @@ The `mappings` field links threat models to industry security frameworks.
 {
   "mitreAtlas": [
     {
-      "tacticId": "AML.TA0002",
-      "tacticName": "ML Artifact Collection",
-      "techniqueId": "AML.T0024",
-      "techniqueName": "Prompt Injection",
+      "id": "AML.T0024",
+      "name": "Prompt Injection",
       "description": "Crafted prompts manipulate AI behavior"
     }
   ]
@@ -61,12 +59,52 @@ The `mappings` field links threat models to industry security frameworks.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `tacticId` | string | Yes | Tactic ID (AML.TA####) |
-| `tacticName` | string | No | Tactic name |
-| `techniqueId` | string | Yes | Technique ID (AML.T####) |
-| `techniqueName` | string | No | Technique name |
+| `id` | string | Yes | ATLAS technique ID (AML.T####) |
+| `name` | string | No | Technique name |
 | `description` | string | No | Context |
 | `url` | string | No | ATLAS URL |
+
+## Alignment Failure Modes
+
+Alignment failure modes classify *why* AI models behaved as they did — a layer
+that cyber (ATT&CK) and adversarial-ML (ATLAS) frameworks do not capture. Use
+them for incidents rooted in misaligned model behavior (e.g. reward hacking,
+goal drift, emergent coordination).
+
+```json
+{
+  "alignmentFailureModes": [
+    {
+      "id": "reward-hacking",
+      "name": "Reward Hacking",
+      "description": "Agent optimizes the reward signal via an unintended path rather than solving the task",
+      "primary": true
+    }
+  ]
+}
+```
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `id` | string | Yes | Stable slug (e.g. `reward-hacking`) |
+| `name` | string | No | Human-readable failure-mode name |
+| `description` | string | No | How the failure mode manifested |
+| `primary` | bool | No | Marks the dominant failure mode for the incident |
+
+## Section Summaries
+
+`mappings.summaries` holds an optional short prose intro per classification
+section, keyed by section slug (`cve`, `cwe`, `mitreAttack`, `mitreAtlas`,
+`owasp`, `stride`, `alignmentFailureModes`). Renderers use it to introduce each
+mapping table.
+
+```json
+{
+  "summaries": {
+    "alignmentFailureModes": "Why the collective behaved as it did, beyond the cyber and adversarial-ML views."
+  }
+}
+```
 
 ## OWASP
 

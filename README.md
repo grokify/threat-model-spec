@@ -171,6 +171,22 @@ Threat Model Spec is an open-source library for creating security threat modelin
 - **PDLC Stage-Analyst Agents**
   - **Six Agent Specs** — One `multi-agent-spec` agent (+ slash command) per PDLC stage, generated into Claude/Kiro/Gemini plugins
 
+### v0.9.0 Agentic Collective & Incident Modeling Features
+
+- **Agentic Collective Modeling**
+  - **`AgentCollective`** — populations of autonomous agents that coordinate (possibly emergently) toward shared objectives: members, coordination channel, emergent behaviors, population/scale
+  - **`coordination` flow type** — an inter-agent coordination channel (covert/emergent), rendered as a distinct teal dashed channel alongside C2 flows
+  - **Reward-hacking constructs** — `reward-hacking` and `emergent-agent-coordination` `AttackPattern` templates
+
+- **Incident Modeling**
+  - **`Vulnerability` inventory** — software CVEs and non-software weaknesses (config, credential-hygiene, design), cross-referenceable against the CISA KEV catalog
+  - **`Timeline`** — chronological incident/attack-chain events with optional phase grouping
+  - **`AlignmentFailureMode` mappings** — classify *why* models behaved as they did (reward hacking, goal drift, …), a layer beyond ATT&CK/ATLAS; plus per-section `summaries`
+
+- **Finding Framework Categorization & Coverage**
+  - **Finding framework fields** — STRIDE/OWASP/MITRE categorization on `Finding`
+  - **`ComputeCoverageChecks`** — deterministic coverage computation; stage gates computed and recorded in `tms analyze --apply`
+
 ## Installation
 
 ### Go Library
@@ -289,7 +305,8 @@ tms profile open-source
 | Framework | Field | Example |
 |-----------|-------|---------|
 | MITRE ATT&CK | `mitreAttack` | `{"tacticId": "TA0001", "techniqueId": "T1189"}` |
-| MITRE ATLAS | `mitreAtlas` | `{"tacticId": "AML.TA0002", "techniqueId": "AML.T0024"}` |
+| MITRE ATLAS | `mitreAtlas` | `{"id": "AML.T0024", "name": "Prompt Injection"}` |
+| Alignment Failure Modes | `alignmentFailureModes` | `{"id": "reward-hacking", "name": "Reward Hacking", "primary": true}` |
 | OWASP | `owasp` | `{"category": "api", "id": "API2:2023"}` |
 | STRIDE | `stride` | `{"category": "S", "name": "Spoofing"}` |
 | LINDDUN | `linddun` | `{"category": "I", "name": "Identifiability"}` |
@@ -463,6 +480,7 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 
 | Version | Schema | Specification |
 |---------|--------|---------------|
+| v0.9.0 | [threat-model.schema.json](docs/versions/v0.9.0/threat-model.schema.json) | [specification.md](docs/versions/v0.9.0/specification.md) |
 | v0.8.0 | [threat-model.schema.json](docs/versions/v0.8.0/threat-model.schema.json) | [specification.md](docs/versions/v0.8.0/specification.md) |
 | v0.7.0 | [threat-model.schema.json](docs/versions/v0.7.0/threat-model.schema.json) | [specification.md](docs/versions/v0.7.0/specification.md) |
 | v0.6.0 | [threat-model.schema.json](docs/versions/v0.6.0/threat-model.schema.json) | [specification.md](docs/versions/v0.6.0/specification.md) |
@@ -474,8 +492,8 @@ The Threat Model Specification follows a versioned schema approach similar to Op
 The links above resolve on GitHub for browsing. For `$schema` references that require raw JSON (validators, editors), use the published documentation site instead — GitHub's web UI serves an HTML wrapper, not raw JSON:
 
 ```
-https://grokify.github.io/threat-model-spec/versions/v0.8.0/threat-model.schema.json
-https://grokify.github.io/threat-model-spec/versions/v0.8.0/diagram.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.9.0/threat-model.schema.json
+https://grokify.github.io/threat-model-spec/versions/v0.9.0/diagram.schema.json
 ```
 
 ### Using the Schema
