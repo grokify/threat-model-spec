@@ -288,6 +288,13 @@ func (r *Renderer) renderFlowStyle(sb *strings.Builder, f Flow) {
 		sb.WriteString(prefix + "style.stroke: \"#4a148c\"\n")
 		sb.WriteString(prefix + "style.stroke-width: 2\n")
 		sb.WriteString(prefix + "style.stroke-dash: 3\n")
+	case CoordinationFlow:
+		// Emergent/covert inter-agent coordination channel: mirror the covert
+		// C2 styling but with a distinct teal stroke so it reads as a separate
+		// class of channel.
+		sb.WriteString(prefix + "style.stroke: \"#00838f\"\n")
+		sb.WriteString(prefix + "style.stroke-width: 2\n")
+		sb.WriteString(prefix + "style.stroke-dash: 4\n")
 	default:
 		sb.WriteString(prefix + "style.stroke: \"#424242\"\n")
 	}

@@ -23,6 +23,10 @@ const (
 
 	// C2Flow represents command and control traffic.
 	C2Flow FlowType = "flow-c2"
+
+	// CoordinationFlow represents an inter-agent coordination channel,
+	// possibly emergent/covert, used by a collective of autonomous agents.
+	CoordinationFlow FlowType = "flow-coordination"
 )
 
 // D2Class returns the D2 style class for this flow type.
@@ -72,7 +76,7 @@ type Flow struct {
 // IsAttack returns true if this is an attack flow.
 func (f Flow) IsAttack() bool {
 	switch f.Type {
-	case AttackFlow, ExfilFlow, LateralFlow, C2Flow:
+	case AttackFlow, ExfilFlow, LateralFlow, C2Flow, CoordinationFlow:
 		return true
 	default:
 		return false

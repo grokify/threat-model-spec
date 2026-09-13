@@ -93,6 +93,7 @@ nav:
     - Lifecycle IR Objects: specification/lifecycle-objects.md
     - Stage Report Profiles: specification/stage-reports/index.md
   - Versions:
+    - v0.9.0: versions/v0.9.0/specification.md
     - v0.8.0: versions/v0.8.0/specification.md
     - v0.7.0: versions/v0.7.0/specification.md
     - v0.6.0: versions/v0.6.0/specification.md

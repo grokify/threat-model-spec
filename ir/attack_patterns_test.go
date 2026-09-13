@@ -176,7 +176,7 @@ func TestAttackPatternType_JSONSchema(t *testing.T) {
 	if schema.Type != "string" {
 		t.Errorf("Expected type 'string', got %s", schema.Type)
 	}
-	if len(schema.Enum) != 10 {
-		t.Errorf("Expected 10 enum values, got %d", len(schema.Enum))
+	if len(schema.Enum) != 12 {
+		t.Errorf("Expected 12 enum values, got %d", len(schema.Enum))
 	}
 }

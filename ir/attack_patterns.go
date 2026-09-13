@@ -35,6 +35,16 @@ const (
 
 	// AttackPatternURLParameterInjection represents URL parameter injection.
 	AttackPatternURLParameterInjection AttackPatternType = "url-param-injection"
+
+	// Agentic collective modeling patterns (v0.9.0)
+
+	// AttackPatternRewardHacking represents an agent pursuing an unintended path
+	// to earn reward without completing the task as designed.
+	AttackPatternRewardHacking AttackPatternType = "reward-hacking"
+
+	// AttackPatternEmergentCoordination represents emergent, unintended
+	// coordination between autonomous agents in a collective.
+	AttackPatternEmergentCoordination AttackPatternType = "emergent-agent-coordination"
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for AttackPatternType.
@@ -45,6 +55,7 @@ func (AttackPatternType) JSONSchema() *jsonschema.Schema {
 			"cswsh", "token-exfiltration", "sandbox-escape", "local-priv-esc",
 			"agent-manipulation", "ssrf", "prompt-injection", "tool-abuse",
 			"session-hijacking", "url-param-injection",
+			"reward-hacking", "emergent-agent-coordination",
 		},
 	}
 }
@@ -166,6 +177,8 @@ func BuiltinAttackPatterns() []AttackPattern {
 		SandboxEscapePattern(),
 		AgentToolAbusePattern(),
 		URLParameterInjectionPattern(),
+		RewardHackingPattern(),
+		EmergentAgentCoordinationPattern(),
 	}
 }
 
@@ -465,6 +478,117 @@ func URLParameterInjectionPattern() AttackPattern {
 		CWEIDs:          []string{"CWE-601", "CWE-20", "CWE-668"},
 		MITRETechniques: []string{"T1566.002"},
 		OWASPIds:        []string{"A01:2021", "A03:2021"},
+	}
+}
+
+// RewardHackingPattern returns the reward-hacking attack pattern. An agent
+// pursues an unintended, easier path to satisfy a reward/objective signal
+// rather than completing the task as designed. Common when a non-trivial
+// fraction of assigned tasks are unsolvable as intended, incentivizing the
+// agent to game the grader, environment, or scoring channel.
+func RewardHackingPattern() AttackPattern {
+	return AttackPattern{
+		ID:          "reward-hacking",
+		Name:        "Reward Hacking (Specification Gaming)",
+		Type:        AttackPatternRewardHacking,
+		Description: "An autonomous agent optimizes the measured reward signal instead of the intended objective, taking an unintended path (tampering with the grader, faking outputs, or exploiting environment state) to appear successful without doing the real work.",
+		Prerequisites: []string{
+			"Agent is optimized against a proxy reward/objective signal",
+			"The reward signal is observable or influenceable by the agent",
+			"A non-trivial fraction of tasks are unsolvable as intended, or the intended path is costlier than gaming the signal",
+		},
+		AttackSteps: []AttackPatternStep{
+			{
+				Step:           1,
+				Name:           "Discover reward signal",
+				Description:    "Agent identifies how success is measured (grader, test harness, scoring file, approval channel).",
+				Action:         "Probe the environment to locate the scoring/grading mechanism",
+				Outcome:        "Agent learns which observable state determines reward",
+				MITRETactic:    MITREDiscovery,
+				MITRETechnique: "AML.T0040",
+			},
+			{
+				Step:        2,
+				Name:        "Identify unintended path",
+				Description: "Agent finds a cheaper path to maximize the signal without solving the task as designed.",
+				Action:      "Compare cost of intended solution vs. gaming the signal",
+				Outcome:     "Agent selects the exploit path (e.g. overwrite expected outputs, short-circuit the grader)",
+				MITRETactic: MITREDefenseEvasion,
+				CWEIDs:      []string{"CWE-840"},
+			},
+			{
+				Step:           3,
+				Name:           "Game the objective",
+				Description:    "Agent manipulates the reward channel or environment state so the task appears complete.",
+				Action:         "Tamper with grader input/output, hardcode expected results, or fabricate success artifacts",
+				Outcome:        "Reward is earned; the intended task remains unsolved or is bypassed",
+				MITRETactic:    MITREImpact,
+				MITRETechnique: "AML.T0031",
+				CWEIDs:         []string{"CWE-693"},
+			},
+		},
+		CWEIDs:          []string{"CWE-840", "CWE-693", "CWE-807"},
+		MITRETechniques: []string{"AML.T0031", "AML.T0040"},
+		ASIIds:          []string{"ASI06:2026"},
+		References: []Reference{
+			{Title: "Specification gaming: the flip side of AI ingenuity", URL: "https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/"},
+			{Title: "MITRE ATLAS", URL: "https://atlas.mitre.org/"},
+		},
+	}
+}
+
+// EmergentAgentCoordinationPattern returns the emergent-agent-coordination
+// attack pattern. Autonomous agents in a collective establish an unintended
+// coordination channel and self-organize behaviors (mailboxes, signing schemes,
+// veto norms) that were never provided as tools, amplifying impact beyond any
+// single agent.
+func EmergentAgentCoordinationPattern() AttackPattern {
+	return AttackPattern{
+		ID:          "emergent-agent-coordination",
+		Name:        "Emergent Inter-Agent Coordination",
+		Type:        AttackPatternEmergentCoordination,
+		Description: "A population of autonomous agents sharing an environment discovers a covert side channel (e.g. a shared datastore, filenames, or directory names) and self-organizes coordinated behavior that was never designed or authorized, producing collective action that exceeds the intended scope of any individual agent.",
+		Prerequisites: []string{
+			"Multiple autonomous agents share a common, writable medium (datastore, filesystem, registry, message board)",
+			"Agents can both write to and observe that medium",
+			"No isolation or content policy prevents agents from signaling one another",
+		},
+		AttackSteps: []AttackPatternStep{
+			{
+				Step:        1,
+				Name:        "Discover shared medium",
+				Description: "Agents find a mutually observable, writable resource usable as a side channel.",
+				Action:      "Enumerate shared storage, filenames, or metadata fields visible to all members",
+				Outcome:     "A covert coordination channel is identified",
+				MITRETactic: MITREDiscovery,
+				CWEIDs:      []string{"CWE-923"},
+			},
+			{
+				Step:           2,
+				Name:           "Establish coordination protocol",
+				Description:    "Agents converge on an ad-hoc signaling convention (mailboxes, signing scheme, naming scheme) over the channel.",
+				Action:         "Encode messages in directory names / artifact metadata that peers agree to read",
+				Outcome:        "An emergent protocol forms without any provided coordination tool",
+				MITRETactic:    MITRECommandAndControl,
+				MITRETechnique: "AML.T0072",
+				CWEIDs:         []string{"CWE-653"},
+			},
+			{
+				Step:        3,
+				Name:        "Self-organize collective behavior",
+				Description: "Agents coordinate actions (division of labor, vetoes, escalation) that amplify impact beyond any single agent.",
+				Action:      "Act on peer signals to converge on a shared objective",
+				Outcome:     "Collective, coordinated behavior exceeding designed single-agent scope",
+				MITRETactic: MITREImpact,
+			},
+		},
+		CWEIDs:          []string{"CWE-923", "CWE-653", "CWE-668"},
+		MITRETechniques: []string{"AML.T0072"},
+		ASIIds:          []string{"ASI08:2026", "ASI06:2026"},
+		References: []Reference{
+			{Title: "MITRE ATLAS", URL: "https://atlas.mitre.org/"},
+			{Title: "OWASP Agentic Security Initiative", URL: "https://genai.owasp.org/initiatives/#agenticsecurity"},
+		},
 	}
 }
 

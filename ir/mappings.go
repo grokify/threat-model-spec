@@ -12,6 +12,11 @@ type Mappings struct {
 	// MITREATLAS contains MITRE ATLAS (AI-specific) technique mappings.
 	MITREATLAS []MITREATLASMapping `json:"mitreAtlas,omitempty"`
 
+	// AlignmentFailureModes classifies AI alignment failure modes that explain
+	// why the models behaved as they did — a layer that cyber (ATT&CK) and
+	// adversarial-ML (ATLAS) frameworks do not capture.
+	AlignmentFailureModes []AlignmentFailureMode `json:"alignmentFailureModes,omitempty"`
+
 	// OWASP contains OWASP Top 10 mappings (API, LLM, Web).
 	OWASP []OWASPMapping `json:"owasp,omitempty"`
 
@@ -35,6 +40,11 @@ type Mappings struct {
 
 	// Compliance contains regulatory compliance framework mappings.
 	Compliance []ComplianceMapping `json:"compliance,omitempty"`
+
+	// Summaries holds a short prose intro per classification section, keyed by
+	// section slug (cve, cwe, mitreAttack, mitreAtlas, owasp, stride,
+	// alignmentFailureModes).
+	Summaries map[string]string `json:"summaries,omitempty"`
 }
 
 // MITREAttackMapping represents a MITRE ATT&CK technique reference.
@@ -63,23 +73,33 @@ type MITREAttackMapping struct {
 
 // MITREATLASMapping represents a MITRE ATLAS (AI/ML) technique reference.
 type MITREATLASMapping struct {
-	// TacticID is the tactic ID (e.g., "AML.TA0002").
-	TacticID string `json:"tacticId"`
+	// ID is the ATLAS technique ID (e.g., "AML.T0048").
+	ID string `json:"id"`
 
-	// TacticName is the human-readable tactic name.
-	TacticName string `json:"tacticName,omitempty"`
-
-	// TechniqueID is the technique ID (e.g., "AML.T0024").
-	TechniqueID string `json:"techniqueId"`
-
-	// TechniqueName is the human-readable technique name.
-	TechniqueName string `json:"techniqueName,omitempty"`
+	// Name is the human-readable technique name.
+	Name string `json:"name,omitempty"`
 
 	// Description explains how this technique applies.
 	Description string `json:"description,omitempty"`
 
 	// URL is the link to the ATLAS page.
 	URL string `json:"url,omitempty"`
+}
+
+// AlignmentFailureMode classifies an AI alignment failure mode that explains
+// why a model behaved as it did (e.g., reward hacking, goal drift).
+type AlignmentFailureMode struct {
+	// ID is a stable slug for the failure mode (e.g., "reward-hacking").
+	ID string `json:"id"`
+
+	// Name is the human-readable failure-mode name.
+	Name string `json:"name,omitempty"`
+
+	// Description explains how this failure mode manifested.
+	Description string `json:"description,omitempty"`
+
+	// Primary marks the dominant failure mode for the incident.
+	Primary bool `json:"primary,omitempty"`
 }
 
 // OWASPCategory identifies which OWASP Top 10 list a mapping belongs to.

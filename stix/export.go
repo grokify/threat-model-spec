@@ -330,7 +330,7 @@ func (e *Exporter) mitreAttackToAttackPattern(m ir.MITREAttackMapping) *AttackPa
 func (e *Exporter) mitreAtlasToAttackPattern(m ir.MITREATLASMapping) *AttackPattern {
 	url := m.URL
 	if url == "" {
-		url = fmt.Sprintf("https://atlas.mitre.org/techniques/%s", m.TechniqueID)
+		url = fmt.Sprintf("https://atlas.mitre.org/techniques/%s", m.ID)
 	}
 
 	return &AttackPattern{
@@ -340,12 +340,12 @@ func (e *Exporter) mitreAtlasToAttackPattern(m ir.MITREATLASMapping) *AttackPatt
 		Created:      time.Now().UTC().Format(time.RFC3339),
 		Modified:     time.Now().UTC().Format(time.RFC3339),
 		CreatedByRef: e.CreatedByRef,
-		Name:         m.TechniqueName,
+		Name:         m.Name,
 		Description:  m.Description,
 		ExternalReferences: []ExternalReference{
 			{
 				SourceName: "mitre-atlas",
-				ExternalID: m.TechniqueID,
+				ExternalID: m.ID,
 				URL:        url,
 			},
 		},
