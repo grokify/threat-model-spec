@@ -91,8 +91,10 @@ func (d *DiagramIR) renderDFD() string {
 		sb.WriteString(d.renderFlow(f))
 	}
 
-	// Mitigations
-	sb.WriteString(d.renderMitigations())
+	// Mitigations (opt-in — a DFD depicts flows, not countermeasures)
+	if d.ShowMitigations {
+		sb.WriteString(d.renderMitigations())
+	}
 
 	return sb.String()
 }
@@ -396,6 +398,12 @@ func (d *DiagramIR) renderFlow(f Flow) string {
 			sb.WriteString("  style.stroke: \"#b71c1c\"\n")
 			sb.WriteString("  style.stroke-width: 3\n")
 			sb.WriteString("  style.stroke-dash: 5\n")
+		case FlowTypeCoordination:
+			// Emergent/covert inter-agent coordination channel: mirror the
+			// covert C2 styling but with a distinct teal stroke.
+			sb.WriteString("  style.stroke: \"#00838f\"\n")
+			sb.WriteString("  style.stroke-width: 2\n")
+			sb.WriteString("  style.stroke-dash: 4\n")
 		default:
 			sb.WriteString("  style.stroke: \"#616161\"\n")
 		}

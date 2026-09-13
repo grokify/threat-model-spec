@@ -129,6 +129,24 @@ type ThreatModel struct {
 	// These can be instantiated from built-in patterns or custom-defined.
 	AttackPatterns []AttackPattern `json:"attackPatterns,omitempty"`
 
+	// Vulnerabilities is an inventory of weaknesses exploited (or exploitable)
+	// in this model, including software vulnerabilities (with optional CVEs) and
+	// non-software weaknesses (config, credential-hygiene, design). CVE entries
+	// may be cross-referenced against the CISA KEV catalog at build time.
+	Vulnerabilities []Vulnerability `json:"vulnerabilities,omitempty"`
+
+	// Timeline is a chronological record of events in the incident or attack
+	// chain, each with a date (or date range/timestamp), a description, and an
+	// optional phase grouping label.
+	Timeline []TimelineEvent `json:"timeline,omitempty"`
+
+	// --- Agentic Collective Modeling (v0.9.0) ---
+
+	// AgentCollectives models populations of autonomous agents that coordinate —
+	// possibly emergently — toward shared objectives. Use this to model agent
+	// swarms, emergent coordination channels, and reward-hacking dynamics.
+	AgentCollectives []AgentCollective `json:"agentCollectives,omitempty"`
+
 	// --- PDLC Lifecycle Analysis (v0.8.0) ---
 
 	// Lifecycle groups stage-tracking state for the model as a whole.

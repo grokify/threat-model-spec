@@ -98,13 +98,20 @@ const (
 
 	// FlowTypeLateral indicates lateral movement within a network.
 	FlowTypeLateral FlowType = "lateral"
+
+	// Agentic collective modeling flow type (v0.9.0)
+
+	// FlowTypeCoordination indicates an inter-agent coordination channel,
+	// possibly emergent/covert, over which a collective of autonomous agents
+	// self-organizes toward shared objectives.
+	FlowTypeCoordination FlowType = "coordination"
 )
 
 // JSONSchema implements jsonschema.JSONSchemaer for FlowType.
 func (FlowType) JSONSchema() *jsonschema.Schema {
 	return &jsonschema.Schema{
 		Type: "string",
-		Enum: []any{"normal", "attack", "exfil", "credential", "websocket", "cswsh", "lateral"},
+		Enum: []any{"normal", "attack", "exfil", "credential", "websocket", "cswsh", "lateral", "coordination"},
 	}
 }
 

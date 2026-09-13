@@ -70,6 +70,12 @@ type DiagramIR struct {
 	// Mitigations contains countermeasures addressing identified threats.
 	Mitigations []Mitigation `json:"mitigations,omitempty"`
 
+	// ShowMitigations controls whether a DFD render includes the mitigations
+	// block as diagram nodes. Defaults to false: a data-flow diagram depicts
+	// elements, trust boundaries, and flows — mitigations belong in the
+	// mitigations report, not as nodes that inflate the diagram's width.
+	ShowMitigations bool `json:"showMitigations,omitempty"`
+
 	// Detections contains detection capabilities for threats and attacks.
 	Detections []Detection `json:"detections,omitempty"`
 
