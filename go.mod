@@ -1,10 +1,10 @@
 module github.com/grokify/threat-model-spec
 
-go 1.26.1
+go 1.26.5
 
 require (
 	github.com/ProductBuildersHQ/pdlc v0.2.0
-	github.com/ProductBuildersHQ/visionspec v0.16.0
+	github.com/ProductBuildersHQ/visionspec v0.18.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/invopop/jsonschema v0.14.0
 	github.com/plexusone/structured-evaluation v0.14.0
