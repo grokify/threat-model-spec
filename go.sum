@@ -21,8 +21,8 @@ github.com/pb33f/ordered-map/v2 v2.3.1 h1:5319HDO0aw4DA4gzi+zv4FXU9UlSs3xGZ40wcP
 github.com/pb33f/ordered-map/v2 v2.3.1/go.mod h1:qxFQgd0PkVUtOMCkTapqotNgzRhMPL7VvaHKbd1HnmQ=
 github.com/plexusone/structured-evaluation v0.14.0 h1:gACNOB//bGD78F8WQlUhCtfBNY4FcRPxcLsbEWGzBc0=
 github.com/plexusone/structured-evaluation v0.14.0/go.mod h1:C7/anlUnYBxXMGRggHD7f2eQ+6ejXvXEIsCadG/D1kg=
-github.com/plexusone/w3pilot v0.9.0 h1:nqFZP5jQI7CDFF5F2xl/Pzlp77mEFML5tDLtNKYdIOQ=
-github.com/plexusone/w3pilot v0.9.0/go.mod h1:wdBroLheLKpd1RowKV3PPGBGrNiKX0FmD4aM5VXtpZg=
+github.com/plexusone/w3pilot v0.10.0 h1:Yoxn6zCe9Ge+aQuZnHs2gsiwinV0A/Y6P4Vbu6C392w=
+github.com/plexusone/w3pilot v0.10.0/go.mod h1:P/fNe2YWtDOSqqKc0kcPaImBdfb6KLmRy/QeObWOg6w=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
